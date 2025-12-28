@@ -1,6 +1,6 @@
-# CPP 学习笔记项目维护指南
+# 学习笔记项目维护指南
 
-本项目基于 [VitePress](https://vitepress.dev/) 构建，用于记录 C++、算法和数据结构的学习笔记。
+本项目基于 [VitePress](https://vitepress.dev/) 构建，用于记录八股面试，日常学习，刷题的学习笔记。
 
 ## 🚀 快速开始
 
