@@ -536,3 +536,289 @@ const className = classes.reduce((res, cur) => {
 5. **如何用数组 / 对象方法支撑扩展性**
 
 ---
+
+## day3:原型链，模态框
+### 流程图
+<img src="../../img/yuanxinglist.png" alt="原型链">
+
+### 一、Modal（模态框）是什么？本案例在做什么？
+
+#### 1️⃣ 什么是模态框（Modal）
+
+模态框（Modal）是一种**覆盖在页面之上的临时窗口**，用于向用户传递重要信息或要求用户进行确认操作。
+
+典型特征：
+
+* 覆盖页面主体内容
+* 通常居中显示
+* 出现时阻断用户对页面其他区域的操作
+* 可关闭
+
+---
+
+#### 2️⃣ 本案例要解决的问题
+
+本案例实现的是一个 **“可复用的消息提示模态框”**，具体目标包括：
+
+* 页面中有多个按钮（删除 / 登录）
+* 点击不同按钮，弹出**样式相同但内容不同**的模态框
+* 页面中**同一时间只能存在一个模态框**
+* 点击右上角 `x` 可以关闭模态框
+
+👉 **核心思想**：
+
+> 使用 JavaScript 的“构造函数 + 原型方法”，对模态框进行面向对象封装，实现组件级复用。
+
+---
+
+### 二、HTML 与 CSS 层设计（为什么 HTML 中没有 modal）
+
+#### 1️⃣ HTML 中没有写死 modal 结构
+
+```html
+<!--
+<div class="modal">
+  ...
+</div>
+-->
+```
+
+原因分析：
+
+* 模态框是否显示、显示什么内容，是**动态行为**
+* 如果写死在 HTML 中，页面加载时就会存在
+* 不利于复用，也不利于控制
+
+👉 **设计思想**：
+
+> 结构由 JavaScript 动态创建，HTML 只保留触发入口
+
+这已经是**组件化思想的雏形**
+
+---
+
+### 三、Modal 构造函数 —— 模态框的“创建器”
+
+#### 1️⃣ 构造函数的职责划分
+
+```js
+function Modal(title = '', message = '') {
+```
+
+构造函数只负责三件事：
+
+1. 接收外部传入的数据
+2. 保存为实例属性
+3. 创建模态框 DOM 结构（不负责显示）
+
+---
+
+#### 2️⃣ 定义实例私有属性（状态）
+
+```js
+this.title = title
+this.message = message
+```
+
+说明：
+
+* `title`：模态框标题
+* `message`：模态框正文内容
+* 每个实例的数据是独立的
+
+---
+
+#### 3️⃣ 创建模态框 DOM 节点
+
+```js
+this.modalBox = document.createElement('div')
+this.modalBox.className = 'modal'
+```
+
+特点：
+
+* `modalBox` 是**实例私有 DOM**
+* 每 `new Modal()` 一次，就创建一个新的模态框节点
+
+---
+
+#### 4️⃣ 使用模板字符串填充结构与数据
+
+```js
+this.modalBox.innerHTML = `
+  <div class="header">${this.title} <i>x</i></div>
+  <div class="body">${this.message}</div>
+`
+```
+
+这里体现了三个核心思想：
+
+* 模板字符串
+* 数据驱动视图
+* 结构复用、内容可变
+
+👉 这是 Vue / React 等框架的核心理念来源
+
+---
+
+### 四、open 方法 —— 打开模态框（原型方法）
+
+#### 1️⃣ 为什么把 open 挂在 prototype 上
+
+```js
+Modal.prototype.open = function () {}
+```
+
+原因：
+
+* `open` 是行为，不是数据
+* 所有实例的行为一致
+* 挂在原型上可以让所有实例共享
+
+👉 **关键词**：方法共享，属性私有
+
+---
+
+#### 2️⃣ 防止模态框重复创建
+
+```js
+if (!document.querySelector('.modal')) {
+```
+
+作用：
+
+* 页面中始终只允许存在一个 `.modal`
+* 防止用户连续点击按钮，产生多个模态框
+
+👉 这是非常重要的**防御性代码**
+
+---
+
+#### 3️⃣ 将模态框渲染到页面中
+
+```js
+document.body.appendChild(this.modalBox)
+```
+
+说明：
+
+* 构造函数阶段只是“准备”
+* `appendChild` 才是真正显示到页面
+
+---
+
+#### 4️⃣ 绑定关闭事件（this 指向是重点）
+
+```js
+this.modalBox.querySelector('i').addEventListener('click', () => {
+  this.close()
+})
+```
+
+为什么必须使用箭头函数：
+
+* 箭头函数没有自己的 `this`
+* `this` 向上查找，指向当前实例对象
+
+如果使用普通函数：
+
+```js
+function () {
+  this.close() // this 指向 i 元素，错误
+}
+```
+
+👉 这是 **this 指向问题的经典应用场景**
+
+---
+
+### 五、close 方法 —— 关闭模态框
+
+```js
+Modal.prototype.close = function () {
+  document.body.removeChild(this.modalBox)
+}
+```
+
+特点分析：
+
+* 只移除 DOM
+* 不销毁实例对象
+* 实例仍可再次调用 `open()`
+
+👉 **对象存在，视图消失**
+
+---
+
+### 六、事件驱动实例化（使用阶段）
+
+#### 1️⃣ 删除按钮触发模态框
+
+```js
+document.querySelector('#delete').addEventListener('click', () => {
+  const m = new Modal('温馨提示', '您没有权限删除')
+  m.open()
+})
+```
+
+---
+
+#### 2️⃣ 登录按钮触发模态框
+
+```js
+document.querySelector('#login').addEventListener('click', () => {
+  const m = new Modal('友情提示', '您还么有注册账号')
+  m.open()
+})
+```
+
+说明：
+
+* 同一个构造函数
+* 不同实例
+* 不同数据
+* 相同行为
+
+👉 这是**面向对象编程的标准使用方式**
+
+---
+
+### 七、本案例必须掌握的核心知识点（面试级）
+
+#### 1️⃣ JavaScript 核心
+
+* 构造函数
+* prototype 原型
+* 实例属性与原型方法
+* 箭头函数的 this 绑定规则
+
+---
+
+#### 2️⃣ DOM 操作
+
+* document.createElement
+* appendChild / removeChild
+* querySelector
+* addEventListener
+
+---
+
+#### 3️⃣ 设计思想（非常重要）
+
+* 组件化封装
+* 数据驱动视图
+* 行为与结构分离
+* 防止重复渲染
+
+---
+
+### 八、自我检验（学会 vs 学熟）
+
+如果你能**脱离代码**回答下面问题，说明你已经掌握：
+
+1. 为什么 modal 不写在 HTML 中？
+2. 为什么 open / close 要写在 prototype 上？
+3. 为什么关闭按钮事件中必须使用箭头函数？
+4. 为什么要判断页面中是否已经存在 `.modal`？
+
+---

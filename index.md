@@ -153,6 +153,23 @@ body.homepage .VPLastUpdated {
 <div class="directory-container">
   <div class="category-section">
     <div class="category-header">
+      <span>📂 Febagu</span>
+      <span class="category-meta">1 篇</span>
+    </div>
+    <div class="tree-container">
+      <div class="tree-item tree-dir depth-0">
+        <span class="tree-prefix"></span>
+        <span class="tree-name">HTML/</span>
+      </div>
+      <a class="tree-item tree-file depth-1" href="/Febagu/HTML/HTML">
+        <span class="tree-prefix">└── </span>
+        <span class="tree-name">HTML</span>
+        <span class="tree-date">12/28</span>
+      </a>
+    </div>
+  </div>
+  <div class="category-section">
+    <div class="category-header">
       <span>📂 前端</span>
       <span class="category-meta">7 篇</span>
     </div>
@@ -193,11 +210,34 @@ body.homepage .VPLastUpdated {
       <a class="tree-item tree-file depth-1" href="/Frontend/JavaScript/JSadvance">
         <span class="tree-prefix">├── </span>
         <span class="tree-name">JSadvance</span>
-        <span class="tree-date">12/26</span>
+        <span class="tree-date">12/28</span>
       </a>
       <a class="tree-item tree-file depth-1" href="/Frontend/JavaScript/webAPIs">
         <span class="tree-prefix">└── </span>
         <span class="tree-name">webAPIs</span>
+        <span class="tree-date">12/26</span>
+      </a>
+    </div>
+  </div>
+  <div class="category-section">
+    <div class="category-header">
+      <span>📂 文章</span>
+      <span class="category-meta">3 篇</span>
+    </div>
+    <div class="tree-container">
+      <a class="tree-item tree-file depth-0" href="/articles/algorithm">
+        <span class="tree-prefix"></span>
+        <span class="tree-name">algorithm</span>
+        <span class="tree-date">11/06</span>
+      </a>
+      <a class="tree-item tree-file depth-0" href="/articles/basicK">
+        <span class="tree-prefix"></span>
+        <span class="tree-name">basicK</span>
+        <span class="tree-date">11/06</span>
+      </a>
+      <a class="tree-item tree-file depth-0" href="/articles/STL">
+        <span class="tree-prefix"></span>
+        <span class="tree-name">STL</span>
         <span class="tree-date">12/26</span>
       </a>
     </div>
@@ -313,29 +353,6 @@ body.homepage .VPLastUpdated {
         <span class="tree-prefix">└── </span>
         <span class="tree-name">tips</span>
         <span class="tree-date">12/25</span>
-      </a>
-    </div>
-  </div>
-  <div class="category-section">
-    <div class="category-header">
-      <span>📂 文章</span>
-      <span class="category-meta">3 篇</span>
-    </div>
-    <div class="tree-container">
-      <a class="tree-item tree-file depth-0" href="/articles/algorithm">
-        <span class="tree-prefix"></span>
-        <span class="tree-name">algorithm</span>
-        <span class="tree-date">11/06</span>
-      </a>
-      <a class="tree-item tree-file depth-0" href="/articles/basicK">
-        <span class="tree-prefix"></span>
-        <span class="tree-name">basicK</span>
-        <span class="tree-date">11/06</span>
-      </a>
-      <a class="tree-item tree-file depth-0" href="/articles/STL">
-        <span class="tree-prefix"></span>
-        <span class="tree-name">STL</span>
-        <span class="tree-date">12/12</span>
       </a>
     </div>
   </div>
