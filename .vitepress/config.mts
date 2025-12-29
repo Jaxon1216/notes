@@ -229,6 +229,9 @@ export default defineConfig({
   description: "Personal Algorithm & CPP Notes",
   ignoreDeadLinks: true, // Avoid build errors for missing links
   themeConfig: {
+    search: {
+      provider: 'local'
+    },
     nav: generateNav(),
     sidebar: generateSidebar(),
     socialLinks: [

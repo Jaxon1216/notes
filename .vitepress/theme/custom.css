@@ -26,3 +26,9 @@ body:not(.homepage) .VPLastUpdated {
   color: var(--vp-c-text-2);
 }
 
+/* 顶部导航栏搜索按钮（DocSearch 样式）加宽：左右各 +20px，总宽约 +40px */
+.VPNavBarSearch .DocSearch-Button {
+  padding-left: calc(var(--docsearch-spacing, 12px) + 20px) !important;
+  padding-right: calc(var(--docsearch-spacing, 12px) + 20px) !important;
+}
+

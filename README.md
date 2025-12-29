@@ -58,6 +58,12 @@ npm run docs:build
 - **原因**：VitePress 的配置文件（包括侧边栏生成逻辑）通常只在服务启动时加载一次。
 - **解决**：在终端中按 `Ctrl + C` 停止服务，然后再次运行 `npm run docs:dev`。
 
+### 场景五：开启站内搜索
+
+本项目使用 VitePress **本地搜索**（构建时生成索引，无需外部服务）。
+- **配置位置**：`.vitepress/config.mts` 的 `themeConfig.search`
+- **验证方式**：运行 `npm run docs:dev` 后，顶部导航栏会出现搜索框
+
 ## 📂 目录结构说明
 
 ```text
