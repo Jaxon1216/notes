@@ -1,35 +1,28 @@
-/* 自定义样式 */
+/* 自定义变量 */
+:root {
+  --vp-sidebar-width: 300px;      /* 侧边栏宽度 */
+  --vp-aside-width: 550px;        /* 右侧大纲宽度 */
+  --vp-content-max-width: 1100px; /* 正文显示宽度 */
+}
 
-/* 将文章页的更新时间固定到左下角 */
+/* 强制修改右侧大纲 (Aside) 的宽度 */
+.VPDoc .aside {
+  width: var(--vp-aside-width) !important;
+}
+
+.aside-container {
+  width: var(--vp-aside-width) !important;
+}
+
+/* 文章页的更新时间样式（放在文章末尾） */
 body:not(.homepage) .VPDocFooter {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  z-index: 10;
-  background: var(--vp-c-bg-soft);
-  padding: 8px 16px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid var(--vp-c-divider);
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--vp-c-divider);
 }
 
-body:not(.homepage) .VPDocFooter .VPLastUpdated {
-  margin: 0;
-  padding: 0;
-}
-
-body:not(.homepage) .VPDocFooter .VPLastUpdated .last-updated {
-  font-size: 13px;
-}
-
-/* 移动端适配 */
-@media (max-width: 768px) {
-  body:not(.homepage) .VPDocFooter {
-    position: static;
-    margin-top: 20px;
-    bottom: auto;
-    left: auto;
-    box-shadow: none;
-  }
+body:not(.homepage) .VPLastUpdated {
+  font-size: 14px;
+  color: var(--vp-c-text-2);
 }
 

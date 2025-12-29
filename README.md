@@ -70,5 +70,44 @@ npm run docs:build
 ├── DataStructure/          # 数据结构笔记目录
 ├── Leetcode/               # Leetcode 刷题笔记目录
 ├── articles/               # 其他文章
-└── package.json            # 项目依赖和脚本定义
+├── package.json            # 项目依赖和脚本定义
+└── README.md               # 本指南文件
 ```
+
+---
+
+## 📝 Markdown 增强组件用法参考
+
+为了让笔记更美观、重点更突出，你可以使用以下 VitePress 内置组件：
+
+### 1. 徽章标签 (Badge)
+用于在标题或文字末尾添加小标签。
+- **用法**：`<Badge type="tip" text="已解决" />`
+- **可选类型**：`tip` (绿), `info` (蓝), `warning` (黄), `danger` (红)
+
+### 2. 提示容器 (Custom Containers)
+用于创建显眼的提示区块。
+- **用法**：
+  ```markdown
+  ::: tip 提示
+  这是一个小技巧
+  :::
+
+  ::: warning 注意
+  这里容易踩坑
+  :::
+
+  ::: danger 重点
+  面试必刷题
+  :::
+  ```
+
+### 3. 折叠详情 (Details)
+用于收纳长代码或大图，点击后展开。
+- **用法**：
+  ```markdown
+  ::: details 点击查看完整解析
+  这里可以放代码、图片或任何内容
+  :::
+  ```
+
