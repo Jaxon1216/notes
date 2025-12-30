@@ -154,7 +154,7 @@ body.homepage .VPLastUpdated {
   <div class="category-section">
     <div class="category-header">
       <span>📂 其他</span>
-      <span class="category-meta">6 篇</span>
+      <span class="category-meta">7 篇</span>
     </div>
     <div class="tree-container">
       <div class="tree-item tree-dir depth-0">
@@ -190,9 +190,14 @@ body.homepage .VPLastUpdated {
         <span class="tree-date">12/29</span>
       </a>
       <a class="tree-item tree-file depth-1" href="/Misc/tools/Linux">
-        <span class="tree-prefix">└── </span>
+        <span class="tree-prefix">├── </span>
         <span class="tree-name">Linux</span>
         <span class="tree-date">12/29</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Misc/tools/markdwon">
+        <span class="tree-prefix">└── </span>
+        <span class="tree-name">markdwon</span>
+        <span class="tree-date">12/30</span>
       </a>
       <div class="tree-item tree-dir depth-0">
         <span class="tree-prefix"></span>
@@ -208,7 +213,7 @@ body.homepage .VPLastUpdated {
   <div class="category-section">
     <div class="category-header">
       <span>📂 前端</span>
-      <span class="category-meta">7 篇</span>
+      <span class="category-meta">10 篇</span>
     </div>
     <div class="tree-container">
       <div class="tree-item tree-dir depth-0">
@@ -219,6 +224,11 @@ body.homepage .VPLastUpdated {
         <span class="tree-prefix">├── </span>
         <span class="tree-name">display</span>
         <span class="tree-date">12/25</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Frontend/CSS/Flex">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">Flex</span>
+        <span class="tree-date">12/29</span>
       </a>
       <a class="tree-item tree-file depth-1" href="/Frontend/CSS/Pseudo-elements">
         <span class="tree-prefix">├── </span>
@@ -249,10 +259,24 @@ body.homepage .VPLastUpdated {
         <span class="tree-name">JSadvance</span>
         <span class="tree-date">12/29</span>
       </a>
+      <a class="tree-item tree-file depth-1" href="/Frontend/JavaScript/PerformanceAPI">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">PerformanceAPI</span>
+        <span class="tree-date">12/29</span>
+      </a>
       <a class="tree-item tree-file depth-1" href="/Frontend/JavaScript/webAPIs">
         <span class="tree-prefix">└── </span>
         <span class="tree-name">webAPIs</span>
         <span class="tree-date">12/26</span>
+      </a>
+      <div class="tree-item tree-dir depth-0">
+        <span class="tree-prefix"></span>
+        <span class="tree-name">Lanqiao/</span>
+      </div>
+      <a class="tree-item tree-file depth-1" href="/Frontend/Lanqiao/lanqiao-mock">
+        <span class="tree-prefix">└── </span>
+        <span class="tree-name">lanqiao-mock</span>
+        <span class="tree-date">12/29</span>
       </a>
     </div>
   </div>
