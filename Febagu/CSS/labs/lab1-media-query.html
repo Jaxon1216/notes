@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 1: 媒体查询与断点体验</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        .box {
+            background-color: white;
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* --- 默认样式（手机优先） --- */
+        /* 假设这是 iPhone (小于 576px) */
+        body {
+            background-color: #ffcccc; /* 浅红色 */
+        }
+        .info::after {
+            content: "当前设备：超小屏幕 (手机)";
+        }
+        .width-indicator::after {
+            content: "width < 576px";
+        }
+
+        /* --- 断点 1: 平板 (>= 576px) --- */
+        /* 当屏幕宽度大于等于 576px 时，下面的样式覆盖上面的 */
+        @media (min-width: 576px) {
+            body {
+                background-color: #ccffcc; /* 浅绿色 */
+            }
+            .info::after {
+                content: "当前设备：小屏幕 (平板竖屏)";
+            }
+            .width-indicator::after {
+                content: "576px <= width < 768px";
+            }
+        }
+
+        /* --- 断点 2: 桌面显示器 (>= 768px) --- */
+        @media (min-width: 768px) {
+            body {
+                background-color: #ccccff; /* 浅蓝色 */
+            }
+            .info::after {
+                content: "当前设备：中等屏幕 (电脑/横屏平板)";
+            }
+            .width-indicator::after {
+                content: "768px <= width < 992px";
+            }
+        }
+
+        /* --- 断点 3: 大屏显示器 (>= 992px) --- */
+        @media (min-width: 992px) {
+            body {
+                background-color: #ffffcc; /* 浅黄色 */
+            }
+            .info::after {
+                content: "当前设备：大屏幕 (高清显示器)";
+            }
+            .width-indicator::after {
+                content: "width >= 992px";
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <h1>请拖动浏览器窗口边缘改变宽度</h1>
+        <p class="info" style="color: #333; margin: 20px 0;"></p>
+        <p class="width-indicator" style="color: #666; font-family: monospace;"></p>
+    </div>
+
+    <div style="margin-top: 20px; text-align: left; background: #fff; padding: 20px;">
+        <h3>知识点解析：</h3>
+        <p>1. <b>@media (min-width: 768px)</b> 的意思是：当视口宽度<b>至少</b>为 768px 时生效。</p>
+        <p>2. 这就是<b>“断点”</b>。就像水管的阀门，到了这个刻度，水流（样式）就变了。</p>
+        <p>3. 这种写法叫<b>“移动优先”</b>：最外层写手机样式，然后用 @media 一层层往大屏幕叠加。</p>
+    </div>
+
+</body>
+</html>
+

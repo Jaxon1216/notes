@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 2: Flex vs Grid 布局对比</title>
+    <style>
+        body { padding: 20px; font-family: sans-serif; background: #f0f2f5; }
+        h2 { border-left: 5px solid #007bff; padding-left: 10px; margin-top: 40px; }
+        .item {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .item:nth-child(odd) { background: #e3f2fd; } /* 奇数个变蓝 */
+
+        /* ========== 1. Flex 布局 (一维) ========== */
+        /* Flex 就像穿糖葫芦，主要控制一行怎么排，换行得手动允许 */
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap; /* 允许换行，不然死命挤在一行 */
+            gap: 10px;       /* 间距 */
+        }
+        
+        .flex-item {
+            /* 
+               flex: 1 1 200px;
+               - 1: 放大 (有空地就占满)
+               - 1: 缩小 (没地了就缩)
+               - 200px: 基础宽度
+            */
+            flex: 1 1 200px; 
+            height: 100px;
+            line-height: 100px;
+        }
+
+        /* ========== 2. Grid 布局 (二维) ========== */
+        /* Grid 就像画棋盘，直接规定几行几列 */
+        .grid-container {
+            display: grid;
+            /* 
+               核心魔法：repeat(auto-fit, minmax(200px, 1fr))
+               - auto-fit: 自动填满，能放几个放几个
+               - minmax(200px, 1fr): 最小 200px，最大 1fr (均分剩余空间)
+            */
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        .grid-item {
+            height: 100px;
+            line-height: 100px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Flex vs Grid 响应式对比</h1>
+    <p>尝试缩放浏览器窗口，观察两者的行为。</p>
+
+    <h2>1. Flexbox 布局</h2>
+    <p>特点：由内容决定布局。不管几列，塞满一行就换行。最后一行可能只有 1 个且被拉得很长。</p>
+    <div class="flex-container">
+        <div class="item flex-item">1</div>
+        <div class="item flex-item">2</div>
+        <div class="item flex-item">3</div>
+        <div class="item flex-item">4</div>
+        <div class="item flex-item">5</div>
+    </div>
+
+    <h2>2. Grid 布局 (推荐)</h2>
+    <p>特点：由容器决定布局。严格的网格系统。最后一行即使只有一个，也不会傻傻地拉满整行（取决于配置）。</p>
+    <div class="grid-container">
+        <div class="item grid-item">1</div>
+        <div class="item grid-item">2</div>
+        <div class="item grid-item">3</div>
+        <div class="item grid-item">4</div>
+        <div class="item grid-item">5</div>
+    </div>
+
+</body>
+</html>
+
