@@ -228,6 +228,12 @@ export default defineConfig({
   title: "学习笔记",
   description: "Personal Algorithm & CPP Notes",
   ignoreDeadLinks: true, // Avoid build errors for missing links
+  
+  // 配置 favicon
+  head: [
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
+  ],
+  
   themeConfig: {
     search: {
       provider: 'local'
