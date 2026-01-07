@@ -195,7 +195,7 @@ int josephus_last(int n, int k) {
 # 环状字符串的最小字典序（Circular Sequence, ACM/ICPC Seoul 2004, UVa1584）
 
 ---
-- 作者blog：[Jaxon](www.jiangxu.net)
+- 作者blog：[Jaxon](https://www.jiangxu.net)
 - [查算法/知识点/代码分享工具/学习路线/大厂算法/八股](https://www.jiangxu.net/study-materials/)
 > 注：本人写题解一方面为了加深印象，另一方面为了锻炼自己的代码和逻辑能力，还有就是想变强。
 

@@ -2,7 +2,7 @@
 
 > - 本文记录了我在学习《算法竞赛入门》第五章时对C++构造函数和运算符重载的深入理解，解决了几个困扰我的问题。
 > - 基于本人低水平的写作勿喷。
-> - [Jaxon's-blog](jiangxu.net)
+> - [Jaxon's-blog](https://jiangxu.net)
 > - [查算法/知识点/代码分享工具/学习路线/大厂算法/八股](https://www.jiangxu.net/study-materials/)
 > - 大学生食用[大学本质](https://www.jiangxu.net/Nature-of-University/)
 

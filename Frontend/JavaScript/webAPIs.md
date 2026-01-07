@@ -229,7 +229,7 @@ for (let i = 0; i < data.length; i++) {
 
 3. M端（mobile）事件
 - `touchstart`/`touchend`/
-- [www.swiper.com.cn](www.swiper.com.cn)
+- [www.swiper.com.cn](https://www.swiper.com.cn)
   - 选-下载-看文档-引入-调试
 
 4. 案例：

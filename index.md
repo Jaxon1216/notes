@@ -154,7 +154,7 @@ body.homepage .VPLastUpdated {
   <div class="category-section">
     <div class="category-header">
       <span>📂 前端</span>
-      <span class="category-meta">13 篇</span>
+      <span class="category-meta">14 篇</span>
     </div>
     <div class="tree-container">
       <div class="tree-item tree-dir depth-0">
@@ -228,14 +228,19 @@ body.homepage .VPLastUpdated {
         <span class="tree-prefix"></span>
         <span class="tree-name">Vue/</span>
       </div>
-      <a class="tree-item tree-file depth-1" href="/Frontend/Vue/day2">
+      <a class="tree-item tree-file depth-1" href="/Frontend/Vue/day1">
         <span class="tree-prefix">├── </span>
-        <span class="tree-name">day2</span>
+        <span class="tree-name">day1</span>
+        <span class="tree-date">01/06</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Frontend/Vue/day2-afternoon">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">day2-afternoon</span>
         <span class="tree-date">01/07</span>
       </a>
-      <a class="tree-item tree-file depth-1" href="/Frontend/Vue/shanggg">
+      <a class="tree-item tree-file depth-1" href="/Frontend/Vue/day2">
         <span class="tree-prefix">└── </span>
-        <span class="tree-name">shanggg</span>
+        <span class="tree-name">day2</span>
         <span class="tree-date">01/07</span>
       </a>
     </div>

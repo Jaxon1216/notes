@@ -13,7 +13,7 @@
 
 ## 📚 基础篇检测（Todo List）
 
-> **对应教程**：[docs/basic.md](basic.md)  
+> **对应教程**：基础篇（暂无链接）
 > **学习目标**：HTML 语义化、CSS Flex、DOM 操作、事件委托、localStorage、数组方法
 
 ### 一、HTML & CSS（8题）
@@ -2130,7 +2130,7 @@ todoList.innerHTML = html;
 
 ## ⏰ 进阶篇1检测（倒数日）
 
-> **对应教程**：[docs/countdown.md](countdown.md)  
+> **对应教程**：进阶篇1（暂无链接）
 > **学习目标**：Date 对象、时间计算、setInterval、日期格式化
 
 ### 一、Date 对象（6题）

@@ -7,7 +7,6 @@ export default defineConfig({
   // 配置 favicon
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
-
   ],
 
   themeConfig: {
