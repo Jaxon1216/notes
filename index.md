@@ -153,36 +153,8 @@ body.homepage .VPLastUpdated {
 <div class="directory-container">
   <div class="category-section">
     <div class="category-header">
-      <span>📂 文章</span>
-      <span class="category-meta">4 篇</span>
-    </div>
-    <div class="tree-container">
-      <a class="tree-item tree-file depth-0" href="/articles/algorithm">
-        <span class="tree-prefix"></span>
-        <span class="tree-name">algorithm</span>
-        <span class="tree-date">01/07</span>
-      </a>
-      <a class="tree-item tree-file depth-0" href="/articles/basicK">
-        <span class="tree-prefix"></span>
-        <span class="tree-name">basicK</span>
-        <span class="tree-date">01/07</span>
-      </a>
-      <a class="tree-item tree-file depth-0" href="/articles/STL">
-        <span class="tree-prefix"></span>
-        <span class="tree-name">STL</span>
-        <span class="tree-date">12/26</span>
-      </a>
-      <a class="tree-item tree-file depth-0" href="/articles/vitepress-vue-compiler-bug-analysis">
-        <span class="tree-prefix"></span>
-        <span class="tree-name">vitepress-vue-compiler-bug-analysis</span>
-        <span class="tree-date">01/08</span>
-      </a>
-    </div>
-  </div>
-  <div class="category-section">
-    <div class="category-header">
       <span>📂 前端</span>
-      <span class="category-meta">15 篇</span>
+      <span class="category-meta">16 篇</span>
     </div>
     <div class="tree-container">
       <div class="tree-item tree-dir depth-0">
@@ -272,8 +244,41 @@ body.homepage .VPLastUpdated {
         <span class="tree-date">01/08</span>
       </a>
       <a class="tree-item tree-file depth-1" href="/Frontend/Vue/day2-night">
-        <span class="tree-prefix">└── </span>
+        <span class="tree-prefix">├── </span>
         <span class="tree-name">day2-night</span>
+        <span class="tree-date">01/08</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Frontend/Vue/day3">
+        <span class="tree-prefix">└── </span>
+        <span class="tree-name">day3</span>
+        <span class="tree-date">01/08</span>
+      </a>
+    </div>
+  </div>
+  <div class="category-section">
+    <div class="category-header">
+      <span>📂 文章</span>
+      <span class="category-meta">4 篇</span>
+    </div>
+    <div class="tree-container">
+      <a class="tree-item tree-file depth-0" href="/articles/algorithm">
+        <span class="tree-prefix"></span>
+        <span class="tree-name">algorithm</span>
+        <span class="tree-date">01/07</span>
+      </a>
+      <a class="tree-item tree-file depth-0" href="/articles/basicK">
+        <span class="tree-prefix"></span>
+        <span class="tree-name">basicK</span>
+        <span class="tree-date">01/07</span>
+      </a>
+      <a class="tree-item tree-file depth-0" href="/articles/STL">
+        <span class="tree-prefix"></span>
+        <span class="tree-name">STL</span>
+        <span class="tree-date">12/26</span>
+      </a>
+      <a class="tree-item tree-file depth-0" href="/articles/vitepress-vue-compiler-bug-analysis">
+        <span class="tree-prefix"></span>
+        <span class="tree-name">vitepress-vue-compiler-bug-analysis</span>
         <span class="tree-date">01/08</span>
       </a>
     </div>
