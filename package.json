@@ -7,9 +7,13 @@
     "check:vue:tags": "node scripts/check-html-tags.cjs Frontend/Vue",
     "docs:dev": "node scripts/generate-dashboard.cjs && vitepress dev",
     "docs:build": "node scripts/generate-dashboard.cjs && vitepress build",
-    "docs:preview": "vitepress preview"
+    "docs:preview": "vitepress preview",
+    "prepare": "husky"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.3.0",
+    "@commitlint/config-conventional": "^20.3.0",
+    "husky": "^9.1.7",
     "vitepress": "^1.6.4",
     "vue": "^3.5.25"
   },
