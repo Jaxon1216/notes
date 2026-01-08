@@ -122,7 +122,7 @@ function inspectChild() {
 ## TypeScript：接口（interface）、类型（type）、泛型、export
 
 * `interface` / `type`：用来声明数据结构与复用类型。`export` 导出以便组件/模块间复用。
-* 泛型（generic）：使类型可参数化，提高复用性。可以用于 `reactive<T>()`、函数等。
+* 泛型（generic）：使类型可参数化，提高复用性。可以用于 `reactive&lt;T&gt;()`、函数等。
 * 在 Props、hooks、API 返回值等处都推荐显式声明类型。
 
 ### 类型与泛型示例
@@ -153,8 +153,8 @@ export interface MaybeNumber {
 
 ## Props（`defineProps` / `withDefaults`）—— 接收、类型限制、默认值、必要性
 
-* `defineProps<T>()`：用于在 `script setup` 中声明 props 的类型。
-* `withDefaults(defineProps<...>(), { ... })`：指定默认值（当 props 可选时）。
+* `defineProps&lt;T&gt;()`：用于在 `script setup` 中声明 props 的类型。
+* `withDefaults(defineProps&lt;...&gt;(), { ... })`：指定默认值（当 props 可选时）。
 * `defineProps` 也可以传字符串数组或对象来做更细的校验（TS 下更常用泛型/类型声明）。
 
 ### 常见写法
@@ -333,7 +333,7 @@ import router from './router'
 createApp(App).use(router).mount('#app')
 ```
 
-`App.vue` 使用 `<RouterLink>` 与 `<RouterView>`：
+`App.vue` 使用 `&lt;RouterLink&gt;` 与 `&lt;RouterView&gt;`：
 
 ```vue
 <template>
@@ -382,7 +382,7 @@ createApp(App).use(router).mount('#app')
 ### 6) 嵌套路由
 
 * 在父路由配置 `children: [...]`，子路由 path 不以 `/` 开头。
-* 父组件中需包含 `<RouterView />` 作为子路由容器。
+* 父组件中需包含 `&lt;RouterView /&gt;` 作为子路由容器。
 
 ```ts
 {

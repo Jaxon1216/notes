@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "check:vue:tags": "node scripts/check-html-tags.cjs Frontend/Vue",
     "docs:dev": "node scripts/generate-dashboard.cjs && vitepress dev",
     "docs:build": "node scripts/generate-dashboard.cjs && vitepress build",
     "docs:preview": "vitepress preview"
