@@ -36,7 +36,7 @@ npm run dev
 **核心认知：**
 
 * `index.html` 是**真正的入口**
-* `&lt;script type="module"&gt;` 加载主 JS
+* `<script type="module">` 加载主 JS
 * Vue3 通过 `createApp(App).mount('#app')` 启动应用
 
 ---

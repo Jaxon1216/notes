@@ -213,7 +213,7 @@ talkStore.$subscribe((mutate, state) => {
 
 除了选项式写法（Options API），Pinia 还支持**组合式写法**（Composition API），这种写法：
 
-* 与 Vue3 的 `&lt;script setup&gt;` 风格一致
+* 与 Vue3 的 `<script setup>` 风格一致
 * 代码更加灵活和简洁
 * 可以直接使用 Vue3 的组合式 API（ref、reactive、computed）
 
@@ -1138,7 +1138,7 @@ defineExpose({ toy })
 **注意：**
 
 * 父组件也必须用 `defineExpose` 暴露数据
-* `$parent` 在模板中直接使用，在 `&lt;script setup&gt;` 中不可用
+* `$parent` 在模板中直接使用，在 `<script setup>` 中不可用
 * 这种方式会导致强耦合，不推荐频繁使用
 
 ---
@@ -1146,7 +1146,7 @@ defineExpose({ toy })
 ### 📝 要点测验
 
 <details>
-<summary>为什么 &lt;script setup&gt; 中的数据默认不对外暴露？</summary>
+<summary>为什么 <code>&lt;script setup&gt;</code> 中的数据默认不对外暴露？</summary>
 这是 Vue3 的设计哲学：组件应该是封装的，只暴露必要的接口。如果不用 `defineExpose` 显式暴露，可以防止外部随意访问组件内部状态，提高组件的安全性和可维护性。
 </details>
 
@@ -1375,7 +1375,7 @@ defineProps(['title'])
 
 **效果：**
 
-父组件的 `&lt;ul&gt;` 会被插入到子组件的 `&lt;slot&gt;&lt;/slot&gt;` 位置。
+父组件的 `<ul>` 会被插入到子组件的 `<slot></slot>` 位置。
 
 ---
 
@@ -1432,8 +1432,8 @@ defineProps(['title'])
 **关键点：**
 
 * `v-slot:s1` 可以简写为 `#s1`
-* 必须用 `&lt;template&gt;` 包裹
-* 子组件用 `&lt;slot name="xxx"&gt;` 接收
+* 必须用 `<template>` 包裹
+* 子组件用 `<slot name="xxx">` 接收
 
 ---
 

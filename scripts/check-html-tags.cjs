@@ -58,14 +58,19 @@ function checkFile(filePath) {
       return;
     }
     
+    // 移除反引号内的内容（行内代码），避免误报
+    // 使用临时标记替换反引号内的内容
+    let processedLine = line;
+    processedLine = processedLine.replace(/`[^`]*`/g, '');
+    
     // 查找HTML标签（排除已转义的）
     const openTagRegex = /<(\w+)[^>]*>/g;
     const closeTagRegex = /<\/(\w+)>/g;
     
     let match;
     
-    // 查找开标签
-    while ((match = openTagRegex.exec(line)) !== null) {
+    // 查找开标签（在处理后的行中查找）
+    while ((match = openTagRegex.exec(processedLine)) !== null) {
       const tagName = match[1];
       // 跳过自闭合标签
       if (!['img', 'br', 'hr', 'input', 'meta', 'link'].includes(tagName.toLowerCase())) {
@@ -74,8 +79,8 @@ function checkFile(filePath) {
       }
     }
     
-    // 查找闭标签
-    while ((match = closeTagRegex.exec(line)) !== null) {
+    // 查找闭标签（在处理后的行中查找）
+    while ((match = closeTagRegex.exec(processedLine)) !== null) {
       const tagName = match[1];
       
       // 检查栈顶是否匹配
