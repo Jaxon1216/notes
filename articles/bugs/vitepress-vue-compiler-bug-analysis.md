@@ -31,7 +31,7 @@ Element is missing end tag.
 5. **更换代码块类型** - 将 `vue` 改为 `html` ✅
 
 但问题依然存在。
-<img src="./img/vue-compiler-bug.png" width="600" alt="编译bug">
+<img src="../img/vue-compiler-bug.png" width="600" alt="编译bug">
 更诡异的是：
 - 删除"问题行"后，错误会移动到更前面的行（273→242→191）
 - 前 272 行单独提取出来可以成功构建
