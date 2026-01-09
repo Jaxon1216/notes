@@ -15,7 +15,8 @@
 ```bash
 # 1. 克隆远程仓库到本地
 git clone https://github.com/用户名/仓库名.git
-
+or：
+git clone git@github.com:yourname/yourproject.git
 # 2. 进入目录
 cd 仓库名
 
