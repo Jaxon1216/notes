@@ -1,5 +1,6 @@
 # 课程笔记：AJAX前端网络通信技术
 
+![](../img/Ajax.svg)
 ## 一、HTTP协议基础
 
 ### 核心概念
@@ -1983,4 +1984,5 @@ const baseURL = process.env.REACT_APP_API_BASE_URL;
 3. 学习Promise、async/await深入异步编程
 4. 了解WebSocket实现实时通信
 5. 研究axios源码，深入理解封装原理
+
 
