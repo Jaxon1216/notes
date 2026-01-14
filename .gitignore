@@ -5,4 +5,5 @@ cache
 .temp
 .vitepress/dist
 .vitepress/cache
-
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json

@@ -38,19 +38,20 @@ Content-encoding: gzip
 ### 📝 要点测验
 
 <details>
-<summary>HTTP常见状态码的含义及应用场景？</summary>
+  <summary>HTTP 常见状态码的含义及应用场景？</summary>
 
-**状态码分类：**
-- **200 OK**: 请求成功，这是最常见的成功响应
-- **404 Not Found**: 请求的资源不存在，URL错误或资源已删除
-- **403 Forbidden**: 服务器拒绝访问，通常是权限问题
-- **401 Unauthorized**: 未授权，需要身份验证
-- **500 Internal Server Error**: 服务器内部错误，代码异常
+  <ul>
+    <li><strong>200 OK</strong>：请求成功</li>
+    <li><strong>404 Not Found</strong>：资源不存在</li>
+    <li><strong>403 Forbidden</strong>：无访问权限</li>
+    <li><strong>401 Unauthorized</strong>：未认证</li>
+    <li><strong>500 Internal Server Error</strong>：服务器错误</li>
+  </ul>
+</details>
 
 **面试要点：**
 - 2xx表示成功，3xx表示重定向，4xx表示客户端错误，5xx表示服务器错误
 - 实际开发中，判断成功通常用：`status >= 200 && status < 300`
-</details>
 
 <details>
 <summary>GET和POST请求的主要区别？</summary>
