@@ -1,5 +1,5 @@
 # 文件路径写法详解：Windows vs Linux vs HTML
-![](../img/url)
+<img src = "../img/url.png">
 ## 一、操作系统路径差异
 
 ### 1. **根目录表示**
