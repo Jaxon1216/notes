@@ -3,8 +3,19 @@ import { spawn } from 'child_process'
 import fs from 'fs'
 import path from 'path'
 
-// Directories to ignore
-const IGNORE = ['.vitepress', 'node_modules', '.git', 'scripts', 'public', 'package.json', 'package-lock.json', 'README.md', 'index.md', '.gitignore', '.DS_Store']
+// ====== 白名单：只有列在这里的顶层文件夹才会出现在导航栏和侧边栏 ======
+const SHOW_DIRS = [
+  'Leetcode',
+  'Frontend',
+  'cs-core',
+  'Projects',
+  'Misc',
+  'articles',
+  'LLMtools',
+  'Febagu',
+  // 'openclaw',   // 取消注释即可公开
+  // 'img',        // 取消注释即可公开
+]
 
 // Helper to find first MD file for nav links
 function findFirstFile(dir: string): string | null {
@@ -88,12 +99,10 @@ function generateNav() {
   const items = fs.readdirSync(root)
   const nav: Array<any> = [{ text: 'Home', link: '/' }]
 
-  // Sort directories
-  const dirs = items.filter(item => {
-    if (IGNORE.includes(item) || item.startsWith('.')) return false
-    const fullPath = path.join(root, item)
+  const dirs = SHOW_DIRS.filter(dir => {
+    const fullPath = path.join(root, dir)
     return fs.existsSync(fullPath) && fs.statSync(fullPath).isDirectory()
-  }).sort()
+  })
 
   dirs.forEach(dir => {
     const dropdownItems = getDirDropdownItems(dir)
@@ -170,20 +179,12 @@ function generateSidebar() {
   
   const sidebar: Record<string, Array<any>> = {}
   
-  // Default sidebar for root
   sidebar['/'] = []
 
-  const items = fs.readdirSync(root)
-  
-  items.forEach(item => {
-    if (IGNORE.includes(item) || item.startsWith('.')) return
-    const fullPath = path.join(root, item)
+  SHOW_DIRS.forEach(dir => {
+    const fullPath = path.join(root, dir)
     if (!fs.existsSync(fullPath)) return
-    const stat = fs.statSync(fullPath)
-    
-    if (stat.isDirectory()) {
-      sidebar[`/${item}/`] = getSidebarItems(fullPath, `/${item}/`)
-    }
+    sidebar[`/${dir}/`] = getSidebarItems(fullPath, `/${dir}/`)
   })
   
   return sidebar

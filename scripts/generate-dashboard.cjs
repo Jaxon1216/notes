@@ -3,7 +3,24 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..');
-const IGNORE = ['.vitepress', 'node_modules', '.git', 'scripts', 'README.md', 'index.md', 'package.json', 'package-lock.json', '.DS_Store', '.gitignore'];
+
+// 子目录内部过滤用（系统文件等）
+const IGNORE = ['node_modules', '.git', '.DS_Store', 'README.md'];
+
+// ====== 白名单：只有列在这里的顶层文件夹才会出现在首页 ======
+// 与 .vitepress/config.mts 中的 SHOW_DIRS 保持一致
+const SHOW_DIRS = [
+  'Leetcode',
+  'Frontend',
+  'cs-core',
+  'Projects',
+  'Misc',
+  'articles',
+  'LLMtools',
+  'Febagu',
+  // 'openclaw',   // 取消注释即可公开
+  // 'img',        // 取消注释即可公开
+];
 
 // Directory name mapping (English -> Chinese)
 const DIR_MAPPING = {
@@ -140,13 +157,11 @@ function buildDirTree(dirPath, basePath = '') {
   return result;
 }
 
-// Get root level categories
+// Get root level categories (only from SHOW_DIRS whitelist)
 function getRootCategories() {
-  const items = fs.readdirSync(ROOT);
   const categories = [];
 
-  items.forEach(item => {
-    if (IGNORE.includes(item) || item.startsWith('.')) return;
+  SHOW_DIRS.forEach(item => {
     const fullPath = path.join(ROOT, item);
     if (!fs.existsSync(fullPath)) return;
     
@@ -154,7 +169,6 @@ function getRootCategories() {
     if (stat.isDirectory()) {
       const tree = buildDirTree(fullPath, item);
       if (tree.length > 0) {
-        // Get latest git time from all files in this category
         const allFiles = getAllMdFiles(fullPath);
         let latestTime = null;
         allFiles.forEach(f => {
