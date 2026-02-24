@@ -1,43 +1,10 @@
 import { defineConfig } from 'vitepress'
+import { spawn } from 'child_process'
 import fs from 'fs'
 import path from 'path'
 
-// Directory name mapping (English -> Chinese)
-const DIR_MAPPING = {
-  'HDU': '数据结构',
-  'Leetcode': 'Leetcode',
-  'PTA': 'PTA',
-  'STL': 'STL',
-  'JavaScript': 'JavaScript',
-  'CSS': 'CSS',
-  'articles': '文章',
-  'Miscellaneous': '杂项',
-  'PurpleBook': '紫书',
-  'TipsAndTricks': '技巧',
-  'BinarySearch': '二分查找',
-  'SlidingWindow': '滑动窗口',
-  'DataStructure': '数据结构',
-  'Intro': '入门题单',
-  'String': '串',
-  'SinglyLinkedList': '单向链表',
-  'Stack': '栈',
-  'StackAndQueue': '栈和队列',
-  'Queue': '队列',
-  'SequentialList': '顺序表',
-  'Frontend': '前端',
-  'cs-core': '计算机基础',
-  'Misc': '其他',
-  'dataStruct': '数据结构',
-  'networks': '计算机网络',
-  'os': '操作系统'
-}
-
 // Directories to ignore
-const IGNORE = ['.vitepress', 'node_modules', '.git', 'scripts', 'package.json', 'package-lock.json', 'README.md', 'index.md', '.gitignore', '.DS_Store']
-
-function getDisplayName(name: string): string {
-  return DIR_MAPPING[name] || name
-}
+const IGNORE = ['.vitepress', 'node_modules', '.git', 'scripts', 'public', 'package.json', 'package-lock.json', 'README.md', 'index.md', '.gitignore', '.DS_Store']
 
 // Helper to find first MD file for nav links
 function findFirstFile(dir: string): string | null {
@@ -107,7 +74,7 @@ function getDirDropdownItems(dirName: string): Array<{text: string, link: string
     if (stat.isDirectory()) {
       const link = getLinkForDir(path.join(dirName, item))
       if (link !== '/') {
-        dropdown.push({ text: getDisplayName(item), link: link })
+        dropdown.push({ text: item, link: link })
       }
     }
   })
@@ -119,7 +86,7 @@ function getDirDropdownItems(dirName: string): Array<{text: string, link: string
 function generateNav() {
   const root = process.cwd()
   const items = fs.readdirSync(root)
-  const nav: Array<any> = [{ text: '首页', link: '/' }]
+  const nav: Array<any> = [{ text: 'Home', link: '/' }]
 
   // Sort directories
   const dirs = items.filter(item => {
@@ -137,16 +104,16 @@ function generateNav() {
     if (dropdownItems.length > 0) {
       // Has subdirectories, create dropdown menu
       nav.push({
-        text: getDisplayName(dir),
+        text: dir,
         items: [
-          { text: '概览', link: firstLink },
+          { text: 'Overview', link: firstLink },
           ...dropdownItems
         ]
       })
     } else {
       // No subdirectories, simple link
       nav.push({
-        text: getDisplayName(dir),
+        text: dir,
         link: firstLink
       })
     }
@@ -181,15 +148,13 @@ function getSidebarItems(dir: string, base: string): Array<any> {
       // Only add directory if it has children
       if (children.length > 0) {
         result.push({
-          text: getDisplayName(item),
+          text: item,
           collapsed: true,
           items: children
         })
       }
     } else if (item.endsWith('.md')) {
       let text = item.replace('.md', '')
-      if (text === 'note') text = '笔记'
-      if (text === 'README') text = '简介'
       
       result.push({
         text: text,
@@ -224,16 +189,40 @@ function generateSidebar() {
   return sidebar
 }
 
+function getGitTimestampWithFollow(file: string): Promise<number> {
+  return new Promise((resolve) => {
+    const cwd = process.cwd()
+    const child = spawn(
+      'git',
+      ['log', '-1', '--follow', '--pretty=%ai', '--', path.relative(cwd, file)],
+      { cwd }
+    )
+    let output = ''
+    child.stdout.on('data', (d: Buffer) => (output += String(d)))
+    child.on('close', () => resolve(+new Date(output) || 0))
+    child.on('error', () => resolve(0))
+  })
+}
+
 export default defineConfig({
-  title: "学习笔记",
+  title: "Study Notes",
   description: "Personal Algorithm & CPP Notes",
   ignoreDeadLinks: true, // Avoid build errors for missing links
+  lastUpdated: true,
   
-  // 配置 favicon
+  // Configure favicon
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
   ],
   
+  transformPageData: async (pageData) => {
+    const filePath = path.join(process.cwd(), pageData.relativePath)
+    const timestamp = await getGitTimestampWithFollow(filePath)
+    if (timestamp) {
+      pageData.lastUpdated = timestamp
+    }
+  },
+
   themeConfig: {
     search: {
       provider: 'local'
@@ -245,10 +234,10 @@ export default defineConfig({
     ],
     outline: {
       level: [2, 3],
-      label: '页面导航'
+      label: 'Page Navigation'
     },
     lastUpdated: {
-      text: '最后更新于',
+      text: 'Last Updated',
       formatOptions: {
         dateStyle: 'full',
         timeStyle: 'medium'
