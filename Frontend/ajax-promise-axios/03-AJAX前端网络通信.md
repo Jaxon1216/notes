@@ -1,6 +1,11 @@
-# 课程笔记：AJAX前端网络通信技术
+# AJAX 前端网络通信
 
 ![](../img/Ajax.svg)
+
+> **本页关键词**：HTTP 协议、XMLHttpRequest、Axios、Fetch、跨域、CORS、JSONP、代理
+
+---
+
 ## 一、HTTP协议基础
 
 ### 核心概念
