@@ -283,7 +283,7 @@ Promise.resolve(config)
 ---
 
 ## 九、学习文件索引
-
+在本地code/local/axios文件夹
 | 文件 | 内容 |
 |------|------|
 | `01-get.js` | 最简 GET 请求 |
