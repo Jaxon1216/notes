@@ -1,3 +1,84 @@
+# 排版示例
+
+## 排版前（原始笔记）
+
+```markdown
+# 相向双指针（二）
+
+> 来源：[基础算法精讲](https://space.bilibili.com/206214/channel/collectiondetail?sid=842776) by [灵茶山艾府](https://space.bilibili.com/206214)
+
+视频精讲：[相向双指针（二）](https://www.bilibili.com/video/BV1Qg411q7ia/)
+
+|题目|代码|备注|
+|---|---|---|
+|[11. 盛最多水的容器](https://leetcode.cn/problems/container-with-most-water/)|[代码](https://leetcode.cn/problems/container-with-most-water/solution/by-endlesscheng-f0xz/)||
+|[42. 接雨水](https://leetcode.cn/problems/trapping-rain-water/)|[代码](https://leetcode.cn/problems/trapping-rain-water/solution/zuo-liao-nbian-huan-bu-hui-yi-ge-shi-pin-ukwm/)|额外讲了**前后缀分解**|
+
+## 例题
+- 盛水最多的容器
+    - 为什么移动最小的边：因为移动大的没好处（木桶效应）
+```js
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+var maxArea = function(height) {
+    //选两端，木桶原理，移动矮的找更大的；
+    //相向双指针
+    //不知道怎么处理相等的情况
+    let l = 0, r = height.length -1;
+    let ans = 0, minh = 0;
+    while(l < r){
+        minh = Math.min(height[l],height[r]);
+        ans = Math.max(ans,(r-l)*minh)
+        if (height[l] ===  height[r]) r--;
+        else if(height[l] > height[r]) r--;
+        else l++;
+    }
+    return ans;
+};
+```
+- 接雨水法一,前后缀和
+```js
+var trap = function (height) {
+    // 根据例题发现，每次计算雨水格子，需要左边的最大值，右边的最大值，与当前值，所以需要维护两个数组
+    //注意前缀和的生成
+    let l = 0, n = height.length;
+    let preMax = Array(n)
+    ...
+};
+```
+- 接雨水法二，双指针
+    - 多画图模拟，多测试
+```js
+var trap = function (height) {
+    //双指针的话，原理也是木桶，找到最小的一方计算那一方的ans
+    ...
+};
+```
+## 作业题
+- 验证回文子串
+    - 正则：! /[a-zA-Z0-9]/.test(s[i]) 就是：如果 s[i] 不是字母 / 数字，就返回 true，
+    - // 不加 i：区分大小写
+/abc/.test('ABC'); // false
+// 加 i：忽略大小写
+/abc/i.test('ABC'); // true
+    - toLowerCase方法
+```js
+var isPalindrome = function (s) {
+    ...
+};
+```
+## 正则
+当然！正则表达式是处理字符串的强大工具。我来详细解释...
+（大段正则知识）
+```
+
+---
+
+## 排版后（目标输出）
+
+```markdown
 # 相向双指针（二）
 
 > 来源：[基础算法精讲](https://space.bilibili.com/206214/channel/collectiondetail?sid=842776) by [灵茶山艾府](https://space.bilibili.com/206214)
@@ -50,10 +131,6 @@ var maxArea = function(height) {
 - 最后遍历一次累加每个位置的雨水量
 
 ```js
-/**
- * @param {number[]} height
- * @return {number}
- */
 var trap = function (height) {
     // 根据例题发现，每次计算雨水格子，需要左边的最大值，右边的最大值，与当前值，所以需要维护两个数组
     //注意前缀和的生成
@@ -88,10 +165,6 @@ var trap = function (height) {
 - **多画图模拟，多测试**
 
 ```js
-/**
- * @param {number[]} height
- * @return {number}
- */
 var trap = function (height) {
     //双指针的话，原理也是木桶，找到最小的一方计算那一方的ans
     //不知道怎么维护前后的最大值？还是比较呗，
@@ -123,10 +196,6 @@ var trap = function (height) {
 - `toLowerCase()` 统一大小写后比较
 
 ```js
-/**
- * @param {string} s
- * @return {boolean}
- */
 var isPalindrome = function (s) {
     //toLowerCase,
     //正反l,r
@@ -164,12 +233,6 @@ var isPalindrome = function (s) {
 - 核心调试思维：跟踪"状态变化"——什么变了、怎么变的、变之前还是变之后用旧值
 
 ```js
-/**
- * @param {number[]} plants
- * @param {number} capacityA
- * @param {number} capacityB
- * @return {number}
- */
 var minimumRefill = function (plants, capacityA, capacityB) {
     //很明显的相向双指针了，要标记容量，模拟即可
     let ca = capacityA, cb = capacityB;
@@ -195,7 +258,6 @@ var minimumRefill = function (plants, capacityA, capacityB) {
             else if (cb >= plants[l]) break;
             else ans++;
         }
-        //可以优化成满足条件++；
     }
     return ans;
 };
@@ -208,102 +270,47 @@ var minimumRefill = function (plants, capacityA, capacityB) {
 ### 正则表达式基础
 
 #### 1. 字符组 `[]`
-
 方括号表示匹配其中的**任意一个字符**：
 - `[abc]` - 匹配 a、b 或 c 中的任意一个
 - `[a-z]` - 匹配任意小写字母（a 到 z）
 - `[0-9]` - 匹配任意数字（0 到 9）
-- `[a-zA-Z]` - 匹配任意大小写字母
 
 #### 2. 反向字符组 `[^]`
-
-在方括号内开头使用 `^` 表示**取反**，匹配不在括号内的字符：
+在方括号内开头使用 `^` 表示**取反**：
 - `[^a-z]` - 匹配任何**不是**小写字母的字符
-- `[^0-9]` - 匹配任何**不是**数字的字符
 - `[^a-zA-Z0-9]` - 匹配任何**不是**字母和数字的字符
 
-#### 3. 量词 `+`
+#### 3. 常用修饰符
+- `g` 全局匹配
+- `i` 忽略大小写
 
-- `+` 表示前面的模式出现**一次或多次**
-- 例如：`/a+/` 可以匹配 "a"、"aa"、"aaa" 等
-
-#### 4. 修饰符 `g` 和 `i`
-
-- `g` 表示**全局匹配**，不只是匹配第一个
-- `i` 表示**忽略大小写**
-
-```js
-/abc/.test('ABC');   // false（区分大小写）
-/abc/i.test('ABC');  // true（忽略大小写）
-
-const str = 'a1b2c3';
-str.match(/\d/);     // ["1"]（只找第一个数字）
-str.match(/\d/g);    // ["1","2","3"]（找所有数字）
-```
-
-#### 5. 分解 `/[^a-z0-9]/g`
-
-```js
-/[^a-z0-9]/g
-
-// 分解：
-/           // 正则表达式的开始
-[^          // 匹配任何不在以下字符组中的字符
-a-z         // 小写字母 a 到 z
-0-9         // 数字 0 到 9
-]           // 字符组结束
-/           // 正则表达式结束
-g           // 全局匹配修饰符
-```
-
-#### 6. 实际应用
-
-```js
-const s = "A man, a plan, a canal: Panama";
-
-// 先转小写，再用正则替换
-const filtered = s.toLowerCase().replace(/[^a-z0-9]/g, '');
-// "amanaplanacanalpanama"
-```
-
-```js
-// 只保留数字
-"abc123def456".replace(/[^0-9]/g, '');     // "123456"
-
-// 只保留字母
-"abc123def456".replace(/[^a-zA-Z]/g, '');  // "abcdef"
-
-// 只保留中文
-"Hello 你好 123".replace(/[^\u4e00-\u9fa5]/g, '');  // "你好"
-
-// 移除所有空格
-" a b c ".replace(/\s/g, '');              // "abc"
-
-// 检查是否只包含字母数字
-/^[a-zA-Z0-9]+$/.test("abc123");           // true
-/^[a-zA-Z0-9]+$/.test("abc 123");          // false（包含空格）
-
-// 提取所有单词
-"Hello, world! 123".match(/[a-zA-Z]+/g);   // ["Hello", "world"]
-```
-
-#### 常用正则速查表
+#### 4. 常用正则速查表
 
 | 模式 | 含义 |
 |------|------|
 | `\d` | 数字，等价于 `[0-9]` |
 | `\D` | 非数字，等价于 `[^0-9]` |
-| `\w` | 单词字符（字母、数字、下划线），等价于 `[a-zA-Z0-9_]` |
+| `\w` | 单词字符，等价于 `[a-zA-Z0-9_]` |
 | `\W` | 非单词字符 |
-| `\s` | 空白字符（空格、制表符等） |
+| `\s` | 空白字符 |
 | `\S` | 非空白字符 |
 | `.` | 匹配除换行符外的任意字符 |
 
 ```js
-// 用 \d 简化
-"abc123".replace(/\D/g, '');    // "123"（保留数字）
-"abc123".replace(/\d/g, '');    // "abc"（移除数字）
-
-// 用 \w 简化
-"hello_world!@#".replace(/\W/g, '');  // "hello_world"
+// 实际应用示例
+const s = "A man, a plan, a canal: Panama";
+const filtered = s.toLowerCase().replace(/[^a-z0-9]/g, '');
+// "amanaplanacanalpanama"
 ```
+```
+
+---
+
+## 关键排版规则总结
+
+1. **题目表格**：保持原样不动
+2. **每道题**：`### 题目名` → 思路列表 → 代码块 → 复杂度
+3. **多解法**：拆成独立的三级标题（如 `### 接雨水 - 前后缀分解`）
+4. **代码**：保留 console.log 和原始注释，只清理多余空行
+5. **踩坑点**：用加粗标记突出
+6. **附录**：额外知识补充独立成 `## 附录` 章节
