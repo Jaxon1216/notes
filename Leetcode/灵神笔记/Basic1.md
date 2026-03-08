@@ -1,5 +1,5 @@
 # 基础算法精讲·题目汇总
-
+- fork自灵神GitHub，但是他的题单页面点击不会新开标签页跳转，本
 [灵茶山艾府](https://space.bilibili.com/206214)。
 制作了一系列算法教学视频，整理成合集[【基础算法精讲】](https://space.bilibili.com/206214/channel/collectiondetail?sid=842776)。以下是合集中的视频链接、配套题目和代码，代码包含 Python/Java/C++/Go 等多种语言。
 
