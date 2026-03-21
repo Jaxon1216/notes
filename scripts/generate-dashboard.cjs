@@ -52,6 +52,28 @@ const DIR_MAPPING = {
   'os': '操作系统'
 };
 
+const CATEGORY_ACCENTS = {
+  'Leetcode': '#ef4444',
+  'Frontend': '#3b82f6',
+  'cs-core': '#8b5cf6',
+  'Projects': '#10b981',
+  'Misc': '#64748b',
+  'articles': '#f59e0b',
+  'LLMtools': '#ec4899',
+  'Febagu': '#06b6d4',
+};
+
+const CATEGORY_ICONS = {
+  'Leetcode': '🧩',
+  'Frontend': '🎨',
+  'cs-core': '💻',
+  'Projects': '🚀',
+  'Misc': '📦',
+  'articles': '✏️',
+  'LLMtools': '🤖',
+  'Febagu': '📐',
+};
+
 function getDisplayName(name) {
   return DIR_MAPPING[name] || name;
 }
@@ -235,11 +257,12 @@ function generateTreeHtml(items, depth = 0) {
 
 function generateDashboard() {
   const categories = getRootCategories();
-  
-  // Find most recently updated file for "继续学习" button
+
   let mostRecentFile = null;
   let mostRecentTime = null;
+  let totalFiles = 0;
   categories.forEach(cat => {
+    totalFiles += cat.fileCount;
     const allFiles = getAllMdFiles(path.join(ROOT, cat.name));
     allFiles.forEach(f => {
       if (!mostRecentTime || f.gitTime > mostRecentTime) {
@@ -249,7 +272,7 @@ function generateDashboard() {
     });
   });
 
-  const continueLink = mostRecentFile 
+  const continueLink = mostRecentFile
     ? '/' + path.relative(ROOT, mostRecentFile).replace(/\\/g, '/').replace('.md', '')
     : '/';
 
@@ -268,7 +291,6 @@ onUnmounted(() => {
 </script>
 
 <style>
-/* 只在主页应用这些样式 */
 body.homepage .VPDoc .container,
 body.homepage .VPDoc .content,
 body.homepage .VPDoc .content-container {
@@ -285,98 +307,248 @@ body.homepage .vp-doc {
   padding: 0 !important;
 }
 
-/* 隐藏主页的更新时间 */
 body.homepage .VPDocFooter,
 body.homepage .VPLastUpdated {
   display: none !important;
 }
 
+/* ---------- Hero ---------- */
+.dashboard-hero {
+  position: relative;
+  padding: 52px 24px 40px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 0%, var(--vp-c-brand-soft) 0%, transparent 70%),
+    radial-gradient(circle at 20% 80%, rgba(168, 85, 247, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 80% 60%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 16px;
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  letter-spacing: 0.01em;
+  border: 1px solid rgba(13, 148, 136, 0.15);
+}
+
+.hero-title {
+  font-size: 2.75rem;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.1;
+  margin: 0 0 10px;
+  background: linear-gradient(135deg, var(--vp-c-brand-1) 0%, #2dd4bf 40%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-desc {
+  font-size: 15px;
+  color: var(--vp-c-text-2);
+  margin: 0 0 28px;
+  font-weight: 400;
+}
+
+.hero-stats {
+  display: inline-flex;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--vp-c-brand-1);
+  line-height: 1.2;
+}
+
+.hero-stat-label {
+  font-size: 12px;
+  color: var(--vp-c-text-3);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 28px;
+  background: var(--vp-c-brand-1);
+  color: #fff !important;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px var(--vp-c-brand-soft);
+}
+
+.hero-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--vp-c-brand-soft);
+  filter: brightness(1.1);
+}
+
+.hero-cta-arrow {
+  transition: transform 0.2s;
+}
+
+.hero-cta:hover .hero-cta-arrow {
+  transform: translateX(3px);
+}
+
+/* ---------- Cards Grid ---------- */
 .directory-container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 16px 20px 24px;
+  padding: 0 24px 48px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px;
 }
 
 .category-section {
-  background: var(--vp-c-bg-soft);
-  border-radius: 8px;
-  padding: 14px;
-  transition: all 0.2s ease;
+  background: var(--vp-c-bg-elv);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid var(--vp-c-divider);
+  animation: cardSlideIn 0.45s ease backwards;
 }
 
 .category-section:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border-color: var(--vp-c-brand);
+  transform: translateY(-4px);
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.06),
+    0 4px 10px rgba(0, 0, 0, 0.04);
+  border-color: color-mix(in srgb, var(--card-accent, var(--vp-c-brand-1)) 40%, transparent);
+}
+
+.dark .category-section:hover {
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.25),
+    0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.category-accent-bar {
+  height: 3px;
+  background: var(--card-accent, var(--vp-c-brand-1));
+  opacity: 0.85;
+}
+
+.category-body {
+  padding: 16px 18px 18px;
 }
 
 .category-header {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--vp-c-text-1);
-  padding-bottom: 8px;
+  gap: 10px;
+  padding-bottom: 12px;
   border-bottom: 1px solid var(--vp-c-divider);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+}
+
+.category-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.category-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+  letter-spacing: -0.02em;
 }
 
 .category-meta {
-  font-size: 13px;
-  font-weight: 400;
-  color: var(--vp-c-text-3);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--card-accent, var(--vp-c-brand-1));
   margin-left: auto;
+  padding: 2px 10px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--card-accent, var(--vp-c-brand-1)) 10%, transparent);
 }
 
+/* ---------- File Tree ---------- */
 .tree-container {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-family: var(--vp-font-family-mono);
   font-size: 13px;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 .tree-item {
   display: flex;
   align-items: center;
-  padding: 1px 0;
+  padding: 1.5px 0;
   color: var(--vp-c-text-2);
 }
 
 .tree-file {
   text-decoration: none !important;
-  border-radius: 4px;
-  padding: 2px 6px;
-  margin: -2px -6px;
-  transition: background-color 0.2s;
+  border-radius: 6px;
+  padding: 2px 8px;
+  margin: -2px -8px;
+  transition: all 0.2s ease;
 }
 
 .tree-file:hover {
-  background-color: var(--vp-c-bg-soft);
-  color: var(--vp-c-brand);
+  background-color: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+}
+
+.tree-file:hover .tree-name {
+  color: var(--vp-c-brand-1);
 }
 
 .tree-prefix {
   color: var(--vp-c-text-3);
   white-space: pre;
+  opacity: 0.5;
 }
 
 .tree-name {
   flex: 1;
+  transition: color 0.2s;
 }
 
 .tree-dir .tree-name {
   color: var(--vp-c-text-1);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .tree-date {
   color: var(--vp-c-text-3);
-  font-size: 12px;
+  font-size: 11px;
   margin-left: 16px;
+  opacity: 0.7;
 }
 
 .depth-0 { padding-left: 0; }
@@ -385,37 +557,90 @@ body.homepage .VPLastUpdated {
 .depth-3 { padding-left: 60px; }
 .depth-4 { padding-left: 80px; }
 
-/* 响应式设计 */
+@keyframes cardSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Responsive ---------- */
 @media (max-width: 1024px) {
   .directory-container {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   }
 }
 
 @media (max-width: 768px) {
+  .dashboard-hero {
+    padding: 36px 16px 28px;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
   .directory-container {
     grid-template-columns: 1fr;
-    gap: 10px;
-    padding: 12px;
+    gap: 12px;
+    padding: 0 16px 36px;
   }
-  
-  .category-section {
-    padding: 12px;
+
+  .category-body {
+    padding: 14px 16px 16px;
+  }
+
+  .hero-stats {
+    gap: 16px;
   }
 }
 </style>
 
+<div class="dashboard-hero">
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-badge">📖 Personal Knowledge Base</div>
+    <h1 class="hero-title">Study Notes</h1>
+    <p class="hero-desc">A growing collection of notes, solutions, and insights</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-value">${totalFiles}</span>
+        <span class="hero-stat-label">Articles</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">${categories.length}</span>
+        <span class="hero-stat-label">Categories</span>
+      </div>
+    </div>
+    <a class="hero-cta" href="${continueLink}">
+      Continue Reading
+      <span class="hero-cta-arrow">→</span>
+    </a>
+  </div>
+</div>
+
 <div class="directory-container">
 `;
 
-  categories.forEach(cat => {
-    content += `  <div class="category-section">
-    <div class="category-header">
-      <span>📂 ${cat.displayName}</span>
-      <span class="category-meta">${cat.fileCount} 篇</span>
+  categories.forEach((cat, index) => {
+    const accent = CATEGORY_ACCENTS[cat.name] || '#0d9488';
+    const icon = CATEGORY_ICONS[cat.name] || '📂';
+    const delay = (index * 0.06).toFixed(2);
+    content += `  <div class="category-section" style="--card-accent: ${accent}; animation-delay: ${delay}s">
+    <div class="category-accent-bar"></div>
+    <div class="category-body">
+      <div class="category-header">
+        <span class="category-icon">${icon}</span>
+        <span class="category-name">${cat.displayName}</span>
+        <span class="category-meta">${cat.fileCount} 篇</span>
+      </div>
+      <div class="tree-container">
+${generateTreeHtml(cat.tree)}      </div>
     </div>
-    <div class="tree-container">
-${generateTreeHtml(cat.tree)}    </div>
   </div>
 `;
   });

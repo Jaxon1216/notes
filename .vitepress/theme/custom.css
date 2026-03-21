@@ -1,11 +1,184 @@
-/* 自定义变量 */
+/* =============================================
+   Theme: Digital Garden
+   A refined, editorial theme for study notes
+   ============================================= */
+
+/* ---------- Brand & Color System ---------- */
 :root {
-  --vp-sidebar-width: 300px;      /* 侧边栏宽度 */
-  --vp-aside-width: 550px;        /* 右侧大纲宽度 */
-  --vp-content-max-width: 1100px; /* 正文显示宽度 */
+  --vp-c-brand-1: #0d9488;
+  --vp-c-brand-2: #14b8a6;
+  --vp-c-brand-3: #2dd4bf;
+  --vp-c-brand-soft: rgba(13, 148, 136, 0.12);
+
+  --vp-font-family-base: 'Lexend', -apple-system, BlinkMacSystemFont,
+    'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+  --vp-font-family-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular,
+    'SF Mono', Menlo, Monaco, Consolas, monospace;
+
+  --vp-sidebar-width: 280px;
+  --vp-aside-width: 280px;
+  --vp-content-max-width: 1100px;
+
+  --vp-c-bg: #fafaf9;
+  --vp-c-bg-soft: #f5f5f4;
+  --vp-c-bg-elv: #ffffff;
+
+  --vp-button-brand-bg: var(--vp-c-brand-1);
+  --vp-button-brand-hover-bg: var(--vp-c-brand-2);
 }
 
-/* 强制修改右侧大纲 (Aside) 的宽度 */
+.dark {
+  --vp-c-brand-1: #5eead4;
+  --vp-c-brand-2: #2dd4bf;
+  --vp-c-brand-3: #14b8a6;
+  --vp-c-brand-soft: rgba(94, 234, 212, 0.10);
+
+  --vp-c-bg: #0f172a;
+  --vp-c-bg-soft: #1e293b;
+  --vp-c-bg-elv: #1e293b;
+}
+
+/* ---------- Navbar ---------- */
+.VPNav .VPNavBar {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid var(--vp-c-divider) !important;
+}
+
+.VPNavBar .title {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  font-size: 15px;
+}
+
+.VPNavBarSearch .DocSearch-Button {
+  border-radius: 10px;
+  padding-left: calc(var(--docsearch-spacing, 12px) + 16px) !important;
+  padding-right: calc(var(--docsearch-spacing, 12px) + 16px) !important;
+}
+
+/* ---------- Sidebar ---------- */
+.VPSidebarItem .text {
+  font-size: 13.5px;
+  font-weight: 400;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.VPSidebarItem .text:hover {
+  transform: translateX(2px);
+}
+
+.VPSidebarItem.is-active > .item > .indicator {
+  background: linear-gradient(180deg, var(--vp-c-brand-1), var(--vp-c-brand-3)) !important;
+  width: 3px !important;
+  border-radius: 2px;
+}
+
+.VPSidebarItem.is-active > .item > .link > .text {
+  color: var(--vp-c-brand-1) !important;
+  font-weight: 600;
+}
+
+/* ---------- Content Typography ---------- */
+.vp-doc h1 {
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+  background: linear-gradient(135deg, var(--vp-c-brand-1) 0%, var(--vp-c-brand-3) 50%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.vp-doc h2 {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--vp-c-brand-soft);
+}
+
+.vp-doc h3 {
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.vp-doc p {
+  line-height: 1.85;
+}
+
+.vp-doc li {
+  line-height: 1.75;
+}
+
+/* Links with animated underline */
+.vp-doc a {
+  text-decoration: none;
+  font-weight: 500;
+  background-image: linear-gradient(var(--vp-c-brand-2), var(--vp-c-brand-2));
+  background-size: 0% 1.5px;
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.vp-doc a:hover {
+  background-size: 100% 1.5px;
+}
+
+/* Inline code */
+.vp-doc :not(pre) > code {
+  border-radius: 5px;
+  padding: 2px 7px;
+  background-color: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+  font-size: 0.88em;
+  font-weight: 500;
+  border: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.vp-doc :not(pre) > code:hover {
+  border-color: var(--vp-c-brand-2);
+}
+
+/* Code blocks */
+.vp-doc div[class*='language-'] {
+  border-radius: 12px;
+  border: 1px solid var(--vp-c-divider);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.vp-doc div[class*='language-'] > button.copy {
+  border-radius: 8px;
+}
+
+/* Blockquote */
+.vp-doc blockquote {
+  border-left: 3px solid var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  margin: 16px 0;
+}
+
+/* Table */
+.vp-doc table {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--vp-c-divider);
+}
+
+.vp-doc tr:nth-child(2n) {
+  background-color: var(--vp-c-bg-soft);
+}
+
+.vp-doc th {
+  background: var(--vp-c-brand-soft);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Aside (Outline) ---------- */
 .VPDoc .aside {
   width: var(--vp-aside-width) !important;
 }
@@ -14,7 +187,7 @@
   width: var(--vp-aside-width) !important;
 }
 
-/* 文章页的更新时间样式（放在文章末尾） */
+/* ---------- Footer / Last Updated ---------- */
 body:not(.homepage) .VPDocFooter {
   margin-top: 48px;
   padding-top: 24px;
@@ -22,13 +195,63 @@ body:not(.homepage) .VPDocFooter {
 }
 
 body:not(.homepage) .VPLastUpdated {
-  font-size: 14px;
-  color: var(--vp-c-text-2);
+  font-size: 13px;
+  color: var(--vp-c-text-3);
 }
 
-/* 顶部导航栏搜索按钮（DocSearch 样式）加宽：左右各 +20px，总宽约 +40px */
-.VPNavBarSearch .DocSearch-Button {
-  padding-left: calc(var(--docsearch-spacing, 12px) + 20px) !important;
-  padding-right: calc(var(--docsearch-spacing, 12px) + 20px) !important;
+/* ---------- Custom Scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
 
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--vp-c-divider);
+  border-radius: 3px;
+  transition: background-color 0.2s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--vp-c-text-3);
+}
+
+/* ---------- Page Content Transition ---------- */
+.VPDoc .vp-doc {
+  animation: contentFadeIn 0.35s ease;
+}
+
+@keyframes contentFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Custom Container (tip/warning/danger) ---------- */
+.vp-doc .custom-block {
+  border-radius: 10px;
+  border-width: 1px;
+  border-left-width: 4px;
+}
+
+.vp-doc .custom-block.tip {
+  border-color: var(--vp-c-brand-1);
+}
+
+.vp-doc .custom-block.warning {
+  border-color: #f59e0b;
+}
+
+/* ---------- Selection ---------- */
+::selection {
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+}
