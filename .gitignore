@@ -44,6 +44,13 @@ yarn-error.log*
 *.out
 *.o
 
+# Draft files
+draft.cpp
+
+# Cursor / Agent files
+.agents/
+skills-lock.json
+
 # 不展示的内容
 .obsidian
 .vscode

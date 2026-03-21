@@ -279,6 +279,56 @@ body.homepage .VPLastUpdated {
 .depth-3 { padding-left: 60px; }
 .depth-4 { padding-left: 80px; }
 
+/* ---------- Collapsible Folders ---------- */
+.tree-folder {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tree-folder > summary {
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.tree-folder > summary::-webkit-details-marker {
+  display: none;
+}
+
+.tree-folder > summary::marker {
+  content: '';
+}
+
+.tree-toggle {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
+  text-align: center;
+  font-size: 10px;
+  color: var(--vp-c-text-3);
+  transition: transform 0.2s ease;
+  margin-right: 4px;
+  flex-shrink: 0;
+}
+
+.tree-toggle::before {
+  content: '▶';
+}
+
+.tree-folder[open] > summary .tree-toggle {
+  transform: rotate(90deg);
+}
+
+.tree-folder > summary:hover .tree-toggle {
+  color: var(--vp-c-brand-1);
+}
+
+.tree-children {
+  overflow: hidden;
+}
+
 @keyframes cardSlideIn {
   from {
     opacity: 0;
@@ -330,15 +380,15 @@ body.homepage .VPLastUpdated {
     <p class="hero-desc">A growing collection of notes, solutions, and insights</p>
     <div class="hero-stats">
       <div class="hero-stat">
-        <span class="hero-stat-value">90</span>
+        <span class="hero-stat-value">62</span>
         <span class="hero-stat-label">Articles</span>
       </div>
       <div class="hero-stat">
-        <span class="hero-stat-value">7</span>
+        <span class="hero-stat-value">3</span>
         <span class="hero-stat-label">Categories</span>
       </div>
     </div>
-    <a class="hero-cta" href="/Leetcode/灵神笔记/04-二分查找">
+    <a class="hero-cta" href="/Frontend/Knowledge/ajax-promise-axios/03-AJAX前端网络通信">
       Continue Reading
       <span class="hero-cta-arrow">→</span>
     </a>
@@ -346,397 +396,123 @@ body.homepage .VPLastUpdated {
 </div>
 
 <div class="directory-container">
-  <div class="category-section" style="--card-accent: #ef4444; animation-delay: 0.00s">
-    <div class="category-accent-bar"></div>
-    <div class="category-body">
-      <div class="category-header">
-        <span class="category-icon">🧩</span>
-        <span class="category-name">Leetcode</span>
-        <span class="category-meta">39 篇</span>
-      </div>
-      <div class="tree-container">
-      <div class="tree-item tree-dir depth-0">
-        <span class="tree-prefix"></span>
-        <span class="tree-name">灵神笔记/</span>
-      </div>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/01-相向双指针（一）">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">01-相向双指针（一）</span>
-        <span class="tree-date">03/08</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/02-相向双指针（二）">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">02-相向双指针（二）</span>
-        <span class="tree-date">03/07</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/03-滑动窗口">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">03-滑动窗口</span>
-        <span class="tree-date">03/12</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/04-二分查找">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">04-二分查找</span>
-        <span class="tree-date">03/18</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/05-二分查找 - 变形">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">05-二分查找 - 变形</span>
-        <span class="tree-date">03/05</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/06-链表 - 反转系列">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">06-链表 - 反转系列</span>
-        <span class="tree-date">03/05</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/07-链表 - 快慢指针">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">07-链表 - 快慢指针</span>
-        <span class="tree-date">03/05</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/08-链表 - 删除系列">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">08-链表 - 删除系列</span>
-        <span class="tree-date">03/05</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/09-二叉树与递归 - 深入理解">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">09-二叉树与递归 - 深入理解</span>
-        <span class="tree-date">03/05</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/10-二叉树与递归 - 灵活运用">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">10-二叉树与递归 - 灵活运用</span>
-        <span class="tree-date">03/05</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/11-二叉树与递归 - 前序中序后序">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">11-二叉树与递归 - 前序中序后序</span>
-        <span class="tree-date">03/05</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/12-二叉树与递归 - 最近公共祖先">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">12-二叉树与递归 - 最近公共祖先</span>
-        <span class="tree-date">03/05</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/13-二叉树 - BFS">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">13-二叉树 - BFS</span>
-        <span class="tree-date">03/05</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/14-回溯 - 子集型">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">14-回溯 - 子集型</span>
-        <span class="tree-date">03/05</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/15-回溯 - 组合型与剪枝">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">15-回溯 - 组合型与剪枝</span>
-        <span class="tree-date">03/05</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/16-回溯 - 排列型">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">16-回溯 - 排列型</span>
-        <span class="tree-date">03/05</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/17-动态规划 - 从记忆化搜索到递推">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">17-动态规划 - 从记忆化搜索到递推</span>
-        <span class="tree-date">03/05</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/18-0-1背包 完全背包">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">18-0-1背包 完全背包</span>
-        <span class="tree-date">03/05</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/19-最长公共子序列 LCS">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">19-最长公共子序列 LCS</span>
-        <span class="tree-date">03/05</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/20-最长递增子序列 LIS">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">20-最长递增子序列 LIS</span>
-        <span class="tree-date">03/05</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/21-状态机 DP - 买卖股票系列">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">21-状态机 DP - 买卖股票系列</span>
-        <span class="tree-date">03/05</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/22-区间 DP">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">22-区间 DP</span>
-        <span class="tree-date">03/05</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/23-树形 DP - 直径系列">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">23-树形 DP - 直径系列</span>
-        <span class="tree-date">03/05</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/24-树形 DP - 最大独立集">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">24-树形 DP - 最大独立集</span>
-        <span class="tree-date">03/05</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/25-树形 DP - 最小支配集">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">25-树形 DP - 最小支配集</span>
-        <span class="tree-date">03/05</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/26-单调栈">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">26-单调栈</span>
-        <span class="tree-date">03/05</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/27-单调队列">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">27-单调队列</span>
-        <span class="tree-date">03/05</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神笔记/Basic1">
-        <span class="tree-prefix">└── </span>
-        <span class="tree-name">Basic1</span>
-        <span class="tree-date">03/08</span>
-      </a>
-      <div class="tree-item tree-dir depth-0">
-        <span class="tree-prefix"></span>
-        <span class="tree-name">题单/</span>
-      </div>
-      <div class="tree-item tree-dir depth-1">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">二分查找/</span>
-      </div>
-      <a class="tree-item tree-file depth-2" href="/Leetcode/题单/BinarySearch/BinarySearch">
-        <span class="tree-prefix">└── </span>
-        <span class="tree-name">BinarySearch</span>
-        <span class="tree-date">02/24</span>
-      </a>
-      <div class="tree-item tree-dir depth-1">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">数据结构/</span>
-      </div>
-      <a class="tree-item tree-file depth-2" href="/Leetcode/题单/DataStructure/Difference">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">Difference</span>
-        <span class="tree-date">02/24</span>
-      </a>
-      <a class="tree-item tree-file depth-2" href="/Leetcode/题单/DataStructure/Enumeration">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">Enumeration</span>
-        <span class="tree-date">02/24</span>
-      </a>
-      <a class="tree-item tree-file depth-2" href="/Leetcode/题单/DataStructure/Heap">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">Heap</span>
-        <span class="tree-date">02/24</span>
-      </a>
-      <a class="tree-item tree-file depth-2" href="/Leetcode/题单/DataStructure/Prefixsum">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">Prefixsum</span>
-        <span class="tree-date">02/24</span>
-      </a>
-      <a class="tree-item tree-file depth-2" href="/Leetcode/题单/DataStructure/Queue">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">Queue</span>
-        <span class="tree-date">02/24</span>
-      </a>
-      <a class="tree-item tree-file depth-2" href="/Leetcode/题单/DataStructure/Stack">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">Stack</span>
-        <span class="tree-date">02/24</span>
-      </a>
-      <a class="tree-item tree-file depth-2" href="/Leetcode/题单/DataStructure/Trie">
-        <span class="tree-prefix">└── </span>
-        <span class="tree-name">Trie</span>
-        <span class="tree-date">02/24</span>
-      </a>
-      <div class="tree-item tree-dir depth-1">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">入门题单/</span>
-      </div>
-      <a class="tree-item tree-file depth-2" href="/Leetcode/题单/Intro/note">
-        <span class="tree-prefix">└── </span>
-        <span class="tree-name">笔记</span>
-        <span class="tree-date">02/24</span>
-      </a>
-      <div class="tree-item tree-dir depth-1">
-        <span class="tree-prefix">└── </span>
-        <span class="tree-name">滑动窗口/</span>
-      </div>
-      <a class="tree-item tree-file depth-2" href="/Leetcode/题单/SlidingWindow/不定长">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">不定长</span>
-        <span class="tree-date">02/24</span>
-      </a>
-      <a class="tree-item tree-file depth-2" href="/Leetcode/题单/SlidingWindow/定长">
-        <span class="tree-prefix">└── </span>
-        <span class="tree-name">定长</span>
-        <span class="tree-date">02/24</span>
-      </a>
-      </div>
-    </div>
-  </div>
-  <div class="category-section" style="--card-accent: #10b981; animation-delay: 0.06s">
-    <div class="category-accent-bar"></div>
-    <div class="category-body">
-      <div class="category-header">
-        <span class="category-icon">🚀</span>
-        <span class="category-name">Projects</span>
-        <span class="category-meta">11 篇</span>
-      </div>
-      <div class="tree-container">
-      <div class="tree-item tree-dir depth-0">
-        <span class="tree-prefix"></span>
-        <span class="tree-name">todomvc/</span>
-      </div>
-      <a class="tree-item tree-file depth-1" href="/Projects/todomvc/day1">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">day1</span>
-        <span class="tree-date">03/08</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Projects/todomvc/day2">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">day2</span>
-        <span class="tree-date">03/08</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Projects/todomvc/day3">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">day3</span>
-        <span class="tree-date">03/08</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Projects/todomvc/day4">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">day4</span>
-        <span class="tree-date">03/08</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Projects/todomvc/quiz">
-        <span class="tree-prefix">└── </span>
-        <span class="tree-name">quiz</span>
-        <span class="tree-date">03/08</span>
-      </a>
-      <div class="tree-item tree-dir depth-0">
-        <span class="tree-prefix"></span>
-        <span class="tree-name">vue3rabbit/</span>
-      </div>
-      <a class="tree-item tree-file depth-1" href="/Projects/vue3rabbit/01-基础与项目搭建">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">01-基础与项目搭建</span>
-        <span class="tree-date">02/24</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Projects/vue3rabbit/02-Layout与Home页">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">02-Layout与Home页</span>
-        <span class="tree-date">02/24</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Projects/vue3rabbit/03-分类页">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">03-分类页</span>
-        <span class="tree-date">02/24</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Projects/vue3rabbit/04-商品详情">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">04-商品详情</span>
-        <span class="tree-date">02/24</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Projects/vue3rabbit/05-登录与用户系统">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">05-登录与用户系统</span>
-        <span class="tree-date">02/24</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Projects/vue3rabbit/06-SKU组件">
-        <span class="tree-prefix">└── </span>
-        <span class="tree-name">06-SKU组件</span>
-        <span class="tree-date">02/24</span>
-      </a>
-      </div>
-    </div>
-  </div>
-  <div class="category-section" style="--card-accent: #3b82f6; animation-delay: 0.12s">
+  <div class="category-section" style="--card-accent: #3b82f6; animation-delay: 0.00s">
     <div class="category-accent-bar"></div>
     <div class="category-body">
       <div class="category-header">
         <span class="category-icon">🎨</span>
         <span class="category-name">前端</span>
-        <span class="category-meta">23 篇</span>
+        <span class="category-meta">21 篇</span>
       </div>
       <div class="tree-container">
-      <div class="tree-item tree-dir depth-0">
-        <span class="tree-prefix"></span>
-        <span class="tree-name">ajax-promise-axios/</span>
-      </div>
-      <a class="tree-item tree-file depth-1" href="/Frontend/ajax-promise-axios/01-手撕Promise与异步编程">
+      <details class="tree-folder">
+        <summary class="tree-item tree-dir depth-0">
+          <span class="tree-prefix"></span>
+          <span class="tree-toggle"></span>
+          <span class="tree-name">Knowledge/</span>
+        </summary>
+        <div class="tree-children">
+      <details class="tree-folder">
+        <summary class="tree-item tree-dir depth-1">
+          <span class="tree-prefix">├── </span>
+          <span class="tree-toggle"></span>
+          <span class="tree-name">ajax-promise-axios/</span>
+        </summary>
+        <div class="tree-children">
+      <a class="tree-item tree-file depth-2" href="/Frontend/Knowledge/ajax-promise-axios/01-手撕Promise与异步编程">
         <span class="tree-prefix">├── </span>
         <span class="tree-name">01-手撕Promise与异步编程</span>
         <span class="tree-date">03/03</span>
       </a>
-      <a class="tree-item tree-file depth-1" href="/Frontend/ajax-promise-axios/02-事件循环机制">
+      <a class="tree-item tree-file depth-2" href="/Frontend/Knowledge/ajax-promise-axios/02-事件循环机制">
         <span class="tree-prefix">├── </span>
         <span class="tree-name">02-事件循环机制</span>
-        <span class="tree-date">03/03</span>
+        <span class="tree-date">03/21</span>
       </a>
-      <a class="tree-item tree-file depth-1" href="/Frontend/ajax-promise-axios/03-AJAX前端网络通信">
+      <a class="tree-item tree-file depth-2" href="/Frontend/Knowledge/ajax-promise-axios/03-AJAX前端网络通信">
         <span class="tree-prefix">├── </span>
         <span class="tree-name">03-AJAX前端网络通信</span>
-        <span class="tree-date">03/03</span>
+        <span class="tree-date">03/21</span>
       </a>
-      <a class="tree-item tree-file depth-1" href="/Frontend/ajax-promise-axios/axios">
+      <a class="tree-item tree-file depth-2" href="/Frontend/Knowledge/ajax-promise-axios/axios">
         <span class="tree-prefix">└── </span>
         <span class="tree-name">axios</span>
-        <span class="tree-date">03/05</span>
-      </a>
-      <div class="tree-item tree-dir depth-0">
-        <span class="tree-prefix"></span>
-        <span class="tree-name">CSS/</span>
-      </div>
-      <a class="tree-item tree-file depth-1" href="/Frontend/CSS/01-display属性详解">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">01-display属性详解</span>
         <span class="tree-date">03/03</span>
       </a>
-      <a class="tree-item tree-file depth-1" href="/Frontend/CSS/02-Flex弹性布局">
+        </div>
+      </details>
+      <details class="tree-folder">
+        <summary class="tree-item tree-dir depth-1">
+          <span class="tree-prefix">├── </span>
+          <span class="tree-toggle"></span>
+          <span class="tree-name">React/</span>
+        </summary>
+        <div class="tree-children">
+      <a class="tree-item tree-file depth-2" href="/Frontend/Knowledge/React/00-React学习路线">
         <span class="tree-prefix">├── </span>
-        <span class="tree-name">02-Flex弹性布局</span>
+        <span class="tree-name">00-React学习路线</span>
         <span class="tree-date">03/03</span>
       </a>
-      <a class="tree-item tree-file depth-1" href="/Frontend/CSS/03-CSS选择器">
+      <a class="tree-item tree-file depth-2" href="/Frontend/Knowledge/React/01-核心概念与基础语法">
         <span class="tree-prefix">├── </span>
-        <span class="tree-name">03-CSS选择器</span>
-        <span class="tree-date">03/03</span>
+        <span class="tree-name">01-核心概念与基础语法</span>
+        <span class="tree-date">03/01</span>
       </a>
-      <a class="tree-item tree-file depth-1" href="/Frontend/CSS/04-文件路径写法">
+      <a class="tree-item tree-file depth-2" href="/Frontend/Knowledge/React/02-组件化与性能优化">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">02-组件化与性能优化</span>
+        <span class="tree-date">03/01</span>
+      </a>
+      <a class="tree-item tree-file depth-2" href="/Frontend/Knowledge/React/03-路由与状态管理">
         <span class="tree-prefix">└── </span>
-        <span class="tree-name">04-文件路径写法</span>
-        <span class="tree-date">03/03</span>
+        <span class="tree-name">03-路由与状态管理</span>
+        <span class="tree-date">03/01</span>
       </a>
-      <div class="tree-item tree-dir depth-0">
-        <span class="tree-prefix"></span>
-        <span class="tree-name">JavaScript/</span>
-      </div>
-      <a class="tree-item tree-file depth-1" href="/Frontend/JavaScript/01-ECMAScript基础语法">
+        </div>
+      </details>
+      <details class="tree-folder">
+        <summary class="tree-item tree-dir depth-1">
+          <span class="tree-prefix">└── </span>
+          <span class="tree-toggle"></span>
+          <span class="tree-name">Vue/</span>
+        </summary>
+        <div class="tree-children">
+      <a class="tree-item tree-file depth-2" href="/Frontend/Knowledge/Vue/01-工程创建与响应式基础">
         <span class="tree-prefix">├── </span>
-        <span class="tree-name">01-ECMAScript基础语法</span>
+        <span class="tree-name">01-工程创建与响应式基础</span>
         <span class="tree-date">03/03</span>
       </a>
-      <a class="tree-item tree-file depth-1" href="/Frontend/JavaScript/02-Web APIs与DOM操作">
+      <a class="tree-item tree-file depth-2" href="/Frontend/Knowledge/Vue/02-监听器与组件进阶">
         <span class="tree-prefix">├── </span>
-        <span class="tree-name">02-Web APIs与DOM操作</span>
+        <span class="tree-name">02-监听器与组件进阶</span>
         <span class="tree-date">03/03</span>
       </a>
-      <a class="tree-item tree-file depth-1" href="/Frontend/JavaScript/03-JS进阶与面向对象">
+      <a class="tree-item tree-file depth-2" href="/Frontend/Knowledge/Vue/03-Pinia状态管理">
         <span class="tree-prefix">├── </span>
-        <span class="tree-name">03-JS进阶与面向对象</span>
+        <span class="tree-name">03-Pinia状态管理</span>
         <span class="tree-date">03/03</span>
       </a>
-      <a class="tree-item tree-file depth-1" href="/Frontend/JavaScript/04-Performance API性能监控">
+      <a class="tree-item tree-file depth-2" href="/Frontend/Knowledge/Vue/04-组件通信与Pinia高级">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">04-组件通信与Pinia高级</span>
+        <span class="tree-date">03/03</span>
+      </a>
+      <a class="tree-item tree-file depth-2" href="/Frontend/Knowledge/Vue/05-指令体系与响应式进阶">
         <span class="tree-prefix">└── </span>
-        <span class="tree-name">04-Performance API性能监控</span>
+        <span class="tree-name">05-指令体系与响应式进阶</span>
         <span class="tree-date">03/03</span>
       </a>
-      <div class="tree-item tree-dir depth-0">
-        <span class="tree-prefix"></span>
-        <span class="tree-name">Lanqiao/</span>
-      </div>
+        </div>
+      </details>
+        </div>
+      </details>
+      <details class="tree-folder">
+        <summary class="tree-item tree-dir depth-0">
+          <span class="tree-prefix"></span>
+          <span class="tree-toggle"></span>
+          <span class="tree-name">Lanqiao/</span>
+        </summary>
+        <div class="tree-children">
       <a class="tree-item tree-file depth-1" href="/Frontend/Lanqiao/01-蓝桥模拟题">
         <span class="tree-prefix">├── </span>
         <span class="tree-name">01-蓝桥模拟题</span>
@@ -747,194 +523,325 @@ body.homepage .VPLastUpdated {
         <span class="tree-name">02-蓝桥基础题</span>
         <span class="tree-date">03/03</span>
       </a>
-      <div class="tree-item tree-dir depth-0">
-        <span class="tree-prefix"></span>
-        <span class="tree-name">React/</span>
-      </div>
-      <a class="tree-item tree-file depth-1" href="/Frontend/React/00-React学习路线">
+        </div>
+      </details>
+      <details class="tree-folder">
+        <summary class="tree-item tree-dir depth-0">
+          <span class="tree-prefix"></span>
+          <span class="tree-toggle"></span>
+          <span class="tree-name">Project/</span>
+        </summary>
+        <div class="tree-children">
+      <details class="tree-folder">
+        <summary class="tree-item tree-dir depth-1">
+          <span class="tree-prefix">└── </span>
+          <span class="tree-toggle"></span>
+          <span class="tree-name">vue3rabbit/</span>
+        </summary>
+        <div class="tree-children">
+      <a class="tree-item tree-file depth-2" href="/Frontend/Project/vue3rabbit/01-基础与项目搭建">
         <span class="tree-prefix">├── </span>
-        <span class="tree-name">00-React学习路线</span>
-        <span class="tree-date">03/03</span>
+        <span class="tree-name">01-基础与项目搭建</span>
+        <span class="tree-date">02/24</span>
       </a>
-      <a class="tree-item tree-file depth-1" href="/Frontend/React/01-核心概念与基础语法">
+      <a class="tree-item tree-file depth-2" href="/Frontend/Project/vue3rabbit/02-Layout与Home页">
         <span class="tree-prefix">├── </span>
-        <span class="tree-name">01-核心概念与基础语法</span>
-        <span class="tree-date">03/01</span>
+        <span class="tree-name">02-Layout与Home页</span>
+        <span class="tree-date">02/24</span>
       </a>
-      <a class="tree-item tree-file depth-1" href="/Frontend/React/02-组件化与性能优化">
+      <a class="tree-item tree-file depth-2" href="/Frontend/Project/vue3rabbit/03-分类页">
         <span class="tree-prefix">├── </span>
-        <span class="tree-name">02-组件化与性能优化</span>
-        <span class="tree-date">03/01</span>
+        <span class="tree-name">03-分类页</span>
+        <span class="tree-date">02/24</span>
       </a>
-      <a class="tree-item tree-file depth-1" href="/Frontend/React/03-路由与状态管理">
+      <a class="tree-item tree-file depth-2" href="/Frontend/Project/vue3rabbit/04-商品详情">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">04-商品详情</span>
+        <span class="tree-date">02/24</span>
+      </a>
+      <a class="tree-item tree-file depth-2" href="/Frontend/Project/vue3rabbit/05-登录与用户系统">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">05-登录与用户系统</span>
+        <span class="tree-date">02/24</span>
+      </a>
+      <a class="tree-item tree-file depth-2" href="/Frontend/Project/vue3rabbit/06-SKU组件">
         <span class="tree-prefix">└── </span>
-        <span class="tree-name">03-路由与状态管理</span>
-        <span class="tree-date">03/01</span>
+        <span class="tree-name">06-SKU组件</span>
+        <span class="tree-date">02/24</span>
       </a>
-      <div class="tree-item tree-dir depth-0">
-        <span class="tree-prefix"></span>
-        <span class="tree-name">Vue/</span>
-      </div>
-      <a class="tree-item tree-file depth-1" href="/Frontend/Vue/01-工程创建与响应式基础">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">01-工程创建与响应式基础</span>
-        <span class="tree-date">03/03</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Frontend/Vue/02-监听器与组件进阶">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">02-监听器与组件进阶</span>
-        <span class="tree-date">03/03</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Frontend/Vue/03-Pinia状态管理">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">03-Pinia状态管理</span>
-        <span class="tree-date">03/03</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Frontend/Vue/04-组件通信与Pinia高级">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">04-组件通信与Pinia高级</span>
-        <span class="tree-date">03/03</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/Frontend/Vue/05-指令体系与响应式进阶">
-        <span class="tree-prefix">└── </span>
-        <span class="tree-name">05-指令体系与响应式进阶</span>
-        <span class="tree-date">03/03</span>
-      </a>
+        </div>
+      </details>
+        </div>
+      </details>
       </div>
     </div>
   </div>
-  <div class="category-section" style="--card-accent: #06b6d4; animation-delay: 0.18s">
+  <div class="category-section" style="--card-accent: #ef4444; animation-delay: 0.06s">
     <div class="category-accent-bar"></div>
     <div class="category-body">
       <div class="category-header">
-        <span class="category-icon">📐</span>
-        <span class="category-name">Febagu</span>
-        <span class="category-meta">3 篇</span>
+        <span class="category-icon">🧩</span>
+        <span class="category-name">Leetcode</span>
+        <span class="category-meta">28 篇</span>
       </div>
       <div class="tree-container">
-      <div class="tree-item tree-dir depth-0">
-        <span class="tree-prefix"></span>
-        <span class="tree-name">CSS/</span>
-      </div>
-      <a class="tree-item tree-file depth-1" href="/Febagu/CSS/BasicBoxModel">
+      <details class="tree-folder">
+        <summary class="tree-item tree-dir depth-0">
+          <span class="tree-prefix"></span>
+          <span class="tree-toggle"></span>
+          <span class="tree-name">灵神算法/</span>
+        </summary>
+        <div class="tree-children">
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/01-相向双指针（一）">
         <span class="tree-prefix">├── </span>
-        <span class="tree-name">BasicBoxModel</span>
-        <span class="tree-date">01/08</span>
+        <span class="tree-name">01-相向双指针（一）</span>
+        <span class="tree-date">03/08</span>
       </a>
-      <a class="tree-item tree-file depth-1" href="/Febagu/CSS/ResponsiveWebDesign">
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/02-相向双指针（二）">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">02-相向双指针（二）</span>
+        <span class="tree-date">03/07</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/03-滑动窗口">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">03-滑动窗口</span>
+        <span class="tree-date">03/12</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/04-二分查找">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">04-二分查找</span>
+        <span class="tree-date">03/19</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/05-二分查找 - 变形">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">05-二分查找 - 变形</span>
+        <span class="tree-date">03/05</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/06-链表 - 反转系列">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">06-链表 - 反转系列</span>
+        <span class="tree-date">03/05</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/07-链表 - 快慢指针">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">07-链表 - 快慢指针</span>
+        <span class="tree-date">03/05</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/08-链表 - 删除系列">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">08-链表 - 删除系列</span>
+        <span class="tree-date">03/05</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/09-二叉树与递归 - 深入理解">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">09-二叉树与递归 - 深入理解</span>
+        <span class="tree-date">03/05</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/10-二叉树与递归 - 灵活运用">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">10-二叉树与递归 - 灵活运用</span>
+        <span class="tree-date">03/05</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/11-二叉树与递归 - 前序中序后序">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">11-二叉树与递归 - 前序中序后序</span>
+        <span class="tree-date">03/05</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/12-二叉树与递归 - 最近公共祖先">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">12-二叉树与递归 - 最近公共祖先</span>
+        <span class="tree-date">03/05</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/13-二叉树 - BFS">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">13-二叉树 - BFS</span>
+        <span class="tree-date">03/05</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/14-回溯 - 子集型">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">14-回溯 - 子集型</span>
+        <span class="tree-date">03/05</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/15-回溯 - 组合型与剪枝">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">15-回溯 - 组合型与剪枝</span>
+        <span class="tree-date">03/05</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/16-回溯 - 排列型">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">16-回溯 - 排列型</span>
+        <span class="tree-date">03/05</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/17-动态规划 - 从记忆化搜索到递推">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">17-动态规划 - 从记忆化搜索到递推</span>
+        <span class="tree-date">03/05</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/18-0-1背包 完全背包">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">18-0-1背包 完全背包</span>
+        <span class="tree-date">03/05</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/19-最长公共子序列 LCS">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">19-最长公共子序列 LCS</span>
+        <span class="tree-date">03/05</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/20-最长递增子序列 LIS">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">20-最长递增子序列 LIS</span>
+        <span class="tree-date">03/05</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/21-状态机 DP - 买卖股票系列">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">21-状态机 DP - 买卖股票系列</span>
+        <span class="tree-date">03/05</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/22-区间 DP">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">22-区间 DP</span>
+        <span class="tree-date">03/05</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/23-树形 DP - 直径系列">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">23-树形 DP - 直径系列</span>
+        <span class="tree-date">03/05</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/24-树形 DP - 最大独立集">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">24-树形 DP - 最大独立集</span>
+        <span class="tree-date">03/05</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/25-树形 DP - 最小支配集">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">25-树形 DP - 最小支配集</span>
+        <span class="tree-date">03/05</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/26-单调栈">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">26-单调栈</span>
+        <span class="tree-date">03/05</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/27-单调队列">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">27-单调队列</span>
+        <span class="tree-date">03/05</span>
+      </a>
+      <a class="tree-item tree-file depth-1" href="/Leetcode/灵神算法/Basic1">
         <span class="tree-prefix">└── </span>
-        <span class="tree-name">ResponsiveWebDesign</span>
-        <span class="tree-date">01/08</span>
+        <span class="tree-name">Basic1</span>
+        <span class="tree-date">03/08</span>
       </a>
-      <div class="tree-item tree-dir depth-0">
-        <span class="tree-prefix"></span>
-        <span class="tree-name">HTML/</span>
-      </div>
-      <a class="tree-item tree-file depth-1" href="/Febagu/HTML/01-HTML">
-        <span class="tree-prefix">└── </span>
-        <span class="tree-name">01-HTML</span>
-        <span class="tree-date">02/27</span>
-      </a>
+        </div>
+      </details>
       </div>
     </div>
   </div>
-  <div class="category-section" style="--card-accent: #ec4899; animation-delay: 0.24s">
-    <div class="category-accent-bar"></div>
-    <div class="category-body">
-      <div class="category-header">
-        <span class="category-icon">🤖</span>
-        <span class="category-name">LLMtools</span>
-        <span class="category-meta">1 篇</span>
-      </div>
-      <div class="tree-container">
-      <a class="tree-item tree-file depth-0" href="/LLMtools/skills">
-        <span class="tree-prefix"></span>
-        <span class="tree-name">skills</span>
-        <span class="tree-date">01/20</span>
-      </a>
-      </div>
-    </div>
-  </div>
-  <div class="category-section" style="--card-accent: #f59e0b; animation-delay: 0.30s">
-    <div class="category-accent-bar"></div>
-    <div class="category-body">
-      <div class="category-header">
-        <span class="category-icon">✏️</span>
-        <span class="category-name">文章</span>
-        <span class="category-meta">5 篇</span>
-      </div>
-      <div class="tree-container">
-      <div class="tree-item tree-dir depth-0">
-        <span class="tree-prefix"></span>
-        <span class="tree-name">algorithm/</span>
-      </div>
-      <a class="tree-item tree-file depth-1" href="/articles/algorithm/algorithm">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">algorithm</span>
-        <span class="tree-date">01/08</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/articles/algorithm/cpp-constructors-overload">
-        <span class="tree-prefix">├── </span>
-        <span class="tree-name">cpp-constructors-overload</span>
-        <span class="tree-date">01/08</span>
-      </a>
-      <a class="tree-item tree-file depth-1" href="/articles/algorithm/STL">
-        <span class="tree-prefix">└── </span>
-        <span class="tree-name">STL</span>
-        <span class="tree-date">01/08</span>
-      </a>
-      <div class="tree-item tree-dir depth-0">
-        <span class="tree-prefix"></span>
-        <span class="tree-name">bugs/</span>
-      </div>
-      <a class="tree-item tree-file depth-1" href="/articles/bugs/vitepress-vue-compiler-bug-analysis">
-        <span class="tree-prefix">└── </span>
-        <span class="tree-name">vitepress-vue-compiler-bug-analysis</span>
-        <span class="tree-date">01/09</span>
-      </a>
-      <div class="tree-item tree-dir depth-0">
-        <span class="tree-prefix"></span>
-        <span class="tree-name">ptojects/</span>
-      </div>
-      <a class="tree-item tree-file depth-1" href="/articles/ptojects/todomvc-js">
-        <span class="tree-prefix">└── </span>
-        <span class="tree-name">todomvc-js</span>
-        <span class="tree-date">01/08</span>
-      </a>
-      </div>
-    </div>
-  </div>
-  <div class="category-section" style="--card-accent: #64748b; animation-delay: 0.36s">
+  <div class="category-section" style="--card-accent: #64748b; animation-delay: 0.12s">
     <div class="category-accent-bar"></div>
     <div class="category-body">
       <div class="category-header">
         <span class="category-icon">📦</span>
         <span class="category-name">其他</span>
-        <span class="category-meta">8 篇</span>
+        <span class="category-meta">13 篇</span>
       </div>
       <div class="tree-container">
-      <div class="tree-item tree-dir depth-0">
-        <span class="tree-prefix"></span>
-        <span class="tree-name">books/</span>
-      </div>
+      <details class="tree-folder">
+        <summary class="tree-item tree-dir depth-0">
+          <span class="tree-prefix"></span>
+          <span class="tree-toggle"></span>
+          <span class="tree-name">文章/</span>
+        </summary>
+        <div class="tree-children">
+      <details class="tree-folder">
+        <summary class="tree-item tree-dir depth-1">
+          <span class="tree-prefix">├── </span>
+          <span class="tree-toggle"></span>
+          <span class="tree-name">algorithm/</span>
+        </summary>
+        <div class="tree-children">
+      <a class="tree-item tree-file depth-2" href="/Misc/articles/algorithm/algorithm">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">algorithm</span>
+        <span class="tree-date">01/07</span>
+      </a>
+      <a class="tree-item tree-file depth-2" href="/Misc/articles/algorithm/cpp-constructors-overload">
+        <span class="tree-prefix">├── </span>
+        <span class="tree-name">cpp-constructors-overload</span>
+        <span class="tree-date">01/07</span>
+      </a>
+      <a class="tree-item tree-file depth-2" href="/Misc/articles/algorithm/STL">
+        <span class="tree-prefix">└── </span>
+        <span class="tree-name">STL</span>
+        <span class="tree-date">12/12</span>
+      </a>
+        </div>
+      </details>
+      <details class="tree-folder">
+        <summary class="tree-item tree-dir depth-1">
+          <span class="tree-prefix">├── </span>
+          <span class="tree-toggle"></span>
+          <span class="tree-name">bugs/</span>
+        </summary>
+        <div class="tree-children">
+      <a class="tree-item tree-file depth-2" href="/Misc/articles/bugs/vitepress-vue-compiler-bug-analysis">
+        <span class="tree-prefix">└── </span>
+        <span class="tree-name">vitepress-vue-compiler-bug-analysis</span>
+        <span class="tree-date">01/09</span>
+      </a>
+        </div>
+      </details>
+      <details class="tree-folder">
+        <summary class="tree-item tree-dir depth-1">
+          <span class="tree-prefix">└── </span>
+          <span class="tree-toggle"></span>
+          <span class="tree-name">ptojects/</span>
+        </summary>
+        <div class="tree-children">
+      <a class="tree-item tree-file depth-2" href="/Misc/articles/ptojects/todomvc-js">
+        <span class="tree-prefix">└── </span>
+        <span class="tree-name">todomvc-js</span>
+        <span class="tree-date">01/08</span>
+      </a>
+        </div>
+      </details>
+        </div>
+      </details>
+      <details class="tree-folder">
+        <summary class="tree-item tree-dir depth-0">
+          <span class="tree-prefix"></span>
+          <span class="tree-toggle"></span>
+          <span class="tree-name">books/</span>
+        </summary>
+        <div class="tree-children">
       <a class="tree-item tree-file depth-1" href="/Misc/books/PurpleBook">
         <span class="tree-prefix">└── </span>
         <span class="tree-name">PurpleBook</span>
         <span class="tree-date">12/25</span>
       </a>
-      <div class="tree-item tree-dir depth-0">
-        <span class="tree-prefix"></span>
-        <span class="tree-name">interview/</span>
-      </div>
+        </div>
+      </details>
+      <details class="tree-folder">
+        <summary class="tree-item tree-dir depth-0">
+          <span class="tree-prefix"></span>
+          <span class="tree-toggle"></span>
+          <span class="tree-name">interview/</span>
+        </summary>
+        <div class="tree-children">
       <a class="tree-item tree-file depth-1" href="/Misc/interview/MockInterviews">
         <span class="tree-prefix">└── </span>
         <span class="tree-name">MockInterviews</span>
         <span class="tree-date">12/25</span>
       </a>
-      <div class="tree-item tree-dir depth-0">
-        <span class="tree-prefix"></span>
-        <span class="tree-name">tools/</span>
-      </div>
+        </div>
+      </details>
+      <details class="tree-folder">
+        <summary class="tree-item tree-dir depth-0">
+          <span class="tree-prefix"></span>
+          <span class="tree-toggle"></span>
+          <span class="tree-name">tools/</span>
+        </summary>
+        <div class="tree-children">
       <a class="tree-item tree-file depth-1" href="/Misc/tools/docker">
         <span class="tree-prefix">├── </span>
         <span class="tree-name">docker</span>
@@ -960,15 +867,22 @@ body.homepage .VPLastUpdated {
         <span class="tree-name">markdwon</span>
         <span class="tree-date">12/30</span>
       </a>
-      <div class="tree-item tree-dir depth-0">
-        <span class="tree-prefix"></span>
-        <span class="tree-name">tricks/</span>
-      </div>
+        </div>
+      </details>
+      <details class="tree-folder">
+        <summary class="tree-item tree-dir depth-0">
+          <span class="tree-prefix"></span>
+          <span class="tree-toggle"></span>
+          <span class="tree-name">tricks/</span>
+        </summary>
+        <div class="tree-children">
       <a class="tree-item tree-file depth-1" href="/Misc/tricks/tips">
         <span class="tree-prefix">└── </span>
         <span class="tree-name">tips</span>
         <span class="tree-date">12/25</span>
       </a>
+        </div>
+      </details>
       </div>
     </div>
   </div>

@@ -15,9 +15,6 @@ const SHOW_DIRS = [
   'cs-core',
   'Projects',
   'Misc',
-  'articles',
-  'LLMtools',
-  'Febagu',
   // 'openclaw',   // 取消注释即可公开
   // 'img',        // 取消注释即可公开
 ];
@@ -58,9 +55,6 @@ const CATEGORY_ACCENTS = {
   'cs-core': '#8b5cf6',
   'Projects': '#10b981',
   'Misc': '#64748b',
-  'articles': '#f59e0b',
-  'LLMtools': '#ec4899',
-  'Febagu': '#06b6d4',
 };
 
 const CATEGORY_ICONS = {
@@ -69,9 +63,6 @@ const CATEGORY_ICONS = {
   'cs-core': '💻',
   'Projects': '🚀',
   'Misc': '📦',
-  'articles': '✏️',
-  'LLMtools': '🤖',
-  'Febagu': '📐',
 };
 
 function getDisplayName(name) {
@@ -237,11 +228,16 @@ function generateTreeHtml(items, depth = 0) {
     const prefix = depth === 0 ? '' : (isLast ? '└── ' : '├── ');
     
     if (item.type === 'dir') {
-      html += `      <div class="tree-item tree-dir depth-${depth}">
-        <span class="tree-prefix">${prefix}</span>
-        <span class="tree-name">${item.displayName}/</span>
-      </div>\n`;
-      html += generateTreeHtml(item.children, depth + 1);
+      const openAttr = '';
+      html += `      <details class="tree-folder"${openAttr}>
+        <summary class="tree-item tree-dir depth-${depth}">
+          <span class="tree-prefix">${prefix}</span>
+          <span class="tree-toggle"></span>
+          <span class="tree-name">${item.displayName}/</span>
+        </summary>
+        <div class="tree-children">
+${generateTreeHtml(item.children, depth + 1)}        </div>
+      </details>\n`;
     } else {
       const dateStr = formatDate(item.gitTime);
       html += `      <a class="tree-item tree-file depth-${depth}" href="/${item.path}">
@@ -556,6 +552,56 @@ body.homepage .VPLastUpdated {
 .depth-2 { padding-left: 40px; }
 .depth-3 { padding-left: 60px; }
 .depth-4 { padding-left: 80px; }
+
+/* ---------- Collapsible Folders ---------- */
+.tree-folder {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tree-folder > summary {
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.tree-folder > summary::-webkit-details-marker {
+  display: none;
+}
+
+.tree-folder > summary::marker {
+  content: '';
+}
+
+.tree-toggle {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
+  text-align: center;
+  font-size: 10px;
+  color: var(--vp-c-text-3);
+  transition: transform 0.2s ease;
+  margin-right: 4px;
+  flex-shrink: 0;
+}
+
+.tree-toggle::before {
+  content: '▶';
+}
+
+.tree-folder[open] > summary .tree-toggle {
+  transform: rotate(90deg);
+}
+
+.tree-folder > summary:hover .tree-toggle {
+  color: var(--vp-c-brand-1);
+}
+
+.tree-children {
+  overflow: hidden;
+}
 
 @keyframes cardSlideIn {
   from {

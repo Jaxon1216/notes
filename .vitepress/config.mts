@@ -10,9 +10,6 @@ const SHOW_DIRS = [
   'cs-core',
   'Projects',
   'Misc',
-  'articles',
-  'LLMtools',
-  'Febagu',
   // 'openclaw',   // 取消注释即可公开
   // 'img',        // 取消注释即可公开
 ]
