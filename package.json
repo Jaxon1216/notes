@@ -15,11 +15,15 @@
     "@commitlint/config-conventional": "^20.3.0",
     "husky": "^9.1.7",
     "vitepress": "^1.6.4",
-    "vue": "^3.5.25"
+    "vue": "^3.5.25",
+    "vue-router": "^4.6.4"
   },
   "description": "",
   "main": "index.js",
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
 }
