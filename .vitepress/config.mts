@@ -5,8 +5,11 @@ import path from 'path'
 
 // ====== 白名单：只有列在这里的顶层文件夹才会出现在导航栏和侧边栏 ======
 const SHOW_DIRS = [
-  'Leetcode',
   'Frontend',
+  'Server',
+  'LLM',
+  'Vibecoding',
+  'Leetcode',
   'cs-core',
   'Projects',
   'Misc',
