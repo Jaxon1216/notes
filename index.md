@@ -435,7 +435,7 @@ body.homepage .VPDocFooter, body.homepage .VPLastUpdated { display: none !import
     <div class="term-line l1"><span class="t-prompt"></span><span class="t-cmd"><span class="t-typed">whoami</span></span><span class="row-cursor"></span></div>
     <div class="term-line l2"><span class="t-out"><span class="t-typed">EastonJiang · <span class="t-key">Frontend</span> developer who writes things down.</span></span><span class="row-cursor"></span></div>
     <div class="term-line l3"><span class="t-prompt"></span><span class="t-cmd"><span class="t-typed">cat ~/notes/<span class="t-key">stats</span>.json</span></span><span class="row-cursor"></span></div>
-    <div class="term-line l4"><span class="t-out"><span class="t-typed">{ "articles": <span class="t-num">71</span>, "categories": <span class="t-num">3</span>, "last_update": <span class="t-str">"today"</span> }</span></span><span class="row-cursor"></span></div>
+    <div class="term-line l4"><span class="t-out"><span class="t-typed">{ "articles": <span class="t-num">64</span>, "categories": <span class="t-num">3</span>, "last_update": <span class="t-str">"today"</span> }</span></span><span class="row-cursor"></span></div>
     <div class="term-line l5"><span class="t-prompt"></span><span class="t-cmd"><span class="t-typed">ls categories/</span></span><span class="row-cursor"></span></div>
     <div class="term-line l6"><span class="t-out"><span class="t-typed"><span class="t-cat" style="--acc: #3b82f6">[前端]</span> <span class="t-cat" style="--acc: #64748b">[其他]</span> <span class="t-cat" style="--acc: #ef4444">[Leetcode]</span></span></span><span class="row-cursor"></span></div>
     <div class="term-line l7"><span class="t-prompt"></span><span class="t-cmd"><span class="t-typed">echo $MOTTO</span></span><span class="row-cursor"></span></div>
@@ -444,14 +444,14 @@ body.homepage .VPDocFooter, body.homepage .VPLastUpdated { display: none !import
 </div>
 
 <div class="bento">
-  <a class="b-card b-feature" href="/Frontend/Handwrite/前端手写25题" style="--acc: #3b82f6">
+  <a class="b-card b-feature" href="/Frontend/Handwrite/00-高频前端手写25题" style="--acc: #3b82f6">
     <div class="b-emoji">🎨</div>
     <div class="feature-meta">
       <span class="b-pill">🎨 前端</span>
       <span class="b-label" style="margin: 0;">06/08 · today</span>
     </div>
     <div class="b-label">最新一篇 · LATEST</div>
-    <h2 class="b-title">前端手写25题</h2>
+    <h2 class="b-title">高频前端手写25题</h2>
     <p class="b-sub">点开继续阅读，从最近留下的脚印开始。</p>
     <div class="b-foot">
       <span>Continue Reading</span>
@@ -460,34 +460,34 @@ body.homepage .VPDocFooter, body.homepage .VPLastUpdated { display: none !import
   </a>
   <div class="b-card b-stats">
     <div class="b-label">Knowledge Base</div>
-    <div class="stat-row"><div class="stat-num">71</div><div class="stat-key">Articles</div></div>
+    <div class="stat-row"><div class="stat-num">64</div><div class="stat-key">Articles</div></div>
     <div class="stat-divider"></div>
     <div class="stat-row"><div class="stat-num">3</div><div class="stat-key">Categories</div></div>
     <div class="stat-divider"></div>
-    <div class="stat-row"><div class="stat-num">2</div><div class="stat-key">This Week</div></div>
+    <div class="stat-row"><div class="stat-num">3</div><div class="stat-key">This Week</div></div>
   </div>
   <div class="b-card b-recent">
     <div class="b-label">📌 最近更新</div>
     <h3 class="b-title" style="font-size: 18px;">Recently Wrote</h3>
     <ul>
-      <li><a href="/Frontend/Handwrite/前端手写25题" style="--acc: #3b82f6"><span class="r-dot"></span><span class="r-title">前端手写25题</span><span class="r-date">06/08</span></a></li>
-      <li><a href="/Misc/interview/面经4.9" style="--acc: #64748b"><span class="r-dot"></span><span class="r-title">面经4.9</span><span class="r-date">06/08</span></a></li>
-      <li><a href="/Frontend/Handwrite/01.top-high-frequency" style="--acc: #3b82f6"><span class="r-dot"></span><span class="r-title">01.top-high-frequency</span><span class="r-date">04/23</span></a></li>
-      <li><a href="/Frontend/Handwrite/00.content" style="--acc: #3b82f6"><span class="r-dot"></span><span class="r-title">00.content</span><span class="r-date">04/23</span></a></li>
-      <li><a href="/Frontend/Handwrite/02.super-high-frequency" style="--acc: #3b82f6"><span class="r-dot"></span><span class="r-title">02.super-high-frequency</span><span class="r-date">04/23</span></a></li>
+      <li><a href="/Frontend/Handwrite/00-高频前端手写25题" style="--acc: #3b82f6"><span class="r-dot"></span><span class="r-title">高频前端手写25题</span><span class="r-date">06/08</span></a></li>
+      <li><a href="/Misc/interview/00-面经4.9" style="--acc: #64748b"><span class="r-dot"></span><span class="r-title">面经4.9</span><span class="r-date">06/08</span></a></li>
+      <li><a href="/Frontend/Handwrite/01-手写题目索引" style="--acc: #3b82f6"><span class="r-dot"></span><span class="r-title">手写题目索引</span><span class="r-date">06/09</span></a></li>
+      <li><a href="/Leetcode/灵神算法/09-二叉树与递归 - 深入理解" style="--acc: #ef4444"><span class="r-dot"></span><span class="r-title">二叉树与递归 - 深入理解</span><span class="r-date">04/23</span></a></li>
+      <li><a href="/Leetcode/灵神算法/07-链表 - 快慢指针" style="--acc: #ef4444"><span class="r-dot"></span><span class="r-title">链表 - 快慢指针</span><span class="r-date">04/19</span></a></li>
     </ul>
   </div>
-  <a class="b-card b-cat-tall" href="/Frontend/Handwrite/前端手写25题" style="--acc: #3b82f6">
+  <a class="b-card b-cat-tall" href="/Frontend/Handwrite/00-高频前端手写25题" style="--acc: #3b82f6">
     <div class="b-emoji">🎨</div>
     <div class="b-label">🎨 前端</div>
     <h3 class="b-title" style="font-size: 20px;">Web · 框架 · 工程化</h3>
-    <p class="b-sub">最新：前端手写25题</p>
+    <p class="b-sub">最新：高频前端手写25题</p>
     <div class="b-foot">
-      <span class="b-pill">28 篇</span>
+      <span class="b-pill">21 篇</span>
       <span class="b-arrow">↗</span>
     </div>
   </a>
-  <a class="b-card b-cat" href="/Misc/interview/面经4.9" style="--acc: #64748b">
+  <a class="b-card b-cat" href="/Misc/interview/00-面经4.9" style="--acc: #64748b">
     <div class="b-emoji">📦</div>
     <div class="b-label">📦 其他</div>
     <h3 class="b-title" style="font-size: 16px;">工具 · 经验 · 杂记</h3>

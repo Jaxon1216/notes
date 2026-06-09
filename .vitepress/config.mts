@@ -163,7 +163,7 @@ function getSidebarItems(dir: string, base: string): Array<any> {
         })
       }
     } else if (item.endsWith('.md')) {
-      let text = item.replace('.md', '')
+      let text = item.replace('.md', '').replace(/^\d+[-.]/, '')
       
       result.push({
         text: text,

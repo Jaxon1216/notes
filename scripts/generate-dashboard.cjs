@@ -64,6 +64,12 @@ const CATEGORY_ICONS = {
 
 function getDisplayName(name) { return DIR_MAPPING[name] || name; }
 
+function categoryPriority(name) {
+  if (name === 'Frontend') return 100;
+  if (name === 'Misc') return 90;
+  return 0;
+}
+
 function getGitTime(filePath) {
   try {
     const result = execSync(
@@ -100,7 +106,7 @@ function getRootCategories() {
     if (!fs.statSync(fullPath).isDirectory()) return;
     const allFiles = getAllMdFiles(fullPath);
     if (allFiles.length === 0) return;
-    allFiles.sort((a, b) => b.gitTime - a.gitTime);
+    allFiles.sort((a, b) => filePriority(b.path) - filePriority(a.path) || b.gitTime - a.gitTime);
     categories.push({
       name: item,
       displayName: getDisplayName(item),
@@ -110,7 +116,7 @@ function getRootCategories() {
       latestFiles: allFiles.slice(0, 3),
     });
   });
-  categories.sort((a, b) => (b.latestTime || 0) - (a.latestTime || 0));
+  categories.sort((a, b) => categoryPriority(b.name) - categoryPriority(a.name) || (b.latestTime || 0) - (a.latestTime || 0));
   return categories;
 }
 
@@ -138,7 +144,14 @@ function fileToLink(absPath) {
 }
 
 function fileTitle(absPath) {
-  return path.basename(absPath, '.md');
+  return path.basename(absPath, '.md').replace(/^\d+[-.]/, '');
+}
+
+function filePriority(absPath) {
+  const rel = path.relative(ROOT, absPath).replace(/\\/g, '/');
+  if (rel === 'Frontend/Handwrite/00-高频前端手写25题.md') return 100;
+  if (rel === 'Misc/interview/00-面经4.9.md') return 90;
+  return 0;
 }
 
 function collectRecentFiles(categories, limit = 6) {
@@ -149,13 +162,14 @@ function collectRecentFiles(categories, limit = 6) {
       all.push({
         title: fileTitle(f.path),
         link: fileToLink(f.path),
+        path: f.path,
         gitTime: f.gitTime,
         category: cat.name,
         categoryDisplay: cat.displayName,
       });
     });
   });
-  all.sort((a, b) => (b.gitTime || 0) - (a.gitTime || 0));
+  all.sort((a, b) => filePriority(b.path) - filePriority(a.path) || (b.gitTime || 0) - (a.gitTime || 0));
   return all.slice(0, limit);
 }
 
