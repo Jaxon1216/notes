@@ -1,119 +1,115 @@
-# 学习笔记项目维护指南
+# Easton Notes
 
-本项目基于 [VitePress](https://vitepress.dev/) 构建，用于记录八股面试，日常学习，刷题的学习笔记。
+一个基于 [VitePress](https://vitepress.dev/) 的个人技术知识库，面向前端、服务端、Agent 应用开发和个人开发常用资料整理。
 
-## 🚀 快速开始
+## 本地运行
 
-### 1. 启动本地开发服务器
-此命令会先执行脚本生成首页 Dashboard，然后启动 VitePress 服务。
+启动开发服务：
+
 ```bash
 npm run docs:dev
 ```
-> **注意**：当你添加了新文件或修改了目录结构后，需要**重启**此命令，以便重新生成侧边栏和首页索引。
 
-### 2. 构建生产版本
+这个命令会先根据当前目录重新生成首页 `index.md`，再启动 VitePress。新增文件或调整目录后，如果页面没有出现，重启开发服务即可。
+
+生产构建：
+
 ```bash
 npm run docs:build
 ```
 
----
+本地预览构建产物：
 
-## 🛠 常见开发场景
-
-### 场景一：我想更改首页（Dashboard）的显示结构
-
-首页内容（`index.md`）并非手动维护，而是由脚本自动生成的。
-
-- **修改位置**：`scripts/generate-dashboard.cjs`
-- **如何修改**：
-  - 该脚本读取所有 `.md` 文件的修改时间，生成 "最近更新" 列表。
-  - 可以在 `generateDashboard` 函数中修改 HTML 模板字符串，调整首页的布局、颜色或显示的文字。
-  - 如果需要修改首页顶部的 Hero 区域（标题、按钮），也在该文件的 `content` 变量中修改 YAML Frontmatter 部分。
-
-### 场景二：我想更改侧边栏（左侧栏）的显示文字
-
-侧边栏是根据文件目录结构自动生成的，生成逻辑在配置文件中。
-
-- **修改位置**：`.vitepress/config.mts`
-- **如何修改**：
-  1. **修改文件夹显示的名称**（如 `DataStructure` -> `数据结构`）：
-     - 找到 `DIR_MAPPING` 常量。
-     - 在对象中添加或修改映射关系，例如：`'MyFolder': '我的文件夹'`。
-     - **注意**：最好同步修改 `scripts/generate-dashboard.cjs` 中的 `DIR_MAPPING`，以保证首页显示的分类名称一致。
-  2. **修改文件显示的名称**：
-     - 默认情况下，侧边栏直接显示文件名（不含 `.md` 后缀）。
-     - 特殊处理：`note.md` 会显示为 "笔记"，`README.md` 会显示为 "简介"。
-     - 若要修改其他文件的显示名称，目前最简单的方法是**重命名该 `.md` 文件**。
-
-### 场景三：我想调整顶部导航栏（Navbar）
-
-- **修改位置**：`.vitepress/config.mts`
-- **如何修改**：
-  - 找到 `themeConfig.nav` 数组。
-  - 按需修改 `text`（显示文字）或 `link`（跳转链接）。
-  - 下拉菜单可以通过 `items` 数组嵌套实现。
-
-### 场景四：添加了新文章但侧边栏没显示
-
-- **原因**：VitePress 的配置文件（包括侧边栏生成逻辑）通常只在服务启动时加载一次。
-- **解决**：在终端中按 `Ctrl + C` 停止服务，然后再次运行 `npm run docs:dev`。
-
-### 场景五：开启站内搜索
-
-本项目使用 VitePress **本地搜索**（构建时生成索引，无需外部服务）。
-- **配置位置**：`.vitepress/config.mts` 的 `themeConfig.search`
-- **验证方式**：运行 `npm run docs:dev` 后，顶部导航栏会出现搜索框
-
-## 📂 目录结构说明
-
-```text
-.
-├── .vitepress/
-│   ├── config.mts          # 核心配置文件 (侧边栏、导航栏、网站标题等)
-│   └── theme/              # 自定义主题样式
-├── scripts/
-│   └── generate-dashboard.cjs # 首页生成脚本
-├── DataStructure/          # 数据结构笔记目录
-├── Leetcode/               # Leetcode 刷题笔记目录
-├── articles/               # 其他文章
-├── package.json            # 项目依赖和脚本定义
-└── README.md               # 本指南文件
+```bash
+npm run docs:preview
 ```
 
----
+## 目录结构
 
-## 📝 Markdown 增强组件用法参考
+```text
+frontend/
+  knowledge/    # 前端知识八股
+  interview/    # 前端面经
+  resources/    # 前端优质好文项目
 
-为了让笔记更美观、重点更突出，你可以使用以下 VitePress 内置组件：
+backend/
+  knowledge/    # 服务端知识八股
+  interview/    # 服务端面经
+  resources/    # 服务端优质好文项目
 
-### 1. 徽章标签 (Badge)
-用于在标题或文字末尾添加小标签。
-- **用法**：`<Badge type="tip" text="已解决" />`
-- **可选类型**：`tip` (绿), `info` (蓝), `warning` (黄), `danger` (红)
+agent/
+  knowledge/    # Agent 应用开发知识八股
+  interview/    # Agent 应用开发面经
+  resources/    # Agent 应用开发优质好文项目
 
-### 2. 提示容器 (Custom Containers)
-用于创建显眼的提示区块。
-- **用法**：
-  ```markdown
-  ::: tip 提示
-  这是一个小技巧
-  :::
+dev/
+  conventions/  # 开发规范
+  linux/        # Linux 常用命令
+  git/          # Git 基础
+  tools/        # 工具配置
+  notes/        # 随手记
+```
 
-  ::: warning 注意
-  这里容易踩坑
-  :::
+站点导航、侧边栏和首页入口由 `site.config.cjs` 统一描述。新增一级方向或调整栏目时，先更新 `site.config.cjs`，再新增对应目录。
 
-  ::: danger 重点
-  面试必刷题
-  :::
-  ```
+## 新增笔记
 
-### 3. 折叠详情 (Details)
-用于收纳长代码或大图，点击后展开。
-- **用法**：
-  ```markdown
-  ::: details 点击查看完整解析
-  这里可以放代码、图片或任何内容
-  :::
-  ```
+1. 选择合适目录，例如 `frontend/knowledge/React/`。
+2. 新增 Markdown 文件，文件名使用清晰标题，可带数字前缀控制排序，例如 `01-核心概念.md`。
+3. 文章内图片放在当前专题附近的 `img/` 目录，使用相对路径引用。
+4. 运行 `npm run docs:dev` 检查首页、导航和侧边栏。
+5. 提交前运行 `npm run docs:build`。
+
+## 贡献优质好文项目
+
+优质好文和项目推荐放在各方向的 `resources/` 目录下，例如：
+
+```text
+frontend/resources/
+backend/resources/
+agent/resources/
+```
+
+推荐新增文章使用这个结构：
+
+```markdown
+# 推荐标题
+
+## 链接
+
+- 原文或项目：<https://example.com>
+
+## 推荐理由
+
+用 2-5 句话说明它解决了什么问题、适合谁读、为什么值得收录。
+
+## 标签
+
+- React
+- 工程化
+- 性能优化
+```
+
+请避免提交：
+
+- 没有推荐理由的链接堆叠。
+- 明显重复或质量较低的内容。
+- 与当前目录结构无关的文件。
+- 未经说明的大规模目录调整。
+
+## 提 PR 的建议流程
+
+1. 从最新主分支创建分支。
+2. 只改和本次贡献相关的 Markdown、图片或配置。
+3. 本地运行 `npm run docs:build`。
+4. PR 标题写清楚方向和内容，例如 `docs: add frontend performance resources`。
+5. PR 描述里说明新增内容放在哪个目录、为什么值得收录。
+
+## 常见维护点
+
+- 首页生成：`scripts/generate-dashboard.cjs`
+- 站点信息架构：`site.config.cjs`
+- VitePress 配置：`.vitepress/config.mts`
+- 主题样式：`.vitepress/theme/custom.css`
+- 本地搜索：`.vitepress/config.mts` 的 `themeConfig.search`
 
