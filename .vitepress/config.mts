@@ -1,21 +1,30 @@
 import { defineConfig } from 'vitepress'
 import { spawn } from 'child_process'
+import { createRequire } from 'module'
 import fs from 'fs'
 import path from 'path'
 
-// ====== 白名单：只有列在这里的顶层文件夹才会出现在导航栏和侧边栏 ======
-const SHOW_DIRS = [
-  'Frontend',
-  'Server',
-  'LLM',
-  'Vibecoding',
-  'Leetcode',
-  'cs-core',
-  'Projects',
-  'Misc',
-  // 'openclaw',   // 取消注释即可公开
-  // 'img',        // 取消注释即可公开
-]
+const require = createRequire(import.meta.url)
+const {
+  SITE_SECTIONS,
+  IGNORE_NAMES,
+  childPath,
+  fileTitle,
+  findChildByDir,
+  findSectionByDir,
+} = require('../site.config.cjs')
+
+type SiteChild = {
+  dir: string
+  title: string
+}
+
+type SiteSection = {
+  dir: string
+  title: string
+  navTitle?: string
+  children: SiteChild[]
+}
 
 // Helper to find first MD file for nav links
 function findFirstFile(dir: string): string | null {
@@ -32,7 +41,7 @@ function findFirstFile(dir: string): string | null {
     
     // First, try to find a direct MD file (prefer files over directories)
     for (const item of items) {
-      if (item.startsWith('.') || item.endsWith('.cpp') || item.endsWith('.exe')) continue
+      if (shouldIgnore(item)) continue
       const fullPath = path.join(dir, item)
       const stat = fs.statSync(fullPath)
       if (!stat.isDirectory() && item.endsWith('.md')) {
@@ -42,7 +51,7 @@ function findFirstFile(dir: string): string | null {
     
     // If no direct MD file, recurse into directories
     for (const item of items) {
-      if (item.startsWith('.') || item.endsWith('.cpp') || item.endsWith('.exe')) continue
+      if (shouldIgnore(item)) continue
       const fullPath = path.join(dir, item)
       const stat = fs.statSync(fullPath)
       if (stat.isDirectory()) {
@@ -56,7 +65,16 @@ function findFirstFile(dir: string): string | null {
   return null
 }
 
-function getLinkForDir(dirName: string): string {
+function shouldIgnore(item: string): boolean {
+  return (
+    item.startsWith('.') ||
+    IGNORE_NAMES.has(item) ||
+    item.endsWith('.cpp') ||
+    item.endsWith('.exe')
+  )
+}
+
+function getLinkForDir(dirName: string): string | null {
   const root = process.cwd()
   const fullPath = path.join(root, dirName)
   if (fs.existsSync(fullPath)) {
@@ -65,70 +83,67 @@ function getLinkForDir(dirName: string): string {
       return '/' + path.relative(root, file).replace(/\\/g, '/').replace(/\.md$/, '')
     }
   }
-  return '/'
+  return null
 }
 
-// Helper to get direct children directories for dropdown
-function getDirDropdownItems(dirName: string): Array<{text: string, link: string}> {
+// Helper to get configured child directories for dropdown
+function getDirDropdownItems(section: SiteSection): Array<{text: string, link: string}> {
   const root = process.cwd()
-  const fullPath = path.join(root, dirName)
-  if (!fs.existsSync(fullPath)) return []
-  
-  const items = fs.readdirSync(fullPath)
   const dropdown: Array<{text: string, link: string}> = []
   
-  items.forEach(item => {
-    if (item.startsWith('.') || item.endsWith('.cpp') || item.endsWith('.exe')) return
-    const itemPath = path.join(fullPath, item)
-    const stat = fs.statSync(itemPath)
-    
-    if (stat.isDirectory()) {
-      const link = getLinkForDir(path.join(dirName, item))
-      if (link !== '/') {
-        dropdown.push({ text: item, link: link })
-      }
-    }
+  section.children.forEach(child => {
+    const dirName = childPath(section, child)
+    const itemPath = path.join(root, dirName)
+    if (!fs.existsSync(itemPath) || !fs.statSync(itemPath).isDirectory()) return
+
+    const link = getLinkForDir(dirName)
+    if (link) dropdown.push({ text: child.title, link })
   })
   
   return dropdown
 }
 
-// Auto-generate navigation from root directories
+// Auto-generate navigation from the shared IA model.
 function generateNav() {
   const root = process.cwd()
-  const items = fs.readdirSync(root)
   const nav: Array<any> = [{ text: 'Home', link: '/' }]
 
-  const dirs = SHOW_DIRS.filter(dir => {
-    const fullPath = path.join(root, dir)
-    return fs.existsSync(fullPath) && fs.statSync(fullPath).isDirectory()
-  })
+  SITE_SECTIONS.forEach((section: SiteSection) => {
+    const fullPath = path.join(root, section.dir)
+    if (!fs.existsSync(fullPath) || !fs.statSync(fullPath).isDirectory()) return
 
-  dirs.forEach(dir => {
-    const dropdownItems = getDirDropdownItems(dir)
-    const firstLink = getLinkForDir(dir)
-    
-    if (firstLink === '/') return // Skip empty directories
+    const dropdownItems = getDirDropdownItems(section)
+    if (dropdownItems.length === 0) {
+      const firstLink = getLinkForDir(section.dir)
+      if (!firstLink) return
 
-    if (dropdownItems.length > 0) {
-      // Has subdirectories, create dropdown menu
       nav.push({
-        text: dir,
-        items: [
-          { text: 'Overview', link: firstLink },
-          ...dropdownItems
-        ]
+        text: section.navTitle || section.title,
+        link: firstLink,
       })
-    } else {
-      // No subdirectories, simple link
-      nav.push({
-        text: dir,
-        link: firstLink
-      })
+      return
     }
+
+    nav.push({
+      text: section.navTitle || section.title,
+      items: dropdownItems,
+    })
   })
 
   return nav
+}
+
+function getSidebarTitle(base: string, item: string): string {
+  const parts = base.split('/').filter(Boolean)
+  const section = parts[0] ? findSectionByDir(parts[0]) : undefined
+  if (!section) return item
+
+  if (parts.length === 1) {
+    const child = findChildByDir(section, item)
+    if (child) return child.title
+  }
+
+  return item
 }
 
 function getSidebarItems(dir: string, base: string): Array<any> {
@@ -147,7 +162,7 @@ function getSidebarItems(dir: string, base: string): Array<any> {
   })
 
   items.forEach(item => {
-    if (item.startsWith('.') || item === 'node_modules' || item === 'draft.cpp' || item.endsWith('.cpp') || item.endsWith('.exe')) return
+    if (shouldIgnore(item) || item === 'draft.cpp') return
     
     const fullPath = path.join(dir, item)
     const stat = fs.statSync(fullPath)
@@ -157,16 +172,14 @@ function getSidebarItems(dir: string, base: string): Array<any> {
       // Only add directory if it has children
       if (children.length > 0) {
         result.push({
-          text: item,
+          text: getSidebarTitle(base, item),
           collapsed: true,
           items: children
         })
       }
     } else if (item.endsWith('.md')) {
-      let text = item.replace('.md', '').replace(/^\d+[-.]/, '')
-      
       result.push({
-        text: text,
+        text: fileTitle(item),
         link: `${base}${item.replace('.md', '')}`
       })
     }
@@ -181,10 +194,12 @@ function generateSidebar() {
   
   sidebar['/'] = []
 
-  SHOW_DIRS.forEach(dir => {
-    const fullPath = path.join(root, dir)
-    if (!fs.existsSync(fullPath)) return
-    sidebar[`/${dir}/`] = getSidebarItems(fullPath, `/${dir}/`)
+  SITE_SECTIONS.forEach((section: SiteSection) => {
+    const fullPath = path.join(root, section.dir)
+    if (!fs.existsSync(fullPath) || !fs.statSync(fullPath).isDirectory()) return
+
+    const items = getSidebarItems(fullPath, `/${section.dir}/`)
+    if (items.length > 0) sidebar[`/${section.dir}/`] = items
   })
   
   return sidebar
@@ -206,8 +221,8 @@ function getGitTimestampWithFollow(file: string): Promise<number> {
 }
 
 export default defineConfig({
-  title: "Study Notes",
-  description: "Personal Algorithm & CPP Notes",
+  title: "Easton Notes",
+  description: "面向前端、服务端与 Agent 应用开发的个人技术知识库",
   ignoreDeadLinks: true, // Avoid build errors for missing links
   lastUpdated: true,
   
