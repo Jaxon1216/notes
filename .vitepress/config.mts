@@ -110,16 +110,15 @@ function generateNav() {
 
   SITE_SECTIONS.forEach((section: SiteSection) => {
     const fullPath = path.join(root, section.dir)
-    if (!fs.existsSync(fullPath) || !fs.statSync(fullPath).isDirectory()) return
+    const sectionExists = fs.existsSync(fullPath) && fs.statSync(fullPath).isDirectory()
 
     const dropdownItems = getDirDropdownItems(section)
     if (dropdownItems.length === 0) {
-      const firstLink = getLinkForDir(section.dir)
-      if (!firstLink) return
+      const firstLink = sectionExists ? getLinkForDir(section.dir) : null
 
       nav.push({
         text: section.navTitle || section.title,
-        link: firstLink,
+        link: firstLink || `/#${section.dir}`,
       })
       return
     }

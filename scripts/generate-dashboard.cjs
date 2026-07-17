@@ -110,7 +110,7 @@ function renderSection(section) {
     ? `<a class="home-section-link" href="${href}">进入栏目</a>`
     : '<span class="home-section-link is-disabled">等待内容</span>'
 
-  return `  <section class="home-section${emptyClass}">
+  return `  <section class="home-section${emptyClass}" id="${escapeHtml(section.dir)}">
     <div class="home-section-main">
       <div>
         <p class="home-kicker">${escapeHtml(section.dir)}</p>
@@ -134,8 +134,7 @@ function renderQuickLinks(sections) {
     .map((section) => {
       const stats = sectionStats(section)
       const label = escapeHtml(section.navTitle || section.title)
-      if (!stats.firstLink) return `<span>${label}</span>`
-      return `<a href="${stats.firstLink}">${label}</a>`
+      return `<a href="${stats.firstLink || `#${section.dir}`}">${label}</a>`
     })
     .join('\n        ')
 }
@@ -166,9 +165,9 @@ onUnmounted(() => {
   <header class="home-hero">
     <div>
       <p class="home-kicker">Easton Notes</p>
-      <h1>面向工程实践的个人技术知识库</h1>
-      <p class="home-subtitle">按前端、服务端、Agent 应用开发和个人开发常用四条主线组织，优先让内容可查、可扩展、可持续维护。</p>
+      <h1>工程实践知识库</h1>
     </div>
+    <p class="home-subtitle">前端、服务端、Agent 应用开发、个人开发常用资料统一入口。</p>
     <div class="home-stats" aria-label="站点统计">
       <div><strong>${totalFiles}</strong><span>篇文章</span></div>
       <div><strong>${SITE_SECTIONS.length}</strong><span>主栏目</span></div>

@@ -219,46 +219,44 @@ body.homepage .VPLastUpdated {
 }
 
 .home-page {
-  max-width: 1160px;
+  max-width: 1320px;
   margin: 0 auto;
-  padding: 40px 24px 64px;
+  padding: 18px 24px 44px;
 }
 
 .home-hero {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 320px;
-  gap: 32px;
-  align-items: end;
-  padding: 28px 0 24px;
+  grid-template-columns: minmax(220px, auto) minmax(320px, 1fr) 300px;
+  gap: 20px;
+  align-items: center;
+  padding: 14px 0 16px;
   border-bottom: 1px solid var(--vp-c-divider);
 }
 
 .home-kicker {
-  margin: 0 0 10px !important;
+  margin: 0 0 6px !important;
   color: var(--vp-c-brand-1);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0;
   text-transform: uppercase;
 }
 
 .home-hero h1 {
-  max-width: 780px;
   margin: 0 !important;
   color: var(--vp-c-text-1);
-  font-size: 44px;
-  line-height: 1.12;
+  font-size: 34px;
+  line-height: 1.15;
   letter-spacing: 0;
   -webkit-text-fill-color: currentColor;
   background: none;
 }
 
 .home-subtitle {
-  max-width: 760px;
-  margin: 16px 0 0 !important;
+  margin: 0 !important;
   color: var(--vp-c-text-2);
-  font-size: 17px;
-  line-height: 1.8;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 .home-stats {
@@ -271,7 +269,7 @@ body.homepage .VPLastUpdated {
 
 .home-stats div {
   min-width: 0;
-  padding: 18px 14px;
+  padding: 12px 12px;
   border-right: 1px solid var(--vp-c-divider);
 }
 
@@ -286,12 +284,12 @@ body.homepage .VPLastUpdated {
 
 .home-stats strong {
   color: var(--vp-c-text-1);
-  font-size: 24px;
+  font-size: 21px;
   line-height: 1;
 }
 
 .home-stats span {
-  margin-top: 8px;
+  margin-top: 5px;
   color: var(--vp-c-text-3);
   font-size: 12px;
 }
@@ -299,16 +297,16 @@ body.homepage .VPLastUpdated {
 .home-quick {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  padding: 18px 0 8px;
+  gap: 8px;
+  padding: 12px 0 4px;
 }
 
 .home-quick a,
 .home-quick span {
   display: inline-flex;
   align-items: center;
-  min-height: 34px;
-  padding: 0 14px;
+  min-height: 30px;
+  padding: 0 12px;
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
   background: var(--vp-c-bg-elv);
@@ -330,9 +328,9 @@ body.homepage .VPLastUpdated {
 
 .home-layout {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-  margin-top: 18px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 10px;
 }
 
 .home-section,
@@ -343,7 +341,8 @@ body.homepage .VPLastUpdated {
 }
 
 .home-section {
-  padding: 22px;
+  scroll-margin-top: 88px;
+  padding: 16px;
 }
 
 .home-section.is-empty {
@@ -351,10 +350,8 @@ body.homepage .VPLastUpdated {
 }
 
 .home-section-main {
-  display: flex;
-  gap: 18px;
-  align-items: flex-start;
-  justify-content: space-between;
+  display: grid;
+  gap: 10px;
 }
 
 .home-section h2,
@@ -363,17 +360,17 @@ body.homepage .VPLastUpdated {
   padding: 0 !important;
   border: 0 !important;
   color: var(--vp-c-text-1);
-  font-size: 24px;
+  font-size: 20px;
   line-height: 1.25;
   letter-spacing: 0;
 }
 
 .home-section-main p,
 .home-contribute p {
-  margin: 10px 0 0 !important;
+  margin: 6px 0 0 !important;
   color: var(--vp-c-text-2);
-  font-size: 14px;
-  line-height: 1.7;
+  font-size: 13px;
+  line-height: 1.55;
 }
 
 .home-section-link,
@@ -382,8 +379,8 @@ body.homepage .VPLastUpdated {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 34px;
-  padding: 0 12px;
+  min-height: 30px;
+  padding: 0 10px;
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
   color: var(--vp-c-text-2) !important;
@@ -406,8 +403,8 @@ body.homepage .VPLastUpdated {
 .home-section-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 18px;
+  gap: 6px;
+  margin-top: 12px;
 }
 
 .home-section-meta span,
@@ -415,8 +412,8 @@ body.homepage .VPLastUpdated {
 .home-tag {
   display: inline-flex;
   align-items: center;
-  min-height: 24px;
-  padding: 0 8px;
+  min-height: 22px;
+  padding: 0 7px;
   border-radius: 6px;
   background: var(--vp-c-bg-soft);
   color: var(--vp-c-text-3);
@@ -426,16 +423,14 @@ body.homepage .VPLastUpdated {
 
 .home-child-grid {
   display: grid;
-  gap: 10px;
-  margin-top: 18px;
+  gap: 8px;
+  margin-top: 12px;
 }
 
 .home-child {
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding: 14px;
+  display: grid;
+  gap: 8px;
+  padding: 11px;
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
   background: var(--vp-c-bg);
@@ -458,20 +453,20 @@ body.homepage .VPLastUpdated {
   align-items: center;
   margin: 0 !important;
   color: var(--vp-c-text-1);
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.35;
   letter-spacing: 0;
 }
 
 .home-child p {
-  margin: 6px 0 0 !important;
+  margin: 4px 0 0 !important;
   color: var(--vp-c-text-2);
-  font-size: 13px;
-  line-height: 1.6;
+  font-size: 12px;
+  line-height: 1.45;
 }
 
 .home-child > span {
-  flex: 0 0 auto;
+  justify-self: start;
 }
 
 .home-tag {
@@ -483,11 +478,11 @@ body.homepage .VPLastUpdated {
 
 .home-contribute {
   display: flex;
-  gap: 24px;
+  gap: 18px;
   align-items: center;
   justify-content: space-between;
-  margin-top: 18px;
-  padding: 24px;
+  margin-top: 12px;
+  padding: 18px;
 }
 
 .home-contribute div {
@@ -499,9 +494,12 @@ body.homepage .VPLastUpdated {
 }
 
 @media (max-width: 960px) {
-  .home-hero,
-  .home-layout {
+  .home-hero {
     grid-template-columns: 1fr;
+  }
+
+  .home-layout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .home-stats {
@@ -511,16 +509,16 @@ body.homepage .VPLastUpdated {
 
 @media (max-width: 640px) {
   .home-page {
-    padding: 28px 16px 44px;
+    padding: 18px 14px 36px;
   }
 
   .home-hero {
-    gap: 20px;
-    padding-top: 18px;
+    gap: 12px;
+    padding-top: 8px;
   }
 
   .home-hero h1 {
-    font-size: 32px;
+    font-size: 28px;
   }
 
   .home-subtitle {
@@ -542,7 +540,11 @@ body.homepage .VPLastUpdated {
 
   .home-section,
   .home-contribute {
-    padding: 18px;
+    padding: 14px;
+  }
+
+  .home-layout {
+    grid-template-columns: 1fr;
   }
 
   .home-section-main,

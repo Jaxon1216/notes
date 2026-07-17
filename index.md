@@ -18,9 +18,9 @@ onUnmounted(() => {
   <header class="home-hero">
     <div>
       <p class="home-kicker">Easton Notes</p>
-      <h1>面向工程实践的个人技术知识库</h1>
-      <p class="home-subtitle">按前端、服务端、Agent 应用开发和个人开发常用四条主线组织，优先让内容可查、可扩展、可持续维护。</p>
+      <h1>工程实践知识库</h1>
     </div>
+    <p class="home-subtitle">前端、服务端、Agent 应用开发、个人开发常用资料统一入口。</p>
     <div class="home-stats" aria-label="站点统计">
       <div><strong>64</strong><span>篇文章</span></div>
       <div><strong>4</strong><span>主栏目</span></div>
@@ -30,13 +30,13 @@ onUnmounted(() => {
 
   <nav class="home-quick" aria-label="快速入口">
         <a href="/frontend/knowledge/ajax-promise-axios/01-手撕Promise与异步编程">前端</a>
-        <span>服务端</span>
-        <span>Agent</span>
+        <a href="#backend">服务端</a>
+        <a href="#agent">Agent</a>
         <a href="/dev/linux/linux">开发常用</a>
   </nav>
 
   <main class="home-layout">
-  <section class="home-section">
+  <section class="home-section" id="frontend">
     <div class="home-section-main">
       <div>
         <p class="home-kicker">frontend</p>
@@ -74,7 +74,7 @@ onUnmounted(() => {
     </div>
   </section>
 
-  <section class="home-section is-empty">
+  <section class="home-section is-empty" id="backend">
     <div class="home-section-main">
       <div>
         <p class="home-kicker">backend</p>
@@ -112,7 +112,7 @@ onUnmounted(() => {
     </div>
   </section>
 
-  <section class="home-section is-empty">
+  <section class="home-section is-empty" id="agent">
     <div class="home-section-main">
       <div>
         <p class="home-kicker">agent</p>
@@ -150,7 +150,7 @@ onUnmounted(() => {
     </div>
   </section>
 
-  <section class="home-section">
+  <section class="home-section" id="dev">
     <div class="home-section-main">
       <div>
         <p class="home-kicker">dev</p>
