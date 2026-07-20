@@ -177,20 +177,12 @@ onUnmounted(() => {
 
   <nav class="home-quick" aria-label="快速入口">
         ${quickLinks}
+        <a class="home-quick-contribute" href="/README#贡献优质好文项目">贡献指南</a>
   </nav>
 
   <main class="home-layout">
 ${sections}
   </main>
-
-  <section class="home-contribute">
-    <div>
-      <p class="home-kicker">Contribution</p>
-      <h2>欢迎补充优质好文和项目</h2>
-      <p>新增内容时优先放进对应方向的 <code>resources</code> 目录；暂时没有合适分类时，可以先补充到 <code>dev/notes</code>，再在后续重整。</p>
-    </div>
-    <a href="/README">查看贡献方式</a>
-  </section>
 </div>
 `
 
