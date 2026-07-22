@@ -17,6 +17,7 @@
 
 - `frontend/`：前端
 - `backend/`：服务端
+- `algorithm/`：算法
 - `agent/`：Agent 应用开发
 - `dev/`：个人开发常用
 
@@ -37,7 +38,8 @@
 - 知识八股：`<direction>/knowledge/`
 - 面经：`<direction>/interview/`
 - 优质好文项目：`<direction>/resources/`
-- 暂未形成专题的个人资料：`dev/notes/`
+- 算法基础和刷题复盘：`algorithm/basics/` 或 `algorithm/leetcode/`
+- 零散技巧、读书笔记和未归档资料：`dev/notes/`
 
 优质好文项目推荐必须包含原文或项目链接、推荐理由和标签。避免只提交链接列表。
 

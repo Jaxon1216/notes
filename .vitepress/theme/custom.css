@@ -338,9 +338,9 @@ body.homepage .VPLastUpdated {
 
 .home-layout {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   align-content: start;
-  gap: clamp(12px, 0.95vw, 18px);
+  gap: clamp(10px, 0.8vw, 16px);
   margin-top: clamp(10px, 0.8vw, 16px);
   min-height: 0;
   overflow-y: auto;
@@ -356,7 +356,7 @@ body.homepage .VPLastUpdated {
 
 .home-section {
   scroll-margin-top: 88px;
-  padding: clamp(15px, 1.05vw, 22px);
+  padding: clamp(13px, 0.9vw, 20px);
 }
 
 .home-section.is-empty {
@@ -373,7 +373,7 @@ body.homepage .VPLastUpdated {
   padding: 0 !important;
   border: 0 !important;
   color: var(--vp-c-text-1);
-  font-size: clamp(20px, 1.25vw, 24px);
+  font-size: clamp(19px, 1.1vw, 23px);
   line-height: 1.25;
   letter-spacing: 0;
 }
@@ -381,7 +381,7 @@ body.homepage .VPLastUpdated {
 .home-section-main p {
   margin: 6px 0 0 !important;
   color: var(--vp-c-text-2);
-  font-size: clamp(13px, 0.8vw, 14px);
+  font-size: clamp(12px, 0.75vw, 14px);
   line-height: 1.55;
 }
 
@@ -440,7 +440,7 @@ body.homepage .VPLastUpdated {
 .home-child {
   display: grid;
   gap: clamp(7px, 0.55vw, 10px);
-  padding: clamp(10px, 0.75vw, 14px);
+  padding: clamp(9px, 0.65vw, 13px);
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
   background: var(--vp-c-bg);
@@ -463,7 +463,7 @@ body.homepage .VPLastUpdated {
   align-items: center;
   margin: 0 !important;
   color: var(--vp-c-text-1);
-  font-size: clamp(14px, 0.9vw, 16px);
+  font-size: clamp(13px, 0.82vw, 15px);
   line-height: 1.35;
   letter-spacing: 0;
 }

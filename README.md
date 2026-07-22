@@ -1,6 +1,6 @@
 # Easton Notes
 
-一个基于 [VitePress](https://vitepress.dev/) 的个人技术知识库，面向前端、服务端、Agent 应用开发和个人开发常用资料整理。
+一个基于 [VitePress](https://vitepress.dev/) 的个人技术知识库，面向前端、服务端、算法、Agent 应用开发和个人开发常用资料整理。
 
 ## 本地运行
 
@@ -42,19 +42,23 @@ agent/
   interview/    # Agent 应用开发面经
   resources/    # Agent 应用开发优质好文项目
 
+algorithm/
+  basics/       # 算法基础、STL 和 C++ 常用知识
+  leetcode/     # LeetCode 专题与刷题复盘
+
 dev/
   conventions/  # 开发规范
   linux/        # Linux 常用命令
   git/          # Git 基础
   tools/        # 工具配置
-  notes/        # 随手记
+  notes/        # 杂记与读书
 ```
 
 站点导航、侧边栏和首页入口由 `site.config.cjs` 统一描述。新增一级方向或调整栏目时，先更新 `site.config.cjs`，再新增对应目录。
 
 ## 新增笔记
 
-1. 选择合适目录，例如 `frontend/knowledge/React/`。
+1. 选择合适目录，例如 `frontend/knowledge/React/` 或 `algorithm/leetcode/`。
 2. 新增 Markdown 文件，文件名使用清晰标题，可带数字前缀控制排序，例如 `01-核心概念.md`。
 3. 文章内图片放在当前专题附近的 `img/` 目录，使用相对路径引用。
 4. 运行 `npm run docs:dev` 检查首页、导航和侧边栏。

@@ -22,15 +22,16 @@ onUnmounted(() => {
     </div>
     <p class="home-subtitle">前端、服务端、Agent 应用开发、个人开发常用资料统一入口。</p>
     <div class="home-stats" aria-label="站点统计">
-      <div><strong>64</strong><span>篇文章</span></div>
-      <div><strong>4</strong><span>主栏目</span></div>
-      <div><strong>2</strong><span>已有内容</span></div>
+      <div><strong>60</strong><span>篇文章</span></div>
+      <div><strong>5</strong><span>主栏目</span></div>
+      <div><strong>3</strong><span>已有内容</span></div>
     </div>
   </header>
 
   <nav class="home-quick" aria-label="快速入口">
         <a href="/frontend/knowledge/ajax-promise-axios/01-手撕Promise与异步编程">前端</a>
         <a href="#backend">服务端</a>
+        <a href="/algorithm/basics/algorithm">算法</a>
         <a href="#agent">Agent</a>
         <a href="/dev/linux/linux">开发常用</a>
         <a class="home-quick-contribute" href="/README#贡献优质好文项目">贡献指南</a>
@@ -48,7 +49,7 @@ onUnmounted(() => {
     </div>
     <div class="home-section-meta">
       <span>3 个方向</span>
-      <span>23 篇文章</span>
+      <span>22 篇文章</span>
     </div>
     <div class="home-child-grid">
       <a class="home-child" href="/frontend/knowledge/ajax-promise-axios/01-手撕Promise与异步编程">
@@ -63,7 +64,7 @@ onUnmounted(() => {
           <h3>面经</h3>
           <p>面试复盘、题目整理和表达素材。</p>
         </div>
-        <span>2 篇</span>
+        <span>1 篇</span>
       </a>
       <a class="home-child" href="/frontend/resources/projects/vue3rabbit/01-基础与项目搭建">
         <div>
@@ -110,6 +111,37 @@ onUnmounted(() => {
         </div>
         <span>待补充</span>
       </div>
+    </div>
+  </section>
+
+  <section class="home-section" id="algorithm">
+    <div class="home-section-main">
+      <div>
+        <p class="home-kicker">algorithm</p>
+        <h2>算法</h2>
+        <p>沉淀算法基础、C++ 常用知识和 LeetCode 刷题体系。</p>
+      </div>
+      <a class="home-section-link" href="/algorithm/basics/algorithm">进入栏目</a>
+    </div>
+    <div class="home-section-meta">
+      <span>2 个方向</span>
+      <span>32 篇文章</span>
+    </div>
+    <div class="home-child-grid">
+      <a class="home-child" href="/algorithm/basics/algorithm">
+        <div>
+          <h3>基础与 C++</h3>
+          <p>算法基础、STL、C++ 语法细节和常用模板。</p>
+        </div>
+        <span>3 篇</span>
+      </a>
+      <a class="home-child" href="/algorithm/leetcode/灵神算法/01-相向双指针（一）">
+        <div>
+          <h3>LeetCode 专题</h3>
+          <p>按题型和方法整理的刷题路线、题解和复盘。</p>
+        </div>
+        <span>29 篇</span>
+      </a>
     </div>
   </section>
 
@@ -162,7 +194,7 @@ onUnmounted(() => {
     </div>
     <div class="home-section-meta">
       <span>5 个方向</span>
-      <span>41 篇文章</span>
+      <span>6 篇文章</span>
     </div>
     <div class="home-child-grid">
       <div class="home-child is-empty">
@@ -193,12 +225,12 @@ onUnmounted(() => {
         </div>
         <span>2 篇</span>
       </a>
-      <a class="home-child" href="/dev/notes/lexicon">
+      <a class="home-child" href="/dev/notes/tips">
         <div>
-          <h3>随手记</h3>
-          <p>还没有形成专题但值得保存的经验和资料。</p>
+          <h3>杂记与读书</h3>
+          <p>零散技巧、读书笔记和暂未归档的个人资料。</p>
         </div>
-        <span>37 篇</span>
+        <span>2 篇</span>
       </a>
     </div>
   </section>

@@ -58,6 +58,27 @@ const SITE_SECTIONS = [
     ],
   },
   {
+    key: 'algorithm',
+    dir: 'algorithm',
+    title: '算法',
+    navTitle: '算法',
+    description: '沉淀算法基础、C++ 常用知识和 LeetCode 刷题体系。',
+    children: [
+      {
+        key: 'basics',
+        dir: 'basics',
+        title: '基础与 C++',
+        description: '算法基础、STL、C++ 语法细节和常用模板。',
+      },
+      {
+        key: 'leetcode',
+        dir: 'leetcode',
+        title: 'LeetCode 专题',
+        description: '按题型和方法整理的刷题路线、题解和复盘。',
+      },
+    ],
+  },
+  {
     key: 'agent',
     dir: 'agent',
     title: 'Agent 应用开发',
@@ -119,8 +140,8 @@ const SITE_SECTIONS = [
       {
         key: 'notes',
         dir: 'notes',
-        title: '随手记',
-        description: '还没有形成专题但值得保存的经验和资料。',
+        title: '杂记与读书',
+        description: '零散技巧、读书笔记和暂未归档的个人资料。',
       },
     ],
   },
