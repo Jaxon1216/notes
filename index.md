@@ -22,9 +22,9 @@ onUnmounted(() => {
     </div>
     <p class="home-subtitle">前端、服务端、Agent 应用开发、个人开发常用资料统一入口。</p>
     <div class="home-stats" aria-label="站点统计">
-      <div><strong>60</strong><span>篇文章</span></div>
+      <div><strong>62</strong><span>篇文章</span></div>
       <div><strong>5</strong><span>主栏目</span></div>
-      <div><strong>3</strong><span>已有内容</span></div>
+      <div><strong>4</strong><span>已有内容</span></div>
     </div>
   </header>
 
@@ -32,7 +32,7 @@ onUnmounted(() => {
         <a href="/frontend/knowledge/ajax-promise-axios/01-手撕Promise与异步编程">前端</a>
         <a href="#backend">服务端</a>
         <a href="/algorithm/basics/algorithm">算法</a>
-        <a href="#agent">Agent</a>
+        <a href="/agent/knowledge/agent/Agent应用开发">Agent</a>
         <a href="/dev/linux/linux">开发常用</a>
         <a class="home-quick-contribute" href="/README#贡献优质好文项目">贡献指南</a>
   </nav>
@@ -145,27 +145,27 @@ onUnmounted(() => {
     </div>
   </section>
 
-  <section class="home-section is-empty" id="agent">
+  <section class="home-section" id="agent">
     <div class="home-section-main">
       <div>
         <p class="home-kicker">agent</p>
         <h2>Agent 应用开发</h2>
         <p>记录 Agent 产品、工具调用、工作流和应用开发经验。</p>
       </div>
-      <span class="home-section-link is-disabled">等待内容</span>
+      <a class="home-section-link" href="/agent/knowledge/agent/Agent应用开发">进入栏目</a>
     </div>
     <div class="home-section-meta">
       <span>3 个方向</span>
-      <span>0 篇文章</span>
+      <span>2 篇文章</span>
     </div>
     <div class="home-child-grid">
-      <div class="home-child is-empty">
+      <a class="home-child" href="/agent/knowledge/agent/Agent应用开发">
         <div>
           <h3>知识八股</h3>
-          <p>LLM、RAG、工具调用、多 Agent 和评测基础。</p>
+          <p>按 Agent 应用开发和 LLM 原理拆分的高频基础知识。</p>
         </div>
-        <span>待补充</span>
-      </div>
+        <span>2 篇</span>
+      </a>
       <div class="home-child is-empty">
         <div>
           <h3>面经</h3>

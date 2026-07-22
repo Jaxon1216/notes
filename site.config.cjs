@@ -89,7 +89,21 @@ const SITE_SECTIONS = [
         key: 'knowledge',
         dir: 'knowledge',
         title: '知识八股',
-        description: 'LLM、RAG、工具调用、多 Agent 和评测基础。',
+        description: '按 Agent 应用开发和 LLM 原理拆分的高频基础知识。',
+        children: [
+          {
+            key: 'agent',
+            dir: 'agent',
+            title: 'Agent 应用开发',
+            description: 'RAG、工具调用、多 Agent、协议和应用工程实践。',
+          },
+          {
+            key: 'llm',
+            dir: 'llm',
+            title: 'LLM 原理',
+            description: 'Transformer、Token、Embedding、微调和模型机制。',
+          },
+        ],
       },
       {
         key: 'interview',

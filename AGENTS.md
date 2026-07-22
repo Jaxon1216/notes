@@ -38,6 +38,7 @@
 - 知识八股：`<direction>/knowledge/`
 - 面经：`<direction>/interview/`
 - 优质好文项目：`<direction>/resources/`
+- Agent 知识八股再分两层：偏应用工程放 `agent/knowledge/agent/`，偏 LLM 原理放 `agent/knowledge/llm/`
 - 算法基础和刷题复盘：`algorithm/basics/` 或 `algorithm/leetcode/`
 - 零散技巧、读书笔记和未归档资料：`dev/notes/`
 
@@ -47,6 +48,7 @@
 
 - 保持目录名为英文，页面展示名为中文。
 - 文件名可以使用数字前缀控制排序，例如 `01-核心概念.md`。
+- 问答型长文使用 `## 题目`、`### 回答重点/扩展知识/面试官追问` 的标题层级，保证 VitePress 右侧导航可渲染题目。
 - 图片放在当前专题附近的 `img/` 目录，并使用相对路径引用。
 - 不要把 `MathModelAgent/` 自动纳入公开导航，除非明确要整理到 `agent/resources/`。
 - 不要删除或恢复用户未说明的改动。

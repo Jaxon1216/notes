@@ -38,7 +38,9 @@ backend/
   resources/    # 服务端优质好文项目
 
 agent/
-  knowledge/    # Agent 应用开发知识八股
+  knowledge/    # Agent 与 LLM 知识八股
+    agent/      # Agent 应用开发、RAG、工具调用和协议
+    llm/        # LLM 原理、模型机制和微调
   interview/    # Agent 应用开发面经
   resources/    # Agent 应用开发优质好文项目
 
@@ -58,7 +60,7 @@ dev/
 
 ## 新增笔记
 
-1. 选择合适目录，例如 `frontend/knowledge/React/` 或 `algorithm/leetcode/`。
+1. 选择合适目录，例如 `frontend/knowledge/React/`、`agent/knowledge/agent/` 或 `algorithm/leetcode/`。
 2. 新增 Markdown 文件，文件名使用清晰标题，可带数字前缀控制排序，例如 `01-核心概念.md`。
 3. 文章内图片放在当前专题附近的 `img/` 目录，使用相对路径引用。
 4. 运行 `npm run docs:dev` 检查首页、导航和侧边栏。

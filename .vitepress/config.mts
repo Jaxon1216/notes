@@ -17,6 +17,7 @@ const {
 type SiteChild = {
   dir: string
   title: string
+  children?: SiteChild[]
 }
 
 type SiteSection = {
@@ -140,6 +141,12 @@ function getSidebarTitle(base: string, item: string): string {
   if (parts.length === 1) {
     const child = findChildByDir(section, item)
     if (child) return child.title
+  }
+
+  if (parts.length === 2) {
+    const child = findChildByDir(section, parts[1])
+    const grandchild = child?.children?.find((subChild: SiteChild) => subChild.dir === item)
+    if (grandchild) return grandchild.title
   }
 
   return item
