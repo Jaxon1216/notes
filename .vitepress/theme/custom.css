@@ -68,6 +68,40 @@
   transform: translateX(2px);
 }
 
+/* 层级区分：展开后一眼分清「子栏目 / 专题目录 / 具体文章」三层 */
+/* 一级：子栏目分组（知识八股 / 面经 / 优质好文项目），最强调 */
+.VPSidebarItem.level-0 > .item > .link > .text,
+.VPSidebarItem.level-0 > .item > .text {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+  letter-spacing: -0.01em;
+}
+
+/* 二级：专题目录（Express / React / Vue…），中等字重、主文本色 */
+.VPSidebarItem.level-1 > .item > .link > .text,
+.VPSidebarItem.level-1 > .item > .text {
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+}
+
+/* 三级及更深：具体文章，常规字重 + 次级色，弱化以突出上层 */
+.VPSidebarItem.level-2 .text,
+.VPSidebarItem.level-3 .text {
+  font-weight: 400;
+  color: var(--vp-c-text-2);
+}
+
+/* 嵌套分组：每深一层都加大缩进并用左侧引导线把子项和父级视觉串起来 */
+.VPSidebarItem.level-0 > .items,
+.VPSidebarItem.level-1 > .items,
+.VPSidebarItem.level-2 > .items,
+.VPSidebarItem.level-3 > .items {
+  margin-left: 9px;
+  padding-left: 15px;
+  border-left: 1px solid var(--vp-c-divider);
+}
+
 .VPSidebarItem.is-active > .item > .indicator {
   background: linear-gradient(180deg, var(--vp-c-brand-1), var(--vp-c-brand-3)) !important;
   width: 3px !important;
