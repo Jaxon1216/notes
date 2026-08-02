@@ -22,7 +22,7 @@ onUnmounted(() => {
     </div>
     <p class="home-subtitle">前端、服务端、Agent 应用开发、个人开发常用资料统一入口。</p>
     <div class="home-stats" aria-label="站点统计">
-      <div><strong>62</strong><span>篇文章</span></div>
+      <div><strong>69</strong><span>篇文章</span></div>
       <div><strong>5</strong><span>主栏目</span></div>
       <div><strong>4</strong><span>已有内容</span></div>
     </div>
@@ -49,7 +49,7 @@ onUnmounted(() => {
     </div>
     <div class="home-section-meta">
       <span>3 个方向</span>
-      <span>22 篇文章</span>
+      <span>29 篇文章</span>
     </div>
     <div class="home-child-grid">
       <a class="home-child" href="/frontend/knowledge/ajax-promise-axios/01-手撕Promise与异步编程">
@@ -57,7 +57,7 @@ onUnmounted(() => {
           <h3>知识八股</h3>
           <p>框架原理、浏览器机制、手写题和高频基础知识。</p>
         </div>
-        <span>15 篇</span>
+        <span>22 篇</span>
       </a>
       <a class="home-child" href="/frontend/interview/00-面经4.9">
         <div>
