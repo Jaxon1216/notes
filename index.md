@@ -22,15 +22,15 @@ onUnmounted(() => {
     </div>
     <p class="home-subtitle">前端、服务端、Agent 应用开发、个人开发常用资料统一入口。</p>
     <div class="home-stats" aria-label="站点统计">
-      <div><strong>69</strong><span>篇文章</span></div>
+      <div><strong>75</strong><span>篇文章</span></div>
       <div><strong>5</strong><span>主栏目</span></div>
-      <div><strong>4</strong><span>已有内容</span></div>
+      <div><strong>5</strong><span>已有内容</span></div>
     </div>
   </header>
 
   <nav class="home-quick" aria-label="快速入口">
         <a href="/frontend/knowledge/ajax-promise-axios/01-手撕Promise与异步编程">前端</a>
-        <a href="#backend">服务端</a>
+        <a href="/backend/knowledge/Go/js2go/01-入门与语法">服务端</a>
         <a href="/algorithm/basics/algorithm">算法</a>
         <a href="/agent/knowledge/agent/Agent应用开发">Agent</a>
         <a href="/dev/linux/linux">开发常用</a>
@@ -76,27 +76,27 @@ onUnmounted(() => {
     </div>
   </section>
 
-  <section class="home-section is-empty" id="backend">
+  <section class="home-section" id="backend">
     <div class="home-section-main">
       <div>
         <p class="home-kicker">backend</p>
         <h2>服务端</h2>
         <p>整理 API、数据库、服务治理和后端工程实践。</p>
       </div>
-      <span class="home-section-link is-disabled">等待内容</span>
+      <a class="home-section-link" href="/backend/knowledge/Go/js2go/01-入门与语法">进入栏目</a>
     </div>
     <div class="home-section-meta">
       <span>3 个方向</span>
-      <span>0 篇文章</span>
+      <span>6 篇文章</span>
     </div>
     <div class="home-child-grid">
-      <div class="home-child is-empty">
+      <a class="home-child" href="/backend/knowledge/Go/js2go/01-入门与语法">
         <div>
           <h3>知识八股</h3>
           <p>网络、数据库、缓存、并发和系统设计基础。</p>
         </div>
-        <span>待补充</span>
-      </div>
+        <span>6 篇</span>
+      </a>
       <div class="home-child is-empty">
         <div>
           <h3>面经</h3>
