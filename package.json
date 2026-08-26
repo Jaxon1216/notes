@@ -6,8 +6,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "typecheck": "tsc --noEmit --pretty false --incremental false",
     "start": "next start",
+    "check:content": "node scripts/check-content-style.cjs content/docs docs README.md AGENTS.md",
     "check:vue:tags": "node scripts/check-html-tags.cjs content/docs/frontend/knowledge/Vue",
+    "validate": "npm run check:content && npm run check:vue:tags && npm run typecheck && npm run docs:build",
     "docs:dev": "next dev",
     "docs:build": "next build",
     "docs:preview": "next start",

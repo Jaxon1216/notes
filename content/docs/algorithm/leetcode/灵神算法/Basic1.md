@@ -4,7 +4,7 @@
 制作了一系列算法教学视频，整理成合集[【基础算法精讲】](https://space.bilibili.com/206214/channel/collectiondetail?sid=842776)。以下是合集中的视频链接、配套题目和代码，代码包含 Python/Java/C++/Go 等多种语言。
 
 >来自评论区:1，把视频里的经典题型看懂，然后把作业题全刷一遍，最好都能做出来，不能做出来就看完答案自己写一遍。2，跟练完一个视频后总结，概括这类题型的答案框架，在固定框架之外总结针对同一题型下不同题目条件变化导致代码细节变化的原因。3，每次面试前把自我总结和视频经典题代码都看一遍（适当复习非常重要
-### 专题目录
+## 专题目录
 
 |序号|专题|视频|
 |---|---|---|
@@ -36,7 +36,7 @@
 |26|[[26-单调栈]]|[视频](https://www.bilibili.com/video/BV1VN411J7S7/)|
 |27|[[27-单调队列]]|[视频](https://www.bilibili.com/video/BV1bM411X72E/)|
 
-### 完整算法题单
+## 完整算法题单
 
 🔥[如何科学刷题？](https://leetcode.cn/circle/discuss/RvFUtj/) 包含核心刷题路线
 
@@ -53,7 +53,7 @@
 11. [链表、二叉树与回溯（前后指针/快慢指针/DFS/BFS/直径/LCA/一般树）](https://leetcode.cn/circle/discuss/K0n2gO/)
 12. [字符串（KMP/Z函数/Manacher/字符串哈希/AC自动机/后缀数组/子序列自动机）](https://leetcode.cn/circle/discuss/SJFwQI/)
 
-### 其他
+## 其他
 
 - 🔥[从集合论到位运算，常见位运算技巧分类总结！](https://leetcode.cn/circle/discuss/CaOJ45/)
 - [模运算的世界：当加减乘除遇上取模](https://leetcode.cn/circle/discuss/mDfnkW/)

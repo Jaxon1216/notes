@@ -1,13 +1,15 @@
-# 知识性
-### `return`、`break`、`return 0` 
+# 开发杂记
 
-### 一句话结论
+## 知识性
+### `return`、`break`、`return 0`
+
+#### 一句话结论
 
 - 在 `void` 函数里用 `return;` 直接结束函数。
 - `break;` 只退出当前循环/`switch`，函数还会继续往下执行。
 - `return 0;` 是“有返回值的函数”返回整数 0。
 
-#### 最小示例
+##### 最小示例
 
 ```cpp
 void LinkedList::ascinsert(eleType value) {
@@ -27,7 +29,7 @@ void LinkedList::ascinsert(eleType value) {
 }
 ```
 
-#### 如果把第二个 `return` 换成 `break` 会怎样？
+##### 如果把第二个 `return` 换成 `break` 会怎样？
 
 ```cpp
 void LinkedList::ascinsert(eleType value){
@@ -46,7 +48,7 @@ void LinkedList::ascinsert(eleType value){
 
 - 核心原因：`break` 只离开循环，函数没有结束；而 `return` 结束整个函数。
 
-####  `return;` 和 `return 0;`
+#####  `return;` 和 `return 0;`
 
 - `return 0;`：用于有返回值的函数，返回整数 0。
 - `return;`：用于 `void` 函数，只退出函数，不返回值。
@@ -57,7 +59,7 @@ int add(int a, int b) { return a + b; }
 void ascinsert(eleType v) { /* ... */ return; }
 ```
 
-#### 速查表
+##### 速查表
 
 | 语句        | 适用场景           | 作用                    |
 | ----------- | ------------------ | ----------------------- |
@@ -65,9 +67,9 @@ void ascinsert(eleType v) { /* ... */ return; }
 | `return;`   | `void` 函数        | 立即结束整个函数        |
 | `return 0;` | 返回 `int` 的函数  | 结束函数并返回 `0`      |
 
-### delete
-
 #### delete
+
+##### delete
 
 ```cpp
 int* p = new int(5);    // 单个对象
@@ -93,7 +95,7 @@ delete wrong;           // 未使用[] → 内存泄漏/未定义行为
 
 ---
 
-### c中的打印
+#### c中的打印
 ```c
 if(x >= 10) 
     printf("%c", 'A' + x - 10);
@@ -125,34 +127,34 @@ C 的 `printf` 需要手动指定格式，而 C++ 的 `cout` 会根据变量类�
 
 
 ---
-### 易混括号
+#### 易混括号
 
-#### `Type name[N]` - 数组声明
+##### `Type name[N]` - 数组声明
 ```cpp
 Queue<int> q[1001];  // 创建1001个队列对象 ❗易错点
 vector<int> v[5];    // 创建5个vector对象
 ```
 **特点：** 创建N个独立的Type对象  
 **坑点：** 这不是1个大小为N的队列，而是N个独立的队列！
-#### `Type name(N)` - 带参构造
+##### `Type name(N)` - 带参构造
 ```cpp
 vector<int> v(100);  // 1个vector，含100个元素
 string s(5, 'a');    // 1个string，5个'a'
 ```
 **特点：** 创建1个对象，初始化N个内容
-#### `Type name{N}` - 列表初始化
+##### `Type name{N}` - 列表初始化
 ```cpp
 vector<int> v{1,2,3}; // 1个vector，元素为1,2,3
 int arr[]{1,2,3};     // 3个int的数组
 ```
 **特点：** 使用花括号指定初始值
-##### 快速记忆
+###### 快速记忆
 - `[N]` → 多个对象（N个Type）
 - `(N)` → 单个对象，N个内容  
 - `{N}` → 初始化值为N
 
 
-### i++和++i
+#### i++和++i
 
 之前都是似懂非懂，现在来总结一下：
   - 区别能体现：涉及立刻赋值，立刻打印，数组索引，return， 条件判断
@@ -160,11 +162,11 @@ int arr[]{1,2,3};     // 3个int的数组
 
 
 
-# 非知识性
-### index.md无内容但侧边栏显示仓库
+### 非知识性
+#### index.md无内容但侧边栏显示仓库
 - index.md只有前置信息无实际内容，侧边栏仓库信息配置在主题配置文件的`projects`和`repository`部分，非Markdown文件内容决定。
 
-#### Hexo中repository/index.md与主题配置的关系
+##### Hexo中repository/index.md与主题配置的关系
 在Hexo博客系统中，`source/repository/index.md`文件与侧边栏显示的GitHub仓库列表之间存在一种特殊的关系：
 
 1. **index.md文件的作用**：

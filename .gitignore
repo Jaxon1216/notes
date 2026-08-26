@@ -9,6 +9,7 @@ out
 # Cache
 cache
 .temp
+tsconfig.tsbuildinfo
 
 # OS files
 .DS_Store
