@@ -1,0 +1,6 @@
+{
+  "title": "Agent 应用开发",
+  "description": "记录 Agent 产品、工具调用、工作流和应用开发经验。",
+  "root": true,
+  "pages": ["knowledge"]
+}

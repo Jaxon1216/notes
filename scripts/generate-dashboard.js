@@ -1,2 +1,0 @@
-require('./generate-dashboard.cjs')
-

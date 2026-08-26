@@ -1,0 +1,5 @@
+{
+  "title": "知识八股",
+  "description": "按 Agent 应用开发和 LLM 原理拆分的高频基础知识。",
+  "pages": ["agent", "llm"]
+}

@@ -1,0 +1,5 @@
+{
+  "title": "知识八股",
+  "description": "框架原理、浏览器机制、手写题和高频基础知识。",
+  "pages": ["React", "Vue", "ajax-promise-axios", "Express", "handwrite"]
+}

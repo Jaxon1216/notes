@@ -3,8 +3,8 @@ node_modules
 
 # Build outputs
 dist
-.vitepress/dist
-.vitepress/cache
+.next
+out
 
 # Cache
 cache
@@ -49,9 +49,10 @@ draft.cpp
 
 # Cursor / Agent files
 .agents/
+.trae/
 skills-lock.json
 
-# 爬取的外部资料源（不纳入 git 跟踪）
+# Fumadocs generated source cache
 .source/
 
 # 不展示的内容

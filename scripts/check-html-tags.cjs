@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-// 获取目标目录（命令行参数或默认为 frontend/knowledge/Vue）
-const targetDir = process.argv[2] || path.join(__dirname, '../frontend/knowledge/Vue');
+// 获取目标目录（命令行参数或默认为 content/docs/frontend/knowledge/Vue）
+const targetDir = process.argv[2] || path.join(__dirname, '../content/docs/frontend/knowledge/Vue');
 
 // 递归获取目录下所有 .md 文件
 function getAllMarkdownFiles(dir) {

@@ -4,19 +4,26 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "check:vue:tags": "node scripts/check-html-tags.cjs frontend/knowledge/Vue",
-    "docs:dev": "node scripts/generate-dashboard.cjs && vitepress dev",
-    "docs:build": "node scripts/generate-dashboard.cjs && vitepress build",
-    "docs:preview": "vitepress preview",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "check:vue:tags": "node scripts/check-html-tags.cjs content/docs/frontend/knowledge/Vue",
+    "docs:dev": "next dev",
+    "docs:build": "next build",
+    "docs:preview": "next start",
     "prepare": "husky"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.3.0",
     "@commitlint/config-conventional": "^20.3.0",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/mdx": "^2.0.14",
+    "@types/node": "^26.3.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.5",
     "husky": "^9.1.7",
-    "vitepress": "^1.6.4",
-    "vue": "^3.5.25",
-    "vue-router": "^4.6.4"
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2"
   },
   "description": "",
   "main": "index.js",
@@ -24,6 +31,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@vercel/analytics": "^2.0.1"
+    "@vercel/analytics": "^2.0.1",
+    "fumadocs-core": "^16.15.1",
+    "fumadocs-mdx": "^15.3.1",
+    "fumadocs-ui": "^16.15.1",
+    "next": "^16.3.3",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
   }
 }

@@ -1,0 +1,6 @@
+{
+  "title": "前端",
+  "description": "沉淀 Web 框架、工程化、浏览器基础和前端项目实践。",
+  "root": true,
+  "pages": ["knowledge", "interview", "resources"]
+}

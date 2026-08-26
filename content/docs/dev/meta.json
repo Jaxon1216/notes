@@ -1,0 +1,6 @@
+{
+  "title": "个人开发常用",
+  "description": "放置日常开发中反复会用到的规范、命令和工具笔记。",
+  "root": true,
+  "pages": ["linux", "git", "tools", "notes"]
+}

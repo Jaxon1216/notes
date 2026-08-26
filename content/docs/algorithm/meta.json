@@ -1,0 +1,6 @@
+{
+  "title": "算法",
+  "description": "沉淀算法基础、C++ 常用知识和 LeetCode 刷题体系。",
+  "root": true,
+  "pages": ["basics", "leetcode"]
+}
