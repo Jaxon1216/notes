@@ -94,6 +94,63 @@ function parseHeadings(filePath) {
   return headings
 }
 
+function findInlineCodeMarkdownPaths(filePath) {
+  const lines = fs.readFileSync(filePath, 'utf8').split(/\r?\n/)
+  const issues = []
+  let inFence = false
+  let fenceChar = ''
+  let fenceLength = 0
+  let inFrontmatter = lines[0]?.trim() === '---'
+
+  for (let index = 0; index < lines.length; index += 1) {
+    const line = lines[index]
+    const trimmed = line.trim()
+    const lineNumber = index + 1
+
+    if (inFrontmatter) {
+      if (lineNumber > 1 && trimmed === '---') {
+        inFrontmatter = false
+      }
+      continue
+    }
+
+    const fenceMatch = /^(`{3,}|~{3,})/.exec(trimmed)
+    if (fenceMatch) {
+      const marker = fenceMatch[1]
+      const markerChar = marker[0]
+      if (!inFence) {
+        inFence = true
+        fenceChar = markerChar
+        fenceLength = marker.length
+      } else if (markerChar === fenceChar && marker.length >= fenceLength) {
+        inFence = false
+        fenceChar = ''
+        fenceLength = 0
+      }
+      continue
+    }
+
+    if (inFence) continue
+
+    const codeSpanPattern = /`([^`\n]+)`/g
+    for (const match of line.matchAll(codeSpanPattern)) {
+      const codeText = match[1].trim()
+      if (/^\.{1,2}\/[^\s`)]*\.mdx?(?:#[^\s`)]*)?$/.test(codeText)) {
+        issues.push(
+          issue(
+            'inline-markdown-path',
+            filePath,
+            lineNumber,
+            `相对 Markdown 路径 \`${codeText}\` 会被渲染为代码文本；需要跳转时请写成 Markdown 链接。`,
+          ),
+        )
+      }
+    }
+  }
+
+  return issues
+}
+
 function issue(code, filePath, line, message) {
   return {
     code,
@@ -106,7 +163,7 @@ function issue(code, filePath, line, message) {
 function checkFile(filePath) {
   const relativePath = toPosix(path.relative(process.cwd(), filePath))
   const headings = parseHeadings(filePath)
-  const issues = []
+  const issues = findInlineCodeMarkdownPaths(filePath)
 
   if (headings.length === 0) {
     if (!ALLOW_NO_HEADINGS.has(relativePath)) {
