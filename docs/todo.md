@@ -35,3 +35,17 @@
 - [ ] 扩展内容校验脚本，继续覆盖坏链接、无效 frontmatter、图片引用和 MDX 语法问题。
 - [ ] 评估接入 ESLint，用于 React/TypeScript 组件代码的风格和潜在问题检查。
 - [ ] 为 AI/Agent 阅读生成结构化索引，例如 `llms.txt` 或站点内容 manifest。
+
+<br />
+
+<br />
+
+# 个人想法
+
+- github链接：<https://www.fumadocs.dev/docs/ui/components/github-info> &#x20;
+- 知识图谱：<https://www.fumadocs.dev/docs/ui/components/graph-view>
+- 文档站提供PR强引导：<https://www.fumadocs.dev/docs/ui/components/steps>
+- 导航栏
+- 主页
+- 友链
+
