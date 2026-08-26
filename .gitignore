@@ -51,6 +51,9 @@ draft.cpp
 .agents/
 skills-lock.json
 
+# 爬取的外部资料源（不纳入 git 跟踪）
+.source/
+
 # 不展示的内容
 .obsidian
 .vscode
