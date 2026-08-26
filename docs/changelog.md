@@ -19,3 +19,4 @@
 - 新增 `.husky/pre-commit`，在提交前运行内容结构检查和 Vue 标签闭合检查；保留 `.husky/commit-msg` 的 commitlint 校验。
 - 新增 GitHub Actions `Docs Checks` 和 PR 模板，推动外部 PR 统一执行内容规范和构建检查。
 - 新增 `vercel.json`，让 Vercel 部署阶段使用 `npm run validate` 作为统一构建门禁。
+- 新增项目级 `.npmrc`，固定依赖安装使用 npm 公网源，并清理 `package-lock.json` 中的内网源地址，避免 Vercel `npm ci` 在公网环境解析内网域名失败。
