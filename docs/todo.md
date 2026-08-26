@@ -40,7 +40,7 @@
 
 <br />
 
-# 个人想法
+## 个人想法
 
 - github链接：<https://www.fumadocs.dev/docs/ui/components/github-info> &#x20;
 - 知识图谱：<https://www.fumadocs.dev/docs/ui/components/graph-view>
