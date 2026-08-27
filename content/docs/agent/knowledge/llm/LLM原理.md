@@ -18,7 +18,7 @@ title: LLM 原理
 
 原因是：输出 Token 要模型一个一个"生成"，每生成一个都跑一次前向推理，计算成本远高于处理输入。输入的 Token 可以并行处理，效率高得多。
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/LVPPCQmI_image_mianshiya.webp)
+
 
 所以实际开发中有个很实用的省钱思路：尽量把信息放在输入端，用详细的 Prompt 和上下文喂进去，让模型的输出尽量简洁精准。
 
@@ -471,7 +471,7 @@ with torch.no_grad():
 
 复杂任务往往需要拆成多个子步骤，每个步骤都有出错的可能。假设每步正确率是 p，n 步任务的整体正确率就是 p^n。小模型单步正确率可能只有 80%，5 步任务就剩 32.8%；大模型单步正确率到 95%，5 步还能保持 77.4%。看起来单步只提升了 15 个百分点，但多步累积下来差距就是好几倍。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/cHXFl37f_uzMQCDu9DC_mianshiya.webp)
+
 
 ---
 
@@ -481,7 +481,7 @@ Embedding 就是把文本、图像、音频这些人能理解的信息，转换�
 
 这串向量就像文本的"数字指纹"，捕捉了语义信息。"猫"和"狗"的向量会很接近，因为它们都是动物；"开心"和"悲伤"的向量会远离，因为它们是反义词。语义相近的对象在向量空间中彼此邻近，语义相异的对象则相距较远。
 
-![yuyi.drawio.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/2s0ocsRG_yuyi.drawio_mianshiya.webp)
+
 
 有了向量表示，就可以通过数学计算判断两段话是否相关。最常用的是**余弦相似度**，计算两个向量夹角的余弦值，值越接近 1 说明越相似。
 
@@ -518,7 +518,7 @@ similarity = cosine_similarity([embeddings[0]], [embeddings[1]])
 
 6）M3E：开源轻量模型，中文场景表现不错，适合资源有限的本地部署
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/bsoZuC0f_4jFAPmlisH_mianshiya.webp)
+
 
 实际选型的话：**中文场景选 BGE 或 M3E，英文场景选 OpenAI 或 Cohere，轻量部署选 Sentence-BERT**。
 
@@ -538,7 +538,7 @@ similarity = cosine_similarity([embeddings[0]], [embeddings[1]])
 
 3）学习方式不同。预训练主要是自监督学习，让模型预测下一个 token 或者还原被遮盖的词，不需要人工标注。微调通常是监督学习，需要输入输出配对的标注数据
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/markdown/OMaEe5oe_1744894051310-72ecfa84-4ed6-4d62-ba11-d6a1d247291a_mianshiya.webp)
+
 
 ### 扩展知识
 
@@ -546,7 +546,7 @@ similarity = cosine_similarity([embeddings[0]], [embeddings[1]])
 
 预训练模型虽然能力强，但它学的是通用知识，面对特定场景还是差点意思。比如用 GPT 直接做法律合同审查，它可能连行业术语都理解不准；用它做客服问答，回复风格可能跟公司调性对不上。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/DJWc9GcG_e9sZv3CMQw_mianshiya.webp)
+
 
 微调就是一个性价比极高的中间方案，不用从零开始训练，也不用忍受通用模型在特定场景的平庸表现。
 
@@ -584,7 +584,7 @@ LoRA 基于一个假设：微调时权重的变化量是低秩的，不需要更
 
 微调的核心原理是**迁移学习**。预训练模型已经在海量数据上学会了语言的通用规律，微调就是在这个基础上，用少量的领域数据让模型学会特定领域的表达方式和知识。打个比方，预训练模型像是读完了整个图书馆的通才，微调就是让它去医院实习三个月，变成一个懂医学的通才。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/7WMwWsGw_GLRkV8xlpQ_mianshiya.webp)
+
 
 什么时候需要微调而不是直接用基础模型？主要看这几种情况：
 
@@ -614,7 +614,7 @@ LoRA 基于一个假设：微调时权重的变化量是低秩的，不需要更
 
 6）多模态任务，处理图文混合输入，比如图像描述生成、视觉问答、图文检索
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/YFwJJNbJ_bZT4X1Xd48_mianshiya.webp)
+
 
 ---
 
@@ -632,7 +632,7 @@ LoRA 基于一个假设：微调时权重的变化量是低秩的，不需要更
 
 **量化微调**是资源受限场景下的救星。QLoRA 把模型权重量化到 4-bit 存储，再配合 LoRA 做微调，单张 3090 就能微调 65B 的模型。IR-QLoRA 在这基础上加了信息保留技术，进一步提升量化后的精度。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/rEdR74DI_DkLhXiI3Ri_mianshiya.webp)
+
 
 ---
 
@@ -642,7 +642,7 @@ LoRA 基于一个假设：微调时权重的变化量是低秩的，不需要更
 
 微调策略分两大类：**全量微调**和**参数高效微调**（PEFT）。全量微调效果最好但成本高、容易过拟合；PEFT 方法只动一小部分参数，省资源、跑得快，大多数场景下效果也够用。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/fAXJqFIz_pn3EiTUhZj_mianshiya.webp)
+
 
 ### 全量微调
 
@@ -668,7 +668,7 @@ LoRA 的思路是：权重更新矩阵 ΔW 通常是低秩的，可以拆成两�
 
 最极简的方案：只训练模型里的 bias 参数，其他全冻。bias 参数只占总参数的 0.1% 左右，几乎没有额外开销。在中小数据集上效果出奇地好，有时甚至能打平全量微调。但碰到大模型大数据，可训练参数太少就不够用了，复杂任务上容易欠拟合。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/oKuenrqA_fvnYjUtAdW_mianshiya.webp)
+
 
 ---
 
@@ -682,7 +682,7 @@ LoRA 的思路是：权重更新矩阵 ΔW 通常是低秩的，可以拆成两�
 
 PEFT 的做法是在原模型基础上插入轻量级模块，比如 LoRA 只加两个小矩阵，Adapter 只加几层 MLP，Prefix Tuning 只加一段可训练向量。这些新增参数通常只占原模型的 0.1% 到 5%，训练起来显存占用降几倍甚至几十倍，checkpoint 从几十 GB 缩到几十 MB，多任务场景下换个小文件就能切换任务，部署运维轻松太多。
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1777886594896760834/pJ38lDfD_image_mianshiya.webp)
+
 
 ---
 
@@ -702,7 +702,7 @@ PEFT 的核心思路就一句话：冻结预训练模型的绝大部分参数，
 
 3）**Prefix Tuning** 在注意力计算时，给 Key 和 Value 拼接一段可训练的前缀向量。这些前缀会影响每一层的注意力分布，相当于给模型一个持续的"任务指令"。特别适合生成类任务，对话、摘要、翻译都有不错效果。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/zlfJtVJ3_1LWNRUbg3q_mianshiya.webp)
+
 
 ---
 
@@ -714,7 +714,7 @@ PEFT 的核心思路就一句话：冻结预训练模型的绝大部分参数，
 
 全量微调：输入数据 → 预训练模型（所有参数可训练） → 输出 PEFT：输入数据 → 预训练模型（参数冻结）+ 少量可训练模块（Adapter/LoRA） → 输出
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/2eqLNR19_RKQwCTa4HL_mianshiya.webp)
+
 
 打个比方，全量微调像把整栋大楼推倒重建，PEFT 就是在原有框架上加装几个新房间。一个 70B 参数的 LLaMA 模型，全量微调需要 8 张 A100 80G 显卡，光模型权重就占 140GB 显存；用 LoRA 的话，可训练参数只有原来的 0.1%，单卡 24G 就能跑起来。
 
@@ -745,7 +745,7 @@ peft_model.print_trainable_parameters()
 
 比如一个 7B 参数的模型，全量微调要训 7B 个参数；用 LoRA 只训注意力层的 Q 和 V 投影，r=8 的话可训练参数只有几百万，存储开销从几十 GB 缩到几十 MB。
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/SUSIpi5K_image_mianshiya.webp)
+
 
 ### 如何结合 LoRA 进行微调
 
@@ -775,7 +775,7 @@ model = get_peft_model(base_model, config)
 
 先看任务类型。文本生成、对话这类任务选 Decoder-only 架构，LLaMA、Qwen、Mistral 都行；文本分类、NER 这种理解型任务，BERT 系列更合适；多模态场景就得上 CLIP、LLaVA 这类模型。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/E5MFF4TZ_x6GwgVoNQi_mianshiya.webp)
+
 
 再看资源约束。一张 3090 24G 显存，全量微调最多跑 7B 模型，用 QLoRA 能上到 30B+。预算有限就别硬上大模型，7B 的 Mistral 在很多任务上能打过早期的 13B 模型，性价比更高。
 
@@ -793,7 +793,7 @@ AdamW 是 Adam 的改进版，核心改动是把权重衰减从梯度更新里�
 
 AdamW 参数更新流程： 1）计算当前 batch 的梯度 g 2）更新一阶动量 m = β1 * m + (1-β1) * g 3）更新二阶动量 v = β2 * v + (1-β2) * g² 4）计算偏差修正后的 m̂ 和 v̂ 5）参数更新 θ = θ - lr * m̂ / (√v̂ + ε) 6）权重衰减 θ = θ - lr * λ * θ（这一步和梯度更新解耦）
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/44g37eg6_jT4stMX3IM_mianshiya.webp)
+
 
 用 Hugging Face Transformers 微调时，默认配置就是 AdamW：
 
@@ -831,7 +831,7 @@ warmup_ratio=0.1, # 前 10% 步数做 warmup )
 
 4）数据增强：对原始样本做同义替换、回译、随机遮蔽、噪声注入等操作，扩充训练集、引入多样性
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/D1GFlcRI_kECgHBDz4p_mianshiya.webp)
+
 
 用 Hugging Face Transformers 微调时，L2 权重衰减和 Dropout 的配置长这样：
 
@@ -855,7 +855,7 @@ model = BertForSequenceClassification.from_pretrained( "bert-base-uncased", conf
 
 微调时有个很头疼的问题叫**灾难性遗忘**：模型在学新任务的时候，把预训练阶段学到的通用能力给"冲掉"了。就像一个人全力学滑板，结果把骑自行车的感觉给忘了。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/fDPocIck_index_30_mianshiya.webp)
+
 
 防止灾难性遗忘的策略主要有四类：
 
@@ -877,7 +877,7 @@ Elastic Weight Consolidation 的核心思想是：不是所有参数都同等重
 
 怎么衡量参数重要性？EWC 用的是 Fisher 信息矩阵。直观理解就是：如果某个参数稍微动一下，旧任务的 loss 变化很大，说明这个参数很重要；变化很小，说明不太重要。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/SPWT9fAI_index_31_mianshiya.webp)
+
 
 EWC 的损失函数长这样：
 
@@ -1005,7 +1005,7 @@ temperature 参数很关键：值越大，概率分布越平滑，蒸馏信号�
 
 5）数据增强：图像做光照、裁剪、遮挡变换，文本做同义替换、回译，让模型见到更多样的图文配对，提升对齐鲁棒性
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/5ROczdhA_L0PQCgAhZK_mianshiya.webp)
+
 
 ---
 
@@ -1025,6 +1025,6 @@ temperature 参数很关键：值越大，概率分布越平滑，蒸馏信号�
 
 5）鲁棒性测试。拿对抗样本、同义词替换、拼写错误这些"脏数据"去试，看模型会不会被轻易带偏。还要测不同领域的数据，确保泛化能力够用。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/t9SNepA4_5NPoVoXRzk_mianshiya.webp)
+
 
 ---

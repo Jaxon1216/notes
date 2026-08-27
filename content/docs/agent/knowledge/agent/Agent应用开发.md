@@ -27,7 +27,7 @@ RAG 全称是 Retrieval Augmented Generation，也就是**检索增强生成**�
 
 用户提问后，先通过 Embedding 模型将问题向量化，然后在向量数据库中检索语义相近的文档片段，接着把检索到的内容和原始问题拼接成 Prompt，最后送给大模型生成回答。
 
-![RAG 流程](./img/pasted-20260514200715.jpg)
+
 
 简单来说就是利用外部知识动态补充模型生成能力，既能保证回答的准确性，又能在知识库更新时及时反映最新信息。另外部分业务是内部文档，网上压根没有，可以通过本地知识库来增强 AI 的能力。
 
@@ -51,7 +51,7 @@ RAG 全称是 Retrieval Augmented Generation，也就是**检索增强生成**�
 
 4）多步推理 vs 单轮问答。Agent 能在执行过程中不断评估结果、发现问题、调整策略，形成一个闭环。传统 AI 系统要么靠写死的规则引擎，要么就是一锤子买卖。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/markdown/kB9D9tTu_1745509719043-fd5392c6-8b7f-4780-b26f-ab7d24d8f0f6_mianshiya.webp)
+
 
 ### 扩展知识
 
@@ -67,7 +67,7 @@ RAG 全称是 Retrieval Augmented Generation，也就是**检索增强生成**�
 
 4）工具模块是 Agent 能力的关键扩展点。OpenAI 的 Function Calling、LangChain 的 Tools、AutoGPT 的 Plugins 都是这个思路。工具可以是搜索引擎、计算器、代码解释器、数据库连接器，甚至是另一个 AI 模型。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/g3Im3z9N_r4ZMoCkND2_mianshiya.webp)
+
 
 ### 主流 Agent 框架对比
 
@@ -102,7 +102,7 @@ LLM Agents 方式：让大模型来当"调度员"，根据用户输入动态决�
 工作流方式：预先定好执行顺序，按照顺序、并行或循环的模式跑，不依赖 LLM 做决策。适合流程固定的场景，比如"先提取数据→再清洗→最后生成报告"这种确定性流程。
 
 自定义 Agent 方式：直接继承 BaseAgent 基类，自己实现控制逻辑。适合有特殊业务需求、需要对接非标系统的场景。
-![Agent 架构示意](./img/pasted-20260514204618.png)
+
 
 ### ADK 的架构设计
 
@@ -110,7 +110,7 @@ ADK 的架构分三层：Agent 层、工具层、运行时层。
 
 Agent 层就是各种智能体，每个 Agent 有自己的职责边界和能力描述。工具层提供 Agent 可以调用的各种能力，比如搜索、代码执行、API 调用等。运行时层负责 Agent 的生命周期管理、状态持久化、并发控制这些脏活累活。
 
-![Agent 协作流程](./img/pasted-20260514204731.jpg)
+
 
 ---
 
@@ -128,7 +128,7 @@ Agent 层就是各种智能体，每个 Agent 有自己的职责边界和能力�
 
 4）工具模块是 Agent 的手和脚，让它能和外部世界交互。搜索引擎、代码解释器、数据库、API 接口都可以作为工具接入。没有工具，Agent 只能动嘴不能动手。
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/erUvUZul_image_mianshiya.webp)
+
 
 ### 扩展知识
 
@@ -168,7 +168,7 @@ Agent 的工作过程本质上是一个 **感知-思考-行动** 的循环，可
 
 8）反思与纠错：高级 Agent 还会启动自我反思模块，回顾执行过程，评估结果是否正确，发现问题就重规划或修正策略，避免下次犯同样的错。
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/WzJ2m9JS_image_mianshiya.webp)
+
 
 ---
 
@@ -194,7 +194,7 @@ Agent 的工作过程本质上是一个 **感知-思考-行动** 的循环，可
 
 3）知识图谱，构建实体关系图，支持结构化查询
 
-![jiyi.drawio.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/88YjfmOw_jiyi.drawio_mianshiya.webp)
+
 
 从目前的实现来看，短期记忆依赖模型原生能力，长期记忆通过外部存储实现检索。
 
@@ -208,7 +208,7 @@ Agent 的工作过程本质上是一个 **感知-思考-行动** 的循环，可
 
 2）执行核心逻辑后，在返回答案之前，把当前这轮的输入和输出写入内存，以便后续引用
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/5NB4ceWn_image_mianshiya.webp)
+
 
 ### LangChain 记忆模块详解
 
@@ -222,7 +222,7 @@ LangChain 提供了几种开箱即用的记忆实现：
 
 **ConversationKGMemory**：构建知识图谱，抽取实体和关系存储。适合需要追踪多个实体状态的复杂对话，比如客服场景要记住用户的订单号、地址、投诉记录等
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/MGscE061_Vv0atYFKgc_mianshiya.webp)
+
 
 ### 工程落地的几个坑
 
@@ -248,7 +248,7 @@ LLM 原生的上下文窗口只有几千到十几万 tokens，聊多了前面的
 
 2）**分层记忆体系**：把记忆分成短期和长期两层。短期记忆就是当前会话的上下文，长期记忆是压缩后的关键信息摘要或 embeddings。MemGPT 就是这个思路，它借鉴操作系统的虚拟内存机制，把记忆分成 main context 和 archival storage，按需换入换出。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/ZMSdNeZc_gECh7LAwbj_mianshiya.webp)
+
 
 ### 扩展知识
 
@@ -264,7 +264,7 @@ Recall Storage 专门存对话历史的原始记录，需要时可以精确回�
 
 Agent 会自动管理这三层存储之间的数据流动。当 Main Context 快满了，会把不太重要的信息压缩后存到 Archival Storage；需要某个历史信息时，从 Archival Storage 检索出来加载到 Main Context。
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/Imr70Mt9_image_mianshiya.webp)
+
 
 ### 长上下文技术的新进展
 
@@ -320,7 +320,7 @@ CEPE 用并行编码的方式处理长文本，把文本切成多段分别编码
 
 LLM Agent 在多模态推理中，核心是先把不同模态的数据转换成统一的**向量表示**，再将这些表示注入到大模型进行跨模态融合和推理。主流方案有三种：
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/AoUyox4v_xO4Dez8S9g_mianshiya.webp)
+
 
 1）视觉-语言融合：用 CLIP、BLIP-2 等视觉编码器将图像转为 embeddings，然后与文本输入一起提供给 LLM。或者直接使用 GPT-4V 这种内置视觉理解能力的模型，一站式处理图像并输出自然语言回答。
 
@@ -347,7 +347,7 @@ with open("image.jpg", "rb") as f:
 
 CLIP 的做法是用对比学习，让图像和对应文本描述的 embedding 尽量靠近，不相关的尽量远离。训练完成后，图像编码器和文本编码器输出的向量就天然在同一个空间里了，可以直接做相似度计算。
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/hRK8mvNT_image_mianshiya.webp)
+
 
 ### BLIP-2 的轻量化思路
 
@@ -381,7 +381,7 @@ Manus 是咱们中国团队 Monica.im 在 2025 年 3 月推出的**全球首款�
 
 比如你让它做股票分析，它会自己去抓数据、跑分析、生成报告，最后给你一份完整的 PDF，不需要你一步步指挥。简历筛选、市场调研这些任务也是同样的逻辑，扔给它一个目标，它自己想办法搞定。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/ZbIY6lAy_BmB1OGDloB_mianshiya.webp)
+
 
 底层实现是通过一个中央调度模块，把用户的高层指令拆解为多个子任务，再分配给不同的内部 Agent 或工具执行，形成端到端的自动化流程。规划和决策还是靠大模型，比如 Claude、Qwen 这些。
 
@@ -401,11 +401,11 @@ Computer Use 是 Anthropic 在 Claude 3.5 Sonnet 中推出的一项能力，让 
 
 3）利用 **OCR 技术**识别屏幕内容，结合语义理解定位目标。比如"点击页面右上角的'登录'按钮"，AI 会先分析页面结构，找到按钮位置，再模拟点击。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/3g0nCDp1_UfSrfkY7Bz_mianshiya.webp)
+
 
 下面这张图是 Anthropic 官方的演示，左边是 AI 的思考和指令展示，中间是操作浏览器进行搜索，右边是把获取到的信息填入表单：
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/aJ3bV9oH_image_mianshiya.webp)
+
 
 ---
 
@@ -419,7 +419,7 @@ Computer Use 是 Anthropic 在 Claude 3.5 Sonnet 中推出的一项能力，让 
 
 **Agent 模式**：用户只需要给一个目标，比如"帮我订下周三去上海的机票和酒店"，Agent 自己规划步骤、调用航班 API 查票、调用酒店 API 比价、处理支付流程，中间遇到问题自己想办法解决，最后把结果汇报给你。整个链路可能跑十几个工具调用，用户压根不用盯着。
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/t2KxuC2w_image_mianshiya.webp)
+
 
 还有个 **Embedding 模式**，属于"隐身"玩法，把大模型能力嵌到现有系统里，用户根本感知不到背后有 AI。比如电商的智能搜索，你搜"适合送女朋友的礼物"，背后是向量检索在做语义匹配，但用户只觉得搜索变聪明了。
 
@@ -452,7 +452,7 @@ ReAct 是 Reasoning and Acting 的缩写，是一种基于大语言模型的智�
 
 4）把 Observation 附加到上下文，模型在新的上下文中继续"思考→行动→观察"循环，直到输出最终答案
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/LimYC4Tb_image_mianshiya.webp)
+
 
 和传统的链式思维 CoT 相比，CoT 只能线性推导，一条路走到黑。ReAct 允许在行动失败后重试或切换方案，灵活性高很多。
 
@@ -462,7 +462,7 @@ ReAct 是 Reasoning and Acting 的缩写，是一种基于大语言模型的智�
 
 ReAct，即 Reasoning + Acting（推理与行动），是一种结合推理和行动的智能体架构。它模仿人类解决问题时“思考 - 行动 - 观察”的循环。AI 首先对问题进行推理（Reason），将原始问题拆分为多步骤任务，明确当前要执行的步骤。然后，它会调用外部工具执行行动（Act），比如调用搜索引擎或访问网页。最后，它会观察（Observe）工具返回的结果，并将这些结果反馈给智能体，用于下一步的决策。这个过程会不断循环迭代，直到任务完成或达到预设的终止条件。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/markdown/F40EJYhe_1748499330275-d0cda98e-31b1-4619-8f9b-05ba186f75cd_mianshiya.webp)
+
 
 基于 ReAct 模式构建具备自主规划能力的 AI 智能体，核心在于实现这个 “思考-行动-观察” 的循环。这意味着智能体要实现：
 
@@ -482,7 +482,7 @@ ReAct，即 Reasoning + Acting（推理与行动），是一种结合推理和�
 
 核心原理很直白：人做复杂题也得打草稿，让 LLM 把"草稿"写出来，中间步骤错了更容易发现，最终答案也更靠谱。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/MgIHeD8y_5EkdZVToDV_mianshiya.webp)
+
 
 实现 CoT 主要有两种方式：
 
@@ -657,7 +657,7 @@ LangChain 是一个专门用来构建大语言模型应用的开源框架，定�
 
 3）**复杂任务编排复杂**：一个任务可能涉及多次 LLM 调用和工具调用，比如"分析财报→提取关键指标→生成可视化建议"，手写这种流程代码很乱。LangChain 用 Chains 和 Agents 把这些操作串成工作流，逻辑清晰好维护。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/pURie9Hp_hdYeLwaGMr_mianshiya.webp)
+
 
 LangChain 的几个实用特性：
 
@@ -703,7 +703,7 @@ ConversationBufferMemory 最简单，把对话历史全存下来。VectorStoreRe
 
 ### 1.0 架构拆分详解
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/Z3Z99YmJ_index_30_mianshiya.webp)
+
 
 1.0 最大的变化是架构解耦。以前组件耦合严重，改一个地方可能牵连一堆。现在拆成三层：
 
@@ -755,7 +755,7 @@ for chunk in rag_chain.stream("问题"):
 
 LangChain 生态还是比较全面的，包括 LangServe（将链部署为 REST API）、LangSmith（用于调试和监控）等工具，支持从开发到部署的全流程。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/markdown/IBTuY1Ys_1745581599395-6b5dcbfc-8c3d-47d8-a43d-c0a9641059b3_mianshiya.webp)
+
 
 ### 面试官追问
 
@@ -789,7 +789,7 @@ LangChain 是一个专门用来开发大语言模型应用的框架，核心就�
 
 6）Tools：工具集，Agent 调用外部资源的入口，比如 Google 搜索、SQL 查询、调第三方 API，让模型能干的事不只是生成文本。
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/ODzBKjJz_image_mianshiya.webp)
+
 
 ---
 
@@ -843,7 +843,7 @@ add_routes(app, chain, path="/translate")
 
 部署上线后，客户端调用 POST /translate/invoke，body 传 {"input": {"text": "你好"}} 就行。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/KnDkdYrj_LJkY6UtO7N_mianshiya.webp)
+
 
 ### LangSmith 解决什么问题
 
@@ -897,7 +897,7 @@ LangChain 的 **Model 模块**就是一层统一的接口封装，让你用同�
 
 Model I/O 模块的整体架构分为三层：输入层是 Prompt 模板系统，负责构建动态提示词；中间层是 Model 调用层，统一封装了 LLM 和 ChatModel 两类接口，向下对接 OpenAI、Anthropic、HuggingFace 等各厂商 API；输出层是 Output Parser，将原始响应解析成结构化数据。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/do7L377K_gkDFc647zA_mianshiya.webp)
+
 
 ---
 
@@ -911,7 +911,7 @@ LangChain Agent 是框架里负责**自主决策**的组件，核心能力是让
 
 举个例子，用户问"北京今天天气怎么样，适合跑步吗"。Agent 会先调天气 API 拿到温度、湿度、空气质量这些数据，然后把这些数据喂给 LLM，让它结合健康知识判断适不适合户外运动，最后组织成自然语言回复用户。整个过程 Agent 自己决定先查天气再做判断，不是你硬编码的。
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/p9oTeaZP_image_mianshiya.webp)
+
 
 ### 扩展知识
 
@@ -1009,7 +1009,7 @@ Chain 和 Agent 是 LangChain 里两种完全不同的任务编排方式，核�
 
 **Agent** 是一个能自己思考的智能体，拿到任务后会判断该用什么工具、该怎么一步步推进。它有一个 ReAct 循环：思考当前状态 → 决定下一个动作 → 执行动作 → 观察结果 → 继续思考，直到任务完成。整个过程是 LLM 在做决策，代码只提供工具和约束。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/wfCR1rQi_index_30_mianshiya.webp)
+
 
 举几个具体场景：
 
@@ -1029,7 +1029,7 @@ LangGraph 是 LangChain 生态下专门做**复杂 AI 工作流编排**的框架
 
 举个例子，做一个客服系统：用户提问→意图识别→如果是退款问题走退款处理节点，如果是咨询问题走知识库检索节点，如果识别不了走人工客服节点。这种多分支场景，用 LangGraph 画个图就行，用传统 Chains 写起来很痛苦。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/MeLD8zYR_7hAlf5O9TQ_mianshiya.webp)
+
 
 LangGraph 的几个核心能力：
 
@@ -1053,7 +1053,7 @@ LangGraph 把工作流抽象成三个核心概念：
 
 **State**：全局状态对象，在节点间流转，存储对话历史、中间结果、用户信息这些上下文
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/BiMBzXoq_index_30_mianshiya.webp)
+
 
 ### 代码示例
 
@@ -1144,7 +1144,7 @@ LangGraph 天然适合多 Agent 协作场景。比如搭一个研究助手系统
 
 这三个 Agent 之间的协作关系用 LangGraph 画成图，研究员输出给写作，写作输出给审核，审核不通过就回到写作节点重来，形成一个闭环。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/3rvvi7eP_2oKwONTq2j_mianshiya.webp)
+
 
 ---
 
@@ -1162,7 +1162,7 @@ LangGraph 的编排原理就是把复杂的 AI 任务拆成一个个**节点**�
 
 3）状态 State，贯穿整个流程的上下文数据，包括对话历史、中间结果这些。状态驱动节点间的动态交互
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/J9IupICo_image_mianshiya.webp)
+
 
 LangGraph 本质上就是个"流程图引擎"，我们通过画图的方式定义节点和边来描述任务逻辑，框架自动根据状态流转执行节点，天然支持多 Agent 协作和动态决策。
 
@@ -1182,7 +1182,7 @@ LangChain 更像是一个"模块化 AI 应用框架"，用于拼接模型、工�
 
 图结构：任务 A 可以走向 B 或 C，B 执行完可以回到 A 重试，C 可以并行触发 D 和 E
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/pgwIlobc_image_mianshiya.webp)
+
 
 实际开发中根据任务复杂度选择：简单任务用 LangChain，复杂任务用 LangGraph。超复杂场景可以结合两者，用 LangChain 处理基础链，LangGraph 管理全局流程。要注意哈，两者并非替代关系，是互补的。LangGraph 可作为 LangChain 的扩展，在需要动态控制流和状态管理的场景中提升应用的灵活性和可靠性。
 
@@ -1199,7 +1199,7 @@ LangChain 更像是一个"模块化 AI 应用框架"，用于拼接模型、工�
 |人机协作|需手动插入|内置审核节点|
 |适用场景|线性流程、简单问答|复杂决策、多角色协作|
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/rR9iT840_3U2H77Axot_mianshiya.webp)
+
 
 ### 典型场景对比
 
@@ -1244,7 +1244,7 @@ for answering queries about X", tool_kwargs={"return_direct":
 
 整体架构分三层：最上层是 LangChain Agent，负责任务拆解和决策；中间层是 Tool 层，LlamaIndex 的 QueryEngine 被封装成 LlamaIndexTool，和其他工具如 Calculator、WebSearch 并列；底层是 LlamaIndex 的数据层，包括 Document Loader、Index、Vector Store 等组件，负责数据的加载、索引和检索。Agent 接到用户问题后，判断需要查知识库就调用 LlamaIndexTool，工具内部走 LlamaIndex 的检索流程，把结果返回给 Agent 做最终回答。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/UjFP4Ua7_ARasHZ7A5Q_mianshiya.webp)
+
 
 ---
 
@@ -1474,7 +1474,7 @@ AI 模型本身可能不具备实时查询天气、操作数据库或访问特�
 
 Spring AI 极大地简化了工具调用的实现：
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/markdown/MO5RUTl7_1748500555074-9efc6198-56a6-4781-befa-1505f8d0914c_mianshiya.webp)
+
 
 1）定义工具：通常使用注解方式，在一个 Java 类中，将希望作为工具的方法标记上 `@Tool` 注解。方法的参数可以使用 `@ToolParam` 注解来提供描述和指定是否必需。Spring AI 支持多种 Java 类型作为参数和返回值，但返回值需要可序列化。
 
@@ -1539,7 +1539,7 @@ LLM 看到 tool_result 后有两种选择：
 
 整个链路：用户发消息 → LLM 分析消息和工具列表 → LLM 返回 tool_use 含工具名和参数 → 系统执行工具函数 → 系统构造 tool_result → 发回 LLM → LLM 决定继续调用或输出最终回复
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/Cz4Xlizy_8REFF3176f_mianshiya.webp)
+
 
 ### 扩展知识
 
@@ -1569,7 +1569,7 @@ Anthropic 的 Claude、Google 的 Gemini 也都支持 Tool Calling，机制基�
 
 3）敏感操作加人工确认，像 LangChain 的 HumanApprovalCallbackHandler 就是在执行前弹一个确认。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/xOBrWjMz_uZtEPfrLvi_mianshiya.webp)
+
 
 ### 错误处理和重试
 
@@ -1609,7 +1609,7 @@ Anthropic 的 Claude、Google 的 Gemini 也都支持 Tool Calling，机制基�
 
 3）代码解释器：部署一个受限的 Python 沙箱环境，当模型需要做计算、数据处理或调用第三方库时，会生成代码片段在沙箱中执行，再将结果反馈给用户。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/vjdOVTTD_aJIcjDbvOp_mianshiya.webp)
+
 
 以 OpenAI 的 Function Calling 为例，调用流程大概是这样：
 
@@ -1647,7 +1647,7 @@ System Prompt 就是 Agent 的"操作系统"，所有行为的底层规则都写
 
 5）**上下文信息补充**：把当前运行环境的关键信息（工作目录、当前时间、用户身份、技能清单）告诉模型，让它的回答更贴合当前场景。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/6MqtO2ox_n3PS7gIVmJ_mianshiya.webp)
+
 
 至于 System Prompt 越来越长怎么办，核心策略就三个字：**拆、选、扔**。
 
@@ -1775,7 +1775,7 @@ System Prompt 就是 Agent 的"操作系统"，所有行为的底层规则都写
 
 5）**上下文信息补充**：把当前运行环境的关键信息（工作目录、当前时间、用户身份、技能清单）告诉模型，让它的回答更贴合当前场景。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/6MqtO2ox_n3PS7gIVmJ_mianshiya.webp)
+
 
 至于 System Prompt 越来越长怎么办，核心策略就三个字：**拆、选、扔**。
 
@@ -1917,7 +1917,7 @@ Spring AI 是一个基于 Spring 生态系统的 AI 应用开发框架，主要�
 
 最终，在项目中我主要使用的是 Spring AI 框架接入：它是 Spring 生态的一部分，社区活跃、文档齐全；通过 Starter 可以快速整合向量数据库、MCP 等组件；API 设计简洁，几行代码就能跑起来。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/TBV4uj0d_lmyOL6oqR0_mianshiya.webp)
+
 
 ### 扩展知识
 
@@ -1929,7 +1929,7 @@ HTTP 接入是最原始的方式，你得自己拼 JSON、设 Header、处理流
 
 Spring AI 和 LangChain4j 都是在 SDK/HTTP 之上再封装一层抽象。Spring AI 的核心是 ChatModel 接口，不管底层是 OpenAI、Ollama 还是阿里云，上层代码都一样。LangChain4j 走得更远，它把 Prompt 模板、记忆管理、工具调用都抽象成了可组合的组件。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/HwiHZoor_Bu7RfgYtwX_mianshiya.webp)
+
 
 ### 常见坑点
 
@@ -2016,7 +2016,7 @@ OpenClaw 的子 Agent 支持可以用"派活 → 干活 → 交差"三步来理�
 
 这种模式在需要处理大量并行子任务的场景下特别有用。比如要对 50 个 GitHub 仓库做代码审查，编排者 Agent 把仓库列表拆成 10 组，spawn 10 个工人 Agent 各自处理 5 个仓库，最后编排者收集所有审查报告做汇总。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/fC43VFKg_nIef5K04cq_mianshiya.webp)
+
 
 ### 子 Agent 管理命令
 
@@ -2052,7 +2052,7 @@ OpenClaw 的多 Agent 方案走的是轻量级路线，核心就是 spawn + anno
 
 分析下来主要是三个原因：提示词没有明确状态流转规则、缺少步骤追踪机制、没有兜底保护策略。
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/Ytenp15u_image_mianshiya.webp)
+
 
 我们做了三个改造：
 
@@ -2085,7 +2085,7 @@ AI Agent 完全不同，它是一个**有状态的循环决策系统**，能感�
 - 单次 API 调用流程：用户发送 prompt → LLM 处理 → 返回 response，结束。
 - Agent 运行流程：用户提交任务 → Agent 规划下一步 → 调用工具执行 → 观察执行结果 → 判断任务是否完成 → 未完成则回到规划步骤继续循环 → 完成后返回最终结果给用户。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/qpcThomZ_uNWiONy1c5_mianshiya.webp)
+
 
 ### 扩展知识
 
@@ -2105,7 +2105,7 @@ Agent 的出现就是为了弥补这个缺口，让大模型从一个"只会说�
 
 3）记忆系统作为"笔记本"，维护整个任务的上下文。短期记忆就是当前对话历史，长期记忆可以是向量数据库或者文件系统里的持久化信息。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/MeGEZew9_WWtNu2zwfX_mianshiya.webp)
+
 
 ### Agent 的运行循环
 
@@ -2197,11 +2197,11 @@ Agent Runner 是执行引擎，管理 LLM 调用、工具执行、结果回传�
 
 Context Engine 管对话历史，摄入、组装、压缩全包了，接口化设计，随时可以插拔替换成自定义实现。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/REEnlpti_f5pZQAvybx_mianshiya.webp)
+
 
 一条消息的完整链路：Channel 收到用户消息 → Gateway 鉴权限流后分发 → Routing 匹配到目标 Agent → Agent Runner 驱动 LLM 执行 → Context Engine 维护上下文 → 回复原路返回，经 Gateway 交回 Channel 发出。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/fpUSXmHm_EZdP2yZDGZ_mianshiya.webp)
+
 
 ### 扩展知识
 
@@ -2239,7 +2239,7 @@ Agent 执行的核心是一个 **LLM + 工具调用的循环**：先构建系统
 
 用户发送消息 → 渠道适配器接收原始消息 → 转换为统一 MsgContext → dispatchInboundMessage 入站补全 → resolveAgentRoute 路由匹配 → 斜杠命令检查（是命令则直接处理返回）→ runReplyAgent 启动 Agent → LLM + 工具循环（构建提示 → 调 LLM → 解析输出 → 执行工具 → 结果回传，循环直到最终回复）→ ReplyDispatcher 投递回复到原渠道
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/zZEpwIr7_DQSfc2WGog_mianshiya.webp)
+
 
 ### 扩展知识
 
@@ -2267,7 +2267,7 @@ Session A 的消息 1、2、3 在 session 队列里排队等待串行执行。Se
 
 多个 session 的任务汇入全局队列，受全局并发数限制。最终从全局队列出来的任务才真正调用 LLM API。
 
-![op1.drawio.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/g9E1E4HY_op1.drawio_mianshiya.webp)
+
 
 ### Fallback 机制
 
@@ -2374,7 +2374,7 @@ Runner 默认用通用的 `streamSimple` 做流式输出，但不同 Provider �
 
 所有 Provider 还会统一做工具名称规范化（有些模型输出的工具名带空格或前缀），确保工具分发能精确匹配
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/TYhRVvlj_vTvUvloUcD_mianshiya.webp)
+
 
 这层适配做完后，执行循环的代码不用管底下是哪家 Provider，调同一个接口就行。新增 Provider 也只需要写一个流式适配函数。
 
@@ -2426,7 +2426,7 @@ Skills 是一套指令文档，告诉 Agent 遇到某类任务应该怎么做、
 
 MCP 相当于给厨师配了一套厨具，锅碗瓢盆、烤箱微波炉；Skills 相当于给厨师一本菜谱，红烧肉先焯水再上色，火候多大放多少料。光有工具不知道怎么用，做不出好菜；光有菜谱没有工具，也做不了饭。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/Wl5wsFwJ_elTvZmMljU_mianshiya.webp)
+
 
 |维度|MCP|Skills|
 |---|---|---|
@@ -2449,7 +2449,7 @@ Agent 的处理流程是这样的：
 
 首先系统识别出这是一个"创建 MCP Server"的任务，加载对应的 Skill。然后 Agent 读取 Skill 中定义的标准流程，包括创建项目结构、写 Server 代码、配置 Transport、注册 Tools 等步骤。在执行过程中，Agent 通过 MCP 协议调用文件系统工具来创建文件、调用终端工具来安装依赖。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/eUJdbN5E_J09xqprzDK_mianshiya.webp)
+
 
 Skill 决定了"做事的顺序和方法"，MCP 提供了"做事所需的工具"，两者缺一不可。
 
@@ -2497,7 +2497,7 @@ skills/ ├── coding/ │ ├── create-api/ │ ├── code-review/ �
 
 3）Skills 是活的文档，需要一套**反馈闭环**：用了效果好的标记为"验证通过"，效果差的分析原因修改，定期清理过时的 Skills 避免误导 Agent。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/LyiVARl9_ixdSaFGao4_mianshiya.webp)
+
 
 ### 扩展知识
 
@@ -2519,7 +2519,7 @@ skills/ ├── coding/ │ ├── create-api/ │ ├── code-review/ �
 
 分层路由的匹配流程：用户输入任务后，先经过一个轻量分类模型，判断任务属于哪个大类，如编码、运维、写作。然后在对应类别的 Skill 子集中，通过关键词或语义匹配找到具体的 Skill 文件。最后加载匹配到的 Skill 注入 LLM 上下文。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/iJvBCTRQ_XcVkp6CFVo_mianshiya.webp)
+
 
 ### 实际项目中的常见挑战
 
@@ -2561,7 +2561,7 @@ skills/ ├── coding/ │ ├── create-api/ │ ├── code-review/ �
 
 这个问题有多恶心呢？各家 Provider 对 JSON Schema 的支持程度天差地别：
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/h8BbyuyU_xmuTed59s5_mianshiya.webp)
+
 
 OpenClaw 在 `normalizeToolParameters()` 里集中处理这些适配逻辑，根据当前请求的目标 Provider 选择对应的清洗策略，上层开发者注册工具的时候完全不用操心这些差异。
 
@@ -2706,7 +2706,7 @@ LangChain 的 Callback 机制也是类似思路，通过 `CallbackManager` 注�
 
 区别在于 LangChain 的 Callback 更偏向观察和记录，OpenClaw 的 Hook 可以直接修改数据流，比如 `before_model_resolve` 可以换掉模型、`llm_input` 可以改写输入内容，**拦截能力**更强。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/u2MXnOZm_BuEuzwGEfJ_mianshiya.webp)
+
 
 ---
 
@@ -2730,7 +2730,7 @@ LangChain 的 Callback 机制也是类似思路，通过 `CallbackManager` 注�
 - 短期记忆精度高但容量有限，受 context window 上限约束，塞满了就得做压缩或截断。
 - 长期记忆容量几乎无限，但检索有损，搜出来的内容不一定完全匹配当前需要。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/cvvHFDrn_Gx6tc2Ms6q_mianshiya.webp)
+
 
 ### 扩展知识
 
@@ -2841,7 +2841,7 @@ RAG 的核心就是"先搜后答"，整个流程分成 **离线索引** 和 **�
 
 1）用户提问进来，先把问题也转成向量 2）拿这个向量去数据库里做相似度检索，捞出最相关的 5-10 个文档块 3）对检索结果做重排序，把最相关的排前面 4）把用户问题和检索到的上下文一起塞给大模型，让它基于这些材料生成回答
 
-![Agent 记忆流程](./img/pasted-20260514204835.jpg)
+
 整个流程的精髓在于：大模型不再"裸奔"回答问题，而是带着检索到的知识去生成，既能减少幻觉，又能让回答有据可查。
 
 ### 文档分块策略
@@ -2860,7 +2860,7 @@ RAG 的核心就是"先搜后答"，整个流程分成 **离线索引** 和 **�
 
 单纯靠向量检索其实不够用，生产环境通常会做多路召回：
 
-![Agent 工具调用](./img/pasted-20260514205037.jpg)
+
 混合检索特别适合那种用户可能用专业术语搜索的场景，纯向量检索容易漏掉精确匹配的结果。
 
 ### Prompt 组装技巧
@@ -2902,7 +2902,7 @@ RAG 系统需要文档切割的原因主要有三个。
 
 3）平衡上下文和计算效率。小块既能保留足够的上下文让模型理解前后逻辑，又能让向量计算和存储更高效。一个 500 tokens 的块比 5000 tokens 的块在相似度计算时快得多。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/0kTDv1Vv_vXdrKCaAkB_mianshiya.webp)
+
 
 ### 扩展知识
 
@@ -2910,13 +2910,13 @@ RAG 系统需要文档切割的原因主要有三个。
 
 这是个没有标准答案的问题，得根据场景权衡：
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/x4yROtKh_image_mianshiya.webp)
+
 
 块太小，上下文丢了。比如一句话被拆成两半，前半句说"虽然这个方案有风险"，后半句说"但收益远大于成本"，拆开后模型只看到前半句，直接理解成"方案有风险不能用"，完全断章取义。
 
 块太大，检索精度下降。一个 2000 tokens 的块里塞了三个不相关的话题，用户问其中一个话题时，另外两个话题的内容也被带进来了，干扰模型生成答案。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/J1hcldoX_Xz12VaQ79i_mianshiya.webp)
+
 
 实践中常用的 chunk 大小在 **200 到 500 tokens** 之间作为起点。对于长技术文档或学术报告，可以放宽到 512 到 1024 tokens。同时建议设置 10% 到 20% 的重叠，让相邻块之间有交集，避免关键信息刚好卡在分界线上被截断。
 
@@ -2952,7 +2952,7 @@ LangChain 的 RecursiveCharacterTextSplitter 支持滑动窗口和语义拆分�
 
 6）混合分块：把上面几种策略组合起来用。先固定分块快速处理，再对关键部分做语义优化，类似粗筛加精修的思路。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/26hgyEbn_mOZnNsjRaR_mianshiya.webp)
+
 
 ---
 
@@ -2970,7 +2970,7 @@ LangChain 的 RecursiveCharacterTextSplitter 支持滑动窗口和语义拆分�
 
 5）存，结构化输出。把分块后的文本和元数据整合成索引系统能识别的格式，输出给向量数据库 FAISS 或 Elasticsearch 建立索引
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/mMLkRIQx_6pCcKd6FVa_mianshiya.webp)
+
 
 ---
 
@@ -3041,7 +3041,7 @@ LangChain 的 RecursiveCharacterTextSplitter 支持滑动窗口和语义拆分�
 
 所以，Rerank 的核心价值就是在**速度**和**精度**之间做一个平衡。 先用向量检索保速度，再用 Rerank 保精度，防止大模型因为看了垃圾文档而胡说八道。
 
-![RAG 架构](./img/pasted-20260514201142.jpg)
+
 简单来说，A2A 就是为了建立一个去中心化的 Agent 互联网，让不同厂商的 AI 能在一个安全、标准的框架下，进行长时间、多模态的自主协作。
 
 ---
@@ -3058,7 +3058,7 @@ LangChain 的 RecursiveCharacterTextSplitter 支持滑动窗口和语义拆分�
 
 混合检索就是两条路并行走，向量检索走一遍，关键词检索走一遍，最后把两边的结果融合起来，用权重加权或者 RRF 算法重排序，取最优结果喂给大模型。
 
-![检索增强流程](./img/pasted-20260514203922.png)
+
 
 工程上 Elasticsearch 就同时支持关键词检索和向量检索，可以用 LlamaIndex + Elasticsearch 快速搭建混合检索系统。
 
@@ -3067,7 +3067,7 @@ LangChain 的 RecursiveCharacterTextSplitter 支持滑动窗口和语义拆分�
 ## 65. 什么是查询扩展（Query Expansion）？
 
 查询扩展就是把用户的原始问题"补全"，加上同义词、相关术语、隐含意图这些信息，让检索能覆盖更多相关文档。用户输入"减肥"，扩展后可能变成"健康减肥方法 饮食控制 运动减脂 避免反弹"。
-![RAG 优化链路](./img/pasted-20260514210745.jpg)
+
 
 RAG 的核心是"先检索后生成"，检索这一步没捞到好东西，后面生成的回答肯定也好不了。查询扩展主要解决两个痛点：
 
@@ -3084,7 +3084,7 @@ RAG 的核心是"先检索后生成"，检索这一步没捞到好东西，后�
 
 为什么需要自查询？用户提问往往带着隐含条件，传统向量检索只管语义相似度，压根不看元数据。结果就是检索出一堆语义相关但时间、作者、标签全不对的文档。自查询通过"解析+过滤"两步走，让检索同时满足语义相关性和元数据条件，直接解决"检索不准"的痛点。
 
-![zichaxun.drawio.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/oUwKybUJ_zichaxun.drawio_mianshiya.webp)
+
 
 ### 扩展知识
 
@@ -3094,7 +3094,7 @@ RAG 的核心是"先检索后生成"，检索这一步没捞到好东西，后�
 
 用户输入一个查询后，系统先判断要不要做自查询。如果用户问得很明确，直接拿原始查询去检索就行。如果用户表述模糊、带隐含条件，就进入意图解析环节，让 LLM 把自然语言拆成语义关键词和元数据过滤条件，生成结构化查询。然后拿着这个结构化查询去向量库做检索，结合元数据过滤筛选文档，最后排序后送给生成模型出答案。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/CJyRS2vK_Z9GGAOfgap_mianshiya.webp)
+
 
 ### 自查询模板示例
 
@@ -3171,7 +3171,7 @@ vector_search 负责语义匹配，metadata_filter 里的 must 是必须满足�
 
 3）省钱省时间。调用商业大模型按 token 计费，GPT-4 每 1000 tokens 要 0.03 美元，多塞 5000 个无关 token 就是白花 0.15 美元。推理速度也会变慢，每多 1000 tokens 大概慢 200ms。
 
-![tishiyasuo.drawio.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/WcvAJWJE_tishiyasuo.drawio_mianshiya.webp)
+
 
 ### 扩展知识
 
@@ -3179,7 +3179,7 @@ vector_search 负责语义匹配，metadata_filter 里的 must 是必须满足�
 
 提示压缩模块夹在检索和生成之间。用户问题先走检索模块拿到原始文档集合，这些文档可能又长又杂，然后经过压缩模块精简成核心片段，最后把压缩后的内容拼上用户问题一起送进大模型生成答案。
 
-![tishiya.drawio.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/zrHtrTd7_tishiya.drawio_mianshiya.webp)
+
 
 ### 压缩方案落地
 
@@ -3202,7 +3202,7 @@ instruction_str = "根据问题提取相关事实"
 # 图文场景
 instruction_str = "压缩文本时保留与图片中logo相关的描述"
 ```
-![MCP 与 Agent 集成](./img/pasted-20260515100409.jpg)
+
 ### 不做压缩会出什么问题
 
 1）上下文溢出直接废掉。假设模型最大支持 8k tokens，用户问题占 500 tokens，文档占 9000 tokens，超出的部分直接被截断。用户问"文档第 3 章的结论"，但第 3 章因为长度超限压根没进去，模型只能干瞪眼。
@@ -3227,7 +3227,7 @@ RAG 提示工程的核心就一句话：让模型老老实实基于检索内容�
 
 4）Few-shot 示例：给 1-2 个标准问答样例，让模型知道该用什么语气、什么结构回答。实测加示例比不加，输出格式稳定性能提升 30% 以上。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/TPYIbYJX_LwJO84PhtX_mianshiya.webp)
+
 
 工业级 RAG 系统的 Prompt 模板一般长这样：
 ```text
@@ -3253,7 +3253,7 @@ RAG 提示工程的核心就一句话：让模型老老实实基于检索内容�
 
 3）Output Format 定死格式后，下游解析就简单了，正则一匹配就能拿到结构化数据。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/m7IkJ3Jl_index_30_mianshiya.webp)
+
 
 ---
 
@@ -3284,11 +3284,11 @@ RAG 中的 Prompt 设计要让大模型明确知道：这些是参考资料，�
 
 上下文查询增强是 RAG 流程中的一个核心环节，指的是把用户的原始查询与从知识库中检索到的相关文档进行结合，形成一个信息更丰富的增强提示，然后将这个增强提示提供给 AI，让模型能基于这些特定知识生成回答。主要作用是为大模型提供必要的、实时的外部知识，这样 AI 的回答就不仅仅依赖于其预训练的通用知识，提高答案的准确性、相关性和时效性。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/Xze04EY3_Bo5UsGXOGI_mianshiya.webp)
+
 
 Spring AI 的 `RetrievalAugmentationAdvisor` 内部使用 `ContextualQueryAugmenter` 来实现上下文查询增强。当处理用户提出的无关问题时，`ContextualQueryAugmenter` 提供了空上下文处理机制。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/markdown/l7MbZ3H4_1748498926034-6bd5a830-9265-47d7-b6cb-e1923e17558f_mianshiya.webp)
+
 
 我们可以配置 `ContextualQueryAugmenter` 的 `allowEmptyContext(false)`，并提供一个自定义的 `emptyContextPromptTemplate`。 检索不到相关文档时，系统会使用这个自定义模板来指示大模型如何回应。在我们的项目中，这个自定义模板会引导 AI 礼貌地告知用户 “它只能回答恋爱相关的问题”，并给出联系客服的方式，优雅地处理了超出知识库范围的提问。
 
@@ -3298,7 +3298,7 @@ Spring AI 的 `RetrievalAugmentationAdvisor` 内部使用 `ContextualQueryAugmen
 
 Advanced RAG 就是把传统 RAG 的三个阶段都加上"外挂"：**检索前优化、检索中优化、检索后优化**。传统 RAG 的问题很明显，检索不准、上下文断裂、生成质量不稳定，Advanced RAG 就是针对这些痛点一个一个打补丁。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/oPwyLa4q_xI7I0bxR3S_mianshiya.webp)
+
 
 检索前优化：在用户查询到达检索引擎之前先做预处理。包括滑动窗口分块让文档切得更合理、给文档加元数据方便过滤、建分层索引提升检索效率、查询重写把用户的口语化表达转成精准查询、查询扩展补充相关关键词扩大召回范围。
 
@@ -3306,7 +3306,7 @@ Advanced RAG 就是把传统 RAG 的三个阶段都加上"外挂"：**检索前�
 
 检索后优化：拿到检索结果后再做一轮处理。重排序用模型给结果打分把最相关的提前、提示压缩砍掉冗余信息、上下文重构让内容逻辑更清晰、内容过滤剔除过时或错误数据。
 
-对比： ![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/akxCnvk2_image_mianshiya.webp)
+对比： 
 
 上图来自 [https://arxiv.org/pdf/2312.10997](https://arxiv.org/pdf/2312.10997)
 
@@ -3330,13 +3330,13 @@ Modular RAG 就是把传统 RAG 系统拆成一堆**松耦合、可重组**的�
 
 5）Generation 生成模块：用大模型生成回答，并通过外部知识验证准确性，避免幻觉
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/zUt0yIGL_tyA19qp9EG_mianshiya.webp)
+
 
 它的核心优势就三点：替换或升级单个组件不影响整体、模块化测试迭代效率高、方便接入新型检索或多模态能力。
 
 更详细的可以参考[这个图](https://arxiv.org/pdf/2407.21059)：
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/QNCtzPB3_image_mianshiya.webp)
+
 
 从图里能看到 Modular 包含 Advanced，Advanced 包含 Naive。实际上 Modular 和 Advanced 最显著的区别就是加了**编排层**，能自由控制和优化检索生成的全流程，动态决定查询处理路径，灵活应对复杂场景。
 
@@ -3375,7 +3375,7 @@ RAG 检索效果差，问题通常出在**文档切片、查询理解、检索�
 
 3）混合检索：单纯的向量检索有个致命问题，专有名词、代码片段、数字这些精确匹配的东西召回率很低。解决办法是向量检索 + BM25 关键词检索组合，用 RRF 算法融合排序。Elasticsearch 8.x 原生支持这种混合检索。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/tqeYn9rL_RQkL2f6XER_mianshiya.webp)
+
 
 除此之外，还有重排序：召回 top 50 之后，用 Cross-Encoder 重排序模型精排一遍，把真正相关的排到前 5。Cross-Encoder 比 Bi-Encoder 准确率高 10-15%，但速度慢，所以只用来精排。
 
@@ -3405,7 +3405,7 @@ RAG 检索效果差，问题通常出在**文档切片、查询理解、检索�
 
 4）Embedding 维度：OpenAI 的 text-embedding-3-large 支持 256/1024/3072 三种维度。维度越高精度越高，但检索速度越慢、存储成本越高。大多数场景 1024 维够用。
 
-![rag.drawio.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/GuvYiabj_rag.drawio_mianshiya.webp)
+
 
 ### HyDE：假设性文档嵌入
 
@@ -3451,7 +3451,7 @@ RAG 检索效果差，问题通常出在**文档切片、查询理解、检索�
 
 LangChain 里实现这个功能主要靠 **EnsembleRetriever**，它能把多个 retriever 组合起来，每个 retriever 配一个权重，最后按权重做 RRF 融合排序。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/OcTognvk_aW2iPv2EAK_mianshiya.webp)
+
 
 核心代码长这样：
 
@@ -3493,7 +3493,7 @@ RAG召回不准，问题一般出在三个环节：文档切得不对、检索�
 
 **后处理阶段**：初检结果往往不够精准，加一层重排序模型二次打分。上下文压缩把不相关的内容过滤掉，省token也提升生成质量
 
-![ragzhaohui.drawio.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/Tw2g47Z1_ragzhaohui.drawio_mianshiya.webp)
+
 
 ### 扩展知识
 
@@ -3507,7 +3507,7 @@ RAG召回不准，问题一般出在三个环节：文档切得不对、检索�
 
 **StepBack-prompt** 适合处理复杂问题。先让LLM把具体问题抽象成更宏观的概念，比如"Redis的zset怎么实现排行榜"抽象成"有序集合的数据结构特性"，用抽象query和原始query同时检索，覆盖面更广。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/qffkPVeX_index_30_mianshiya.webp)
+
 
 ### 混合检索的实现细节
 
@@ -3529,7 +3529,7 @@ PDF里的表格是RAG系统的老大难问题。普通的文本切分器根本�
 
 解决思路是把表格当成**特殊内容单独处理**：先用专业工具把表格完整抽出来，给它补上上下文描述，转成LLM好理解的格式，最后作为一个整体存进向量库。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/OfwSIOcx_index_30_mianshiya.webp)
+
 
 ### 扩展知识
 
@@ -3578,7 +3578,7 @@ def generate_table_context(table_content: str, surrounding_text: str) -> str:
 
 生成的描述类似"2023年Q1-Q4各产品线销售额及同比增长率对比表，单位万元"。这段描述和用户query的语义匹配度比原始表格高得多。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/kagQtknF_index_31_mianshiya.webp)
+
 
 ### 检索阶段的优化
 
@@ -3628,7 +3628,7 @@ table_doc = Document( page_content=f"{context_description}\n\n{markdown_table}",
 
 用户提问进来，先把问题也转成向量，拿去向量库里做相似度检索，捞出 Top-K 个最相关的文档片段。然后把这些片段和用户问题拼成一个 Prompt，扔给 LLM 生成答案。这一步 LangChain 封装了各种 Chain，最简单的 stuff chain 直接把所有检索结果塞进去，文档多的话可以用 map_reduce 或 refine 分批处理。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/KPF5tkXN_NtsONwOsmg_mianshiya.webp)
+
 
 ---
 
@@ -3644,7 +3644,7 @@ table_doc = Document( page_content=f"{context_description}\n\n{markdown_table}",
 
 第三步是分阶段召回，先粗召回拉出 top 20 候选，再用 rerank 模型精排。粗召回靠向量检索速度快，rerank 用 CrossEncoder 或者 bge-reranker 这类模型，准确率高但慢，只跑 20 条也能接受。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/yCtqVBZc_e4a9LNiGL0_mianshiya.webp)
+
 
 第四步是减少幻觉，生成前在 prompt 里加约束，明确告诉模型"只能基于提供的内容回答，不确定就说不知道"。生成后再跑一轮校验，检查答案里提到的实体是不是真的在知识库里出现过。
 
@@ -3682,7 +3682,7 @@ bge-reranker-large 是目前中文场景效果最好的开源 rerank 模型，�
 
 ### 减少幻觉的多层兜底
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/JGh4x9DV_MVpZWuMuRp_mianshiya.webp)
+
 
 1）生成前过滤，给每个 chunk 打可信度标签，来源不可靠或者和 query 相关性低的直接不送给 LLM。还可以设置兜底逻辑，如果召回的 chunk 置信度都不高，直接回复"没有找到相关信息"，不让模型硬编。
 
@@ -3771,7 +3771,7 @@ RAG 调优后的效果评估围绕三个维度：**检索质量、生成质量�
 
 除了功能性指标，非功能性需求也得关注：延迟、吞吐量、错误率。
   
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/NQa81XQU_ARiXFF3ZNI_mianshiya.webp)
+
 
 真实企业场景里的做法是分层测试：先测检索质量确保文档找得对，再测生成质量确保答案靠谱，最后压测系统性能确保扛得住流量。上线后还得持续监控用户满意度和业务指标。
 
@@ -3811,7 +3811,7 @@ RAG 调优后的效果评估围绕三个维度：**检索质量、生成质量�
 
 3）降低推理成本。不用把所有背景知识都塞进 prompt 里，只检索最相关的内容，token 消耗能省一个数量级。10 万条文档全塞进去要几百万 token，检索后可能就 2000 token。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/cGzD3se7_index_30_mianshiya.webp)
+
 
 ### 扩展知识
 
@@ -3827,7 +3827,7 @@ RAG 调优后的效果评估围绕三个维度：**检索质量、生成质量�
 
 **PQ** 把高维向量拆成多个子向量，每个子向量用聚类中心的 ID 代替，压缩存储空间。10 亿级向量的场景会用 IVF+PQ 的组合，内存占用能压到原来的 1/10。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/pdoMevvv_gxoQav1cq0_mianshiya.webp)
+
 
 ### 主流向量数据库对比
 
@@ -3852,7 +3852,7 @@ OpenAI 的 text-embedding-3-large 是目前效果最好的通用模型，1536 �
 
 还有个容易踩的坑：query 和 document 要用同一个模型生成向量，不能混用。不同模型的向量空间不一样，混着用检索效果会很差。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/GSiBgsQ0_index_31_mianshiya.webp)
+
 
 ### 与传统数据库配合使用
 
@@ -3879,7 +3879,7 @@ OpenAI 的 text-embedding-3-large 是目前效果最好的通用模型，1536 �
 
 3）近似搜索：允许一定误差，用 ANN 算法在速度与准确性间取平衡，返回 Top-K 相似结果。牺牲 5% 准确率能换来 100 倍的速度提升。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/LA3gDHMK_Wn0p8ORR7h_mianshiya.webp)
+
 
 相似度计算常用的度量方式：余弦相似度衡量方向是否一致，欧氏距离衡量空间上的绝对距离。文本语义搜索一般用余弦，图像特征匹配用欧氏的多一些。
 
@@ -3897,7 +3897,7 @@ LSH 全称 Locality-Sensitive Hashing，局部敏感哈希。设计一组特殊�
 
 PQ 全称 Product Quantization，乘积量化。把高维向量切成若干子块，每块用聚类中心的编号代替原始值。128 维向量拆成 8 段，每段 1 字节编码，存储空间直接压缩 64 倍。
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/YgmXnj28_image_mianshiya.webp)
+
 
 | 技术   | 核心目的      | 适用场景       | 优势      | 代价     |
 | ---- | --------- | ---------- | ------- | ------ |
@@ -3922,7 +3922,7 @@ HNSW 的核心思想来自"小世界网络"理论：任意两点之间平均只�
 
 3）efSearch：查询时的搜索宽度，越大召回率越高但查询越慢。可以动态调整。
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/x6PYZrAm_image_mianshiya.webp)
+
 
 HNSW 分层结构示意：
 
@@ -3963,7 +3963,7 @@ PQ 的核心思想是分治：把一个高维向量拆成 M 个低维子向量�
 
 PQ 的变种：OPQ 在量化前加一个旋转矩阵，让子空间划分更均匀；IVFPQ 先用 IVF 粗筛再用 PQ 精排，是工业界最常用的组合。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/6diAh40m_8D3xoXZ51Q_mianshiya.webp)
+
 
 ---
 
@@ -3977,7 +3977,7 @@ ANN 全称 Approximate Nearest Neighbor，近似最近邻搜索，核心思想�
 
 举个实际场景：电商的以图搜图功能，用户上传一张商品图，后台把图片编码成向量，然后在几亿商品向量里找相似的。如果用精确搜索，一次查询要几十秒，体验直接崩掉。换成 HNSW 索引的 ANN，同样的数据量，P99 延迟能压到 50ms 以内。
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/8CIckBzq_image_mianshiya.webp)
+
 
 ---
 
@@ -3993,7 +3993,7 @@ ANN 全称 Approximate Nearest Neighbor，近似最近邻搜索，核心思想�
 
 **曼哈顿距离**把各维度的差值绝对值加起来，像在城市街区里沿着街道走，不能斜着穿。网格数据、稀疏特征向量用得比较多，比如地图坐标计算、高维稀疏文本特征。取值 ≥ 0，同样越小越相似。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/PxLf3pxA_N30wqOgbH4_mianshiya.webp)
+
 
 三种方法的选型逻辑：文本、推荐系统首选余弦相似度；图像、视频检索首选欧氏距离；网格坐标、稀疏高维数据考虑曼哈顿距离。
 
@@ -4009,7 +4009,7 @@ MCP 全称 Model Context Protocol，模型上下文协议，是 Anthropic 在 20
 
 用 USB 接口来类比最直观。以前各种设备的充电线、数据线五花八门，现在有了 USB-C，一根线搞定所有设备。MCP 就是 AI 领域的 USB-C，让模型和外部世界的连接变得**即插即用**。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/markdown/jm2OBaAQ_1744783724038-ed03d602-200b-4ebd-9dbd-72ba49d97f83_mianshiya.webp)
+
 
 MCP 的作用主要体现在三个层面：
 
@@ -4019,7 +4019,7 @@ MCP 的作用主要体现在三个层面：
 
 3）降低集成复杂度：系统架构变得模块化，加一个新数据源只要部署一个 MCP Server，不用动模型侧的代码
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/Eeilj3CR_iJS2xaeXne_mianshiya.webp)
+
 
 ### 扩展知识
 
@@ -4041,7 +4041,7 @@ MCP 采用经典的 Client-Server 架构：
 
 3）MCP Server：轻量级服务，对接具体的数据源或工具，比如一个 MCP Server 专门连 PostgreSQL，另一个专门访问 Slack
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/iSNib2vu_0RhDSTMUL5_mianshiya.webp)
+
 
 ---
 
@@ -4051,7 +4051,7 @@ MCP 采用经典的 Client-Server 架构：
 
 MCP 的核心是**客户端-服务器**架构，一个主机应用可以同时连接多个服务器。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/markdown/8ml8dkoZ_1744784366744-480587b8-8183-4bf1-8d5d-31ac24543cac_mianshiya.webp)
+
 
 整体由 5 个核心组件构成：
 
@@ -4065,7 +4065,7 @@ MCP 的核心是**客户端-服务器**架构，一个主机应用可以同时�
 
 5）远程服务：MCP 服务器通过互联网连接的外部系统，比如第三方 API、云服务。
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/08GknszX_image_mianshiya.webp)
+
 
 ---
 
@@ -4079,7 +4079,7 @@ MCP 和 Function Calling 是完全不同层面的东西。
 
 **Function Calling** 是某些大模型提供的特有能力，比如 OpenAI 的 GPT-4、阿里的通义千问。它让模型能产出结构化的函数调用请求，应用读取这个请求去执行具体操作再把结果返回。但它不要求消息是 JSON-RPC 格式，也不遵守 MCP 的上下文管理方式，是各家厂商自己定义的调用机制。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/sEWZcC5J_lEFagwpzqj_mianshiya.webp)
+
 
 用支付系统来比喻：Function Calling 像是直接对接微信、支付宝、银联，每个系统都要单独开发；MCP 像是对接一个支付网关，只需要开发一次，网关帮你搞定和各家的对接。
 
@@ -4101,11 +4101,11 @@ Function Calling 主要是增强模型的功能性。模型理解上下文后发
 
 MCP 协议流程：
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/markdown/oMu6GIS0_1744799258681-320dcbe3-95b7-42c5-9d97-5e9338981e2e_mianshiya.webp)
+
 
 Function Calling 流程：
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/markdown/mBAEeCtW_1744799014915-8df45885-4cc8-4071-88aa-31a582fd401d_mianshiya.webp)
+
 
 ### 实际使用中的关系
 
@@ -4135,7 +4135,7 @@ MCP 的核心工作流程是一个**客户端-服务器协作**的闭环，整�
 
 7）用户响应输出：Client 把模型生成的回答展示给用户，完成一次完整的人机协作。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/markdown/j1hhXoW5_1744799258681-320dcbe3-95b7-42c5-9d97-5e9338981e2e_mianshiya.webp)
+
 
 ---
 
@@ -4157,7 +4157,7 @@ MCP 的核心工作流程是一个**客户端-服务器协作**的闭环，整�
 
 5）实现 MCP Server，按照 MCP 协议规范构建服务端，负责接收 MCP 客户端请求、路由到对应功能模块、返回结果
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/5zAV3k7x_uVVuSVAHO9_mianshiya.webp)
+
 
 ---
 
@@ -4175,7 +4175,7 @@ A2A 协议的工作流程可以分成 5 个阶段：**发现、启动、处理�
 
 5）完成：任务进入终态，比如 `completed`、`failed` 或 `canceled`。客户端可以选择主动拉取最终的 Task 对象，也可以继续通过 SSE 或 Webhook 机制订阅 `TaskStatusUpdateEvent`，并获取以 JSON Artifact 形式封装的最终结果。
 
-![A2A 工作流程](./img/pasted-20260514205819.jpg)
+
 
 ---
 
@@ -4185,11 +4185,11 @@ A2A 和 MCP 是两个**互补的协议**，共同推动智能体生态的发展�
 
 在智能体与外部系统之间实现互操作，标准化协议至关重要，主要聚焦两个密切关联的领域：工具与智能体。工具是具有结构化输入输出、预定义行为的基本单元；智能体则是能够调用工具、进行逻辑推理并与用户互动的自主应用。
 
-![A2A 与 MCP 关系](./img/pasted-20260514210932.png)
+
 
 可以把 A2A 想象成智能体之间的"电话簿"，负责发现、呼叫和协作；MCP 则像工具的"使用说明书"，为智能体接入外部数据源和服务提供统一接口。两者结合，才能构建既能高效联动工具，又能自由组织多方智能体的完整生态。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/markdown/NK4Nu0ia_1745308829903-ea3f7f09-311b-4fc8-bfd6-4906b6af65b2_mianshiya.webp)
+
 
 具体来看：
 
@@ -4209,7 +4209,7 @@ MCP 采用客户端-服务器模型，主要由三个组件组成：
 
 3）MCP Servers：通过标准化协议实现 Client 与 Servers 之间的双向交互，提供本地或远程资源的访问能力
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/9CJ0IQuR_JToIkPZJ7W_mianshiya.webp)
+
 
 ### A2A 的应用场景
 
@@ -4288,7 +4288,7 @@ A2A 协议在多智能体系统中应用前景很广：
 
 5）结合 RAG。微调让模型学会"先查后答"的模式，遇到事实性问题先去检索外部知识库，而不是凭记忆瞎编。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/WSeHNNGy_index_30_mianshiya.webp)
+
 
 ### 扩展知识
 
@@ -4348,7 +4348,7 @@ A2A 协议在多智能体系统中应用前景很广：
 
 还有一点很关键就是**持续迭代**，提示词不是一次写完就定死的。根据模型输出的效果不断调整，补充细节、优化示例，跑个 A/B 测试，慢慢逼近最优解。
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/Z1PySlff_image_mianshiya.webp)
+
 
 提示词模板的常见字段：
 
@@ -4458,7 +4458,7 @@ top_p 的优势是更加动态。它不是固定选择前 N 个词，而是根�
 
 让大模型生成一个能直接用的 React 表单组件，Prompt 得把**上下文约束**写死，不然 AI 就会按自己的理解乱发挥。一个完整的 Prompt 应该覆盖四个维度：字段定义、验证规则、交互行为、代码规范。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/LAq8mc9z_Xy4K8z8QIt_mianshiya.webp)
+
 
 直接上一个实战级的 Prompt 示例：
 
@@ -4479,7 +4479,7 @@ React Hook Form 用的是非受控组件，通过 ref 直接读取 DOM 的值，
 
 而且受控组件写起来很啰嗦，每个字段都要写 value、onChange、错误状态，代码量轻松翻倍。React Hook Form 用 register 一行搞定，代码干净很多。
 
-![react.drawio.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/jPLo4nE2_react.drawio_mianshiya.webp)
+
 
 ### 验证库选型对比
 
@@ -4496,7 +4496,7 @@ React Hook Form 用的是非受控组件，通过 ref 直接读取 DOM 的值，
 
 ### 写 Prompt 容易忽略的坑
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/LPA3Tpb4_iw2XdoUtBH_mianshiya.webp)
+
 
 很多人写 Prompt 只关注主流程，边界情况完全不提。AI 默认是不会处理这些的，你不说它就不做。比如用户名前后带空格，不 trim 的话会存进数据库，后面登录的时候就对不上了。这种细节要在 Prompt 里明确写出来。
 
@@ -4550,7 +4550,7 @@ React Hook Form 用的是非受控组件，通过 ref 直接读取 DOM 的值，
 
 技术实现的核心是通过提示工程、JSON Schema 定义或约束性解码强制模型遵循格式规则。
 
-![jiegouhua.drawio.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/fMcgiY1o_jiegouhua.drawio_mianshiya.webp)
+
 
 实现方法主要有三种：
 
@@ -4560,7 +4560,7 @@ React Hook Form 用的是非受控组件，通过 ref 直接读取 DOM 的值，
 
 3）工具辅助：使用库或框架自动验证和解析输出格式，比如 LangChain 的 `StructuredOutputParser`
 
-像 LangChain 的图介绍的，通过定义 schema，大模型就会返回结构化的输出： ![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/fwDDv5zc_image_mianshiya.webp)
+像 LangChain 的图介绍的，通过定义 schema，大模型就会返回结构化的输出： 
 
 ---
 
@@ -4572,7 +4572,7 @@ GPT Structured Outputs 是 OpenAI 提供的一种**强制大模型输出结构�
 
 现在用 Structured Outputs，你在 API 调用时通过 `response_format` 参数传入 JSON Schema，模型生成时会被约束在这个 Schema 定义的范围内。底层用的是 Constrained Decoding 技术，模型每生成一个 token，都会检查是否符合当前状态机允许的字符，不符合的直接屏蔽掉，从源头杜绝格式错误。
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/5tcfAI7V_image_mianshiya.webp)
+
 
 实际调用示例：
 
@@ -4606,7 +4606,7 @@ class Person(BaseModel):
 
 Structured Outputs 的核心是 **Constrained Decoding**，也叫受限解码。传统的文本生成，模型每一步从整个词表里挑概率最高的 token；受限解码则是在挑选之前，先用一个"过滤器"把不符合当前状态的 token 全部屏蔽掉。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/gZ7i0vCy_index_30_mianshiya.webp)
+
 
 具体实现上有两种主流方案：
 
@@ -4678,7 +4678,7 @@ class Order(BaseModel):
 
 3）错误处理机制：当 AI 无法处理问题或检测到风险时，拒绝回答或引导人工介入
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/jzZuEZR0_tQX83ju0iW_mianshiya.webp)
+
 
 ---
 
@@ -4688,7 +4688,7 @@ class Order(BaseModel):
 
 GPTCache 是专为大语言模型设计的**语义缓存工具**，通过存储和复用模型响应，降低 API 调用成本并提升响应速度。
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/hKXR9w15_image_mianshiya.webp)
+
 
 和传统缓存只能精确匹配不一样，GPTCache 用向量嵌入技术把用户问题转成向量，通过向量数据库做相似性搜索，实现语义级的缓存命中。意思就是"今天天气怎么样"和"今儿天气咋样"虽然字面不同，但语义相似，能命中同一条缓存。
 
@@ -4700,7 +4700,7 @@ GPTCache 是专为大语言模型设计的**语义缓存工具**，通过存储�
 
 3）模块化设计：嵌入模型、缓存存储、逐出策略都可以自定义，SQLite、MySQL、Redis 都能当存储后端
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/uPhbfZ2K_NcwHOCgX9C_mianshiya.webp)
+
 
 典型使用场景：聊天机器人和客服系统里重复问题的快速响应；测试环境里模拟 LLM 响应，减少对真实 API 的依赖，加速开发迭代。
 
@@ -4720,7 +4720,7 @@ GPTCache 是专为大语言模型设计的**语义缓存工具**，通过存储�
 
 5）后处理：根据 temperature 参数调整响应的随机性，平衡准确性和多样性
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/JbMb5Cwo_oee8Ta698f_mianshiya.webp)
+
 
 ### 相似度阈值怎么定
 
@@ -4774,7 +4774,7 @@ GPTCache 是专为大语言模型设计的**语义缓存工具**，通过存储�
 
 压根不用把整篇文档塞进去，先把文档切块存向量库，用户提问时只检索最相关的几个片段，拼进 Prompt 里就行。这是目前最主流的方案，几百 MB 的知识库也能秒级响应。检索质量决定了最终效果，向量检索加 BM25 混合检索，再配个 Rerank 模型，召回率能上一个台阶。
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/C7NUdOuu_image_mianshiya.webp)
+
 
 ### 扩展知识
 
@@ -4782,7 +4782,7 @@ GPTCache 是专为大语言模型设计的**语义缓存工具**，通过存储�
 
 Transformer 的自注意力机制计算复杂度是 O(n²)，n 是序列长度。4K token 的时候还好，到了 100K，显存和计算量都扛不住。虽然现在有 Flash Attention、Ring Attention 这些优化，能把窗口撑大，但成本还是随长度飙升。更关键的是，模型在超长上下文里容易"迷路"，中间的内容注意力权重会被稀释，所谓的"Lost in the Middle"问题。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/hLTlGKrr_index_30_mianshiya.webp)
+
 
 ### 文本压缩方案详解
 
@@ -4804,7 +4804,7 @@ Map-Reduce 的问题是中间结果汇总时可能丢信息，Refine 的问题�
 
 ### 技术选型决策树
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/xu53nqjV_qQPww29e50_mianshiya.webp)
+
 
 ### 相关文档参考
 
@@ -4838,7 +4838,7 @@ Map-Reduce 的问题是中间结果汇总时可能丢信息，Refine 的问题�
 
 **立即反馈**是指用户点发送的瞬间，界面就要有动静。消息气泡先出来，哪怕内容是空的，加个 loading 动画或者骨架屏，让用户知道系统在干活。这招叫乐观 UI，核心思路是把用户反馈和网络请求解耦，不等后端响应就先更新界面。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/KDCz3S34_gawyVIfbo2_mianshiya.webp)
+
 
 **流式输出**是大模型场景的标配。OpenAI、Claude 这些 API 都支持 SSE 流式返回，后端每生成一个 token 就往前端推一次，前端拿到就渲染，用户看到的就是文字一个一个蹦出来的打字机效果。心理学上这叫"进度反馈"，用户看着文字在动，等 5 秒也不觉得烦。
 
@@ -4870,7 +4870,7 @@ LLM 推理不是把算力切成 1000 份分给 1000 个用户，而是靠**批�
 
 假设每次批处理包含 100 个用户的请求，每个用户请求 10 tokens，那 1000 个用户分 10 批就处理完了。单用户实际体验到的速度是 10 tokens/s，不是 1 token/s。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/MnwVPTmA_Sl0cjaQnbm_mianshiya.webp)
+
 
 实际响应速度取决于三个核心因素：请求的 token 长度、batch 大小策略、排队调度机制。
 
@@ -4894,7 +4894,7 @@ LLM 推理不是把算力切成 1000 份分给 1000 个用户，而是靠**批�
 
 分类完不是结束，还能让 AI 干更多。比如接入 RAG 系统，从企业知识库里捞出历史类似工单的处理方案，直接推荐给客服。简单问题甚至可以让 LLM 生成回复，用户一提交就秒回，不用等人工。分类结果还能触发工作流，自动创建 Jira 工单、发企业微信通知、更新 CRM 状态。
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/MKiJS88b_image_mianshiya.webp)
+
 
 ### 扩展知识
 
@@ -4904,7 +4904,7 @@ LLM 推理不是把算力切成 1000 份分给 1000 个用户，而是靠**批�
 
 ### 技术选型思路
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/fBaxHORP_index_30_mianshiya.webp)
+
 
 选型要看业务规模和准确率要求：
 
@@ -4919,7 +4919,7 @@ LLM 推理不是把算力切成 1000 份分给 1000 个用户，而是靠**批�
 
 完整的处理流程是这样的：工单进来先做预处理，去掉 HTML 标签、特殊字符、表情这些噪音。然后过一遍 NER 模型提取实体，再用分类模型预测类别。预测结果有个置信度阈值，高于 0.9 的直接自动分发，0.7-0.9 的人工复核，低于 0.7 的全量人工处理。自动分发出去的工单还要定期抽检，发现错分的案例收集起来做增量训练。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/Wh77MbcS_sUpBC9c4aN_mianshiya.webp)
+
 
 ### 相似工单检索
 
@@ -4941,7 +4941,7 @@ LLM 推理不是把算力切成 1000 份分给 1000 个用户，而是靠**批�
 
 解决长尾问题的核心思路是搭建一套**向量化知识库 + RAG 检索增强生成**的架构。整体链路是：用户提问先过 Embedding 模型转成向量，然后去向量数据库里做相似度检索，捞出 Top-K 条最相关的知识片段，最后把这些片段塞给大模型做上下文，让它生成最终答案。这套方案的好处是知识库可以无限扩展，不用改代码，往里面灌文档就行。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/Y2654zzi_Y5cCZaCQeh_mianshiya.webp)
+
 
 具体实现分三步走：
 
@@ -4975,7 +4975,7 @@ def answer_question(query: str) -> str:
 
 传统客服系统要么靠规则匹配，要么靠意图分类。规则匹配就是写一堆"如果包含 XX 关键词就回复 YY"，问题是长尾问题的表述五花八门，"充电器兼容性"用户可能问"能不能混用"、"通不通用"、"插得进去吗"，规则写到吐血也覆盖不全。意图分类把问题往预设的几十个意图上归类，但长尾问题的意图本身就有上万种，分类器压根训不过来，准确率惨不忍睹。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/UQv1Nr1b_index_30_mianshiya.webp)
+
 
 ---
 
@@ -5001,7 +5001,7 @@ def answer_question(query: str) -> str:
 
 3）订单状态追踪，物流信息在第三方系统里，大模型没法直接访问，得通过 API 拿到数据后再生成回复
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/nOxxh47n_image_mianshiya.webp)
+
 
 ### 扩展知识
 
@@ -5015,7 +5015,7 @@ def answer_question(query: str) -> str:
 
 3）数据实时性，大模型的知识是训练时定死的，今天的促销价、当前的库存量它压根不知道
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/KmmkvRig_index_30_mianshiya.webp)
+
 
 ---
 
@@ -5035,7 +5035,7 @@ def answer_question(query: str) -> str:
 
 4）人工兜底层，所有 AI 回复在展示前要过一道医学规则引擎，高风险内容必须医生审核
 
-![image.png](https://pic.code-nav.cn/mianshiya/question_picture/1783388929455529986/1SkuOyl0_image_mianshiya.webp)
+
 
 技术手段主要包括：
 
@@ -5051,7 +5051,7 @@ def answer_question(query: str) -> str:
 
 大模型幻觉在普通场景最多是闹笑话，在医疗场景可能出人命。丁香园曾经测试过，让 ChatGPT 回答"阿司匹林和华法林能不能一起吃"，它有时候会说可以，但实际上两者联用会大幅增加出血风险。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/061nRtZX_index_30_mianshiya.webp)
+
 
 ### RAG 技术在医疗场景的落地
 
@@ -5090,7 +5090,7 @@ qa_chain = RetrievalQA.from_chain_type( llm=OpenAI(temperature=0), retriever=ret
 
 京东健康的智能问诊就是这个模式，AI 处理 70% 的常规咨询，医护只需要聚焦那 30% 的复杂问题，人效提升了 3 倍。
 
-![](https://pic.code-nav.cn/mianshiya/question_picture/1843904816956411905/grzE0OG0_index_31_mianshiya.webp)
+
 
 ### 不确定性量化的实现
 
