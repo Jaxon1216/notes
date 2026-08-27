@@ -23,6 +23,7 @@
 - 生产构建：`npm run docs:build`
 - 预览构建产物：`npm run docs:preview`
 - 内容结构检查：`npm run check:content`
+- 图片引用检查：`npm run check:images`
 - 检查 Vue 笔记中的 HTML 标签闭合：`npm run check:vue:tags`
 - TypeScript 检查：`npm run typecheck`
 - PR 总检查：`npm run validate`
@@ -81,6 +82,7 @@
 
 ```bash
 npm run check:content
+npm run check:images
 ```
 
 涉及导航、首页、目录或样式时，至少运行：

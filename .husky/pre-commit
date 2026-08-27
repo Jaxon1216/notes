@@ -2,4 +2,5 @@
 set -e
 
 npm run check:content
+npm run check:images
 npm run check:vue:tags

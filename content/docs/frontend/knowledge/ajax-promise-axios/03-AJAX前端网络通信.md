@@ -1,6 +1,6 @@
 # AJAX 前端网络通信
 
-![](../../img/Ajax.svg)
+![AJAX 通信流程](./img/ajax.svg)
 
 > **本页关键词**：HTTP 协议、XMLHttpRequest、Axios、Fetch、跨域、CORS、JSONP、代理
 
@@ -1990,5 +1990,4 @@ const baseURL = process.env.REACT_APP_API_BASE_URL;
 3. 学习Promise、async/await深入异步编程
 4. 了解WebSocket实现实时通信
 5. 研究axios源码，深入理解封装原理
-
 

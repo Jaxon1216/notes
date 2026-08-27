@@ -40,7 +40,7 @@
 新增文章：
 
 ```text
-读取 AGENTS.md -> 读取 writing-style.md -> 选择 content/docs 目录 -> 新增文章 -> 更新 meta.json -> npm run check:content -> npm run docs:build
+读取 AGENTS.md -> 读取 writing-style.md -> 选择 content/docs 目录 -> 新增文章 -> 更新必要的 meta.json -> npm run check:content -> npm run check:images -> npm run docs:build
 ```
 
 修改信息架构：
@@ -61,6 +61,7 @@
 
 ```bash
 npm run check:content
+npm run check:images
 ```
 
 完整 PR 检查：

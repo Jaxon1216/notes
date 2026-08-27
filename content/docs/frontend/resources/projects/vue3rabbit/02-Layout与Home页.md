@@ -53,7 +53,7 @@ export const getCategoryAPI = () => httpInstance({ url: '/home/category/head' })
 
 ### 3. Pinia 优化重复请求
 
-![Pinia 数据流](img/piniadr.svg)
+![Pinia 数据流](./img/piniadr.svg)
 
 **问题**：LayoutHeader、LayoutFixed、HomeCategory 三个组件都需要分类数据，如果各自调 API 就会发 3 次相同请求。
 
@@ -106,7 +106,7 @@ Home 拆分为 5 个子组件：HomeCategory（左侧分类面板）/ HomeBanner
 
 ### 2. Banner 轮播图 — HTTP 请求三层架构
 
-![HTTP 请求三层架构](img/hr.svg)
+![HTTP 请求三层架构](./img/hr.svg)
 
 这是项目中贯穿始终的数据获取模式，以 Banner 为例说明三层各自的职责：
 
@@ -205,7 +205,7 @@ export const getHotAPI = () => httpInstance({ url: '/home/hot' })
 
 ## 三、图片懒加载自定义指令 `v-img-lazy`
 
-![图片懒加载流程](img/imglazy.svg)
+![图片懒加载流程](./img/imglazy.svg)
 
 ### 为什么需要懒加载
 

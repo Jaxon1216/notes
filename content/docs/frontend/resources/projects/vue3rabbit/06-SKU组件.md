@@ -6,7 +6,7 @@
 
 ## 整体思路
 
-![SKU 组件逻辑](img/sku.svg)
+![SKU 组件逻辑](./img/sku.svg)
 
 SKU（Stock Keeping Unit）规格选择组件是电商项目中复杂度最高的前端组件之一。需要实现三个核心功能：
 

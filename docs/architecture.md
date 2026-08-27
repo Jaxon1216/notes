@@ -42,6 +42,7 @@ lib/
 
 scripts/
   check-content-style.cjs     # Markdown/MDX 写作结构检查
+  check-images.cjs            # Markdown/MDX 图片引用检查
   check-html-tags.cjs         # Vue 笔记 HTML 标签闭合检查
 
 vercel.json                   # Vercel 安装和构建命令
@@ -108,13 +109,14 @@ docs/
 
 ```bash
 npm run check:content
+npm run check:images
 npm run check:vue:tags
 npm run typecheck
 npm run docs:build
 npm run validate
 ```
 
-`npm run validate` 是 PR 前的总检查入口。它会依次执行内容结构检查、Vue 笔记标签检查、TypeScript 检查和生产构建。
+`npm run validate` 是 PR 前的总检查入口。它会依次执行内容结构检查、图片引用检查、Vue 笔记标签检查、TypeScript 检查和生产构建。
 
 ## 部署
 

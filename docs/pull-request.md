@@ -47,7 +47,7 @@ chore: add content style check
 本地 `husky` 当前包含：
 
 - `commit-msg`：运行 `commitlint --edit`，校验提交信息。
-- `pre-commit`：运行内容结构和 Vue 标签闭合检查。
+- `pre-commit`：运行内容结构、图片引用和 Vue 标签闭合检查。
 
 如果需要临时跳过本地 hooks，可以使用 `HUSKY=0 git commit ...`，但 PR 仍必须通过 CI。
 
@@ -57,6 +57,7 @@ chore: add content style check
 
 ```bash
 npm run check:content
+npm run check:images
 npm run docs:build
 ```
 
@@ -75,7 +76,7 @@ npm run validate
 `validate` 会依次执行：
 
 ```text
-check:content -> check:vue:tags -> typecheck -> docs:build
+check:content -> check:images -> check:vue:tags -> typecheck -> docs:build
 ```
 
 当前项目尚未接入 ESLint。TypeScript 和 Next.js 构建会覆盖编译错误；如果后续 React 组件和交互代码增多，再补 `eslint.config.mjs`、`lint` 脚本和 CI lint 阶段。
@@ -114,6 +115,7 @@ Review 时优先看这些点：
 - 标题层级是否符合 `docs/writing-style.md`。
 - 是否存在多个 H1、标题跳级、标题里嵌套链接。
 - 新目录是否有对应 `meta.json`。
+- 图片是否放在当前专题 `img/` 目录，并使用 `./img/xxx` 引用。
 - 首页、导航、搜索或 Fumadocs 配置是否被误改。
 - 是否运行过必要检查，并在 PR 描述里写明结果。
 - 大改动是否更新 `docs/changelog.md` 或 `docs/todo.md`。
