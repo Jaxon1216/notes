@@ -211,13 +211,37 @@ a {
   right: 0;
   z-index: 80;
   display: grid;
-  width: min(380px, calc(100vw - 32px));
+  max-width: calc(100vw - 96px);
+  min-width: 360px;
   height: 100vh;
   grid-template-rows: auto auto minmax(0, 1fr) auto;
   border-left: 1px solid var(--color-fd-border);
   background: var(--color-fd-background);
   color: var(--color-fd-foreground);
   box-shadow: -18px 0 44px rgb(0 0 0 / 14%);
+}
+
+.ai-explain-sidebar__resize {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -5px;
+  width: 10px;
+  cursor: col-resize;
+}
+
+.ai-explain-sidebar__resize::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 4px;
+  width: 1px;
+  background: transparent;
+  content: '';
+}
+
+.ai-explain-sidebar__resize:hover::before {
+  background: var(--color-fd-primary);
 }
 
 .ai-explain-sidebar__header {
@@ -293,6 +317,15 @@ a {
 .ai-settings-form button:disabled {
   cursor: not-allowed;
   opacity: 0.55;
+}
+
+.ai-explain-sidebar .ai-explain-sidebar__resize {
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
 }
 
 .ai-explain-sidebar__quote {

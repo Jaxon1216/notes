@@ -31,6 +31,34 @@ function trimQuote(text: string) {
   return text.replace(/\s+/g, ' ').trim()
 }
 
+const AI_SIDEBAR_WIDTH_STORAGE_KEY = 'easton-ai-sidebar-width-v1'
+const DEFAULT_SIDEBAR_WIDTH = 460
+const MIN_SIDEBAR_WIDTH = 360
+const SIDEBAR_EDGE_GAP = 96
+
+function getMaxSidebarWidth() {
+  if (typeof window === 'undefined') return 760
+
+  return Math.min(820, window.innerWidth - SIDEBAR_EDGE_GAP)
+}
+
+function clampSidebarWidth(width: number) {
+  return Math.min(Math.max(width, MIN_SIDEBAR_WIDTH), getMaxSidebarWidth())
+}
+
+function loadSidebarWidth() {
+  if (typeof window === 'undefined') return DEFAULT_SIDEBAR_WIDTH
+
+  const stored = Number.parseInt(
+    window.localStorage.getItem(AI_SIDEBAR_WIDTH_STORAGE_KEY) ?? '',
+    10,
+  )
+
+  return Number.isFinite(stored)
+    ? clampSidebarWidth(stored)
+    : clampSidebarWidth(DEFAULT_SIDEBAR_WIDTH)
+}
+
 export function AiExplainSidebar({
   open,
   quote,
@@ -39,12 +67,51 @@ export function AiExplainSidebar({
   const [config, setConfig] = useState<AiProviderConfig | null>(null)
   const [showSettings, setShowSettings] = useState(false)
   const [input, setInput] = useState('')
-  const lastAutoQuoteIdRef = useRef<string | null>(null)
+  const [sidebarWidth, setSidebarWidth] = useState(DEFAULT_SIDEBAR_WIDTH)
+  const lastPreparedQuoteIdRef = useRef<string | null>(null)
+  const messagesEndRef = useRef<HTMLDivElement | null>(null)
+  const isResizingRef = useRef(false)
+  const sidebarWidthRef = useRef(DEFAULT_SIDEBAR_WIDTH)
 
   useEffect(() => {
     const storedConfig = loadAiConfig()
+    const storedSidebarWidth = loadSidebarWidth()
     setConfig(storedConfig)
     setShowSettings(!storedConfig)
+    setSidebarWidth(storedSidebarWidth)
+    sidebarWidthRef.current = storedSidebarWidth
+  }, [])
+
+  useEffect(() => {
+    function handlePointerMove(event: PointerEvent) {
+      if (!isResizingRef.current) return
+
+      const nextWidth = clampSidebarWidth(window.innerWidth - event.clientX)
+      sidebarWidthRef.current = nextWidth
+      setSidebarWidth(nextWidth)
+    }
+
+    function handlePointerUp() {
+      if (!isResizingRef.current) return
+
+      isResizingRef.current = false
+      document.body.style.cursor = ''
+      document.body.style.userSelect = ''
+      window.localStorage.setItem(
+        AI_SIDEBAR_WIDTH_STORAGE_KEY,
+        String(sidebarWidthRef.current),
+      )
+    }
+
+    window.addEventListener('pointermove', handlePointerMove)
+    window.addEventListener('pointerup', handlePointerUp)
+
+    return () => {
+      window.removeEventListener('pointermove', handlePointerMove)
+      window.removeEventListener('pointerup', handlePointerUp)
+      document.body.style.cursor = ''
+      document.body.style.userSelect = ''
+    }
   }, [])
 
   const transport = useMemo(
@@ -69,28 +136,29 @@ export function AiExplainSidebar({
     throttle: 50,
   })
 
-  const canRequest = open && quote && isCompleteAiConfig(config)
   const isBusy = status === 'submitted' || status === 'streaming'
 
   useEffect(() => {
-    if (!canRequest || !quote || !config) return
-    if (lastAutoQuoteIdRef.current === quote.id) return
+    if (!quote) return
+    if (lastPreparedQuoteIdRef.current === quote.id) return
 
-    lastAutoQuoteIdRef.current = quote.id
-    setInput('')
+    lastPreparedQuoteIdRef.current = quote.id
+    setInput(AI_DEFAULT_QUESTION)
     setMessages([])
     clearError()
+    requestAnimationFrame(() => {
+      messagesEndRef.current?.scrollIntoView({ block: 'end' })
+    })
+  }, [clearError, quote, setMessages])
 
-    void sendMessage(
-      { text: AI_DEFAULT_QUESTION },
-      {
-        body: {
-          config,
-          quote,
-        },
-      },
-    )
-  }, [canRequest, clearError, config, quote, sendMessage, setMessages])
+  useEffect(() => {
+    if (!open) return
+
+    messagesEndRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+    })
+  }, [messages, open, status])
 
   if (!open) return null
 
@@ -111,7 +179,7 @@ export function AiExplainSidebar({
     setInput('')
     setMessages([])
     clearError()
-    lastAutoQuoteIdRef.current = quote.id
+    lastPreparedQuoteIdRef.current = quote.id
 
     void sendMessage(
       { text: AI_DEFAULT_QUESTION },
@@ -144,7 +212,23 @@ export function AiExplainSidebar({
   }
 
   return (
-    <aside className="ai-explain-sidebar" aria-label="AI 解释侧栏">
+    <aside
+      className="ai-explain-sidebar"
+      style={{ width: sidebarWidth }}
+      aria-label="AI 解释侧栏"
+    >
+      <button
+        type="button"
+        className="ai-explain-sidebar__resize"
+        aria-label="调整 AI 解释侧栏宽度"
+        title="拖拽调整宽度"
+        onPointerDown={(event) => {
+          event.preventDefault()
+          isResizingRef.current = true
+          document.body.style.cursor = 'col-resize'
+          document.body.style.userSelect = 'none'
+        }}
+      />
       <header className="ai-explain-sidebar__header">
         <div>
           <p>AI 解释</p>
@@ -228,6 +312,7 @@ export function AiExplainSidebar({
             AI 服务请求失败，请检查 baseURL、API Key 和 model。
           </div>
         ) : null}
+        <div ref={messagesEndRef} aria-hidden="true" />
       </section>
 
       <form className="ai-explain-sidebar__composer" onSubmit={submitMessage}>
