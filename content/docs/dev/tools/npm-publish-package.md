@@ -7,8 +7,8 @@
 先创建项目目录，再执行 `npm init` 生成 `package.json`。
 
 ```bash
-mkdir my-sleep
-cd my-sleep
+mkdir my-nailong
+cd my-nailong
 npm init -y
 ```
 
@@ -129,26 +129,26 @@ my-skill/
 
 ```json
 {
-  "name": "my-sleep",
+  "name": "my-nailong",
   "version": "1.0.0",
-  "description": "A simple sleep utility",
+  "description": "A simple nailong utility",
   "main": "index.js",
-  "keywords": ["sleep", "promise", "utils"],
+  "keywords": ["nailong", "promise", "utils"],
   "author": "你的名字",
   "license": "MIT"
 }
 ```
 
-`main` 表示这个包被别人 `require("my-sleep")` 时默认加载哪个入口文件。
+`main` 表示这个包被别人 `require("my-nailong")` 时默认加载哪个入口文件。
 
 例如包里有一个 `index.js`：
 
 ```js
-function sleep(ms) {
+function nailong(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-module.exports = sleep;
+module.exports = nailong;
 ```
 
 并且 `package.json` 写了：
@@ -162,7 +162,7 @@ module.exports = sleep;
 那么使用者就可以这样引入：
 
 ```js
-const sleep = require("my-sleep");
+const nailong = require("my-nailong");
 ```
 
 如果你的构建产物在 `dist/index.js`，那 `main` 通常就写成：
@@ -176,7 +176,7 @@ const sleep = require("my-sleep");
 这里的 `name` 就是安装时使用的名字：
 
 ```bash
-npm install my-sleep
+npm install my-nailong
 ```
 
 ### 包名规则
@@ -184,13 +184,13 @@ npm install my-sleep
 npm 包名主要分两种：
 
 - 普通包名：例如 `lodash`、`vite`，需要在 npm 全站唯一。
-- 作用域包名：例如 `@author/my-sleep`，属于某个用户或组织空间。
+- 作用域包名：例如 `@author/my-nailong`，属于某个用户或组织空间。
 
 如果普通包名被占用，可以考虑使用作用域包名：
 
 ```json
 {
-  "name": "@your-name/my-sleep"
+  "name": "@your-name/my-nailong"
 }
 ```
 
@@ -210,9 +210,9 @@ npm publish --access public
 
 举几个例子：
 
-- `patch`：修复 `sleep(1000)` 偶尔不 resolve 的 bug，用户不需要改代码，版本从 `1.0.0` 升到 `1.0.1`。
-- `minor`：新增一个 `timeout(promise, ms)` 方法，老的 `sleep(ms)` 还能照常用，版本从 `1.0.0` 升到 `1.1.0`。
-- `major`：把原来 `sleep(ms)` 的 CommonJS 用法改成只支持 ESM，用户必须从 `require("my-sleep")` 改成 `import sleep from "my-sleep"`，版本从 `1.0.0` 升到 `2.0.0`。
+- `patch`：修复 `nailong(1000)` 偶尔不 resolve 的 bug，用户不需要改代码，版本从 `1.0.0` 升到 `1.0.1`。
+- `minor`：新增一个 `timeout(promise, ms)` 方法，老的 `nailong(ms)` 还能照常用，版本从 `1.0.0` 升到 `1.1.0`。
+- `major`：把原来 `nailong(ms)` 的 CommonJS 用法改成只支持 ESM，用户必须从 `require("my-nailong")` 改成 `import nailong from "my-nailong"`，版本从 `1.0.0` 升到 `2.0.0`。
 
 常用命令：
 
@@ -258,6 +258,69 @@ npm login
 
 `npm login` 不是绑定某个项目目录的命令，本质上是在当前电脑保存 npm 登录态。可以在任意目录执行，但通常就在要发布的项目目录里执行，方便后续直接 `npm publish`。
 
+### 选择公网 npm 还是内网 npm
+
+登录和发布时真正要选择的是 `registry`，也就是包要发到哪个 npm 仓库。
+
+- 发给所有人使用的开源包：登录公网 npm，使用官方 registry。
+- 只给公司或团队内部使用的包：登录内网 npm / 私有 npm 仓库，使用公司提供的 registry。
+
+可以先查看当前 npm 使用的是哪个 registry：
+
+```bash
+npm config get registry
+```
+
+公网 npm 官方地址通常是：
+
+```bash
+https://registry.npmjs.org/
+```
+
+登录公网 npm：
+
+```bash
+npm login --registry=https://registry.npmjs.org/
+```
+
+发布到公网 npm：
+
+```bash
+npm publish --registry=https://registry.npmjs.org/
+```
+
+内网 npm 的 registry 地址一般由公司或团队提供，例如：
+
+```bash
+https://npm.example.com/
+```
+
+登录内网 npm：
+
+```bash
+npm login --registry=https://npm.example.com/
+```
+
+发布到内网 npm：
+
+```bash
+npm publish --registry=https://npm.example.com/
+```
+
+如果一个项目固定发布到内网，推荐在项目根目录放 `.npmrc`，避免每次命令都手动带 `--registry`：
+
+```ini
+registry=https://npm.example.com/
+```
+
+如果只想让某个作用域包走内网，可以只配置这个 scope：
+
+```ini
+@your-team:registry=https://npm.example.com/
+```
+
+这样 `@your-team/xxx` 会走内网 registry，其他普通包仍然可以走默认 registry。
+
 登录后可以检查当前用户：
 
 ```bash
@@ -288,7 +351,7 @@ npm pack
 它会生成一个 `.tgz` 文件。可以在另一个临时项目中安装测试：
 
 ```bash
-npm install ../my-sleep/my-sleep-1.0.0.tgz
+npm install ../my-nailong/my-nailong-1.0.0.tgz
 ```
 
 ## 正式发布
@@ -308,13 +371,13 @@ npm publish --access public
 如果成功，会看到类似信息：
 
 ```text
-+ my-sleep@1.0.0
++ my-nailong@1.0.0
 ```
 
 然后别人就可以安装：
 
 ```bash
-npm install my-sleep
+npm install my-nailong
 ```
 
 如果发布的是 CLI 包，也可以执行：
@@ -352,20 +415,20 @@ npm version major  # 破坏更新：1.0.0 -> 2.0.0
 查看当前包信息：
 
 ```bash
-npm view my-sleep
-npm view my-sleep versions
+npm view my-nailong
+npm view my-nailong versions
 ```
 
 取消发布要非常谨慎，npm 对已发布包的撤回有时间和依赖限制：
 
 ```bash
-npm unpublish my-sleep@1.0.0
+npm unpublish my-nailong@1.0.0
 ```
 
 更常见的做法是废弃某个错误版本，并发布新版本：
 
 ```bash
-npm deprecate my-sleep@1.0.0 "This version has a bug, please upgrade."
+npm deprecate my-nailong@1.0.0 "This version has a bug, please upgrade."
 ```
 
 ### 发布前检查
@@ -373,5 +436,5 @@ npm deprecate my-sleep@1.0.0 "This version has a bug, please upgrade."
 ```bash
 npm pack --dry-run
 npm whoami
-npm view my-sleep version
+npm view my-nailong version
 ```
