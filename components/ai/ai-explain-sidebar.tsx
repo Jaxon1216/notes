@@ -3,7 +3,7 @@
 import { useChat } from '@ai-sdk/react'
 import { Bot, LoaderCircle, RefreshCw, Send, Settings, X } from 'lucide-react'
 import { DefaultChatTransport, type UIMessage } from 'ai'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react'
 
 import {
   AI_DEFAULT_QUESTION,
@@ -13,6 +13,7 @@ import {
 
 import { isCompleteAiConfig, loadAiConfig } from './ai-config-storage'
 import { AiSettingsForm } from './ai-settings-form'
+import { AiMarkdown } from './ai-markdown'
 
 type AiExplainSidebarProps = {
   open: boolean
@@ -123,7 +124,7 @@ export function AiExplainSidebar({
     )
   }
 
-  function submitMessage(event: React.FormEvent<HTMLFormElement>) {
+  function submitMessage(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
     const text = input.trim()
@@ -204,7 +205,13 @@ export function AiExplainSidebar({
               key={message.id}
             >
               <span>{message.role === 'user' ? '你' : 'AI'}</span>
-              <p>{text}</p>
+              {message.role === 'assistant' ? (
+                <div className="ai-explain-markdown">
+                  <AiMarkdown>{text}</AiMarkdown>
+                </div>
+              ) : (
+                <p>{text}</p>
+              )}
             </article>
           )
         })}

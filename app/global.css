@@ -400,13 +400,96 @@ a {
   font-size: 13px;
 }
 
-.ai-explain-message {
-  white-space: pre-wrap;
-}
-
 .ai-explain-message p {
   font-size: 13px;
   line-height: 1.75;
+}
+
+.ai-explain-message.is-user p {
+  white-space: pre-wrap;
+}
+
+.ai-explain-markdown {
+  display: grid;
+  gap: 10px;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.ai-explain-markdown :where(p, ul, ol, pre, blockquote, hr) {
+  margin: 0;
+}
+
+.ai-explain-markdown :where(h1, h2, h3, h4, h5, h6) {
+  margin: 10px 0 2px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.ai-explain-markdown h1,
+.ai-explain-markdown h2 {
+  font-size: 16px;
+}
+
+.ai-explain-markdown h3 {
+  font-size: 15px;
+}
+
+.ai-explain-markdown :where(h4, h5, h6) {
+  font-size: 14px;
+}
+
+.ai-explain-markdown :where(ul, ol) {
+  display: grid;
+  gap: 5px;
+  padding-left: 20px;
+}
+
+.ai-explain-markdown li {
+  padding-left: 2px;
+}
+
+.ai-explain-markdown strong {
+  font-weight: 700;
+}
+
+.ai-explain-markdown a {
+  color: var(--color-fd-primary);
+  text-decoration: underline;
+}
+
+.ai-explain-markdown code {
+  border: 1px solid var(--color-fd-border);
+  border-radius: 6px;
+  padding: 1px 5px;
+  background: var(--color-fd-muted);
+  font-size: 12px;
+}
+
+.ai-explain-markdown pre {
+  overflow-x: auto;
+  border: 1px solid var(--color-fd-border);
+  border-radius: 8px;
+  padding: 10px;
+  background: var(--color-fd-muted);
+}
+
+.ai-explain-markdown pre code {
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.ai-explain-markdown blockquote {
+  border-left: 3px solid var(--color-fd-border);
+  padding-left: 10px;
+  color: var(--color-fd-muted-foreground);
+}
+
+.ai-explain-markdown hr {
+  border: 0;
+  border-top: 1px solid var(--color-fd-border);
 }
 
 .ai-explain-message.is-user {
