@@ -4,6 +4,8 @@
 
 ## 2026-08-27
 
+- 新增文档页 AI 解释挂件方案，支持用户在浏览器本地配置 OpenAI-compatible `baseURL`、`apiKey` 和 `model`，选中文档正文后通过右侧栏流式解释引用内容。
+- 新增 `/api/ai/explain` 作为 AI SDK serverless 转发接口，服务端不持久化用户密钥，并对 `baseURL`、引用长度和问题长度做校验；生产环境限制 HTTPS 和允许域名，并拦截本机、内网、链路本地地址及 provider 重定向。
 - 更新 `docs/writing-style.md` 的文件命名规范，明确连续课程型、独立主题集合和混合型目录的命名取舍，避免同一目录无说明地混用数字前缀和普通标题。
 - 补充 `meta.json`、Markdown/MDX 和图片资源维护规则；新增 `scripts/check-images.cjs` 与 `npm run check:images`，并接入 `pre-commit` 和 `validate` 检查链路。
 

@@ -8,6 +8,7 @@
 - React + TypeScript：负责页面和组件实现。
 - Fumadocs：负责 Markdown/MDX 内容加载、文档布局、文档树和搜索源。
 - Tailwind CSS v4：通过 `app/global.css` 引入全局样式能力。
+- AI SDK：负责文档页 AI 解释挂件的 OpenAI-compatible 模型调用和流式输出。
 - Vercel Analytics：仅在 Vercel 环境中启用访问统计。
 - Husky + commitlint：本地提交信息校验。
 
@@ -19,11 +20,13 @@ app/
   layout.tsx                  # 全站根布局和 Fumadocs RootProvider
   global.css                  # 全局样式和 Fumadocs 样式引入
   api/search/route.ts         # Fumadocs 搜索接口
+  api/ai/explain/route.ts     # AI 解释挂件的模型调用转发接口
   docs/
     layout.tsx                # 文档区布局
     [[...slug]]/page.tsx      # 文档动态路由
 
 components/
+  ai/                         # 文档页 AI 解释挂件
   mdx.tsx                     # MDX 组件覆盖，例如图片渲染
 
 content/docs/
@@ -36,6 +39,7 @@ content/docs/
   dev/                        # 个人开发常用内容
 
 lib/
+  ai/config.ts                # AI 挂件共享类型、提示词和限制配置
   source.ts                   # Fumadocs 内容源
   content.ts                  # 首页统计和首篇文章链接
   layout.shared.tsx           # 导航等共享布局配置
@@ -71,6 +75,25 @@ docs/
 
 因此，调整 Fumadocs 内容、路由、MDX 行为或文档样式时，优先从这些文件查起。
 
+## AI 解释挂件
+
+文档页提供一个桌面端 AI 解释挂件，核心文件：
+
+- `components/ai/ai-explain-widget.tsx`：文档 AI 挂件总入口，组合选区监听、触发浮标和右侧栏。
+- `components/ai/use-text-selection.ts`：监听正文区域选中文本，只响应 `[data-ai-doc-content]` 内部选区。
+- `components/ai/ai-selection-trigger.tsx`：选区旁的 AI 解释触发按钮。
+- `components/ai/ai-explain-sidebar.tsx`：最右侧解释侧栏，负责会话 UI、流式输出和继续追问。
+- `components/ai/ai-settings-form.tsx`：用户模型配置表单。
+- `components/ai/ai-config-storage.ts`：浏览器 localStorage 配置读写。
+- `lib/ai/config.ts`：共享类型、默认问题、内置提示词和长度限制。
+- `app/api/ai/explain/route.ts`：Next.js Route Handler，使用 AI SDK 转发到用户配置的 OpenAI-compatible 模型服务。
+
+挂件只在 `/docs/**` 文档布局中挂载。用户配置项包括 `baseURL`、`apiKey` 和 `model`，只保存在当前浏览器的 `localStorage:easton-ai-config-v1` 中；每次请求会随请求体传给 `/api/ai/explain`，服务端仅用于本次转发，不持久化密钥。
+
+`/api/ai/explain` 只支持 OpenAI-compatible 模型服务。生产环境会限制 `baseURL` 为 HTTPS，并要求域名在内置允许列表或 `AI_ALLOWED_BASE_URL_HOSTS` 环境变量中；本地开发环境允许 `localhost` 和 `127.0.0.1`，便于调试 LM Studio/Ollama 兼容接口。接口还会解析域名并拦截本机、内网、链路本地等地址，模型请求不跟随重定向。
+
+第一版只把用户选中的文本作为引用上下文，不自动读取附近段落、整篇文章或全站内容。移动端小于 `1024px` 时隐藏入口和侧栏。
+
 ## 内容渲染链路
 
 1. 作者在 `content/docs/**` 下新增或修改 Markdown/MDX。
@@ -97,6 +120,8 @@ docs/
 - 文档内容源：`lib/source.ts`
 - 文档路由：`app/docs/[[...slug]]/page.tsx`
 - 文档布局：`app/docs/layout.tsx`
+- AI 解释接口：`app/api/ai/explain/route.ts`
+- AI 挂件 UI：`components/ai/`
 - 首页：`app/page.tsx`、`lib/content.ts`
 - 全局样式：`app/global.css`
 - 共享导航：`lib/layout.shared.tsx`

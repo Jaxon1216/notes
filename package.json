@@ -35,10 +35,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@ai-sdk/openai-compatible": "^3.0.39",
+    "@ai-sdk/react": "^4.0.86",
     "@vercel/analytics": "^2.0.1",
+    "ai": "^7.0.83",
     "fumadocs-core": "^16.15.1",
     "fumadocs-mdx": "^15.3.1",
     "fumadocs-ui": "^16.15.1",
+    "lucide-react": "^1.34.0",
     "next": "^16.3.3",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
