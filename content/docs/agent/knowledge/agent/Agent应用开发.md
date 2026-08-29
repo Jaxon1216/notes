@@ -328,16 +328,7 @@ LLM Agent 在多模态推理中，核心是先把不同模态的数据转换成�
 
 3）**工具链调用**：LLM Agent 根据任务需求按需调用 OCR、物体检测、视频帧提取等工具，将结果合并进上下文，再由模型执行更高级别的推理或决策。
 
-以 GPT-4V 为例，多模态调用大概是这样：
-
-```python
-import openai
-import base64
-# 读取图片并转为 base64
-with open("image.jpg", "rb") as f:
-    image_data = base64.standard_b64encode(f.read()).decode("utf-8")
-    response = openai.chat.completions.create( model="gpt-4-vision-preview", messages=[{ "role": "user", "content": [ {"type": "text", "text": "这张图里有什么？"}, {"type": "image_url", "image_url": {"url": f"data:image/jpeg base64,{image_data}"}} ] }] )
-```
+以 GPT-4V 为例，多模态调用的关键是把非文本输入编码为模型可消费的内容块，并和文本指令一起提交给模型。
 
 ### 扩展知识
 
