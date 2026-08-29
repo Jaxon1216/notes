@@ -181,6 +181,397 @@ a {
   color: var(--color-fd-muted-foreground);
 }
 
+.ai-selection-trigger {
+  position: fixed;
+  z-index: 70;
+  display: inline-grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid var(--color-fd-border);
+  border-radius: 999px;
+  background: var(--color-fd-primary);
+  color: var(--color-fd-primary-foreground);
+  box-shadow: 0 12px 30px rgb(0 0 0 / 18%);
+  cursor: pointer;
+}
+
+.ai-selection-trigger:hover {
+  filter: brightness(0.98);
+}
+
+.ai-selection-trigger:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.ai-explain-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 80;
+  display: grid;
+  max-width: calc(100vw - 96px);
+  min-width: 360px;
+  height: 100vh;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  border-left: 1px solid var(--color-fd-border);
+  background: var(--color-fd-background);
+  color: var(--color-fd-foreground);
+  box-shadow: -18px 0 44px rgb(0 0 0 / 14%);
+}
+
+.ai-explain-sidebar__resize {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -5px;
+  width: 10px;
+  cursor: col-resize;
+}
+
+.ai-explain-sidebar__resize::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 4px;
+  width: 1px;
+  background: transparent;
+  content: '';
+}
+
+.ai-explain-sidebar__resize:hover::before {
+  background: var(--color-fd-primary);
+}
+
+.ai-explain-sidebar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 64px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--color-fd-border);
+}
+
+.ai-explain-sidebar__header p,
+.ai-explain-sidebar__quote p,
+.ai-explain-sidebar__empty p,
+.ai-explain-message p,
+.ai-settings-form__notice,
+.ai-settings-form__error {
+  margin: 0;
+}
+
+.ai-explain-sidebar__header p {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.ai-explain-sidebar__header span {
+  display: block;
+  margin-top: 3px;
+  color: var(--color-fd-muted-foreground);
+  font-size: 12px;
+}
+
+.ai-explain-sidebar__tools,
+.ai-settings-form__actions,
+.ai-explain-sidebar__composer div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ai-explain-sidebar button,
+.ai-settings-form button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 34px;
+  border: 1px solid var(--color-fd-border);
+  border-radius: 8px;
+  padding: 0 12px;
+  background: var(--color-fd-primary);
+  color: var(--color-fd-primary-foreground);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ai-explain-sidebar__tools button {
+  width: 34px;
+  padding: 0;
+  background: var(--color-fd-card);
+  color: var(--color-fd-foreground);
+}
+
+.ai-explain-sidebar button.is-ghost,
+.ai-settings-form button.is-ghost {
+  background: var(--color-fd-card);
+  color: var(--color-fd-foreground);
+}
+
+.ai-explain-sidebar button:disabled,
+.ai-settings-form button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.ai-explain-sidebar .ai-explain-sidebar__resize {
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+}
+
+.ai-explain-sidebar__quote {
+  margin: 14px 16px 0;
+  border: 1px solid var(--color-fd-border);
+  border-radius: 8px;
+  padding: 12px;
+  background: var(--color-fd-card);
+}
+
+.ai-explain-sidebar__quote span,
+.ai-explain-message span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--color-fd-muted-foreground);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.ai-explain-sidebar__quote p {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--color-fd-muted-foreground);
+  font-size: 13px;
+  line-height: 1.7;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
+.ai-settings-form {
+  display: grid;
+  gap: 12px;
+  margin: 14px 16px 0;
+  border: 1px solid var(--color-fd-border);
+  border-radius: 8px;
+  padding: 14px;
+  background: var(--color-fd-card);
+}
+
+.ai-settings-form label {
+  display: grid;
+  gap: 6px;
+}
+
+.ai-settings-form label span {
+  color: var(--color-fd-muted-foreground);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.ai-settings-form input,
+.ai-explain-sidebar__composer textarea {
+  width: 100%;
+  border: 1px solid var(--color-fd-border);
+  border-radius: 8px;
+  padding: 9px 10px;
+  background: var(--color-fd-background);
+  color: var(--color-fd-foreground);
+  font: inherit;
+  font-size: 13px;
+}
+
+.ai-settings-form input:focus,
+.ai-explain-sidebar__composer textarea:focus {
+  outline: 2px solid var(--color-fd-ring);
+  outline-offset: 1px;
+}
+
+.ai-settings-form__error,
+.ai-explain-sidebar__error {
+  color: #b42318;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.ai-settings-form__notice {
+  color: var(--color-fd-muted-foreground);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.ai-explain-sidebar__messages {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  padding: 14px 16px;
+}
+
+.ai-explain-sidebar__empty,
+.ai-explain-sidebar__status,
+.ai-explain-message {
+  border: 1px solid var(--color-fd-border);
+  border-radius: 8px;
+  padding: 12px;
+  background: var(--color-fd-card);
+}
+
+.ai-explain-sidebar__empty {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--color-fd-muted-foreground);
+  font-size: 13px;
+}
+
+.ai-explain-message p {
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.ai-explain-message.is-user p {
+  white-space: pre-wrap;
+}
+
+.ai-explain-markdown {
+  display: grid;
+  gap: 10px;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.ai-explain-markdown :where(p, ul, ol, pre, blockquote, hr) {
+  margin: 0;
+}
+
+.ai-explain-markdown :where(h1, h2, h3, h4, h5, h6) {
+  margin: 10px 0 2px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.ai-explain-markdown h1,
+.ai-explain-markdown h2 {
+  font-size: 16px;
+}
+
+.ai-explain-markdown h3 {
+  font-size: 15px;
+}
+
+.ai-explain-markdown :where(h4, h5, h6) {
+  font-size: 14px;
+}
+
+.ai-explain-markdown :where(ul, ol) {
+  display: grid;
+  gap: 5px;
+  padding-left: 20px;
+}
+
+.ai-explain-markdown li {
+  padding-left: 2px;
+}
+
+.ai-explain-markdown strong {
+  font-weight: 700;
+}
+
+.ai-explain-markdown a {
+  color: var(--color-fd-primary);
+  text-decoration: underline;
+}
+
+.ai-explain-markdown code {
+  border: 1px solid var(--color-fd-border);
+  border-radius: 6px;
+  padding: 1px 5px;
+  background: var(--color-fd-muted);
+  font-size: 12px;
+}
+
+.ai-explain-markdown pre {
+  overflow-x: auto;
+  border: 1px solid var(--color-fd-border);
+  border-radius: 8px;
+  padding: 10px;
+  background: var(--color-fd-muted);
+}
+
+.ai-explain-markdown pre code {
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.ai-explain-markdown blockquote {
+  border-left: 3px solid var(--color-fd-border);
+  padding-left: 10px;
+  color: var(--color-fd-muted-foreground);
+}
+
+.ai-explain-markdown hr {
+  border: 0;
+  border-top: 1px solid var(--color-fd-border);
+}
+
+.ai-explain-message.is-user {
+  background: var(--color-fd-accent);
+}
+
+.ai-explain-sidebar__status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-fd-muted-foreground);
+  font-size: 13px;
+}
+
+.ai-explain-sidebar__status svg {
+  animation: ai-spin 0.8s linear infinite;
+}
+
+.ai-explain-sidebar__error {
+  border: 1px solid color-mix(in srgb, #b42318 35%, transparent);
+  border-radius: 8px;
+  padding: 12px;
+  background: color-mix(in srgb, #b42318 8%, transparent);
+}
+
+.ai-explain-sidebar__composer {
+  display: grid;
+  gap: 10px;
+  padding: 14px 16px;
+  border-top: 1px solid var(--color-fd-border);
+  background: var(--color-fd-background);
+}
+
+.ai-explain-sidebar__composer textarea {
+  min-height: 78px;
+  max-height: 160px;
+  resize: vertical;
+}
+
+.ai-explain-sidebar__composer div {
+  justify-content: flex-end;
+}
+
+@keyframes ai-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (max-width: 720px) {
   .home-container {
     width: min(100% - 24px, 1120px);
@@ -193,5 +584,12 @@ a {
 
   .home-section-link {
     width: fit-content;
+  }
+}
+
+@media (max-width: 1023px) {
+  .ai-selection-trigger,
+  .ai-explain-sidebar {
+    display: none;
   }
 }
