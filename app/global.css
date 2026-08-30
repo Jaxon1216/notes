@@ -130,7 +130,9 @@ a {
 }
 
 .home-shell {
+  min-height: calc(100vh - var(--site-header-height));
   min-height: calc(100svh - var(--site-header-height));
+  min-height: calc(100dvh - var(--site-header-height));
   overflow: clip;
   background: #ffffff;
   color: #1e293b;
@@ -138,7 +140,11 @@ a {
 
 .home-hero {
   position: relative;
+  display: flex;
+  min-height: calc(100vh - var(--site-header-height));
   min-height: calc(100svh - var(--site-header-height));
+  min-height: calc(100dvh - var(--site-header-height));
+  flex-direction: column;
   overflow: hidden;
   background: #ffffff;
 }
@@ -176,12 +182,16 @@ a {
   position: relative;
   z-index: 3;
   display: grid;
-  width: min(1120px, calc(100vw - 40px));
-  max-width: 760px;
+  flex: 1 1 auto;
+  width: min(980px, calc(100vw - 40px));
+  max-width: 980px;
+  align-content: center;
   gap: 18px;
+  justify-items: center;
   margin: 0 auto;
-  padding: clamp(72px, 13vh, 128px) 0 150px;
+  padding: 48px 0 34px;
   pointer-events: none;
+  text-align: center;
 }
 
 .home-kicker {
@@ -194,17 +204,17 @@ a {
 }
 
 .home-title {
-  max-width: 720px;
+  max-width: 900px;
   margin: 0;
   color: #1e293b;
-  font-size: 88px;
-  line-height: 0.96;
+  font-size: 76px;
+  line-height: 1.05;
   letter-spacing: 0;
   text-wrap: balance;
 }
 
 .home-subtitle {
-  max-width: 580px;
+  max-width: 760px;
   margin: 0;
   color: #64748b;
   font-size: 18px;
@@ -216,6 +226,7 @@ a {
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
+  justify-content: center;
   margin-top: 4px;
 }
 
@@ -268,11 +279,11 @@ a {
 }
 
 .home-hero__loop {
-  position: absolute;
-  right: 0;
-  bottom: clamp(18px, 4vh, 42px);
-  left: 0;
+  position: relative;
   z-index: 3;
+  flex: 0 0 auto;
+  width: 100%;
+  padding: 0 0 28px;
   pointer-events: none;
 }
 
@@ -312,7 +323,7 @@ a {
   }
 
   .home-title {
-    font-size: 64px;
+    font-size: 58px;
   }
 }
 
@@ -354,11 +365,12 @@ a {
   .home-hero__content {
     width: min(100% - 28px, 1180px);
     gap: 14px;
-    padding: clamp(48px, 10vh, 76px) 0 128px;
+    padding: 34px 0 24px;
   }
 
   .home-title {
-    font-size: 42px;
+    font-size: 40px;
+    line-height: 1.12;
   }
 
   .home-subtitle {
@@ -375,6 +387,15 @@ a {
     min-height: 40px;
     padding: 0 13px;
     font-size: 13px;
+  }
+
+  .home-hero__loop {
+    padding-bottom: 18px;
+  }
+
+  .home-logo-item {
+    min-width: 126px;
+    height: 42px;
   }
 }
 
