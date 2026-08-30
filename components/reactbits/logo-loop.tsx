@@ -140,6 +140,23 @@ function usePrefersReducedMotion() {
   return prefersReducedMotion
 }
 
+function usePageVisibility() {
+  const [isPageVisible, setIsPageVisible] = useState(
+    () => typeof document === 'undefined' || document.visibilityState === 'visible',
+  )
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      setIsPageVisible(document.visibilityState === 'visible')
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange)
+  }, [])
+
+  return isPageVisible
+}
+
 function useAnimationLoop(
   trackRef: React.RefObject<HTMLDivElement | null>,
   targetVelocity: number,
@@ -161,10 +178,7 @@ function useAnimationLoop(
 
     const seqSize = isVertical ? seqHeight : seqWidth
 
-    if (disabled) {
-      track.style.transform = 'translate3d(0, 0, 0)'
-      return
-    }
+    if (disabled) return
 
     if (seqSize > 0) {
       offsetRef.current = ((offsetRef.current % seqSize) + seqSize) % seqSize
@@ -234,6 +248,7 @@ export const LogoLoop = memo(function LogoLoop({
   const [copyCount, setCopyCount] = useState(ANIMATION_CONFIG.MIN_COPIES)
   const [isHovered, setIsHovered] = useState(false)
   const prefersReducedMotion = usePrefersReducedMotion()
+  const isPageVisible = usePageVisibility()
 
   const effectiveHoverSpeed = useMemo(() => {
     if (hoverSpeed !== undefined) return hoverSpeed
@@ -301,7 +316,7 @@ export const LogoLoop = memo(function LogoLoop({
     isHovered,
     effectiveHoverSpeed,
     isVertical,
-    prefersReducedMotion,
+    prefersReducedMotion || !isPageVisible,
   )
 
   const cssVariables = useMemo<CssVariables>(

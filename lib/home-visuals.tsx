@@ -142,7 +142,7 @@ export const HOME_LOGO_ITEMS: HomeLogoItem[] = [
   {
     key: 'github',
     label: 'GitHub',
-    href: 'https://github.com/Jaxon1216/cpp-notes',
+    href: 'https://github.com/Jaxon1216/notes',
     icon: siGithub,
   },
 ]

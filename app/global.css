@@ -23,10 +23,18 @@ a {
   top: 0;
   z-index: 90;
   border-bottom: 1px solid var(--color-fd-border);
-  background: color-mix(in oklab, var(--color-fd-background) 92%, transparent);
+  background: var(--color-fd-background);
   color: var(--color-fd-foreground);
   box-shadow: 0 1px 0 color-mix(in oklab, var(--color-fd-card) 72%, transparent) inset;
-  backdrop-filter: blur(20px) saturate(140%);
+}
+
+body:has(.home-shell) .site-header {
+  position: fixed;
+  right: 0;
+  left: 0;
+  border-bottom-color: transparent;
+  background: transparent;
+  box-shadow: none;
 }
 
 .site-header__inner {
@@ -236,9 +244,9 @@ a {
 }
 
 .home-shell {
-  min-height: calc(100vh - var(--site-header-height));
-  min-height: calc(100svh - var(--site-header-height));
-  min-height: calc(100dvh - var(--site-header-height));
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
   overflow: clip;
   background: #ffffff;
   color: #1e293b;
@@ -249,12 +257,13 @@ a {
   --home-hero-padding-top: clamp(34px, 6vh, 72px);
   --home-hero-padding-bottom: clamp(8px, 1.4vh, 16px);
 
-  min-height: calc(100vh - var(--site-header-height));
-  min-height: calc(100svh - var(--site-header-height));
-  min-height: calc(100dvh - var(--site-header-height));
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
   box-sizing: border-box;
   overflow: hidden;
-  padding: var(--home-hero-padding-top) 0 var(--home-hero-padding-bottom);
+  padding: calc(var(--site-header-height) + var(--home-hero-padding-top)) 0
+    var(--home-hero-padding-bottom);
   background: #ffffff;
 }
 
@@ -373,13 +382,12 @@ a {
   border: 1px solid rgb(148 163 184 / 28%);
   border-radius: 999px;
   padding: 0 13px;
-  background: rgb(255 255 255 / 64%);
+  background: rgb(255 255 255 / 88%);
   color: #334155;
   font-size: 13px;
   font-weight: 720;
   text-decoration: none;
   box-shadow: 0 8px 20px rgb(37 99 235 / 5%);
-  backdrop-filter: blur(14px);
   transition:
     background 0.18s ease,
     border-color 0.18s ease,
@@ -422,7 +430,6 @@ a {
   font-size: 14px;
   font-weight: 760;
   text-decoration: none;
-  backdrop-filter: blur(14px);
   pointer-events: auto;
 }
 
@@ -452,10 +459,9 @@ a {
   border: 1px solid #e2e8f0;
   border-radius: 999px;
   padding: 6px 11px;
-  background: rgb(248 250 252 / 76%);
+  background: rgb(248 250 252 / 90%);
   color: #64748b;
   font-size: 13px;
-  backdrop-filter: blur(14px);
 }
 
 .home-hero__loop {
@@ -468,6 +474,8 @@ a {
 }
 
 .home-logo-loop {
+  --logoloop-fadeColorAuto: #ffffff;
+
   padding: 8px 0;
 }
 
@@ -481,12 +489,11 @@ a {
   border: 1px solid rgb(191 219 254 / 72%);
   border-radius: 8px;
   padding: 0 13px;
-  background: rgb(239 246 255 / 78%);
+  background: rgb(239 246 255 / 92%);
   color: #1e293b;
   font-size: 13px;
   font-weight: 720;
   box-shadow: 0 8px 22px rgb(37 99 235 / 7%);
-  backdrop-filter: blur(16px);
   pointer-events: auto;
 }
 
@@ -495,6 +502,66 @@ a {
   height: 18px;
   flex: 0 0 auto;
   fill: var(--home-logo-color);
+}
+
+.dark .home-shell,
+.dark .home-hero {
+  background: #090d14;
+  color: #e5edf7;
+}
+
+.dark .home-hero::before {
+  background:
+    radial-gradient(circle at 50% 36%, rgb(29 78 216 / 28%), transparent 32%),
+    radial-gradient(circle at 18% 48%, rgb(14 116 144 / 18%), transparent 26%),
+    linear-gradient(180deg, rgb(9 13 20 / 22%) 0%, rgb(9 13 20 / 62%) 74%, #090d14 100%);
+}
+
+.dark .home-kicker,
+.dark .home-subtitle,
+.dark .home-hero__meta {
+  color: #94a3b8;
+}
+
+.dark .home-title {
+  color: #e5edf7;
+}
+
+.dark .home-topic-tag {
+  border-color: rgb(148 163 184 / 24%);
+  background: rgb(17 24 39 / 88%);
+  color: #cbd5e1;
+}
+
+.dark .home-topic-tag:hover {
+  border-color: rgb(96 165 250 / 42%);
+  background: rgb(30 41 59 / 94%);
+  color: #bfdbfe;
+}
+
+.dark .home-secondary-action,
+.dark .home-hero__meta {
+  border-color: rgb(148 163 184 / 24%);
+  background: rgb(17 24 39 / 90%);
+}
+
+.dark .home-secondary-action {
+  color: #e2e8f0;
+}
+
+.dark .home-secondary-action:hover {
+  background: #1e293b;
+}
+
+.dark .home-logo-loop {
+  --logoloop-fadeColorAuto: #090d14;
+}
+
+.dark .home-logo-item {
+  border-color: rgb(96 165 250 / 26%);
+  background: rgb(15 23 42 / 92%);
+  color: #e2e8f0;
+  box-shadow: 0 8px 22px rgb(0 0 0 / 18%);
 }
 
 @media (max-width: 980px) {

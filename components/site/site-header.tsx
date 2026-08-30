@@ -36,7 +36,7 @@ export function SiteHeader() {
           </Link>
           <a
             className="site-header__icon"
-            href="https://github.com/Jaxon1216/cpp-notes"
+            href="https://github.com/Jaxon1216/notes"
             aria-label="GitHub 仓库"
             rel="noreferrer"
             target="_blank"

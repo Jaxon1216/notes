@@ -33,7 +33,6 @@ export function HomeLogoLoop() {
       className="home-logo-loop"
       direction="left"
       fadeOut
-      fadeOutColor="#ffffff"
       gap={14}
       hoverSpeed={26}
       logoHeight={42}

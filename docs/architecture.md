@@ -114,16 +114,18 @@ docs/
 首页不走 Fumadocs 文档树，而是使用独立的数据统计逻辑：
 
 1. `site.config.ts` 维护一级方向、子栏目名称和描述。
-2. `lib/content.ts` 扫描 `content/docs/<section>` 下的 Markdown/MDX 文件。
+2. `lib/content.ts` 单次扫描 `content/docs/` 下的 Markdown/MDX 文件，再按一级方向和子栏目聚合统计；同一服务端渲染中的首页与导航通过 React `cache` 复用结果。
 3. `app/page.tsx` 获取统计结果，并渲染导航栏下的全屏动效首屏。
 4. `components/home/home-hero.tsx` 组合浅色粒子背景、轻量入口文案和技术栈 LogoLoop。
 5. `lib/home-visuals.tsx` 维护首页技术栈 LogoLoop 图标白名单，不从正文自动扫描技术词。
 
 新增一级方向或调整栏目时，不要在多个页面重复写配置。先改 `site.config.ts`，再补对应目录和 `meta.json`。
+首页粒子和 LogoLoop 都是客户端逐帧动画：粒子数量按桌面/移动端分档，并在组件卸载时销毁；
+两者在页面不可见或用户偏好减少动态效果时停止动画，避免后台标签页持续占用资源。
 
 ## 导航链路
 
-全站固定顶部导航由 `components/site/site-header.tsx` 提供，并在 `app/layout.tsx` 中挂载，覆盖首页和 `/docs/**`。Fumadocs `DocsLayout` 仍负责文档树、侧边栏、搜索和正文区域；`lib/layout.shared.tsx` 保留 Fumadocs 布局共享参数，但不再作为全站主导航的唯一入口。
+全站固定顶部导航由 `components/site/site-header.tsx` 提供，并在 `app/layout.tsx` 中挂载，覆盖首页和 `/docs/**`。CSS 使用首页唯一的 `.home-shell` 标记切换导航外观：首页导航固定覆盖在首屏上且背景透明，非首页导航保持 sticky 并使用不透明的 Fumadocs 主题背景。Fumadocs `DocsLayout` 仍负责文档树、侧边栏、搜索和正文区域；`lib/layout.shared.tsx` 保留 Fumadocs 布局共享参数，但不再作为全站主导航的唯一入口。
 
 ## 配置边界
 

@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import { cache } from 'react'
 
 import {
   IGNORE_NAMES,
@@ -82,37 +83,35 @@ export function toDocHref(absPath: string) {
   return `/docs/${relativePath}`
 }
 
-function firstMarkdownHref(relativeDir: string) {
-  const files = getMdFiles(path.join(process.cwd(), 'content', 'docs', relativeDir))
-  return files.length > 0 ? toDocHref(files[0]) : ''
-}
-
-function childStats(section: SiteSection, child: SiteChild): ChildStat {
+function childStats(section: SiteSection, child: SiteChild, files: string[]): ChildStat {
   const relativeDir = childPath(section, child)
-  const files = getMdFiles(path.join(process.cwd(), 'content', 'docs', relativeDir))
+  const childFiles = files.filter((file) => file.startsWith(`${relativeDir}/`))
 
   return {
     child,
-    href: files.length > 0 ? toDocHref(files[0]) : '',
-    fileCount: files.length,
+    href: childFiles[0] ? `/docs/${childFiles[0].replace(/\.mdx?$/, '')}` : '',
+    fileCount: childFiles.length,
   }
 }
 
-function sectionStats(section: SiteSection): SectionStat {
-  const files = getMdFiles(path.join(process.cwd(), 'content', 'docs', section.dir))
-  const children = section.children.map((child) => childStats(section, child))
+function sectionStats(section: SiteSection, files: string[]): SectionStat {
+  const sectionFiles = files.filter((file) => file.startsWith(`${section.dir}/`))
+  const children = section.children.map((child) => childStats(section, child, sectionFiles))
 
   return {
     section,
-    href: firstMarkdownHref(section.dir),
-    fileCount: files.length,
+    href: sectionFiles[0] ? `/docs/${sectionFiles[0].replace(/\.mdx?$/, '')}` : '',
+    fileCount: sectionFiles.length,
     childCount: section.children.length,
     children,
   }
 }
 
-export function getHomeData(): HomeData {
-  const sections = SITE_SECTIONS.map(sectionStats)
+export const getHomeData = cache(function getHomeData(): HomeData {
+  const files = getMdFiles(CONTENT_ABS_ROOT).map((file) =>
+    path.relative(CONTENT_ABS_ROOT, file).replace(/\\/g, '/'),
+  )
+  const sections = SITE_SECTIONS.map((section) => sectionStats(section, files))
   const totalFiles = sections.reduce((sum, section) => sum + section.fileCount, 0)
   const activeSections = sections.filter((section) => section.fileCount > 0).length
 
@@ -121,4 +120,4 @@ export function getHomeData(): HomeData {
     totalFiles,
     activeSections,
   }
-}
+})
