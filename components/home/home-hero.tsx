@@ -2,7 +2,7 @@ import { ArrowRight, GitPullRequestArrow } from 'lucide-react'
 import Link from 'next/link'
 
 import { HomeLogoLoop } from '@/components/home/home-logo-loop'
-import Galaxy from '@/components/reactbits/galaxy'
+import { ParticlesWrapper } from '@/components/home/particles-wrapper'
 import type { HomeData } from '@/lib/content'
 
 const CONTRIBUTION_HREF = '/docs/dev/conventions/open-source-contribution'
@@ -11,22 +11,7 @@ export function HomeHero({ data }: { data: HomeData }) {
   return (
     <section className="home-hero" aria-labelledby="home-title">
       <div className="home-hero__background" aria-hidden="true">
-        <Galaxy
-          autoCenterRepulsion={0}
-          density={1.18}
-          glowIntensity={0.72}
-          hueShift={198}
-          mouseInteraction
-          mouseRepulsion
-          repulsionStrength={4.2}
-          rotation={[0.74, 0.52]}
-          rotationSpeed={0.16}
-          saturation={0.8}
-          speed={1.85}
-          starSpeed={1.9}
-          transparent
-          twinkleIntensity={0.5}
-        />
+        <ParticlesWrapper />
       </div>
 
       <div className="home-hero__content">

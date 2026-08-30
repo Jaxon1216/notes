@@ -6,7 +6,7 @@
 
 - 新增全站固定顶部导航，统一首页和 `/docs/**` 的主入口，并用独立强调入口指向站内开源贡献指南。
 - 首页改为导航栏下的全屏动效首屏，移除原占位用的站点能力亮点和内容地图模块，继续复用 `lib/content.ts` 的内容统计链路。
-- 接入 ReactBits `LogoLoop` 与 `Galaxy`，新增 `ogl` 依赖；`LogoLoop` 的图标来源改为 `lib/home-visuals.tsx` 中的技术栈白名单，并使用 `simple-icons` 提供品牌图标。
+- 接入 ReactBits `LogoLoop` 和个人主页同款 `particles.js` 浅色粒子背景；`LogoLoop` 的图标来源改为 `lib/home-visuals.tsx` 中的技术栈白名单，并使用 `simple-icons` 提供品牌图标。
 - 新增 `content/docs/dev/conventions/open-source-contribution.md`，将贡献内容、资源推荐格式和提交前检查沉淀为站内文档。
 
 ## 2026-08-27

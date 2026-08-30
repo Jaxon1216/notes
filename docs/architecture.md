@@ -8,7 +8,8 @@
 - React + TypeScript：负责页面和组件实现。
 - Fumadocs：负责 Markdown/MDX 内容加载、文档布局、文档树和搜索源。
 - Tailwind CSS v4：通过 `app/global.css` 引入全局样式能力。
-- ReactBits + OGL：负责首页首屏的 LogoLoop 和 Galaxy 动效。
+- ReactBits LogoLoop：负责首页技术栈横向循环动效。
+- particles.js：复用个人主页同款浅色粒子背景。
 - Simple Icons：负责首页技术栈 LogoLoop 的品牌图标来源。
 - AI SDK：负责文档页 AI 解释挂件的 OpenAI-compatible 模型调用和流式输出。
 - Vercel Analytics：仅在 Vercel 环境中启用访问统计。
@@ -115,7 +116,7 @@ docs/
 1. `site.config.ts` 维护一级方向、子栏目名称和描述。
 2. `lib/content.ts` 扫描 `content/docs/<section>` 下的 Markdown/MDX 文件。
 3. `app/page.tsx` 获取统计结果，并渲染导航栏下的全屏动效首屏。
-4. `components/home/home-hero.tsx` 组合 Galaxy 背景、轻量入口文案和技术栈 LogoLoop。
+4. `components/home/home-hero.tsx` 组合浅色粒子背景、轻量入口文案和技术栈 LogoLoop。
 5. `lib/home-visuals.tsx` 维护首页技术栈 LogoLoop 图标白名单，不从正文自动扫描技术词。
 
 新增一级方向或调整栏目时，不要在多个页面重复写配置。先改 `site.config.ts`，再补对应目录和 `meta.json`。

@@ -29,11 +29,11 @@ export function HomeLogoLoop() {
 
   return (
     <LogoLoop
-      ariaLabel="Easton Notes 涉及的技术与栏目"
+      ariaLabel="Easton Notes 涉及的技术栈"
       className="home-logo-loop"
       direction="left"
       fadeOut
-      fadeOutColor="#081510"
+      fadeOutColor="#ffffff"
       gap={20}
       hoverSpeed={26}
       logoHeight={46}
