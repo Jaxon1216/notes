@@ -34,9 +34,11 @@ export function HomeHero({ data }: { data: HomeData }) {
           </Link>
         </div>
 
-        <div className="home-hero__loop">
-          <HomeLogoLoop />
-        </div>
+        <p className="home-hero__meta">{data.activeSections} 个内容方向持续维护中</p>
+      </div>
+
+      <div className="home-hero__loop">
+        <HomeLogoLoop />
       </div>
     </section>
   )
