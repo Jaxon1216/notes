@@ -8,6 +8,8 @@
 - React + TypeScript：负责页面和组件实现。
 - Fumadocs：负责 Markdown/MDX 内容加载、文档布局、文档树和搜索源。
 - Tailwind CSS v4：通过 `app/global.css` 引入全局样式能力。
+- ReactBits + OGL：负责首页首屏的 LogoLoop 和 Galaxy 动效。
+- Simple Icons：负责首页技术栈 LogoLoop 的品牌图标来源。
 - AI SDK：负责文档页 AI 解释挂件的 OpenAI-compatible 模型调用和流式输出。
 - Vercel Analytics：仅在 Vercel 环境中启用访问统计。
 - Husky + commitlint：本地提交信息校验。
@@ -27,6 +29,9 @@ app/
 
 components/
   ai/                         # 文档页 AI 解释挂件
+  home/                       # 首页模块组件
+  reactbits/                  # ReactBits 动效组件落地代码
+  site/                       # 全站共享导航
   mdx.tsx                     # MDX 组件覆盖，例如图片渲染
 
 content/docs/
@@ -109,9 +114,15 @@ docs/
 
 1. `site.config.ts` 维护一级方向、子栏目名称和描述。
 2. `lib/content.ts` 扫描 `content/docs/<section>` 下的 Markdown/MDX 文件。
-3. `app/page.tsx` 用统计结果渲染首页栏目入口、文章数和首篇文章链接。
+3. `app/page.tsx` 获取统计结果，并渲染导航栏下的全屏动效首屏。
+4. `components/home/home-hero.tsx` 组合 Galaxy 背景、轻量入口文案和技术栈 LogoLoop。
+5. `lib/home-visuals.tsx` 维护首页技术栈 LogoLoop 图标白名单，不从正文自动扫描技术词。
 
 新增一级方向或调整栏目时，不要在多个页面重复写配置。先改 `site.config.ts`，再补对应目录和 `meta.json`。
+
+## 导航链路
+
+全站固定顶部导航由 `components/site/site-header.tsx` 提供，并在 `app/layout.tsx` 中挂载，覆盖首页和 `/docs/**`。Fumadocs `DocsLayout` 仍负责文档树、侧边栏、搜索和正文区域；`lib/layout.shared.tsx` 保留 Fumadocs 布局共享参数，但不再作为全站主导航的唯一入口。
 
 ## 配置边界
 
@@ -123,6 +134,8 @@ docs/
 - AI 解释接口：`app/api/ai/explain/route.ts`
 - AI 挂件 UI：`components/ai/`
 - 首页：`app/page.tsx`、`lib/content.ts`
+- 全站固定导航：`components/site/site-header.tsx`，挂载在 `app/layout.tsx`
+- 首页视觉配置：`components/home/home-hero.tsx`、`lib/home-visuals.tsx`
 - 全局样式：`app/global.css`
 - 共享导航：`lib/layout.shared.tsx`
 - 写作结构检查：`scripts/check-content-style.cjs`

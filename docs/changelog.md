@@ -2,6 +2,13 @@
 
 本文件记录仓库级重大改动、架构决策和维护规则变更。普通笔记内容的小修小补不需要记录。
 
+## 2026-08-29
+
+- 新增全站固定顶部导航，统一首页和 `/docs/**` 的主入口，并用独立强调入口指向站内开源贡献指南。
+- 首页改为导航栏下的全屏动效首屏，移除原占位用的站点能力亮点和内容地图模块，继续复用 `lib/content.ts` 的内容统计链路。
+- 接入 ReactBits `LogoLoop` 与 `Galaxy`，新增 `ogl` 依赖；`LogoLoop` 的图标来源改为 `lib/home-visuals.tsx` 中的技术栈白名单，并使用 `simple-icons` 提供品牌图标。
+- 新增 `content/docs/dev/conventions/open-source-contribution.md`，将贡献内容、资源推荐格式和提交前检查沉淀为站内文档。
+
 ## 2026-08-27
 
 - 新增文档页 AI 解释挂件方案，支持用户在浏览器本地配置 OpenAI-compatible `baseURL`、`apiKey` 和 `model`，选中文档正文后通过右侧栏流式解释引用内容。
