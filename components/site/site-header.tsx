@@ -1,7 +1,8 @@
-import { GitBranch, GitPullRequestArrow } from 'lucide-react'
+import { BookOpenText, GitFork, GitPullRequestArrow } from 'lucide-react'
 import Link from 'next/link'
 
 import { getHomeData } from '@/lib/content'
+import { SiteSearchTrigger } from '@/components/site/site-search-trigger'
 
 const CONTRIBUTION_HREF = '/docs/dev/conventions/open-source-contribution'
 
@@ -12,12 +13,13 @@ export function SiteHeader() {
     <header className="site-header">
       <div className="site-header__inner">
         <Link className="site-header__brand" href="/" aria-label="Easton Notes 首页">
-          <span className="site-header__brand-mark">EN</span>
+          <span className="site-header__brand-mark">
+            <BookOpenText aria-hidden="true" size={17} />
+          </span>
           <span>Easton Notes</span>
         </Link>
 
         <nav className="site-header__nav" aria-label="主导航">
-          <Link href="/docs">Docs</Link>
           {data.sections.map((section) => (
             <Link href={section.href || '/docs'} key={section.section.key}>
               {section.section.navTitle ?? section.section.title}
@@ -26,9 +28,10 @@ export function SiteHeader() {
         </nav>
 
         <div className="site-header__actions">
+          <SiteSearchTrigger />
           <Link className="site-header__contribute" href={CONTRIBUTION_HREF}>
             <GitPullRequestArrow aria-hidden="true" size={16} />
-            <span>开源贡献</span>
+            <span>参与文档贡献</span>
           </Link>
           <a
             className="site-header__icon"
@@ -37,7 +40,7 @@ export function SiteHeader() {
             rel="noreferrer"
             target="_blank"
           >
-            <GitBranch aria-hidden="true" size={18} />
+            <GitFork aria-hidden="true" size={18} />
           </a>
         </div>
       </div>

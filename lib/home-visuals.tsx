@@ -1,17 +1,24 @@
 import {
+  siCss,
   siDocker,
+  siExpress,
   siGit,
   siGithub,
   siGo,
+  siHtml5,
   siJavascript,
   siMarkdown,
   siNextdotjs,
   siNginx,
   siNodedotjs,
+  siPnpm,
+  siPostgresql,
   siReact,
+  siRedis,
   siTailwindcss,
   siTypescript,
   siVite,
+  siWebpack,
   siVuedotjs,
   type SimpleIcon,
 } from 'simple-icons'
@@ -41,6 +48,16 @@ export const HOME_LOGO_ITEMS: HomeLogoItem[] = [
     icon: siTailwindcss,
   },
   {
+    key: 'html',
+    label: 'HTML',
+    icon: siHtml5,
+  },
+  {
+    key: 'css',
+    label: 'CSS',
+    icon: siCss,
+  },
+  {
     key: 'next',
     label: 'Next.js',
     href: '/docs',
@@ -50,6 +67,11 @@ export const HOME_LOGO_ITEMS: HomeLogoItem[] = [
     key: 'node',
     label: 'Node.js',
     icon: siNodedotjs,
+  },
+  {
+    key: 'express',
+    label: 'Express',
+    icon: siExpress,
   },
   {
     key: 'go',
@@ -64,6 +86,16 @@ export const HOME_LOGO_ITEMS: HomeLogoItem[] = [
     icon: siDocker,
   },
   {
+    key: 'postgresql',
+    label: 'PostgreSQL',
+    icon: siPostgresql,
+  },
+  {
+    key: 'redis',
+    label: 'Redis',
+    icon: siRedis,
+  },
+  {
     key: 'nginx',
     label: 'Nginx',
     icon: siNginx,
@@ -72,6 +104,16 @@ export const HOME_LOGO_ITEMS: HomeLogoItem[] = [
     key: 'vite',
     label: 'Vite',
     icon: siVite,
+  },
+  {
+    key: 'webpack',
+    label: 'Webpack',
+    icon: siWebpack,
+  },
+  {
+    key: 'pnpm',
+    label: 'pnpm',
+    icon: siPnpm,
   },
   {
     key: 'vue',

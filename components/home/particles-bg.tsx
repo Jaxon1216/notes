@@ -11,13 +11,13 @@ declare global {
 const config = {
   particles: {
     number: {
-      value: 120,
+      value: 150,
       density: { enable: true, value_area: 800 },
     },
-    color: { value: '#3b82f6' },
+    color: { value: '#2563eb' },
     shape: { type: 'circle' },
     opacity: {
-      value: 0.25,
+      value: 0.32,
       random: true,
       anim: { enable: false },
     },
@@ -29,8 +29,8 @@ const config = {
     line_linked: {
       enable: true,
       distance: 150,
-      color: '#3b82f6',
-      opacity: 0.15,
+      color: '#2563eb',
+      opacity: 0.2,
       width: 1,
     },
     move: {
@@ -65,7 +65,7 @@ const mobileConfig = {
   ...config,
   particles: {
     ...config.particles,
-    number: { value: 45, density: { enable: true, value_area: 800 } },
+    number: { value: 60, density: { enable: true, value_area: 800 } },
   },
 }
 

@@ -34,9 +34,9 @@ export function HomeLogoLoop() {
       direction="left"
       fadeOut
       fadeOutColor="#ffffff"
-      gap={20}
+      gap={14}
       hoverSpeed={26}
-      logoHeight={46}
+      logoHeight={42}
       logos={logos}
       renderItem={(item, key, { isDuplicate }) => {
         if (!('node' in item)) return null
