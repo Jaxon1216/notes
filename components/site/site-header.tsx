@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import { getHomeData } from '@/lib/content'
 import { SiteSearchTrigger } from '@/components/site/site-search-trigger'
+import { SiteThemeSwitch } from '@/components/site/site-theme-switch'
 
 const CONTRIBUTION_HREF = '/docs/dev/conventions/open-source-contribution'
 
@@ -42,6 +43,7 @@ export function SiteHeader() {
           >
             <GitFork aria-hidden="true" size={18} />
           </a>
+          <SiteThemeSwitch />
         </div>
       </div>
     </header>

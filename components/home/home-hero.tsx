@@ -36,7 +36,7 @@ export function HomeHero({ data }: { data: HomeData }) {
         <ParticlesWrapper />
       </div>
 
-      <div className="home-hero__stage">
+      <div className="home-hero__stage particles-passthrough">
         <div className="home-hero__content">
           <p className="home-kicker">Easton Notes</p>
           <h1 className="home-title" id="home-title">
