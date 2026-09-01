@@ -87,7 +87,8 @@ export function SiteHeader({ data }: { data: HomeData }) {
                 data-open={isOpen || undefined}
                 key={section.section.key}
                 onBlur={(event) => {
-                  if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+                  const next = event.relatedTarget as Node | null
+                  if (next && !event.currentTarget.contains(next)) {
                     dispatch({ type: 'close' })
                   }
                 }}
@@ -115,7 +116,6 @@ export function SiteHeader({ data }: { data: HomeData }) {
                           href={child.href || href}
                           key={child.child.key}
                           role="menuitem"
-                          onClick={() => dispatch({ type: 'close' })}
                         >
                           <span>{child.child.title}</span>
                           <small>

@@ -19,4 +19,19 @@ describe('site header rendering boundary', () => {
     expect(layout).toContain('const homeData = getHomeData()')
     expect(layout).toContain('<SiteHeader data={homeData} />')
   })
+
+  it('does not close the menu inside Link onClick, so client navigation can finish', () => {
+    const header = fs.readFileSync(
+      path.join(root, 'components/site/site-header.tsx'),
+      'utf8',
+    )
+    const menuLinks = header.match(/<Link[\s\S]*?<\/Link>/g) ?? []
+
+    expect(menuLinks.length).toBeGreaterThan(0)
+    expect(header).toContain("dispatch({ type: 'route-change' })")
+
+    for (const link of menuLinks) {
+      expect(link).not.toContain("type: 'close'")
+    }
+  })
 })
