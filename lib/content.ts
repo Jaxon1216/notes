@@ -32,6 +32,11 @@ export type HomeData = {
   activeSections: number
 }
 
+function isPlaceholderDoc(file: string) {
+  const source = fs.readFileSync(file, 'utf8')
+  return /^---\r?\n[\s\S]*?^placeholder:\s*true\s*$/m.test(source)
+}
+
 function shouldIgnore(name: string) {
   return (
     name.startsWith('.') ||
@@ -83,35 +88,66 @@ export function toDocHref(absPath: string) {
   return `/docs/${relativePath}`
 }
 
-function childStats(section: SiteSection, child: SiteChild, files: string[]): ChildStat {
+function childStats(
+  section: SiteSection,
+  child: SiteChild,
+  routeFiles: string[],
+  contentFiles: string[],
+): ChildStat {
   const relativeDir = childPath(section, child)
-  const childFiles = files.filter((file) => file.startsWith(`${relativeDir}/`))
+  const childRouteFiles = routeFiles.filter((file) =>
+    file.startsWith(`${relativeDir}/`),
+  )
+  const childContentFiles = contentFiles.filter((file) =>
+    file.startsWith(`${relativeDir}/`),
+  )
 
   return {
     child,
-    href: childFiles[0] ? `/docs/${childFiles[0].replace(/\.mdx?$/, '')}` : '',
-    fileCount: childFiles.length,
+    href: childRouteFiles[0]
+      ? `/docs/${childRouteFiles[0].replace(/\.mdx?$/, '')}`
+      : '',
+    fileCount: childContentFiles.length,
   }
 }
 
-function sectionStats(section: SiteSection, files: string[]): SectionStat {
-  const sectionFiles = files.filter((file) => file.startsWith(`${section.dir}/`))
-  const children = section.children.map((child) => childStats(section, child, sectionFiles))
+function sectionStats(
+  section: SiteSection,
+  routeFiles: string[],
+  contentFiles: string[],
+): SectionStat {
+  const sectionRouteFiles = routeFiles.filter((file) =>
+    file.startsWith(`${section.dir}/`),
+  )
+  const sectionContentFiles = contentFiles.filter((file) =>
+    file.startsWith(`${section.dir}/`),
+  )
+  const children = section.children.map((child) =>
+    childStats(section, child, sectionRouteFiles, sectionContentFiles),
+  )
 
   return {
     section,
-    href: sectionFiles[0] ? `/docs/${sectionFiles[0].replace(/\.mdx?$/, '')}` : '',
-    fileCount: sectionFiles.length,
+    href: sectionRouteFiles[0]
+      ? `/docs/${sectionRouteFiles[0].replace(/\.mdx?$/, '')}`
+      : '',
+    fileCount: sectionContentFiles.length,
     childCount: section.children.length,
     children,
   }
 }
 
 export const getHomeData = cache(function getHomeData(): HomeData {
-  const files = getMdFiles(CONTENT_ABS_ROOT).map((file) =>
+  const files = getMdFiles(CONTENT_ABS_ROOT)
+  const routeFiles = files.map((file) =>
     path.relative(CONTENT_ABS_ROOT, file).replace(/\\/g, '/'),
   )
-  const sections = SITE_SECTIONS.map((section) => sectionStats(section, files))
+  const contentFiles = files
+    .filter((file) => !isPlaceholderDoc(file))
+    .map((file) => path.relative(CONTENT_ABS_ROOT, file).replace(/\\/g, '/'))
+  const sections = SITE_SECTIONS.map((section) =>
+    sectionStats(section, routeFiles, contentFiles),
+  )
   const totalFiles = sections.reduce((sum, section) => sum + section.fileCount, 0)
   const activeSections = sections.filter((section) => section.fileCount > 0).length
 

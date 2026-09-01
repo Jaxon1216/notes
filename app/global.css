@@ -678,6 +678,84 @@ body:has(.home-shell) .site-header {
   }
 }
 
+.empty-category-state {
+  display: grid;
+  max-width: 620px;
+  justify-items: start;
+  gap: 14px;
+  margin: 32px auto;
+  border: 1px dashed color-mix(in srgb, var(--color-fd-primary) 36%, var(--color-fd-border));
+  border-radius: 18px;
+  padding: clamp(28px, 6vw, 52px);
+  background:
+    radial-gradient(circle at top right, color-mix(in srgb, var(--color-fd-primary) 10%, transparent), transparent 42%),
+    var(--color-fd-card);
+  box-shadow: 0 18px 42px rgb(15 23 42 / 7%);
+}
+
+.empty-category-state__icon {
+  display: inline-grid;
+  width: 56px;
+  height: 56px;
+  place-items: center;
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--color-fd-primary) 12%, transparent);
+  color: var(--color-fd-primary);
+}
+
+.empty-category-state__eyebrow {
+  margin: 6px 0 -6px !important;
+  color: var(--color-fd-primary);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+
+.empty-category-state h2 {
+  margin: 0 !important;
+  font-size: clamp(24px, 4vw, 32px);
+  letter-spacing: -0.035em;
+}
+
+.empty-category-state > p:not(.empty-category-state__eyebrow) {
+  max-width: 52ch;
+  margin: 0 !important;
+  color: var(--color-fd-muted-foreground);
+  line-height: 1.8;
+}
+
+.empty-category-state__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.empty-category-state__actions a {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  gap: 7px;
+  border-radius: 10px;
+  padding: 0 13px;
+  background: var(--color-fd-primary);
+  color: var(--color-fd-primary-foreground);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.empty-category-state__actions a.is-secondary {
+  border: 1px solid var(--color-fd-border);
+  background: transparent;
+  color: var(--color-fd-foreground);
+}
+
+.empty-category-state__actions a:hover {
+  filter: brightness(0.97);
+  transform: translateY(-1px);
+}
+
 .ai-selection-trigger {
   position: fixed;
   z-index: 70;
