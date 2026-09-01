@@ -955,6 +955,136 @@ body:has(.home-shell) .site-header {
   }
 }
 
+.resource-directory {
+  overflow: hidden;
+  margin: 1.5rem 0;
+  border: 1px solid var(--color-fd-border);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--color-fd-card) 72%, var(--color-fd-background));
+  box-shadow: 0 14px 34px rgb(15 23 42 / 5%);
+}
+
+.resource-directory__tabs {
+  display: flex;
+  gap: 6px;
+  padding: 10px;
+  border-bottom: 1px solid var(--color-fd-border);
+  background: color-mix(in srgb, var(--color-fd-muted) 48%, transparent);
+}
+
+.resource-directory__tab {
+  border: 0;
+  border-radius: 9px;
+  padding: 7px 12px;
+  background: transparent;
+  color: var(--color-fd-muted-foreground);
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.resource-directory__tab[aria-selected='true'] {
+  background: var(--color-fd-primary);
+  color: var(--color-fd-primary-foreground);
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--color-fd-primary) 22%, transparent);
+}
+
+.resource-directory__tab:focus-visible,
+.resource-directory a:focus-visible {
+  outline: 2px solid var(--color-fd-primary);
+  outline-offset: 2px;
+}
+
+.resource-directory__table-wrap {
+  overflow-x: auto;
+}
+
+.resource-directory table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+}
+
+.resource-directory th,
+.resource-directory td {
+  border-bottom: 1px solid var(--color-fd-border);
+  padding: 14px 16px;
+  vertical-align: top;
+  text-align: left;
+}
+
+.resource-directory thead th {
+  color: var(--color-fd-muted-foreground);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.resource-directory tbody th {
+  min-width: 144px;
+  color: var(--color-fd-foreground);
+  font-size: 14px;
+}
+
+.resource-directory tbody td {
+  color: var(--color-fd-muted-foreground);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.resource-directory tbody tr:last-child th,
+.resource-directory tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.resource-directory tbody tr:hover {
+  background: color-mix(in srgb, var(--color-fd-primary) 7%, transparent);
+}
+
+.resource-directory a {
+  color: var(--color-fd-primary);
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.resource-directory a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.resource-directory__tags {
+  display: flex;
+  min-width: 110px;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.resource-directory__tag {
+  display: inline-flex;
+  border-radius: 999px;
+  padding: 2px 8px;
+  background: var(--color-fd-accent);
+  color: var(--color-fd-accent-foreground);
+  font-size: 12px;
+  line-height: 1.45;
+  white-space: nowrap;
+}
+
+.resource-directory__external-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  white-space: nowrap;
+}
+
+.resource-directory__empty {
+  margin: 0;
+  padding: 28px 20px;
+  color: var(--color-fd-muted-foreground);
+  text-align: center;
+}
+
 .ai-selection-trigger {
   position: fixed;
   z-index: 70;

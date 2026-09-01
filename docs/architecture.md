@@ -31,6 +31,7 @@ app/
 components/
   ai/                         # 文档页 AI 解释挂件
   home/                       # 首页模块组件
+  docs/                       # 文档页可复用目录与空态组件
   reactbits/                  # ReactBits 动效组件落地代码
   site/                       # 全站共享导航
   mdx.tsx                     # MDX 组件覆盖，例如图片渲染
@@ -48,6 +49,8 @@ lib/
   ai/config.ts                # AI 挂件共享类型、提示词和限制配置
   source.ts                   # Fumadocs 内容源
   content.ts                  # 首页统计和首篇文章链接
+  resource-directory.ts       # 优质资源文章/项目目录数据与校验
+  site-navigation.ts          # 顶部导航受控状态与当前领域解析
   layout.shared.tsx           # 导航等共享布局配置
 
 scripts/
@@ -116,16 +119,18 @@ docs/
 1. `site.config.ts` 维护一级方向、子栏目名称和描述。
 2. `lib/content.ts` 单次扫描 `content/docs/` 下的 Markdown/MDX 文件，再按一级方向和子栏目聚合统计；同一服务端渲染中的首页与导航通过 React `cache` 复用结果。
 3. `app/page.tsx` 获取统计结果，并渲染导航栏下的全屏动效首屏。
-4. `components/home/home-hero.tsx` 组合浅色粒子背景、轻量入口文案和技术栈 LogoLoop。
+4. `components/home/home-hero.tsx` 组合浅色粒子背景、轻量入口文案和技术栈 LogoLoop；`components/home/particles-config.ts` 集中维护桌面/移动端的粒子配置。
 5. `lib/home-visuals.tsx` 维护首页技术栈 LogoLoop 图标白名单，不从正文自动扫描技术词。
 
 新增一级方向或调整栏目时，不要在多个页面重复写配置。先改 `site.config.ts`，再补对应目录和 `meta.json`。
 首页粒子和 LogoLoop 都是客户端逐帧动画：粒子数量按桌面/移动端分档，并在组件卸载时销毁；
 两者在页面不可见或用户偏好减少动态效果时停止动画，避免后台标签页持续占用资源。
 
+优质好文项目页由 `lib/resource-directory.ts` 提供三类领域的类型化文章/项目数据，并由 `components/docs/resource-directory.tsx` 渲染带键盘可用分段控件的资源表。每个已发布条目都必须有 HTTPS 链接、简介、推荐理由和至少一个标签；暂未筛到合适内容的维度使用明确空态。
+
 ## 导航链路
 
-全站固定顶部导航由 `components/site/site-header.tsx` 提供，并在 `app/layout.tsx` 中挂载，覆盖首页和 `/docs/**`。CSS 使用首页唯一的 `.home-shell` 标记切换导航外观：首页导航固定覆盖在首屏上且背景透明，非首页导航保持 sticky 并使用不透明的 Fumadocs 主题背景。Fumadocs `DocsLayout` 仍负责文档树、侧边栏、搜索和正文区域；`lib/layout.shared.tsx` 保留 Fumadocs 布局共享参数，但不再作为全站主导航的唯一入口。
+全站固定顶部导航由 `components/site/site-header.tsx` 提供，并在 `app/layout.tsx` 中挂载，覆盖首页和 `/docs/**`。导航使用 `lib/site-navigation.ts` 的受控状态，任一时刻仅保留一个展开菜单：悬浮会转移菜单归属，点击可固定/关闭，点击栏外、按 Escape 或路由变更都会关闭。当前阅读领域从 `/docs/<section>/...` 推导，并以低干扰的蓝色焦点提示显示；首页和 `/docs` 总览不高亮。CSS 使用首页唯一的 `.home-shell` 标记切换导航外观：首页导航固定覆盖在首屏上且背景透明，非首页导航保持 sticky 并使用不透明的 Fumadocs 主题背景。Fumadocs `DocsLayout` 仍负责文档树、侧边栏、搜索和正文区域；`lib/layout.shared.tsx` 保留 Fumadocs 布局共享参数，但不再作为全站主导航的唯一入口。
 
 ## 配置边界
 
@@ -139,7 +144,9 @@ docs/
 - 首页：`app/page.tsx`、`lib/content.ts`
 - 全站固定导航：`components/site/site-header.tsx`，挂载在 `app/layout.tsx`
 - 首页视觉配置：`components/home/home-hero.tsx`、`lib/home-visuals.tsx`
+- 首页粒子配置：`components/home/particles-config.ts`
 - 全局样式：`app/global.css`
+- 资源目录数据与组件：`lib/resource-directory.ts`、`components/docs/resource-directory.tsx`
 - 共享导航：`lib/layout.shared.tsx`
 - 写作结构检查：`scripts/check-content-style.cjs`
 - Vercel 部署命令：`vercel.json`
