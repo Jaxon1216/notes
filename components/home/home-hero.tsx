@@ -16,8 +16,8 @@ const TOPIC_TAGS = [
     href: '/docs/frontend/interview/00-面经4.9',
   },
   {
-    label: '优质资源',
-    href: '/docs/frontend/resources/projects/vue3rabbit/01-基础与项目搭建',
+    label: 'React 学习',
+    href: '/docs/frontend/knowledge/React/00-React学习路线',
   },
   {
     label: 'GitHub 学习项目',
