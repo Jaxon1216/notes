@@ -759,16 +759,63 @@ body:has(.home-shell) .site-header {
 .ai-selection-trigger {
   position: fixed;
   z-index: 70;
-  display: inline-grid;
-  width: 34px;
+  display: inline-flex;
+  min-width: 34px;
   height: 34px;
-  place-items: center;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
   border: 1px solid var(--color-fd-border);
   border-radius: 999px;
+  padding: 0 11px;
   background: var(--color-fd-primary);
   color: var(--color-fd-primary-foreground);
   box-shadow: 0 12px 30px rgb(0 0 0 / 18%);
   cursor: pointer;
+}
+
+.ai-selection-trigger span {
+  font-size: 12px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.ai-selection-trigger__hint {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 8px);
+  border-radius: 8px;
+  padding: 6px 8px;
+  background: var(--color-fd-foreground);
+  color: var(--color-fd-background);
+  font-size: 11px !important;
+  font-weight: 650 !important;
+  box-shadow: 0 8px 18px rgb(15 23 42 / 18%);
+}
+
+.ai-explain-launcher {
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  z-index: 70;
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid var(--color-fd-border);
+  border-radius: 999px;
+  padding: 0 14px;
+  background: var(--color-fd-primary);
+  color: var(--color-fd-primary-foreground);
+  box-shadow: 0 14px 32px rgb(15 23 42 / 18%);
+  font-size: 13px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.ai-explain-launcher:hover {
+  filter: brightness(0.98);
+  transform: translateY(-1px);
 }
 
 .ai-selection-trigger:hover {
@@ -909,6 +956,56 @@ body:has(.home-shell) .site-header {
   border-radius: 8px;
   padding: 12px;
   background: var(--color-fd-card);
+}
+
+.ai-explain-sidebar__guide {
+  display: grid;
+  gap: 10px;
+  margin: 14px 16px 0;
+  border: 1px solid color-mix(in srgb, var(--color-fd-primary) 28%, var(--color-fd-border));
+  border-radius: 12px;
+  padding: 14px;
+  background: color-mix(in srgb, var(--color-fd-primary) 7%, var(--color-fd-card));
+}
+
+.ai-explain-sidebar__guide div {
+  display: grid;
+  gap: 3px;
+}
+
+.ai-explain-sidebar__guide span {
+  color: var(--color-fd-primary);
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.ai-explain-sidebar__guide h2 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.ai-explain-sidebar__guide ol {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding-left: 19px;
+  color: var(--color-fd-muted-foreground);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.ai-explain-sidebar__guide p {
+  margin: 0;
+  color: var(--color-fd-muted-foreground);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.ai-explain-sidebar__guide button {
+  justify-self: start;
+  min-height: 30px;
+  padding: 0 10px;
+  font-size: 12px;
 }
 
 .ai-explain-sidebar__quote span,
@@ -1149,6 +1246,7 @@ body:has(.home-shell) .site-header {
 
 @media (max-width: 1023px) {
   .ai-selection-trigger,
+  .ai-explain-launcher,
   .ai-explain-sidebar {
     display: none;
   }

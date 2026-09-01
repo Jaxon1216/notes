@@ -12,6 +12,7 @@ export type AiQuote = {
 }
 
 export const AI_CONFIG_STORAGE_KEY = 'easton-ai-config-v1'
+export const AI_ONBOARDING_STORAGE_KEY = 'easton-ai-onboarding-v1'
 export const AI_TRIGGER_LABEL = '解释选中内容'
 export const AI_DEFAULT_QUESTION = '解释这段内容'
 export const AI_TRIGGER_ICON_NAME = 'sparkles'

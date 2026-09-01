@@ -1,7 +1,15 @@
 'use client'
 
 import { useChat } from '@ai-sdk/react'
-import { Bot, LoaderCircle, RefreshCw, Send, Settings, X } from 'lucide-react'
+import {
+  Bot,
+  CircleHelp,
+  LoaderCircle,
+  RefreshCw,
+  Send,
+  Settings,
+  X,
+} from 'lucide-react'
 import { DefaultChatTransport, type UIMessage } from 'ai'
 import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react'
 
@@ -18,6 +26,9 @@ import { AiMarkdown } from './ai-markdown'
 type AiExplainSidebarProps = {
   open: boolean
   quote: AiQuote | null
+  showOnboarding: boolean
+  onDismissOnboarding: () => void
+  onShowOnboarding: () => void
   onClose: () => void
 }
 
@@ -62,6 +73,9 @@ function loadSidebarWidth() {
 export function AiExplainSidebar({
   open,
   quote,
+  showOnboarding,
+  onDismissOnboarding,
+  onShowOnboarding,
   onClose,
 }: AiExplainSidebarProps) {
   const [config, setConfig] = useState<AiProviderConfig | null>(null)
@@ -237,6 +251,14 @@ export function AiExplainSidebar({
         <div className="ai-explain-sidebar__tools">
           <button
             type="button"
+            title="使用说明"
+            aria-label="使用说明"
+            onClick={onShowOnboarding}
+          >
+            <CircleHelp aria-hidden="true" size={16} />
+          </button>
+          <button
+            type="button"
             title="设置"
             aria-label="设置"
             onClick={() => setShowSettings((value) => !value)}
@@ -257,6 +279,24 @@ export function AiExplainSidebar({
         </div>
       </header>
 
+      {showOnboarding ? (
+        <section className="ai-explain-sidebar__guide" aria-label="AI 解答使用说明">
+          <div>
+            <span>第一次使用？</span>
+            <h2>三步开始 AI 解答</h2>
+          </div>
+          <ol>
+            <li>在设置中填写自己的 OpenAI-compatible 模型配置。</li>
+            <li>回到正文，选中想读懂的一段内容。</li>
+            <li>点击选区旁的“AI 解答”，即可围绕原文追问。</li>
+          </ol>
+          <p>API Key 仅保存在当前浏览器，本站不会持久化。</p>
+          <button type="button" onClick={onDismissOnboarding}>
+            我知道了
+          </button>
+        </section>
+      ) : null}
+
       {quote ? (
         <section className="ai-explain-sidebar__quote" aria-label="当前引用">
           <span>引用</span>
@@ -275,7 +315,11 @@ export function AiExplainSidebar({
         {messages.length === 0 && !error ? (
           <div className="ai-explain-sidebar__empty">
             <Bot aria-hidden="true" size={18} />
-            <p>选中文档内容后，我会围绕引用解释。</p>
+            <p>
+              {quote
+                ? '输入问题，或点击“重新解释”开始。'
+                : '先选中正文内容，我会围绕引用解释。'}
+            </p>
           </div>
         ) : null}
 

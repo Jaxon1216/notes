@@ -12,12 +12,14 @@ import type { TextSelectionState } from './use-text-selection'
 type AiSelectionTriggerProps = {
   selection: TextSelectionState
   hidden?: boolean
+  showHint?: boolean
   onExplain: (text: string) => void
 }
 
 export function AiSelectionTrigger({
   selection,
   hidden = false,
+  showHint = false,
   onExplain,
 }: AiSelectionTriggerProps) {
   if (hidden || !selection.text || !selection.rect) return null
@@ -26,7 +28,7 @@ export function AiSelectionTrigger({
   const top = Math.max(selection.rect.top - 42, 12)
   const left = Math.min(
     selection.rect.left + selection.rect.width,
-    window.innerWidth - 56,
+    window.innerWidth - 150,
   )
 
   return (
@@ -45,6 +47,10 @@ export function AiSelectionTrigger({
       }}
     >
       <Sparkles aria-hidden="true" size={16} />
+      <span>AI 解答</span>
+      {showHint ? (
+        <span className="ai-selection-trigger__hint">选中内容后点这里</span>
+      ) : null}
     </button>
   )
 }

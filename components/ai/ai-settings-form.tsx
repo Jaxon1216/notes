@@ -114,8 +114,8 @@ export function AiSettingsForm({ onSave, onClear }: AiSettingsFormProps) {
         </button>
       </div>
       <p className="ai-settings-form__notice">
-        配置只保存在当前浏览器；请求 AI 时会发送到本站 API
-        用于转发，不会持久化。生产环境仅允许站点配置的模型服务域名。
+        支持 OpenAI-compatible 模型服务。配置只保存在当前浏览器；请求 AI 时会发送到本站 API
+        用于转发，不会持久化。生产环境仅允许站点配置的 HTTPS 模型服务域名。
       </p>
     </form>
   )
