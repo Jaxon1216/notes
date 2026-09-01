@@ -85,7 +85,13 @@ export function toDocHref(absPath: string) {
     .replace(/\\/g, '/')
     .replace(/\.mdx?$/, '')
 
-  return `/docs/${relativePath}`
+  return toPageHref(relativePath)
+}
+
+function toPageHref(relativePath: string) {
+  const normalizedPath = relativePath.replace(/(^|\/)index$/, '')
+
+  return normalizedPath ? `/docs/${normalizedPath}` : '/docs'
 }
 
 function childStats(
@@ -105,7 +111,7 @@ function childStats(
   return {
     child,
     href: childRouteFiles[0]
-      ? `/docs/${childRouteFiles[0].replace(/\.mdx?$/, '')}`
+      ? toPageHref(childRouteFiles[0].replace(/\.mdx?$/, ''))
       : '',
     fileCount: childContentFiles.length,
   }
@@ -129,7 +135,7 @@ function sectionStats(
   return {
     section,
     href: sectionRouteFiles[0]
-      ? `/docs/${sectionRouteFiles[0].replace(/\.mdx?$/, '')}`
+      ? toPageHref(sectionRouteFiles[0].replace(/\.mdx?$/, ''))
       : '',
     fileCount: sectionContentFiles.length,
     childCount: section.children.length,

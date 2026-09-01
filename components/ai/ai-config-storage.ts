@@ -1,6 +1,5 @@
 import {
   AI_CONFIG_STORAGE_KEY,
-  AI_ONBOARDING_STORAGE_KEY,
   type AiProviderConfig,
 } from '@/lib/ai/config'
 
@@ -69,16 +68,4 @@ export function clearAiConfig() {
   if (typeof window === 'undefined') return
 
   window.localStorage.removeItem(AI_CONFIG_STORAGE_KEY)
-}
-
-export function hasSeenAiOnboarding() {
-  if (typeof window === 'undefined') return false
-
-  return window.localStorage.getItem(AI_ONBOARDING_STORAGE_KEY) === 'seen'
-}
-
-export function markAiOnboardingSeen() {
-  if (typeof window === 'undefined') return
-
-  window.localStorage.setItem(AI_ONBOARDING_STORAGE_KEY, 'seen')
 }

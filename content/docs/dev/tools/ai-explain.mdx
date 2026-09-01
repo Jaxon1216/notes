@@ -1,0 +1,28 @@
+---
+title: 如何使用 AI 解答
+description: 配置自己的模型服务后，选中文档正文并获得围绕原文的解释。
+---
+
+import { AiTutorialPlaceholder } from '@/components/ai/ai-tutorial-placeholder'
+
+# 如何使用 AI 解答
+
+AI 解答用于辅助阅读当前文章：它只围绕你选中的原文解释，不会自动读取整篇笔记。
+
+## 操作示意
+
+<AiTutorialPlaceholder />
+
+## 使用步骤
+
+1. 在任意文档正文中选中想进一步理解的内容。
+2. 点击选区旁出现的“AI 解答”。
+3. 首次使用时，填写自己的 OpenAI-compatible `Base URL`、`API Key` 与模型名称。
+4. 保存后即可获得解释，也可以继续围绕当前引用追问。
+
+## 配置与隐私
+
+- 模型配置只保存在当前浏览器的本地存储中。
+- API Key 请求时会经由本站 API 转发，但不会由本站持久化。
+- 生产环境只接受 HTTPS 且在站点允许列表中的模型服务域名。
+- 选中的内容最多 4000 个字符，追问最多 1000 个字符。

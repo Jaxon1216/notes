@@ -1,4 +1,10 @@
-import { BookOpenText, GitFork, GitPullRequestArrow } from 'lucide-react'
+import {
+  BookOpenText,
+  ChevronDown,
+  GitFork,
+  GitPullRequestArrow,
+  Sparkles,
+} from 'lucide-react'
 import Link from 'next/link'
 
 import { getHomeData } from '@/lib/content'
@@ -21,14 +27,39 @@ export function SiteHeader() {
         </Link>
 
         <nav className="site-header__nav" aria-label="主导航">
-          {data.sections.map((section) => (
-            <Link href={section.href || '/docs'} key={section.section.key}>
-              {section.section.navTitle ?? section.section.title}
-            </Link>
-          ))}
+          {data.sections.map((section) => {
+            const defaultChild =
+              section.children.find((child) => child.child.key === 'knowledge') ??
+              section.children[0]
+            const href = defaultChild?.href || section.href || '/docs'
+
+            return (
+              <div className="site-header__nav-item" key={section.section.key}>
+                <Link href={href}>
+                  {section.section.navTitle ?? section.section.title}
+                  <ChevronDown aria-hidden="true" size={14} />
+                </Link>
+                <div className="site-header__nav-menu">
+                  {section.children.map((child) => (
+                    <Link href={child.href || href} key={child.child.key}>
+                      <span>{child.child.title}</span>
+                      <small>
+                        {child.fileCount > 0 ? `${child.fileCount} 篇` : '整理中'}
+                      </small>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )
+          })}
         </nav>
 
         <div className="site-header__actions">
+          <Link className="site-header__ai-guide" href="/docs/dev/tools/ai-explain">
+            <Sparkles aria-hidden="true" size={15} />
+            <span>AI 解答</span>
+            <i>新</i>
+          </Link>
           <SiteSearchTrigger />
           <Link className="site-header__contribute" href={CONTRIBUTION_HREF}>
             <GitPullRequestArrow aria-hidden="true" size={16} />

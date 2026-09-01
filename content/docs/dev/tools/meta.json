@@ -1,5 +1,5 @@
 {
   "title": "工具配置",
   "description": "Docker、Markdown、npm 和常用工具。",
-  "pages": ["docker", "markdown", "npm-publish-package"]
+  "pages": ["docker", "markdown", "npm-publish-package", "ai-explain"]
 }
