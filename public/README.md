@@ -6,6 +6,7 @@
 
 当前站点使用：
 
-- `favicon.svg`
+- `site-icon.png`：浏览器标签页和 Apple 设备网站图标
+- `favicon.svg`：保留的旧图标资源
 
 如需新增全站静态资源，放在本目录后可通过根路径访问，例如 `public/example.png` 对应 `/example.png`。

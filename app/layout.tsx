@@ -14,7 +14,8 @@ export const metadata: Metadata = {
   },
   description: '面向前端、服务端与 Agent 应用开发的个人技术知识库',
   icons: {
-    icon: '/favicon.svg',
+    icon: '/site-icon.png',
+    apple: '/site-icon.png',
   },
 }
 
