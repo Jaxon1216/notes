@@ -1,0 +1,54 @@
+export function createParticlesConfig(isMobile: boolean) {
+  return {
+    particles: {
+      number: {
+        value: isMobile ? 45 : 120,
+        density: { enable: true, value_area: 800 },
+      },
+      color: { value: '#3b82f6' },
+      shape: { type: 'circle' },
+      opacity: {
+        value: 0.25,
+        random: true,
+        anim: { enable: false },
+      },
+      size: {
+        value: 2.5,
+        random: true,
+        anim: { enable: false },
+      },
+      line_linked: {
+        enable: true,
+        distance: 150,
+        color: '#3b82f6',
+        opacity: 0.15,
+        width: 1,
+      },
+      move: {
+        enable: true,
+        speed: 0.8,
+        direction: 'none',
+        random: false,
+        straight: false,
+        out_mode: 'bounce',
+        bounce: false,
+        attract: { enable: true, rotateX: 600, rotateY: 1200 },
+      },
+    },
+    interactivity: {
+      detect_on: 'canvas',
+      events: {
+        onhover: { enable: true, mode: 'grab' },
+        onclick: { enable: false },
+        resize: true,
+      },
+      modes: {
+        grab: {
+          distance: 150,
+          line_linked: { opacity: 0.4 },
+        },
+      },
+    },
+    retina_detect: true,
+  }
+}
