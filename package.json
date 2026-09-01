@@ -15,7 +15,8 @@
     "docs:dev": "next dev",
     "docs:build": "next build",
     "docs:preview": "next start",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test:unit": "vitest run"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.3.0",
@@ -27,7 +28,8 @@
     "@types/react-dom": "^19.2.5",
     "husky": "^9.1.7",
     "tailwindcss": "^4.3.3",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11"
   },
   "description": "",
   "main": "index.js",

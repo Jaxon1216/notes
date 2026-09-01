@@ -6,6 +6,7 @@ import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 
 import { SiteHeader } from '@/components/site/site-header'
+import { getHomeData } from '@/lib/content'
 
 export const metadata: Metadata = {
   title: {
@@ -20,11 +21,13 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
+  const homeData = getHomeData()
+
   return (
     <html lang="zh-CN" suppressHydrationWarning>
       <body className="flex min-h-screen flex-col">
         <RootProvider>
-          <SiteHeader />
+          <SiteHeader data={homeData} />
           {children}
         </RootProvider>
         {process.env.VERCEL ? <Analytics /> : null}

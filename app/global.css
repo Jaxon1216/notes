@@ -81,7 +81,8 @@ body:has(.home-shell) .site-header {
 }
 
 .site-header__brand:focus-visible,
-.site-header__nav a:focus-visible,
+.site-header__nav button:focus-visible,
+.site-header__nav-menu a:focus-visible,
 .site-header__contribute:focus-visible,
 .site-header__search:focus-visible,
 .site-header__theme-switch:focus-visible,
@@ -113,34 +114,67 @@ body:has(.home-shell) .site-header {
   position: relative;
 }
 
-.site-header__nav-item > a {
+.site-header__nav-item > button {
   display: inline-flex;
   align-items: center;
   gap: 3px;
+  border: 0;
   border-radius: 10px;
   padding: 8px 11px;
+  background: transparent;
   color: var(--color-fd-muted-foreground);
+  font: inherit;
   font-size: 14px;
   font-weight: 650;
-  text-decoration: none;
+  line-height: inherit;
   white-space: nowrap;
+  cursor: pointer;
   transition:
     background 0.18s ease,
     color 0.18s ease,
     transform 0.18s ease;
 }
 
-.site-header__nav-item > a:hover {
+.site-header__nav-item > button:hover,
+.site-header__nav-item[data-open] > button {
   background: var(--color-fd-accent);
   color: var(--color-fd-accent-foreground);
   transform: translateY(-1px);
 }
 
-.site-header__nav-menu {
+.site-header__nav-item[data-active] > button {
+  position: relative;
+  color: #2563eb;
+  box-shadow:
+    0 0 0 2px rgb(37 99 235 / 90%),
+    0 0 0 5px rgb(96 165 250 / 20%);
+}
+
+.site-header__nav-item[data-active] > button::after {
   position: absolute;
-  top: calc(100% + 8px);
+  inset: -7px;
+  border: 1px solid rgb(96 165 250 / 65%);
+  border-radius: 14px;
+  animation: site-nav-active-pulse 1.8s ease-out 1;
+  pointer-events: none;
+  content: '';
+}
+
+.site-header__nav-item[data-open] > button svg {
+  transform: rotate(180deg);
+}
+
+.site-header__nav-menu-shell {
+  position: absolute;
+  top: 100%;
   left: 50%;
   z-index: 100;
+  width: max-content;
+  padding-top: 8px;
+  transform: translateX(-50%);
+}
+
+.site-header__nav-menu {
   display: grid;
   width: max-content;
   min-width: 184px;
@@ -150,17 +184,7 @@ body:has(.home-shell) .site-header {
   border-radius: 12px;
   background: var(--color-fd-background);
   box-shadow: 0 16px 32px rgb(15 23 42 / 14%);
-  opacity: 0;
-  pointer-events: none;
-  transform: translate(-50%, -4px);
-  transition: opacity 0.16s ease, transform 0.16s ease;
-}
-
-.site-header__nav-item:hover .site-header__nav-menu,
-.site-header__nav-item:focus-within .site-header__nav-menu {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translate(-50%, 0);
+  animation: site-nav-menu-in 0.16s ease-out both;
 }
 
 .site-header__nav-menu a {
@@ -185,6 +209,37 @@ body:has(.home-shell) .site-header {
   color: var(--color-fd-muted-foreground);
   font-size: 11px;
   font-weight: 600;
+}
+
+@keyframes site-nav-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes site-nav-active-pulse {
+  from {
+    opacity: 0.9;
+    transform: scale(0.88);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header__nav-item[data-active] > button::after,
+  .site-header__nav-menu {
+    animation: none;
+  }
 }
 
 .site-header__actions {
