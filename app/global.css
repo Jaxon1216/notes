@@ -909,36 +909,50 @@ body:has(.home-shell) .site-header {
   transform: translateY(-1px);
 }
 
-.ai-tutorial-placeholder {
+.ai-tutorial-steps {
   display: grid;
-  min-height: 240px;
-  place-items: center;
-  align-content: center;
-  gap: 10px;
+  gap: 20px;
   margin: 24px 0;
-  border: 1px dashed var(--color-fd-border);
-  border-radius: 16px;
-  padding: 28px;
-  background: repeating-linear-gradient(
-    -45deg,
-    color-mix(in srgb, var(--color-fd-muted) 72%, transparent),
-    color-mix(in srgb, var(--color-fd-muted) 72%, transparent) 12px,
-    transparent 12px,
-    transparent 24px
-  );
-  color: var(--color-fd-muted-foreground);
-  text-align: center;
 }
 
-.ai-tutorial-placeholder strong {
+.ai-tutorial-steps figure {
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid color-mix(in srgb, var(--color-fd-border) 88%, transparent);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--color-fd-card) 94%, transparent);
+  box-shadow: 0 14px 34px rgb(15 23 42 / 8%);
+}
+
+.ai-tutorial-steps img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-fd-border) 86%, transparent);
+}
+
+.ai-tutorial-steps figcaption {
+  display: grid;
+  gap: 4px;
+  padding: 14px 16px 16px;
+}
+
+.ai-tutorial-steps strong {
   color: var(--color-fd-foreground);
   font-size: 15px;
 }
 
-.ai-tutorial-placeholder span {
-  max-width: 44ch;
+.ai-tutorial-steps span {
+  color: var(--color-fd-muted-foreground);
   font-size: 13px;
   line-height: 1.65;
+}
+
+@media (min-width: 900px) {
+  .ai-tutorial-steps figure:last-child {
+    width: min(100%, 920px);
+    justify-self: center;
+  }
 }
 
 .ai-selection-trigger {
