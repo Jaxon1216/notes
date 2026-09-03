@@ -1,11 +1,11 @@
 'use client'
 
 import {
-  BookOpenText,
   ChevronDown,
   GitPullRequestArrow,
   Sparkles,
 } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
@@ -64,7 +64,13 @@ export function SiteHeader({ data }: { data: HomeData }) {
       <div className="site-header__inner">
         <Link className="site-header__brand" href="/" aria-label="Easton Notes 首页">
           <span className="site-header__brand-mark">
-            <BookOpenText aria-hidden="true" size={17} />
+            <Image
+              src="/brand-icon.jpg"
+              alt=""
+              width={34}
+              height={34}
+              priority
+            />
           </span>
           <span>Easton Notes</span>
         </Link>

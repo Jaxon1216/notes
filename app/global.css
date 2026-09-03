@@ -93,12 +93,18 @@ body:has(.home-shell) .site-header {
   display: inline-grid;
   width: 34px;
   height: 34px;
+  overflow: hidden;
   place-items: center;
   border: 1px solid rgb(30 41 59 / 12%);
   border-radius: 10px;
-  background: #102118;
-  color: #f7fbf8;
+  background: #fff;
   box-shadow: 0 10px 24px rgb(15 23 42 / 12%);
+}
+
+.site-header__brand-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .site-header__nav {
