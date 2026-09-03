@@ -3,7 +3,6 @@
 import {
   BookOpenText,
   ChevronDown,
-  GitFork,
   GitPullRequestArrow,
   Sparkles,
 } from 'lucide-react'
@@ -142,15 +141,6 @@ export function SiteHeader({ data }: { data: HomeData }) {
             <GitPullRequestArrow aria-hidden="true" size={16} />
             <span>参与文档贡献</span>
           </Link>
-          <a
-            className="site-header__icon"
-            href="https://github.com/Jaxon1216/notes"
-            aria-label="GitHub 仓库"
-            rel="noreferrer"
-            target="_blank"
-          >
-            <GitFork aria-hidden="true" size={18} />
-          </a>
           <SiteThemeSwitch />
         </div>
       </div>

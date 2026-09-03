@@ -52,8 +52,7 @@ body:has(.home-shell) .site-header {
 .site-header__actions,
 .site-header__contribute,
 .site-header__search,
-.site-header__theme-switch,
-.site-header__icon {
+.site-header__theme-switch {
   display: inline-flex;
   align-items: center;
 }
@@ -85,8 +84,7 @@ body:has(.home-shell) .site-header {
 .site-header__nav-menu a:focus-visible,
 .site-header__contribute:focus-visible,
 .site-header__search:focus-visible,
-.site-header__theme-switch:focus-visible,
-.site-header__icon:focus-visible {
+.site-header__theme-switch:focus-visible {
   outline: 2px solid #2563eb;
   outline-offset: 2px;
 }
@@ -315,28 +313,6 @@ body:has(.home-shell) .site-header {
 .site-header__contribute:hover {
   background: #d4ef68;
   box-shadow: 0 12px 28px rgb(96 114 18 / 16%);
-  transform: translateY(-1px);
-}
-
-.site-header__icon {
-  width: 36px;
-  height: 36px;
-  justify-content: center;
-  border: 1px solid var(--color-fd-border);
-  border-radius: 10px;
-  color: var(--color-fd-foreground);
-  text-decoration: none;
-  transition:
-    background 0.18s ease,
-    box-shadow 0.18s ease,
-    color 0.18s ease,
-    transform 0.18s ease;
-}
-
-.site-header__icon:hover {
-  background: var(--color-fd-accent);
-  color: var(--color-fd-accent-foreground);
-  box-shadow: 0 10px 24px rgb(15 23 42 / 7%);
   transform: translateY(-1px);
 }
 
@@ -751,11 +727,6 @@ body:has(.home-shell) .site-header {
     min-height: 34px;
     padding: 0 10px;
     font-size: 13px;
-  }
-
-  .site-header__icon {
-    width: 34px;
-    height: 34px;
   }
 
   .home-hero__content {
