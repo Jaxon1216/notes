@@ -176,7 +176,7 @@ description: 页面描述
 ```bash
 npm run check:content
 npm run check:images
-npm run docs:build
+npm run build
 ```
 
 如果改了 Vue 笔记中的 HTML/Vue 示例，额外运行：

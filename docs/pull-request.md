@@ -60,7 +60,7 @@ chore: add content style check
 ```bash
 npm run check:content
 npm run check:images
-npm run docs:build
+npm run build
 ```
 
 改动 Vue 笔记里的 HTML/Vue 示例时运行：
@@ -78,7 +78,7 @@ npm run validate
 `validate` 会依次执行：
 
 ```text
-check:content -> check:images -> check:vue:tags -> typecheck -> docs:build
+check:content -> check:images -> check:vue:tags -> typecheck -> build
 ```
 
 当前项目尚未接入 ESLint。TypeScript 和 Next.js 构建会覆盖编译错误；如果后续 React 组件和交互代码增多，再补 `eslint.config.mjs`、`lint` 脚本和 CI lint 阶段。

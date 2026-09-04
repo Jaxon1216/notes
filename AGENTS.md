@@ -19,16 +19,16 @@
 
 ## 本地命令
 
-- 启动开发服务：`npm run docs:dev`
-- 生产构建：`npm run docs:build`
-- 预览构建产物：`npm run docs:preview`
+- 启动开发服务：`npm run dev`
+- 生产构建：`npm run build`
+- 预览构建产物：`npm run start`
 - 内容结构检查：`npm run check:content`
 - 图片引用检查：`npm run check:images`
 - 检查 Vue 笔记中的 HTML 标签闭合：`npm run check:vue:tags`
 - TypeScript 检查：`npm run typecheck`
 - PR 总检查：`npm run validate`
 
-`docs:dev` 和 `docs:build` 直接运行 Next.js，不再生成 `index.md`。
+`dev` 和 `build` 直接运行 Next.js，不再生成 `index.md`。
 
 ## 信息架构
 
@@ -88,7 +88,7 @@ npm run check:images
 涉及导航、首页、目录或样式时，至少运行：
 
 ```bash
-npm run docs:build
+npm run build
 ```
 
 如果只改 Vue 笔记里的 HTML/Vue 示例，也可以额外运行：

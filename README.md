@@ -13,19 +13,19 @@ npm install
 启动开发服务：
 
 ```bash
-npm run docs:dev
+npm run dev
 ```
 
 生产构建：
 
 ```bash
-npm run docs:build
+npm run build
 ```
 
 本地预览构建产物：
 
 ```bash
-npm run docs:preview
+npm run start
 ```
 
 ## 目录结构
@@ -77,7 +77,7 @@ content/docs/
 2. 新增 Markdown 或 MDX 文件，文件名使用清晰标题，可带数字前缀控制排序，例如 `01-核心概念.md`。
 3. 文章内图片放在当前专题附近的 `img/` 目录，并使用相对路径引用。
 4. 如需调整侧边栏展示顺序或目录中文名，编辑对应目录下的 `meta.json`。
-5. 提交前运行 `npm run docs:build`。
+5. 提交前运行 `npm run build`。
 
 更完整的写作约束见 `docs/writing-style.md`，PR 流程见 `docs/pull-request.md`。
 
@@ -87,7 +87,7 @@ content/docs/
 npm run check:content
 npm run check:vue:tags
 npm run typecheck
-npm run docs:build
+npm run build
 npm run validate
 ```
 

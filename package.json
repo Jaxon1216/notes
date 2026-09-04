@@ -11,10 +11,7 @@
     "check:content": "node scripts/check-content-style.cjs content/docs docs README.md AGENTS.md",
     "check:images": "node scripts/check-images.cjs content/docs",
     "check:vue:tags": "node scripts/check-html-tags.cjs content/docs/frontend/knowledge/Vue",
-    "validate": "npm run check:content && npm run check:images && npm run check:vue:tags && npm run typecheck && npm run docs:build",
-    "docs:dev": "next dev",
-    "docs:build": "next build",
-    "docs:preview": "next start",
+    "validate": "npm run check:content && npm run check:images && npm run check:vue:tags && npm run typecheck && npm run build",
     "prepare": "husky",
     "test:unit": "vitest run"
   },

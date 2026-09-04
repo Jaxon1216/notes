@@ -160,7 +160,7 @@ npm run check:content
 npm run check:images
 npm run check:vue:tags
 npm run typecheck
-npm run docs:build
+npm run build
 npm run validate
 ```
 

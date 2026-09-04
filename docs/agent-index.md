@@ -40,7 +40,7 @@
 新增文章：
 
 ```text
-读取 AGENTS.md -> 读取 writing-style.md -> 选择 content/docs 目录 -> 新增文章 -> 更新必要的 meta.json -> npm run check:content -> npm run check:images -> npm run docs:build
+读取 AGENTS.md -> 读取 writing-style.md -> 选择 content/docs 目录 -> 新增文章 -> 更新必要的 meta.json -> npm run check:content -> npm run check:images -> npm run build
 ```
 
 修改信息架构：
@@ -73,5 +73,5 @@ npm run validate
 涉及导航、首页、目录、样式、Fumadocs 配置或构建链路时，必须至少运行：
 
 ```bash
-npm run docs:build
+npm run build
 ```

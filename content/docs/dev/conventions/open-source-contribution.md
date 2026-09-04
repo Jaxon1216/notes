@@ -108,7 +108,7 @@ npm run check:images
 涉及首页、导航、目录、样式或构建链路时，至少运行：
 
 ```bash
-npm run docs:build
+npm run build
 ```
 
 PR 前建议运行完整检查：

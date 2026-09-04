@@ -63,7 +63,7 @@ AI 完成修改后，贡献者应依次确认：
 - 标题层级、代码块、图片引用和链接是否符合写作规范。
 - `git diff` 是否只包含本次贡献，不含构建产物、编辑器配置或无关的导航、样式和架构改动。
 - 已运行 `npm run check:content`、`npm run check:images`；涉及导航、目录、样式或构建链路时已运行
-  `npm run docs:build`。提交 PR 前建议运行 `npm run validate`。
+  `npm run build`。提交 PR 前建议运行 `npm run validate`。
 
 ## 可复制提示词
 
