@@ -59,6 +59,7 @@ export function HomeLogoLoop() {
             className="logoloop__link"
             href={item.href}
             key={key}
+            prefetch={false}
             tabIndex={isDuplicate ? -1 : undefined}
           >
             {item.node}

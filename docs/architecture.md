@@ -130,12 +130,14 @@ docs/
 新增一级方向或调整栏目时，不要在多个页面重复写配置。先改 `site.config.ts`，再补对应目录和 `meta.json`。
 首页粒子和 LogoLoop 都是客户端逐帧动画：粒子数量按桌面/移动端分档，并在组件卸载时销毁；
 两者在页面不可见或用户偏好减少动态效果时停止动画，避免后台标签页持续占用资源。
+首页只为主要的“进入文档”入口保留 Next.js 路由预取；内容标签、次要贡献入口和
+LogoLoop 中会被复制的技术栈链接关闭自动预取，避免首屏可见链接批量请求 RSC。
 
 优质好文项目页由 `lib/resource-directory.ts` 提供三类领域的类型化文章/项目数据，并由 `components/docs/resource-directory.tsx` 渲染带键盘可用分段控件的资源表。每个已发布条目都必须有 HTTPS 链接、简介、推荐理由和至少一个标签；暂未筛到合适内容的维度使用明确空态。
 
 ## 导航链路
 
-全站固定顶部导航由 `components/site/site-header.tsx` 提供，并在 `app/layout.tsx` 中挂载，覆盖首页和 `/docs/**`。导航使用 `lib/site-navigation.ts` 的受控状态，任一时刻仅保留一个展开菜单：悬浮会转移菜单归属，点击可固定/关闭，点击栏外、按 Escape 或路由变更都会关闭。当前阅读领域从 `/docs/<section>/...` 推导，并以低干扰的蓝色焦点提示显示；首页和 `/docs` 总览不高亮。CSS 使用首页唯一的 `.home-shell` 标记切换导航外观：首页导航固定覆盖在首屏上且背景透明，非首页导航保持 sticky 并使用不透明的 Fumadocs 主题背景。Fumadocs `DocsLayout` 仍负责文档树、侧边栏、搜索和正文区域；`lib/layout.shared.tsx` 保留 Fumadocs 布局共享参数，但不再作为全站主导航的唯一入口。
+全站固定顶部导航由 `components/site/site-header.tsx` 提供，并在 `app/layout.tsx` 中挂载，覆盖首页和 `/docs/**`。导航使用 `lib/site-navigation.ts` 的受控状态，任一时刻仅保留一个展开菜单：悬浮会转移菜单归属，点击可固定/关闭，点击栏外、按 Escape 或路由变更都会关闭。当前阅读领域从 `/docs/<section>/...` 推导，并以低干扰的蓝色焦点提示显示；首页和 `/docs` 总览不高亮。CSS 使用首页唯一的 `.home-shell` 标记切换导航外观：首页导航固定覆盖在首屏上且背景透明，非首页导航保持 sticky 并使用不透明的 Fumadocs 主题背景。Fumadocs `DocsLayout` 仍负责文档树、侧边栏、搜索和正文区域；`lib/layout.shared.tsx` 保留 Fumadocs 布局共享参数，但不再作为全站主导航的唯一入口。全站头部的品牌和栏目菜单保持 Next.js 默认预取；低频的 AI 解答教程与贡献入口关闭自动预取，但仍使用 `Link` 完成客户端导航。
 
 ## 配置边界
 

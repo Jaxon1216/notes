@@ -62,7 +62,12 @@ export function HomeHero({ data }: { data: HomeData }) {
                   {tag.label}
                 </a>
               ) : (
-                <Link className="home-topic-tag" href={tag.href} key={tag.label}>
+                <Link
+                  className="home-topic-tag"
+                  href={tag.href}
+                  key={tag.label}
+                  prefetch={false}
+                >
                   {tag.label}
                 </Link>
               )
@@ -70,11 +75,15 @@ export function HomeHero({ data }: { data: HomeData }) {
           </div>
 
           <div className="home-hero__actions">
-            <Link className="home-primary-action" href="/docs">
+            <Link className="home-primary-action" href="/docs" prefetch={true}>
               <span>进入文档</span>
               <ArrowRight aria-hidden="true" size={17} />
             </Link>
-            <Link className="home-secondary-action" href={CONTRIBUTION_HREF}>
+            <Link
+              className="home-secondary-action"
+              href={CONTRIBUTION_HREF}
+              prefetch={false}
+            >
               <GitPullRequestArrow aria-hidden="true" size={17} />
               <span>参与文档贡献</span>
             </Link>

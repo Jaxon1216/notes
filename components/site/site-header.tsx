@@ -137,13 +137,21 @@ export function SiteHeader({ data }: { data: HomeData }) {
         </nav>
 
         <div className="site-header__actions">
-          <Link className="site-header__ai-guide" href="/docs/dev/tools/ai-explain">
+          <Link
+            className="site-header__ai-guide"
+            href="/docs/dev/tools/ai-explain"
+            prefetch={false}
+          >
             <Sparkles aria-hidden="true" size={15} />
             <span>AI 解答</span>
             <i>新</i>
           </Link>
           <SiteSearchTrigger />
-          <Link className="site-header__contribute" href={CONTRIBUTION_HREF}>
+          <Link
+            className="site-header__contribute"
+            href={CONTRIBUTION_HREF}
+            prefetch={false}
+          >
             <GitPullRequestArrow aria-hidden="true" size={16} />
             <span>参与文档贡献</span>
           </Link>
