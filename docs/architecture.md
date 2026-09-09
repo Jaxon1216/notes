@@ -43,6 +43,9 @@ content/docs/
   backend/                    # 服务端内容
   algorithm/                  # 算法内容
   agent/                      # Agent 应用开发内容
+    knowledge/agent/
+      Agent应用开发.md         # Agent 应用开发专题总览，保留稳定入口
+      agent-development/      # 按主题拆分的 Agent 应用开发文章
   dev/                        # 个人开发常用内容
 
 lib/
@@ -111,6 +114,8 @@ docs/
 4. `app/docs/[[...slug]]/page.tsx` 根据 URL slug 找到对应 page，生成 metadata 并渲染 MDX。
 5. `app/docs/layout.tsx` 用 `source.getPageTree()` 生成文档树和侧边栏。
 6. `app/api/search/route.ts` 基于同一个 source 生成搜索数据。
+
+大型连续专题优先保留一个稳定的总览页面，再将正文拆到带数字前缀的子目录中；专题子目录使用 `meta.json` 固定侧边栏顺序。`Agent应用开发.md` 采用这一结构承接原有 URL，具体内容位于 `agent-development/`。
 
 ## 首页数据链路
 
