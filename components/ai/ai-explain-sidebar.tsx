@@ -34,6 +34,21 @@ function getMessageText(message: UIMessage) {
     .join('')
 }
 
+function toRequestMessages(messages: UIMessage[]) {
+  return messages.flatMap((message) => {
+    const text = getMessageText(message)
+    if (!text.trim()) return []
+
+    return [
+      {
+        id: message.id,
+        role: message.role,
+        parts: [{ type: 'text' as const, text }],
+      },
+    ]
+  })
+}
+
 function trimQuote(text: string) {
   return text.replace(/\s+/g, ' ').trim()
 }
@@ -125,6 +140,12 @@ export function AiExplainSidebar({
     () =>
       new DefaultChatTransport({
         api: '/api/ai/explain',
+        prepareSendMessagesRequest: ({ body, messages }) => ({
+          body: {
+            ...body,
+            messages: toRequestMessages(messages),
+          },
+        }),
       }),
     [],
   )

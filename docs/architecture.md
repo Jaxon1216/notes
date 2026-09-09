@@ -50,6 +50,9 @@ content/docs/
 
 lib/
   ai/config.ts                # AI 挂件共享类型、提示词和限制配置
+  ai/explain-request.ts       # AI 请求体读取、结构校验和字段限制
+  ai/fixed-window-rate-limit.ts # 进程内 best-effort 固定窗口限流
+  ai/provider-url.ts          # Provider URL、allowlist、DNS 和私网校验
   source.ts                   # Fumadocs 内容源
   content.ts                  # 首页统计和首篇文章链接
   resource-directory.ts       # 优质资源文章/项目目录数据与校验
@@ -109,11 +112,18 @@ docs/
 - `components/ai/ai-settings-form.tsx`：用户模型配置表单。
 - `components/ai/ai-config-storage.ts`：浏览器 localStorage 配置读写。
 - `lib/ai/config.ts`：共享类型、默认问题、内置提示词和长度限制。
+- `lib/ai/explain-request.ts`：请求体字节限制、消息结构和字段长度校验。
+- `lib/ai/fixed-window-rate-limit.ts`：无外部依赖的进程内固定窗口限流。
+- `lib/ai/provider-url.ts`：Provider URL allowlist、DNS 解析和非公网地址校验。
 - `app/api/ai/explain/route.ts`：Next.js Route Handler，使用 AI SDK 转发到用户配置的 OpenAI-compatible 模型服务。
 
 挂件只在 `/docs/**` 文档布局中挂载。用户配置项包括 `baseURL`、`apiKey` 和 `model`，只保存在当前浏览器的 `localStorage:easton-ai-config-v1` 中；每次请求会随请求体传给 `/api/ai/explain`，服务端仅用于本次转发，不持久化密钥。
 
-`/api/ai/explain` 只支持 OpenAI-compatible 模型服务。生产环境会限制 `baseURL` 为 HTTPS，并要求域名在内置允许列表或 `AI_ALLOWED_BASE_URL_HOSTS` 环境变量中；本地开发环境允许 `localhost` 和 `127.0.0.1`，便于调试 LM Studio/Ollama 兼容接口。接口还会解析域名并拦截本机、内网、链路本地等地址，模型请求不跟随重定向。
+`/api/ai/explain` 只支持 OpenAI-compatible 模型服务。请求体按声明的 `Content-Length` 和实际读取的 UTF-8 字节双重限制为 128 KiB；只接受最多 24 条 `user`/`assistant` 文本消息，单条最多 8,000 字符、总计最多 24,000 字符，用户问题仍限制为 1,000 字符，引用仍限制为 4,000 字符。每条消息最多包含 8 个文本 part。`baseURL`、`apiKey`、`model`、各类 `id`、`pageTitle`、`pageUrl` 分别限制为 2,048、4,096、256、128、300、2,048 字符。
+
+生产环境会限制 `baseURL` 为 HTTPS，并要求域名精确匹配内置允许列表或 `AI_ALLOWED_BASE_URL_HOSTS` 环境变量；本地开发环境只额外允许 `localhost` 和 `127.0.0.1` 使用 HTTP，便于调试 LM Studio/Ollama 兼容接口。接口还会解析域名并拦截本机、内网、链路本地及其他非公网地址，模型请求不跟随重定向。
+
+接口按代理提供的客户端 IP 执行 best-effort 固定窗口限流：每个热实例内每个客户端每 60 秒最多 10 次请求，状态 Map 最多保留 10,000 个客户端；超过限制返回 `429` 和 `Retry-After`。该限制不依赖外部服务，因此不保证跨实例全局计数。Provider 调用错误统一转换为固定提示，不向客户端回显密钥或上游错误详情。
 
 第一版只把用户选中的文本作为引用上下文，不自动读取附近段落、整篇文章或全站内容。移动端小于 `1024px` 时隐藏入口和侧栏。
 
