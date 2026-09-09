@@ -61,6 +61,10 @@ scripts/
   check-images.cjs            # Markdown/MDX 图片引用检查
   check-html-tags.cjs         # Vue 笔记 HTML 标签闭合检查
 
+public/
+  favicon.svg                 # 浏览器标签页矢量图标
+  site-icon.png               # 180x180 Apple Touch Icon，路径保持兼容
+
 vercel.json                   # Vercel 安装和构建命令
 
 docs/
@@ -86,6 +90,13 @@ docs/
 - `app/global.css`：引入 `fumadocs-ui/css/neutral.css` 和 `fumadocs-ui/css/preset.css`。
 
 因此，调整 Fumadocs 内容、路由、MDX 行为或文档样式时，优先从这些文件查起。
+
+## 站点 Metadata 与图标
+
+`app/layout.tsx` 统一维护全站 Metadata。普通浏览器 favicon 指向轻量的
+`/favicon.svg`；Apple Touch Icon 指向规范的 180x180 PNG
+`/site-icon.png`。后者保留原公开路径以兼容旧引用，资源用途和尺寸约束记录在
+`public/README.md`。
 
 ## AI 解释挂件
 
@@ -153,6 +164,7 @@ Fumadocs `DocsLayout` 仍负责文档树、侧边栏、搜索和正文区域；`
 - AI 解释接口：`app/api/ai/explain/route.ts`
 - AI 挂件 UI：`components/ai/`
 - 首页：`app/page.tsx`、`lib/content.ts`
+- 全站 Metadata 与图标：`app/layout.tsx`、`public/favicon.svg`、`public/site-icon.png`
 - 全站固定导航：`components/site/site-header.tsx`，挂载在 `app/layout.tsx`
 - 首页视觉配置：`components/home/home-hero.tsx`、`lib/home-visuals.tsx`
 - 首页粒子配置：`components/home/particles-config.ts`
