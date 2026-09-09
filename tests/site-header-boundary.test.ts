@@ -20,6 +20,24 @@ describe('site header rendering boundary', () => {
     expect(layout).toContain('<SiteHeader data={homeData} />')
   })
 
+  it('uses only the Fumadocs header on mobile docs pages', () => {
+    const docsLayout = fs.readFileSync(
+      path.join(root, 'app/docs/layout.tsx'),
+      'utf8',
+    )
+    const styles = fs.readFileSync(path.join(root, 'app/global.css'), 'utf8')
+
+    expect(docsLayout).toContain(
+      "containerProps={{ className: 'docs-layout' }}",
+    )
+    expect(styles).toContain(
+      '.docs-layout {\n  --fd-banner-height: var(--site-header-height);\n}',
+    )
+    expect(styles).toMatch(
+      /@media \(width < 48rem\) \{\s+body:has\(\.docs-layout\) \.site-header \{\s+display: none;\s+\}\s+\.docs-layout \{\s+--site-header-height: 0px;\s+--fd-banner-height: 0px;\s+\}\s+\}/,
+    )
+  })
+
   it('does not close the menu inside Link onClick, so client navigation can finish', () => {
     const header = fs.readFileSync(
       path.join(root, 'components/site/site-header.tsx'),

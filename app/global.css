@@ -28,6 +28,21 @@ a {
   box-shadow: 0 1px 0 color-mix(in oklab, var(--color-fd-card) 72%, transparent) inset;
 }
 
+.docs-layout {
+  --fd-banner-height: var(--site-header-height);
+}
+
+@media (width < 48rem) {
+  body:has(.docs-layout) .site-header {
+    display: none;
+  }
+
+  .docs-layout {
+    --site-header-height: 0px;
+    --fd-banner-height: 0px;
+  }
+}
+
 body:has(.home-shell) .site-header {
   position: fixed;
   right: 0;
