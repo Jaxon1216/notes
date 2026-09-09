@@ -7,6 +7,7 @@
 - Next.js App Router：负责应用路由、页面渲染、构建和静态生成。
 - React + TypeScript：负责页面和组件实现。
 - Fumadocs：负责 Markdown/MDX 内容加载、文档布局、文档树和搜索源。
+- Zod：基于 Fumadocs `pageSchema` 校验统一的文档 frontmatter。
 - Tailwind CSS v4：通过 `app/global.css` 引入全局样式能力。
 - ReactBits LogoLoop：负责首页技术栈横向循环动效。
 - particles.js：复用个人主页同款浅色粒子背景。
@@ -22,6 +23,8 @@ app/
   page.tsx                    # 首页
   layout.tsx                  # 全站根布局和 Fumadocs RootProvider
   global.css                  # 全局样式和 Fumadocs 样式引入
+  robots.ts                   # 搜索引擎抓取规则
+  sitemap.ts                  # 首页与全部文档 URL
   api/search/route.ts         # Fumadocs 搜索接口
   api/ai/explain/route.ts     # AI 解释挂件的模型调用转发接口
   docs/
@@ -53,6 +56,8 @@ lib/
   ai/explain-request.ts       # AI 请求体读取、结构校验和字段限制
   ai/fixed-window-rate-limit.ts # 进程内 best-effort 固定窗口限流
   ai/provider-url.ts          # Provider URL、allowlist、DNS 和私网校验
+  frontmatter.ts              # 基于 Zod 的共享文档 frontmatter schema
+  site-url.ts                 # 部署环境与本地环境的站点 URL 解析
   source.ts                   # Fumadocs 内容源
   content.ts                  # 首页统计和首篇文章链接
   resource-directory.ts       # 优质资源文章/项目目录数据与校验
@@ -96,10 +101,18 @@ docs/
 
 ## 站点 Metadata 与图标
 
-`app/layout.tsx` 统一维护全站 Metadata。普通浏览器 favicon 指向轻量的
-`/favicon.svg`；Apple Touch Icon 指向规范的 180x180 PNG
-`/site-icon.png`。后者保留原公开路径以兼容旧引用，资源用途和尺寸约束记录在
-`public/README.md`。
+`lib/site-url.ts` 统一解析站点源地址，依次读取 `NEXT_PUBLIC_SITE_URL`、
+`VERCEL_PROJECT_PRODUCTION_URL` 和 `VERCEL_URL`，自动补全 Vercel 域名的 HTTPS
+协议并移除尾部斜杠；本地未配置时明确回退到 `http://localhost:3000`。
+
+`app/layout.tsx` 统一维护 `metadataBase`、首页 canonical、基础 OpenGraph/Twitter
+Metadata 和图标。文档动态路由使用各自的 Fumadocs 页面 URL 生成 canonical 与
+OpenGraph URL，避免所有文章继承首页地址。`app/robots.ts` 开放全站抓取并声明
+sitemap，`app/sitemap.ts` 通过 `source.getPages()` 动态输出首页和全部文档 URL。
+
+普通浏览器 favicon 指向轻量的 `/favicon.svg`；Apple Touch Icon 指向规范的
+180x180 PNG `/site-icon.png`。后者保留原公开路径以兼容旧引用，资源用途和尺寸约束
+记录在 `public/README.md`。
 
 ## AI 解释挂件
 
@@ -130,8 +143,9 @@ docs/
 ## 内容渲染链路
 
 1. 作者在 `content/docs/**` 下新增或修改 Markdown/MDX。
-2. Fumadocs MDX macro 在构建期读取 `content/docs/**/*.md(x)` 和 `meta.json`。
-3. `lib/source.ts` 将文档内容转换为 Fumadocs source。
+2. Fumadocs MDX macro 在构建期读取 `content/docs/**/*.md(x)` 和 `meta.json`，并
+   使用 `lib/frontmatter.ts` 的共享 schema 校验可选元数据。
+3. `lib/source.ts` 将校验后的文档内容转换为 Fumadocs source。
 4. `app/docs/[[...slug]]/page.tsx` 根据 URL slug 找到对应 page，生成 metadata 并渲染 MDX。
 5. `app/docs/layout.tsx` 用 `source.getPageTree()` 生成文档树和侧边栏。
 6. `app/api/search/route.ts` 基于同一个 source 生成搜索数据。
@@ -168,8 +182,10 @@ Fumadocs `DocsLayout` 仍负责文档树、侧边栏、搜索和正文区域；`
 
 - 信息架构：`site.config.ts`
 - 文档树顺序和目录标题：`content/docs/**/meta.json`
+- 文档 frontmatter schema：`lib/frontmatter.ts`
 - 文档内容源：`lib/source.ts`
 - 文档路由：`app/docs/[[...slug]]/page.tsx`
+- 站点 URL 与搜索引擎发现路由：`lib/site-url.ts`、`app/robots.ts`、`app/sitemap.ts`
 - 文档布局：`app/docs/layout.tsx`
 - AI 解释接口：`app/api/ai/explain/route.ts`
 - AI 挂件 UI：`components/ai/`

@@ -1,15 +1,14 @@
 import { loader } from 'fumadocs-core/source'
-import { pageSchema } from 'fumadocs-core/source/schema'
 import { applyMdxPreset } from 'fumadocs-mdx/config'
 import { defineDocs } from 'fumadocs-mdx/macro'
+
+import { frontmatterSchema } from '@/lib/frontmatter'
 
 const docs = defineDocs({
   dir: 'content/docs',
   docs: {
     files: ['**/*.md', '**/*.mdx'],
-    schema: pageSchema.extend({
-      title: pageSchema.shape.title.optional(),
-    }),
+    schema: frontmatterSchema,
     mdxOptions: applyMdxPreset({
       remarkImageOptions: {
         external: false,

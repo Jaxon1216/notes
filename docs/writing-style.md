@@ -83,16 +83,35 @@ Fumadocs 使用 `meta.json` 维护目录元信息。它不应该成为每篇文�
 
 ## Frontmatter
 
-普通文章可以不写 frontmatter，页面标题会从文件名或正文 H1 推导。需要覆盖展示标题或描述时再写：
+普通文章可以不写 frontmatter，页面标题会从文件名或正文 H1 推导。所有字段都是可选的，
+以兼容已有内容；一旦填写，就必须符合 `lib/frontmatter.ts` 的共享 schema。
+
+支持字段：
+
+- `title`：非空字符串，用于覆盖页面展示标题。
+- `description`：非空字符串，用于页面摘要和 SEO 描述。
+- `tags`：至少包含一个非空字符串的数组。
+- `status`：只能是 `draft`、`published` 或 `archived`。
+- `updatedAt`：使用带引号的 `YYYY-MM-DD` 日期。
+- `featured`：布尔值，标记精选内容。
+- `placeholder`：布尔值，标记仍为空态的占位页面。
 
 ```md
 ---
 title: 自定义标题
 description: 页面描述
+tags:
+  - Next.js
+  - SEO
+status: published
+updatedAt: '2026-09-10'
+featured: true
+placeholder: false
 ---
 ```
 
-不要为了排序在 frontmatter 里维护重复信息。排序优先使用文件名前缀和 `meta.json`。
+不要填写空字符串、空标签数组、未声明的状态或无法解析的日期。不要为了排序在 frontmatter
+里维护重复信息，排序优先使用文件名前缀和 `meta.json`。
 
 ## 内容结构
 

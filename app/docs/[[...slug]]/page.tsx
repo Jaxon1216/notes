@@ -9,6 +9,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { getMDXComponents } from '@/components/mdx'
+import { absoluteSiteUrl } from '@/lib/site-url'
 import { source } from '@/lib/source'
 import { fileTitle } from '@/site.config'
 
@@ -54,9 +55,27 @@ export async function generateMetadata({
 
   if (!page) notFound()
 
+  const title = getTitle(page.data.title, page.slugs)
+  const pageUrl = absoluteSiteUrl(page.url)
+
   return {
-    title: getTitle(page.data.title, page.slugs),
+    title,
     description: page.data.description,
+    alternates: {
+      canonical: pageUrl,
+    },
+    openGraph: {
+      type: 'article',
+      url: pageUrl,
+      title,
+      description: page.data.description,
+      tags: page.data.tags,
+    },
+    twitter: {
+      card: 'summary',
+      title,
+      description: page.data.description,
+    },
   }
 }
 

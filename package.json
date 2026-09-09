@@ -48,6 +48,10 @@
     "react-dom": "^19.2.8",
     "react-markdown": "^10.1.0",
     "remark-gfm": "^4.0.1",
-    "simple-icons": "^16.29.0"
+    "simple-icons": "^16.29.0",
+    "zod": "^4.4.3"
+  },
+  "overrides": {
+    "sharp": "0.35.4"
   }
 }

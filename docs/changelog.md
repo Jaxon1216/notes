@@ -9,6 +9,7 @@
 - 移动端文档页隐藏重复的全站头部并归零对应布局偏移，保留 Fumadocs 自带的品牌、搜索、侧边栏触发器和页内目录；首页移动端与桌面文档头部保持不变。
 - 浏览器 favicon 改用轻量 SVG，并将保留原路径的 Apple Touch Icon 从 1080x1080 缩放为规范的 180x180 PNG，避免为标签页和 Apple 图标重复传输大图。
 - 强化 `/api/ai/explain` 请求边界：增加请求体字节、严格消息结构和字段长度校验，引入有界的进程内 best-effort 限流，并将 SSRF 地址/域名规则拆为可单测模块；BYOK 配置和 `useChat` 流式交互保持不变。
+- 新增统一站点 URL 解析、动态 `robots.txt`/`sitemap.xml`、页面级 canonical 与 OpenGraph/Twitter Metadata；以 Zod 扩展 Fumadocs `pageSchema`，集中校验可选文档 frontmatter，并将受影响的 `sharp` 锁定到安全版本。
 
 ## 2026-09-04
 
