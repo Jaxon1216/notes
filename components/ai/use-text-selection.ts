@@ -85,16 +85,33 @@ export function useTextSelection() {
       setSelection(EMPTY_SELECTION)
     }
 
+    function handleScroll(event: Event) {
+      const root = document.querySelector('[data-ai-doc-content]')
+      const target = event.target
+
+      // 侧栏流式输出的滚动不会移动正文选区，不能因此隐藏追加引用入口。
+      if (
+        root &&
+        target instanceof Element &&
+        !root.contains(target) &&
+        !target.contains(root)
+      ) {
+        return
+      }
+
+      clearSelection()
+    }
+
     document.addEventListener('mouseup', updateSelection)
     document.addEventListener('keyup', updateSelection)
     window.addEventListener('resize', clearSelection)
-    window.addEventListener('scroll', clearSelection, true)
+    window.addEventListener('scroll', handleScroll, true)
 
     return () => {
       document.removeEventListener('mouseup', updateSelection)
       document.removeEventListener('keyup', updateSelection)
       window.removeEventListener('resize', clearSelection)
-      window.removeEventListener('scroll', clearSelection, true)
+      window.removeEventListener('scroll', handleScroll, true)
     }
   }, [])
 

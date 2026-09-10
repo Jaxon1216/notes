@@ -1129,7 +1129,7 @@ body:has(.home-shell) .site-header {
 
 .ai-selection-trigger {
   position: fixed;
-  z-index: 70;
+  z-index: 110;
   display: inline-flex;
   min-width: 34px;
   height: 34px;
@@ -1292,7 +1292,7 @@ body:has(.home-shell) .site-header {
 }
 
 .ai-explain-sidebar__quote span,
-.ai-explain-message span {
+.ai-explain-message > span {
   display: block;
   margin-bottom: 6px;
   color: var(--color-fd-muted-foreground);
@@ -1368,7 +1368,9 @@ body:has(.home-shell) .site-header {
   flex-direction: column;
   gap: 12px;
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 14px 16px;
+  scrollbar-gutter: stable;
 }
 
 .ai-explain-sidebar__empty,
@@ -1452,6 +1454,8 @@ body:has(.home-shell) .site-header {
   border-radius: 6px;
   padding: 1px 5px;
   background: var(--color-fd-muted);
+  font-family: var(--font-mono, ui-monospace), 'SFMono-Regular', Consolas,
+    monospace;
   font-size: 12px;
 }
 
@@ -1459,14 +1463,160 @@ body:has(.home-shell) .site-header {
   overflow-x: auto;
   border: 1px solid var(--color-fd-border);
   border-radius: 8px;
-  padding: 10px;
-  background: var(--color-fd-muted);
+  padding: 12px;
+  background: #f6f8fa;
 }
 
 .ai-explain-markdown pre code {
+  display: block;
+  min-width: max-content;
   border: 0;
   padding: 0;
   background: transparent;
+  color: #24292f;
+  line-height: 1.65;
+  tab-size: 2;
+}
+
+.ai-explain-markdown .hljs-comment,
+.ai-explain-markdown .hljs-quote {
+  color: #6e7781;
+}
+
+.ai-explain-markdown .hljs-keyword,
+.ai-explain-markdown .hljs-selector-tag,
+.ai-explain-markdown .hljs-literal,
+.ai-explain-markdown .hljs-type {
+  color: #cf222e;
+}
+
+.ai-explain-markdown .hljs-title,
+.ai-explain-markdown .hljs-title.function_,
+.ai-explain-markdown .hljs-section {
+  color: #8250df;
+}
+
+.ai-explain-markdown .hljs-string,
+.ai-explain-markdown .hljs-regexp,
+.ai-explain-markdown .hljs-attribute,
+.ai-explain-markdown .hljs-symbol {
+  color: #0a3069;
+}
+
+.ai-explain-markdown .hljs-number,
+.ai-explain-markdown .hljs-variable,
+.ai-explain-markdown .hljs-template-variable {
+  color: #0550ae;
+}
+
+.ai-explain-markdown .hljs-meta,
+.ai-explain-markdown .hljs-built_in {
+  color: #953800;
+}
+
+.ai-explain-markdown .hljs-addition {
+  color: #116329;
+  background: #dafbe1;
+}
+
+.ai-explain-markdown .hljs-deletion {
+  color: #82071e;
+  background: #ffebe9;
+}
+
+.dark .ai-explain-markdown pre {
+  background: #0d1117;
+}
+
+.dark .ai-explain-markdown pre code {
+  color: #e6edf3;
+}
+
+.dark .ai-explain-markdown .hljs-comment,
+.dark .ai-explain-markdown .hljs-quote {
+  color: #8b949e;
+}
+
+.dark .ai-explain-markdown .hljs-keyword,
+.dark .ai-explain-markdown .hljs-selector-tag,
+.dark .ai-explain-markdown .hljs-literal,
+.dark .ai-explain-markdown .hljs-type {
+  color: #ff7b72;
+}
+
+.dark .ai-explain-markdown .hljs-title,
+.dark .ai-explain-markdown .hljs-title.function_,
+.dark .ai-explain-markdown .hljs-section {
+  color: #d2a8ff;
+}
+
+.dark .ai-explain-markdown .hljs-string,
+.dark .ai-explain-markdown .hljs-regexp,
+.dark .ai-explain-markdown .hljs-attribute,
+.dark .ai-explain-markdown .hljs-symbol {
+  color: #a5d6ff;
+}
+
+.dark .ai-explain-markdown .hljs-number,
+.dark .ai-explain-markdown .hljs-variable,
+.dark .ai-explain-markdown .hljs-template-variable {
+  color: #79c0ff;
+}
+
+.dark .ai-explain-markdown .hljs-meta,
+.dark .ai-explain-markdown .hljs-built_in {
+  color: #ffa657;
+}
+
+.dark .ai-explain-markdown .hljs-addition {
+  color: #aff5b4;
+  background: #033a16;
+}
+
+.dark .ai-explain-markdown .hljs-deletion {
+  color: #ffdcd7;
+  background: #67060c;
+}
+
+.ai-explain-markdown__table {
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--color-fd-border);
+  border-radius: 8px;
+}
+
+.ai-explain-markdown__table:focus-visible {
+  outline: 2px solid var(--color-fd-ring);
+  outline-offset: 2px;
+}
+
+.ai-explain-markdown table {
+  width: 100%;
+  min-width: max-content;
+  border-collapse: collapse;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.ai-explain-markdown :where(th, td) {
+  border-right: 1px solid var(--color-fd-border);
+  border-bottom: 1px solid var(--color-fd-border);
+  padding: 7px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.ai-explain-markdown th {
+  background: var(--color-fd-muted);
+  font-weight: 700;
+}
+
+.ai-explain-markdown :where(th, td):last-child {
+  border-right: 0;
+}
+
+.ai-explain-markdown tbody tr:last-child td {
+  border-bottom: 0;
 }
 
 .ai-explain-markdown blockquote {

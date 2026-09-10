@@ -129,7 +129,9 @@ sitemap，`app/sitemap.ts` 通过 `source.getPages()` 动态输出首页和全�
 - `components/ai/ai-explain-widget.tsx`：文档 AI 挂件总入口，组合选区监听、触发浮标和右侧栏。
 - `components/ai/use-text-selection.ts`：监听正文区域选中文本，只响应 `[data-ai-doc-content]` 内部选区。
 - `components/ai/ai-selection-trigger.tsx`：选区旁的 AI 解释触发按钮。
+- `components/ai/ai-quote.ts`：合并同一会话中的多段引用，并执行累计长度限制。
 - `components/ai/ai-explain-sidebar.tsx`：最右侧解释侧栏，负责会话 UI、流式输出和继续追问。
+- `components/ai/ai-markdown.tsx`：渲染 AI 回答中的 GFM、表格和代码高亮。
 - `components/ai/ai-settings-form.tsx`：用户模型配置表单。
 - `components/ai/ai-config-storage.ts`：浏览器 localStorage 配置读写。
 - `lib/ai/config.ts`：共享类型、默认问题、内置提示词和长度限制。
@@ -146,7 +148,12 @@ sitemap，`app/sitemap.ts` 通过 `source.getPages()` 动态输出首页和全�
 
 接口按代理提供的客户端 IP 执行 best-effort 固定窗口限流：每个热实例内每个客户端每 60 秒最多 10 次请求，状态 Map 最多保留 10,000 个客户端；超过限制返回 `429` 和 `Retry-After`。该限制不依赖外部服务，因此不保证跨实例全局计数。Provider 调用错误统一转换为固定提示，不向客户端回显密钥或上游错误详情。
 
-第一版只把用户选中的文本作为引用上下文，不自动读取附近段落、整篇文章或全站内容。移动端小于 `1024px` 时隐藏入口和侧栏。
+挂件只把用户主动选中的文本作为引用上下文，不自动读取附近段落、整篇文章或全站内容。
+侧栏打开后继续划选正文时，浮动入口改为“追加引用”，新片段会合并到当前会话上下文且不会清空已有消息；
+累计引用仍受 4,000 字符上限约束。侧栏内部滚动不清空正文选区；正文或其祖先容器滚动时清空浮标，避免位置失效。
+流式回答仅在消息区停留于底部时自动跟随，用户向上滚动后保持当前位置。
+AI 回答使用 GFM Markdown 渲染，表格带边框和横向滚动容器，围栏代码块通过 `rehype-highlight`
+生成语法高亮。移动端小于 `1024px` 时隐藏入口和侧栏。
 
 ## 内容渲染链路
 

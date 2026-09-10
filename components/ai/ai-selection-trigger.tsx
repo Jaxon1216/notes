@@ -12,17 +12,24 @@ import type { TextSelectionState } from './use-text-selection'
 type AiSelectionTriggerProps = {
   selection: TextSelectionState
   hidden?: boolean
+  mode?: 'explain' | 'append'
+  totalQuoteLength?: number
   onExplain: (text: string) => void
 }
 
 export function AiSelectionTrigger({
   selection,
   hidden = false,
+  mode = 'explain',
+  totalQuoteLength = selection.text.length,
   onExplain,
 }: AiSelectionTriggerProps) {
   if (hidden || !selection.text || !selection.rect) return null
 
-  const isTooLong = selection.text.length > MAX_QUOTE_LENGTH
+  const isTooLong = totalQuoteLength > MAX_QUOTE_LENGTH
+  const label = mode === 'append' ? '追加引用' : 'AI 解答'
+  const accessibleLabel =
+    mode === 'append' ? '追加选中内容到当前对话' : AI_TRIGGER_LABEL
   const top = Math.max(selection.rect.top - 42, 12)
   const left = Math.min(
     selection.rect.left + selection.rect.width,
@@ -34,8 +41,12 @@ export function AiSelectionTrigger({
       type="button"
       className="ai-selection-trigger"
       style={{ left, top }}
-      title={isTooLong ? `选中内容不能超过 ${MAX_QUOTE_LENGTH} 个字符` : AI_TRIGGER_LABEL}
-      aria-label={AI_TRIGGER_LABEL}
+      title={
+        isTooLong
+          ? `引用总长度不能超过 ${MAX_QUOTE_LENGTH} 个字符`
+          : accessibleLabel
+      }
+      aria-label={accessibleLabel}
       disabled={isTooLong}
       onMouseDown={(event) => {
         event.preventDefault()
@@ -45,7 +56,7 @@ export function AiSelectionTrigger({
       }}
     >
       <Sparkles aria-hidden="true" size={16} />
-      <span>AI 解答</span>
+      <span>{label}</span>
     </button>
   )
 }

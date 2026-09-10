@@ -10,7 +10,15 @@ import {
   X,
 } from 'lucide-react'
 import { DefaultChatTransport, type UIMessage } from 'ai'
-import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react'
+import {
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  type FormEvent,
+  type UIEvent,
+} from 'react'
 
 import {
   AI_DEFAULT_QUESTION,
@@ -25,6 +33,7 @@ import { AiMarkdown } from './ai-markdown'
 type AiExplainSidebarProps = {
   open: boolean
   quote: AiQuote | null
+  quoteCount: number
   onClose: () => void
 }
 
@@ -61,6 +70,7 @@ const AI_SIDEBAR_WIDTH_STORAGE_KEY = 'easton-ai-sidebar-width-v1'
 const DEFAULT_SIDEBAR_WIDTH = 460
 const MIN_SIDEBAR_WIDTH = 360
 const SIDEBAR_EDGE_GAP = 96
+const AUTO_SCROLL_THRESHOLD = 48
 
 function getMaxSidebarWidth() {
   if (typeof window === 'undefined') return 760
@@ -88,6 +98,7 @@ function loadSidebarWidth() {
 export function AiExplainSidebar({
   open,
   quote,
+  quoteCount,
   onClose,
 }: AiExplainSidebarProps) {
   const [config, setConfig] = useState<AiProviderConfig | null>(null)
@@ -95,7 +106,9 @@ export function AiExplainSidebar({
   const [input, setInput] = useState('')
   const [sidebarWidth, setSidebarWidth] = useState(DEFAULT_SIDEBAR_WIDTH)
   const lastPreparedQuoteIdRef = useRef<string | null>(null)
-  const messagesEndRef = useRef<HTMLDivElement | null>(null)
+  const messagesRef = useRef<HTMLElement | null>(null)
+  const shouldAutoScrollRef = useRef(true)
+  const lastScrollTopRef = useRef(0)
   const isResizingRef = useRef(false)
   const sidebarWidthRef = useRef(DEFAULT_SIDEBAR_WIDTH)
 
@@ -175,21 +188,21 @@ export function AiExplainSidebar({
     if (lastPreparedQuoteIdRef.current === quote.id) return
 
     lastPreparedQuoteIdRef.current = quote.id
+    shouldAutoScrollRef.current = true
+    lastScrollTopRef.current = 0
     setInput(AI_DEFAULT_QUESTION)
     setMessages([])
     clearError()
-    requestAnimationFrame(() => {
-      messagesEndRef.current?.scrollIntoView({ block: 'end' })
-    })
   }, [clearError, quote, setMessages])
 
-  useEffect(() => {
-    if (!open) return
+  useLayoutEffect(() => {
+    if (!open || !shouldAutoScrollRef.current) return
 
-    messagesEndRef.current?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'end',
-    })
+    const messagesElement = messagesRef.current
+    if (!messagesElement) return
+
+    messagesElement.scrollTop = messagesElement.scrollHeight
+    lastScrollTopRef.current = messagesElement.scrollTop
   }, [messages, open, status])
 
   if (!open) return null
@@ -205,9 +218,29 @@ export function AiExplainSidebar({
     setShowSettings(true)
   }
 
+  function handleMessagesScroll(event: UIEvent<HTMLElement>) {
+    const messagesElement = event.currentTarget
+    const scrollTop = messagesElement.scrollTop
+    const isScrollingUp = scrollTop < lastScrollTopRef.current - 1
+    const isNearBottom =
+      messagesElement.scrollHeight -
+        scrollTop -
+        messagesElement.clientHeight <=
+      AUTO_SCROLL_THRESHOLD
+
+    if (isScrollingUp) {
+      shouldAutoScrollRef.current = false
+    } else if (isNearBottom) {
+      shouldAutoScrollRef.current = true
+    }
+
+    lastScrollTopRef.current = scrollTop
+  }
+
   function explainAgain() {
     if (!quote || !isCompleteAiConfig(config) || isBusy) return
 
+    shouldAutoScrollRef.current = true
     setInput('')
     setMessages([])
     clearError()
@@ -230,6 +263,7 @@ export function AiExplainSidebar({
     const text = input.trim()
     if (!text || !quote || !isCompleteAiConfig(config) || isBusy) return
 
+    shouldAutoScrollRef.current = true
     setInput('')
     clearError()
     void sendMessage(
@@ -291,7 +325,7 @@ export function AiExplainSidebar({
 
       {quote ? (
         <section className="ai-explain-sidebar__quote" aria-label="当前引用">
-          <span>引用</span>
+          <span>{quoteCount > 1 ? `${quoteCount} 段引用` : '引用'}</span>
           <p>{trimQuote(quote.text)}</p>
         </section>
       ) : null}
@@ -303,7 +337,15 @@ export function AiExplainSidebar({
         />
       ) : null}
 
-      <section className="ai-explain-sidebar__messages" aria-live="polite">
+      <section
+        ref={messagesRef}
+        className="ai-explain-sidebar__messages"
+        aria-live="polite"
+        onScroll={handleMessagesScroll}
+        onWheel={(event) => {
+          if (event.deltaY < 0) shouldAutoScrollRef.current = false
+        }}
+      >
         {messages.length === 0 && !error ? (
           <div className="ai-explain-sidebar__empty">
             <Bot aria-hidden="true" size={18} />
@@ -348,7 +390,6 @@ export function AiExplainSidebar({
             AI 服务请求失败，请检查 baseURL、API Key 和 model。
           </div>
         ) : null}
-        <div ref={messagesEndRef} aria-hidden="true" />
       </section>
 
       <form className="ai-explain-sidebar__composer" onSubmit={submitMessage}>
