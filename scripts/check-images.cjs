@@ -5,8 +5,10 @@ const path = require('node:path')
 
 const DEFAULT_TARGET = path.join('content', 'docs')
 const IGNORE_DIRS = new Set(['node_modules', '.git', '.next', '.source', 'dist', 'out'])
-const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.webp', '.gif', '.svg'])
-const IMAGE_FILE_NAME_PATTERN = /^[a-z0-9][a-z0-9-]*\.(png|jpg|jpeg|webp|gif|svg)$/
+const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.webp', '.avif', '.gif', '.svg'])
+const IMAGE_FILE_NAME_PATTERN = /^[a-z0-9][a-z0-9-]*\.(png|jpg|jpeg|webp|avif|gif|svg)$/
+const RECOMMENDED_MAX_IMAGE_BYTES = 500 * 1024
+const HARD_MAX_IMAGE_BYTES = 1024 * 1024
 
 function toPosix(filePath) {
   return filePath.split(path.sep).join('/')
@@ -16,23 +18,24 @@ function isMarkdownFile(filePath) {
   return /\.mdx?$/.test(filePath)
 }
 
-function walk(target, files = []) {
-  if (!fs.existsSync(target)) return files
+function walk(target, collected = { markdownFiles: [], imageFiles: [] }) {
+  if (!fs.existsSync(target)) return collected
 
   const stat = fs.statSync(target)
   if (stat.isFile()) {
-    if (isMarkdownFile(target)) files.push(target)
-    return files
+    if (isMarkdownFile(target)) collected.markdownFiles.push(target)
+    if (isImagePath(target)) collected.imageFiles.push(target)
+    return collected
   }
 
-  if (!stat.isDirectory()) return files
+  if (!stat.isDirectory()) return collected
 
   for (const name of fs.readdirSync(target).sort((a, b) => a.localeCompare(b, 'zh-CN'))) {
     if (IGNORE_DIRS.has(name) || name.startsWith('.')) continue
-    walk(path.join(target, name), files)
+    walk(path.join(target, name), collected)
   }
 
-  return files
+  return collected
 }
 
 function isRemoteUrl(value) {
@@ -56,7 +59,7 @@ function issue(code, filePath, line, message) {
   }
 }
 
-function scanMarkdownImages(filePath, lines, issues, isIgnoredLine) {
+function scanMarkdownImages(filePath, lines, issues, warnings, referencedImages, isIgnoredLine) {
   const markdownImagePattern = /!\[([^\]]*)\]\(([^)\s]+)(?:\s+["'][^"']*["'])?\)/g
 
   for (let index = 0; index < lines.length; index += 1) {
@@ -72,12 +75,12 @@ function scanMarkdownImages(filePath, lines, issues, isIgnoredLine) {
         issues.push(issue('image-alt-empty', filePath, lineNumber, 'Markdown 图片需要填写有意义的 alt 文案。'))
       }
 
-      checkImageSource(filePath, lineNumber, src, issues)
+      checkImageSource(filePath, lineNumber, src, issues, warnings, referencedImages)
     }
   }
 }
 
-function scanHtmlImages(filePath, lines, issues, isIgnoredLine) {
+function scanHtmlImages(filePath, lines, issues, warnings, referencedImages, isIgnoredLine) {
   const htmlImagePattern = /<img\b[^>]*\bsrc=(?:"([^"]+)"|'([^']+)')[^>]*>/gi
 
   for (let index = 0; index < lines.length; index += 1) {
@@ -87,15 +90,29 @@ function scanHtmlImages(filePath, lines, issues, isIgnoredLine) {
     const lineNumber = index + 1
     for (const match of line.matchAll(htmlImagePattern)) {
       const src = (match[1] || match[2] || '').trim()
-      if (src && isImagePath(src)) {
-        checkImageSource(filePath, lineNumber, src, issues)
+      if (src) {
+        checkImageSource(filePath, lineNumber, src, issues, warnings, referencedImages)
       }
     }
   }
 }
 
-function checkImageSource(filePath, lineNumber, src, issues) {
-  if (isRemoteUrl(src) || src.startsWith('/')) return
+function checkImageSource(filePath, lineNumber, src, issues, warnings, referencedImages) {
+  if (isRemoteUrl(src)) {
+    if (/^(?:https?:)?\/\//i.test(src)) {
+      warnings.push(
+        issue(
+          'remote-image',
+          filePath,
+          lineNumber,
+          `远程图片 \`${src}\` 不经过 Next.js 本地图片优化，建议下载到当前专题的 \`img/\` 目录。`,
+        ),
+      )
+    }
+    return
+  }
+
+  if (src.startsWith('/')) return
   if (!isImagePath(src)) return
 
   const cleanSrc = stripUrlSuffix(src)
@@ -112,6 +129,8 @@ function checkImageSource(filePath, lineNumber, src, issues) {
   }
 
   const absoluteImagePath = path.resolve(path.dirname(filePath), cleanSrc)
+  referencedImages.add(absoluteImagePath)
+
   if (!fs.existsSync(absoluteImagePath)) {
     issues.push(issue('image-not-found', filePath, lineNumber, `本地图片 \`${src}\` 指向的文件不存在。`))
     return
@@ -128,6 +147,52 @@ function checkImageSource(filePath, lineNumber, src, issues) {
       ),
     )
   }
+}
+
+function formatImageSize(bytes) {
+  return `${(bytes / 1024).toFixed(1)} KiB`
+}
+
+function checkImageInventory(imageFiles, referencedImages, issues, warnings) {
+  for (const filePath of imageFiles) {
+    const size = fs.statSync(filePath).size
+
+    if (!referencedImages.has(path.resolve(filePath))) {
+      issues.push(
+        issue(
+          'image-orphan',
+          filePath,
+          null,
+          '图片未被扫描范围内的 Markdown/MDX 引用，请删除或补充正文引用。',
+        ),
+      )
+    }
+
+    if (size > HARD_MAX_IMAGE_BYTES) {
+      issues.push(
+        issue(
+          'image-size-limit',
+          filePath,
+          null,
+          `图片大小为 ${formatImageSize(size)}，超过 1 MiB 上限，请压缩后再提交。截图优先使用 WebP，图示优先使用 SVG。`,
+        ),
+      )
+    } else if (size > RECOMMENDED_MAX_IMAGE_BYTES) {
+      warnings.push(
+        issue(
+          'image-size-warning',
+          filePath,
+          null,
+          `图片大小为 ${formatImageSize(size)}，建议压缩到 500 KiB 以内。截图优先使用 WebP，图示优先使用 SVG。`,
+        ),
+      )
+    }
+  }
+}
+
+function formatIssue(item) {
+  const location = item.line ? `${item.filePath}:${item.line}` : item.filePath
+  return `${location} [${item.code}] ${item.message}`
 }
 
 function createIgnoredLinePredicate(lines) {
@@ -176,28 +241,55 @@ function createIgnoredLinePredicate(lines) {
 function checkFile(filePath) {
   const lines = fs.readFileSync(filePath, 'utf8').split(/\r?\n/)
   const issues = []
+  const warnings = []
+  const referencedImages = new Set()
   const isIgnoredLine = createIgnoredLinePredicate(lines)
 
-  scanMarkdownImages(filePath, lines, issues, isIgnoredLine)
-  scanHtmlImages(filePath, lines, issues, isIgnoredLine)
+  scanMarkdownImages(filePath, lines, issues, warnings, referencedImages, isIgnoredLine)
+  scanHtmlImages(filePath, lines, issues, warnings, referencedImages, isIgnoredLine)
 
-  return issues
+  return { issues, warnings, referencedImages }
 }
 
 function main() {
   const targets = process.argv.slice(2).filter((arg) => !arg.startsWith('-'))
   const scanTargets = targets.length > 0 ? targets : [DEFAULT_TARGET]
-  const files = scanTargets.flatMap((target) => walk(path.resolve(target))).sort()
-  const issues = files.flatMap(checkFile)
+  const collected = scanTargets.reduce(
+    (result, target) => walk(path.resolve(target), result),
+    { markdownFiles: [], imageFiles: [] },
+  )
+  const files = [...new Set(collected.markdownFiles)].sort()
+  const imageFiles = [...new Set(collected.imageFiles)].sort()
+  const issues = []
+  const warnings = []
+  const referencedImages = new Set()
+
+  for (const filePath of files) {
+    const result = checkFile(filePath)
+    issues.push(...result.issues)
+    warnings.push(...result.warnings)
+    for (const imagePath of result.referencedImages) {
+      referencedImages.add(imagePath)
+    }
+  }
+
+  checkImageInventory(imageFiles, referencedImages, issues, warnings)
+
+  if (warnings.length > 0) {
+    console.warn(`Image reference check completed with ${warnings.length} warning(s):`)
+    for (const item of warnings) {
+      console.warn(formatIssue(item))
+    }
+  }
 
   if (issues.length === 0) {
-    console.log(`Image reference check passed (${files.length} files).`)
+    console.log(`Image reference check passed (${files.length} files, ${imageFiles.length} images).`)
     return
   }
 
   console.error(`Image reference check failed with ${issues.length} issue(s):`)
   for (const item of issues) {
-    console.error(`${item.filePath}:${item.line} [${item.code}] ${item.message}`)
+    console.error(formatIssue(item))
   }
 
   process.exit(1)

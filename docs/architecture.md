@@ -67,7 +67,7 @@ lib/
 
 scripts/
   check-content-style.cjs     # Markdown/MDX 写作结构检查
-  check-images.cjs            # Markdown/MDX 图片引用检查
+  check-images.cjs            # 图片引用、孤立文件、远程来源和体积检查
   check-html-tags.cjs         # Vue 笔记 HTML 标签闭合检查
 
 tests/                        # 业务逻辑、配置边界和静态回归单元测试
@@ -102,6 +102,8 @@ docs/
 - `app/global.css`：引入 `fumadocs-ui/css/neutral.css` 和 `fumadocs-ui/css/preset.css`。
 
 因此，调整 Fumadocs 内容、路由、MDX 行为或文档样式时，优先从这些文件查起。
+
+Markdown/MDX 中使用 `./img/xxx` 引用的本地图片会在构建期生成带哈希的静态资源，并通过 Fumadocs 默认组件接入 Next.js Image，获得尺寸信息、响应式 `srcSet` 和懒加载。远程图片由 `components/mdx.tsx` 保留为普通 `<img>`，不会经过 Next.js 本地图片优化，因此内容规范优先要求下载到当前专题目录。
 
 ## 站点 Metadata 与图标
 

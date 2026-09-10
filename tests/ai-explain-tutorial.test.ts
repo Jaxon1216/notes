@@ -11,7 +11,7 @@ const page = fs.readFileSync(
 describe('AI explanation tutorial images', () => {
   it('uses markdown images so Fumadocs can resolve files next to the article', () => {
     expect(page).not.toMatch(/<img\b[^>]*src=["']\.\/img\//)
-    expect(page).toContain('](./img/ai-explain-selection-trigger.png)')
-    expect(page).toContain('](./img/ai-explain-sidebar.png)')
+    expect(page).toContain('](./img/ai-explain-selection-trigger.webp)')
+    expect(page).toContain('](./img/ai-explain-sidebar.webp)')
   })
 })

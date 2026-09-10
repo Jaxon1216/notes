@@ -75,7 +75,7 @@ content/docs/
 
 1. 选择合适目录，例如 `content/docs/frontend/knowledge/React/`、`content/docs/agent/knowledge/agent/` 或 `content/docs/algorithm/leetcode/`。
 2. 新增 Markdown 或 MDX 文件，文件名使用清晰标题，可带数字前缀控制排序，例如 `01-核心概念.md`。
-3. 文章内图片放在当前专题附近的 `img/` 目录，并使用相对路径引用。
+3. 文章内图片放在当前专题附近的 `img/` 目录并使用相对路径引用；截图优先使用 WebP，图示优先使用 SVG。
 4. 如需调整侧边栏展示顺序或目录中文名，编辑对应目录下的 `meta.json`。
 5. 提交前运行 `npm run build`。
 
