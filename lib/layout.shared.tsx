@@ -9,12 +9,5 @@ export function baseOptions(): BaseLayoutProps {
     themeSwitch: {
       enabled: false,
     },
-    links: [
-      {
-        text: 'Docs',
-        url: '/docs',
-        active: 'nested-url',
-      },
-    ],
   }
 }

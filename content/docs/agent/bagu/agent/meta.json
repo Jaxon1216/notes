@@ -1,5 +1,5 @@
 {
   "title": "Agent 应用开发",
-  "description": "RAG、工具调用、多 Agent、协议和应用工程实践。",
+  "description": "RAG、工具调用、多 Agent、协议和应用工程高频问答。",
   "pages": ["Agent应用开发", "agent-development"]
 }

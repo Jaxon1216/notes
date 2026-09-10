@@ -36,8 +36,9 @@
 
 - `content/docs/frontend/`：前端
 - `content/docs/backend/`：服务端
-- `content/docs/algorithm/`：算法
 - `content/docs/agent/`：Agent 应用开发
+- `content/docs/algorithm/`：算法
+- `content/docs/resources/`：资源推荐
 - `content/docs/dev/`：个人开发常用
 
 新增一级方向、调整子栏目名称、修改导航展示文案时，先改 `site.config.ts`，再改对应目录和 `content/docs/**/meta.json`。不要在 `app/page.tsx`、`lib/content.ts`、`README.md` 中各写一份重复配置。
@@ -56,14 +57,15 @@
 
 新增笔记时选择最贴近的目录：
 
-- 知识八股：`content/docs/<direction>/knowledge/`
-- 面经：`content/docs/<direction>/interview/`
-- 优质好文项目：`content/docs/<direction>/resources/`
-- Agent 知识八股再分两层：偏应用工程放 `content/docs/agent/knowledge/agent/`，偏 LLM 原理放 `content/docs/agent/knowledge/llm/`
+- 系统教程：`content/docs/<direction>/tutorial/`
+- 高频八股：`content/docs/<direction>/bagu/`
+- 真实面经：`content/docs/<direction>/interview/`
+- Agent 八股再分两层：偏应用工程放 `content/docs/agent/bagu/agent/`，偏 LLM 原理放 `content/docs/agent/bagu/llm/`
+- 资源推荐：`content/docs/resources/`
 - 算法基础和刷题复盘：`content/docs/algorithm/basics/` 或 `content/docs/algorithm/leetcode/`
 - 零散技巧、读书笔记和未归档资料：`content/docs/dev/notes/`
 
-优质好文项目推荐必须包含原文或项目链接、推荐理由和标签。避免只提交链接列表。
+资源推荐必须包含原文或项目链接、技术方向、资源类型、推荐理由和标签。避免只提交链接列表。
 
 ## 编辑约束
 
@@ -72,7 +74,7 @@
 - 问答型长文使用 `## 题目`、`### 回答重点/扩展知识/面试官追问` 的标题层级，保证 Fumadocs 右侧目录可渲染题目。
 - 图片放在当前专题附近的 `img/` 目录并使用相对路径引用；截图优先使用 WebP，图示优先使用 SVG，单图不得超过 1 MiB。
 - 大改动后参考 `docs/qa/` 做常见问题自检；遇到大家都可能遇到的问题时，按 `docs/qa/template.md` 主动补充。
-- 不要把 `MathModelAgent/` 自动纳入公开导航，除非明确要整理到 `content/docs/agent/resources/`。
+- 不要把 `MathModelAgent/` 自动纳入公开导航，除非明确要整理到 `content/docs/resources/`。
 - 不要删除或恢复用户未说明的改动。
 - 除非用户明确要求，不要自主提交 commit；完成修改后提醒用户可提交的文件和建议 commit message。
 

@@ -38,6 +38,16 @@ describe('site header rendering boundary', () => {
     )
   })
 
+  it('disables Fumadocs layout tabs owned by the global navigation', () => {
+    const docsLayout = fs.readFileSync(
+      path.join(root, 'app/docs/layout.tsx'),
+      'utf8',
+    )
+
+    expect(docsLayout).toContain('tabs={false}')
+    expect(docsLayout).not.toContain('tabMode="top"')
+  })
+
   it('does not close the menu inside Link onClick, so client navigation can finish', () => {
     const header = fs.readFileSync(
       path.join(root, 'components/site/site-header.tsx'),

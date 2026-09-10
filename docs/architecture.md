@@ -43,13 +43,15 @@ components/
 content/docs/
   meta.json                   # Fumadocs 根文档树配置
   index.mdx                   # 文档总览页
-  frontend/                   # 前端内容
-  backend/                    # 服务端内容
+  frontend/                   # 前端教程、八股和面经
+  backend/                    # 服务端教程、八股和面经
+  agent/                      # Agent 教程、八股和面经
+    bagu/agent/
+      Agent应用开发.md         # Agent 八股总览，保留稳定入口
+      agent-development/      # 按主题拆分的 Agent 八股
+    bagu/llm/                 # LLM 原理八股
   algorithm/                  # 算法内容
-  agent/                      # Agent 应用开发内容
-    knowledge/agent/
-      Agent应用开发.md         # Agent 应用开发专题总览，保留稳定入口
-      agent-development/      # 按主题拆分的 Agent 应用开发文章
+  resources/                  # 集中的资源推荐页
   dev/                        # 个人开发常用内容
 
 lib/
@@ -156,7 +158,7 @@ sitemap，`app/sitemap.ts` 通过 `source.getPages()` 动态输出首页和全�
 5. `app/docs/layout.tsx` 用 `source.getPageTree()` 生成文档树和侧边栏。
 6. `app/api/search/route.ts` 基于同一个 source 生成搜索数据。
 
-大型连续专题优先保留一个稳定的总览页面，再将正文拆到带数字前缀的子目录中；专题子目录使用 `meta.json` 固定侧边栏顺序。`Agent应用开发.md` 采用这一结构承接原有 URL，具体内容位于 `agent-development/`。
+前端、服务端和 Agent 统一使用 `tutorial/`、`bagu/`、`interview/` 三类目录，页面名称固定为“教程”“八股”“面经”。大型连续专题优先保留一个稳定的总览页面，再将正文拆到带数字前缀的子目录中；专题子目录使用 `meta.json` 固定侧边栏顺序。`Agent应用开发.md` 采用这一结构，具体内容位于 `agent/bagu/agent/agent-development/`，旧 URL 由 Next.js 永久重定向承接。
 
 ## 首页数据链路
 
@@ -174,15 +176,15 @@ sitemap，`app/sitemap.ts` 通过 `source.getPages()` 动态输出首页和全�
 首页只为主要的“进入文档”入口保留 Next.js 路由预取；内容标签、次要贡献入口和
 LogoLoop 中会被复制的技术栈链接关闭自动预取，避免首屏可见链接批量请求 RSC。
 
-优质好文项目页由 `lib/resource-directory.ts` 提供三类领域的类型化文章/项目数据，并由 `components/docs/resource-directory.tsx` 渲染带键盘可用分段控件的资源表。每个已发布条目都必须有 HTTPS 链接、简介、推荐理由和至少一个标签；暂未筛到合适内容的维度使用明确空态。
+独立的资源推荐页位于 `content/docs/resources/`。`lib/resource-directory.ts` 使用扁平数据同时记录技术方向和资源类型，跨方向资源只维护一份；`components/docs/resource-directory.tsx` 提供方向分段控件和类型筛选。每个条目都必须有 HTTPS 链接、简介、推荐理由、方向、类型和至少一个标签。
 
 ## 导航链路
 
-全站固定顶部导航由 `components/site/site-header.tsx` 提供，并在 `app/layout.tsx` 中挂载。导航使用 `lib/site-navigation.ts` 的受控状态，任一时刻仅保留一个展开菜单：悬浮会转移菜单归属，点击可固定/关闭，点击栏外、按 Escape 或路由变更都会关闭。当前阅读领域从 `/docs/<section>/...` 推导，并以低干扰的蓝色焦点提示显示；首页和 `/docs` 总览不高亮。CSS 使用首页唯一的 `.home-shell` 标记切换导航外观：首页导航固定覆盖在首屏上且背景透明，非首页导航保持 sticky 并使用不透明的 Fumadocs 主题背景。
+全站固定顶部导航由 `components/site/site-header.tsx` 提供，并在 `app/layout.tsx` 中挂载。前端、服务端和 Agent 的菜单固定展示“教程”“八股”“面经”；算法和开发常用保留各自子栏目，资源推荐作为直接链接。下拉导航使用 `lib/site-navigation.ts` 的受控状态，任一时刻仅保留一个展开菜单：悬浮会转移菜单归属，点击可固定/关闭，点击栏外、按 Escape 或路由变更都会关闭。当前阅读领域从 `/docs/<section>/...` 推导，并以低干扰的蓝色焦点提示显示；首页和 `/docs` 总览不高亮。CSS 使用首页唯一的 `.home-shell` 标记切换导航外观：首页导航固定覆盖在首屏上且背景透明，非首页导航保持 sticky 并使用不透明的 Fumadocs 主题背景。
 
 `app/docs/layout.tsx` 通过 `DocsLayout.containerProps` 在文档根容器添加 `.docs-layout` 标记。桌面文档继续显示全站头部，并将 `--site-header-height` 传给 Fumadocs 的 `--fd-banner-height`；小于 Fumadocs `md` 断点时，仅隐藏 docs 页面上的全站头部，并在 `.docs-layout` 内把两个高度变量归零。首页移动端不受该规则影响，文档移动端继续使用 Fumadocs 自带的品牌、搜索、侧边栏触发器和页内目录。
 
-Fumadocs `DocsLayout` 仍负责文档树、侧边栏、搜索和正文区域；`lib/layout.shared.tsx` 保留 Fumadocs 布局共享参数，但不再作为全站主导航的唯一入口。全站头部的品牌和栏目菜单保持 Next.js 默认预取；低频的 AI 解答教程与贡献入口关闭自动预取，但仍使用 `Link` 完成客户端导航。
+Fumadocs `DocsLayout` 仍负责文档树、侧边栏、搜索和正文区域；自动 layout tabs 保持关闭，一级栏目统一由全站头部导航，避免顶级目录生成的 tab 与正文占用同一布局区域。`lib/layout.shared.tsx` 保留 Fumadocs 布局共享参数，但不再作为全站主导航的唯一入口。全站头部的品牌和栏目菜单保持 Next.js 默认预取；低频的 AI 解答教程与贡献入口关闭自动预取，但仍使用 `Link` 完成客户端导航。
 
 ## 配置边界
 

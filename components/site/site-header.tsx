@@ -82,12 +82,26 @@ export function SiteHeader({ data }: { data: HomeData }) {
         <nav className="site-header__nav" aria-label="主导航">
           {data.sections.map((section) => {
             const defaultChild =
-              section.children.find((child) => child.child.key === 'knowledge') ??
+              section.children.find((child) => child.child.key === 'tutorial') ??
               section.children[0]
             const href = defaultChild?.href || section.href || '/docs'
             const menuId = `site-menu-${section.section.key}`
             const isOpen = navigation.openSectionKey === section.section.key
             const isActive = activeSectionKey === section.section.key
+
+            if (section.children.length === 0) {
+              return (
+                <div
+                  className="site-header__nav-item"
+                  data-active={isActive || undefined}
+                  key={section.section.key}
+                >
+                  <Link className="site-header__nav-link" href={href}>
+                    {section.section.navTitle ?? section.section.title}
+                  </Link>
+                </div>
+              )
+            }
 
             return (
               <div

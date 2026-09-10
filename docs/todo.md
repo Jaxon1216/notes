@@ -7,7 +7,7 @@
 ### P0: 文档站技术栈迁移
 
 - [x] 基于现有 75 篇 Markdown 内容完成 `Next.js App Router + React + TypeScript + Fumadocs + MDX` 迁移验证。
-- [x] 保留现有一级信息架构名称：`frontend/`、`backend/`、`algorithm/`、`agent/`、`dev/`，内容根目录迁到 `content/docs/`。
+- [x] 内容根目录迁到 `content/docs/`，按前端、服务端、Agent、算法、资源推荐和开发常用维护一级信息架构。
 - [x] 设计新的内容数据层，使用 `lib/content.ts` 替代 `scripts/generate-dashboard.cjs` 拼接首页 HTML 的方式。
 - [x] 确认 Markdown/MDX 兼容规则，先通过宽松 frontmatter schema、远程图片跳过尺寸抓取和少量语法修正保证现有文章可构建。
 - [x] 输出迁移后的本地开发、构建、预览命令，并更新 `README.md` 与 `AGENTS.md`。
@@ -17,7 +17,7 @@
 - [x] 将首页改为正常 React 路由页面 `app/page.tsx`，而不是生成 `index.md`。
 - [x] 首页模块组件化：导航栏下全屏动效首屏和技术栈 LogoLoop。
 - [x] 完善栏目菜单互斥展开、当前阅读领域提示、首页粒子清晰度和 AI 解答操作引导。
-- [ ] 持续筛选并补充服务端优质文章，保持文章与项目两个目录维度的编辑质量。
+- [ ] 持续补充资源推荐，保持技术方向、资源类型和推荐理由的编辑质量。
 - [ ] 继续补充首页内容运营模块：最近更新、精选知识、轮播推荐。
 - [x] 引入 shadcn registry 配置、ReactBits 动效组件、simple-icons 技术栈白名单和 particles.js 浅色背景。
 - [ ] 评估使用 Motion 为首页和局部组件提供轻量动效，避免影响阅读性能。
@@ -37,6 +37,7 @@
 - [x] 增加基础内容校验脚本，提前发现缺失标题、多个 H1、标题跳级和标题链接等结构问题。
 - [ ] 扩展内容校验脚本，继续覆盖坏链接、无效 frontmatter、图片引用和 MDX 语法问题。
 - [x] 将 Agent 应用开发长文拆分为带稳定总览入口的专题文章，降低单页体积和目录复杂度。
+- [x] 将前端、服务端和 Agent 统一拆分为教程、八股、面经，并把资源推荐收敛为独立一级目录。
 - [ ] 评估接入 ESLint，用于 React/TypeScript 组件代码的风格和潜在问题检查。
 - [ ] 为 AI/Agent 阅读生成结构化索引，例如 `llms.txt` 或站点内容 manifest。
 

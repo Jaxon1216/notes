@@ -34,7 +34,7 @@ export const HOME_LOGO_ITEMS: HomeLogoItem[] = [
   {
     key: 'react',
     label: 'React',
-    href: '/docs/frontend/knowledge/React/01-核心概念与基础语法',
+    href: '/docs/frontend/tutorial/React/01-核心概念与基础语法',
     icon: siReact,
   },
   {
@@ -76,7 +76,7 @@ export const HOME_LOGO_ITEMS: HomeLogoItem[] = [
   {
     key: 'go',
     label: 'Go',
-    href: '/docs/backend/knowledge/Go/js2go/01-入门与语法',
+    href: '/docs/backend/tutorial/Go/js2go/01-入门与语法',
     icon: siGo,
   },
   {
@@ -118,13 +118,13 @@ export const HOME_LOGO_ITEMS: HomeLogoItem[] = [
   {
     key: 'vue',
     label: 'Vue',
-    href: '/docs/frontend/knowledge/Vue/01-工程创建与响应式基础',
+    href: '/docs/frontend/tutorial/Vue/01-工程创建与响应式基础',
     icon: siVuedotjs,
   },
   {
     key: 'javascript',
     label: 'JavaScript',
-    href: '/docs/frontend/knowledge/ajax-promise-axios/01-手撕Promise与异步编程',
+    href: '/docs/frontend/tutorial/ajax-promise-axios/01-手撕Promise与异步编程',
     icon: siJavascript,
   },
   {

@@ -1,6 +1,6 @@
 {
   "title": "Agent 应用开发专题",
-  "description": "按主题拆分的 Agent 应用开发知识与面试问答。",
+  "description": "按主题拆分的 Agent 应用开发八股问答。",
   "pages": [
     "01-Agent基础与核心架构",
     "02-推理范式与提示词基础",

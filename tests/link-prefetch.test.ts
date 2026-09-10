@@ -122,4 +122,34 @@ describe('route prefetch policy', () => {
       { prefetch: false },
     ])
   })
+
+  it('renders a section without children as a direct navigation link', () => {
+    renderToStaticMarkup(
+      createElement(SiteHeader, {
+        data: {
+          sections: [
+            {
+              section: {
+                key: 'resources',
+                dir: 'resources',
+                title: '资源推荐',
+                description: '精选技术资源。',
+                children: [],
+              },
+              href: '/docs/resources',
+              fileCount: 1,
+              childCount: 0,
+              children: [],
+            },
+          ],
+          totalFiles: 1,
+          activeSections: 1,
+        },
+      }),
+    )
+
+    expect(findByClass('site-header__nav-link')).toMatchObject([
+      { href: '/docs/resources' },
+    ])
+  })
 })

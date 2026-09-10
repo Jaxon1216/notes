@@ -9,8 +9,11 @@ describe('site navigation', () => {
   it('maps only document section paths to an active section', () => {
     expect(getActiveSectionKey('/')).toBeNull()
     expect(getActiveSectionKey('/docs')).toBeNull()
-    expect(getActiveSectionKey('/docs/agent/knowledge/llm/LLM原理')).toBe('agent')
-    expect(getActiveSectionKey('/docs/frontend/resources')).toBe('frontend')
+    expect(getActiveSectionKey('/docs/agent/bagu/llm/LLM原理')).toBe('agent')
+    expect(getActiveSectionKey('/docs/frontend/tutorial/React/00-React学习路线')).toBe(
+      'frontend',
+    )
+    expect(getActiveSectionKey('/docs/resources')).toBe('resources')
   })
 
   it('keeps exactly one menu open and transfers ownership on hover', () => {

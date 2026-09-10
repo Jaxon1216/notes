@@ -1,0 +1,5 @@
+{
+  "title": "教程",
+  "description": "系统讲解框架原理、浏览器机制、网络通信和工程实践。",
+  "pages": ["React", "Vue", "ajax-promise-axios", "Express"]
+}

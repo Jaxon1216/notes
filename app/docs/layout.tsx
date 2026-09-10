@@ -14,7 +14,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     <DocsLayout
       containerProps={{ className: 'docs-layout' }}
       tree={source.getPageTree()}
-      tabMode="top"
+      tabs={false}
       {...baseOptions()}
     >
       {children}

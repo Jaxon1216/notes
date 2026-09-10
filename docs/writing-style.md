@@ -6,13 +6,16 @@
 
 新增笔记时放到最接近主题的目录：
 
-- 知识八股：`content/docs/<direction>/knowledge/`
+- 教程：`content/docs/<direction>/tutorial/`
+- 八股：`content/docs/<direction>/bagu/`
 - 面经：`content/docs/<direction>/interview/`
-- 优质文章和项目：`content/docs/<direction>/resources/`
-- Agent 应用工程：`content/docs/agent/knowledge/agent/`
-- LLM 原理：`content/docs/agent/knowledge/llm/`
+- Agent 应用八股：`content/docs/agent/bagu/agent/`
+- LLM 原理八股：`content/docs/agent/bagu/llm/`
+- 资源推荐：`content/docs/resources/`
 - 算法基础和刷题复盘：`content/docs/algorithm/basics/` 或 `content/docs/algorithm/leetcode/`
 - 零散技巧、读书笔记和未归档资料：`content/docs/dev/notes/`
+
+教程用于系统讲解和按顺序学习，八股用于高频问题、回答重点与追问，面经只记录具体面试过程和真实题目。不要仅因为教程中包含少量问答，就把整篇文章归入八股。
 
 目录名优先使用英文。页面展示名放在 `meta.json` 或文章标题里维护。
 
@@ -47,7 +50,7 @@ Fumadocs 使用 `meta.json` 维护目录元信息。它不应该成为每篇文�
 
 图片资源默认采用“专题就近存放”规则，避免多人维护时出现跨目录引用和迁移断链。
 
-- 图片放在当前文章所在专题目录的 `img/` 子目录下，例如 `content/docs/frontend/knowledge/ajax-promise-axios/img/event-loop.png`。
+- 图片放在当前文章所在专题目录的 `img/` 子目录下，例如 `content/docs/frontend/tutorial/ajax-promise-axios/img/event-loop.png`。
 - 文章中使用相对路径引用当前专题图片，例如 `![事件循环流程](./img/event-loop.png)`。
 - 不要使用 `../img/`、`../../img/` 跨专题引用图片。确实被多个专题复用的图片，应优先复制到各专题 `img/`，或在上层专题建立明确的共享资源目录并在文档中说明。
 - 图片文件名使用英文小写、数字和短横线，例如 `event-loop.png`、`request-flow.svg`。
@@ -117,7 +120,7 @@ placeholder: false
 
 ## 内容结构
 
-知识型文章建议按这个顺序组织：
+教程文章建议按这个顺序组织：
 
 ```markdown
 # 主题名称
@@ -133,7 +136,7 @@ placeholder: false
 ## 扩展阅读
 ```
 
-面试题文章建议按这个顺序组织：
+八股文章建议按这个顺序组织：
 
 ```markdown
 # 主题名称
@@ -147,9 +150,11 @@ placeholder: false
 ### 面试官追问
 ```
 
-项目推荐文章必须包含：
+资源推荐条目必须包含：
 
 - 原文或项目链接
+- 技术方向
+- 资源类型
 - 推荐理由
 - 标签
 

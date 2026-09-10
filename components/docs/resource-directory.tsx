@@ -4,67 +4,93 @@ import { ArrowUpRight } from 'lucide-react'
 import { useId, useState } from 'react'
 
 import {
-  RESOURCE_DIRECTORIES,
+  RESOURCE_ENTRIES,
+  RESOURCE_KIND_LABELS,
+  RESOURCE_SECTION_LABELS,
+  filterResourceEntries,
   type ResourceKind,
-  type ResourceSection,
+  type ResourceKindFilter,
+  type ResourceSectionFilter,
 } from '@/lib/resource-directory'
 
-const RESOURCE_KIND_LABELS: Record<ResourceKind, string> = {
-  articles: '文章',
-  projects: '项目',
-}
+const SECTION_FILTERS: ResourceSectionFilter[] = [
+  'all',
+  'frontend',
+  'backend',
+  'agent',
+  'algorithm',
+  'general',
+]
 
-type ResourceDirectoryProps = {
-  section: ResourceSection
-}
-
-export function ResourceDirectory({ section }: ResourceDirectoryProps) {
-  const [kind, setKind] = useState<ResourceKind>('articles')
+export function ResourceDirectory() {
+  const [section, setSection] = useState<ResourceSectionFilter>('all')
+  const [kind, setKind] = useState<ResourceKindFilter>('all')
   const id = useId()
-  const directory = RESOURCE_DIRECTORIES[section]
-  const entries = directory[kind]
-  const panelId = `${id}-${kind}-panel`
+  const panelId = `${id}-panel`
+  const entries = filterResourceEntries(RESOURCE_ENTRIES, section, kind)
 
-  function moveFocus(current: ResourceKind, direction: 1 | -1) {
-    const kinds: ResourceKind[] = ['articles', 'projects']
-    const nextKind = kinds[(kinds.indexOf(current) + direction + kinds.length) % kinds.length]
-    setKind(nextKind)
-    document.getElementById(`${id}-${nextKind}-tab`)?.focus()
+  function moveFocus(current: ResourceSectionFilter, direction: 1 | -1) {
+    const nextSection =
+      SECTION_FILTERS[
+        (SECTION_FILTERS.indexOf(current) + direction + SECTION_FILTERS.length) %
+          SECTION_FILTERS.length
+      ]
+    setSection(nextSection)
+    document.getElementById(`${id}-${nextSection}-tab`)?.focus()
   }
 
   return (
-    <section className="resource-directory" aria-label={directory.title}>
-      <div className="resource-directory__tabs" role="tablist" aria-label={`${directory.title}分类`}>
-        {(Object.keys(RESOURCE_KIND_LABELS) as ResourceKind[]).map((item) => {
-          const selected = kind === item
-          const tabId = `${id}-${item}-tab`
+    <section className="resource-directory" aria-label="资源推荐">
+      <div className="resource-directory__filters">
+        <div className="resource-directory__tabs" role="tablist" aria-label="技术方向">
+          {SECTION_FILTERS.map((item) => {
+            const selected = section === item
+            const tabId = `${id}-${item}-tab`
 
-          return (
-            <button
-              aria-controls={selected ? panelId : undefined}
-              aria-selected={selected}
-              className="resource-directory__tab"
-              id={tabId}
-              key={item}
-              onClick={() => setKind(item)}
-              onKeyDown={(event) => {
-                if (event.key === 'ArrowRight') moveFocus(item, 1)
-                if (event.key === 'ArrowLeft') moveFocus(item, -1)
-              }}
-              role="tab"
-              tabIndex={selected ? 0 : -1}
-              type="button"
-            >
-              {RESOURCE_KIND_LABELS[item]}
-            </button>
-          )
-        })}
+            return (
+              <button
+                aria-controls={panelId}
+                aria-selected={selected}
+                className="resource-directory__tab"
+                id={tabId}
+                key={item}
+                onClick={() => setSection(item)}
+                onKeyDown={(event) => {
+                  if (event.key === 'ArrowRight') moveFocus(item, 1)
+                  if (event.key === 'ArrowLeft') moveFocus(item, -1)
+                }}
+                role="tab"
+                tabIndex={selected ? 0 : -1}
+                type="button"
+              >
+                {item === 'all' ? '全部' : RESOURCE_SECTION_LABELS[item]}
+              </button>
+            )
+          })}
+        </div>
+
+        <label className="resource-directory__kind-filter">
+          <span>类型</span>
+          <select
+            value={kind}
+            onChange={(event) => setKind(event.target.value as ResourceKindFilter)}
+          >
+            <option value="all">全部类型</option>
+            {(Object.entries(RESOURCE_KIND_LABELS) as [ResourceKind, string][]).map(
+              ([value, label]) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ),
+            )}
+          </select>
+        </label>
       </div>
 
       <div className="resource-directory__panel" id={panelId} role="tabpanel">
         {entries.length === 0 ? (
           <p className="resource-directory__empty">
-            目前还没有经过筛选的{RESOURCE_KIND_LABELS[kind]}，宁缺毋滥。
+            当前筛选条件下还没有经过整理的资源。
           </p>
         ) : (
           <div className="resource-directory__table-wrap">
@@ -72,6 +98,8 @@ export function ResourceDirectory({ section }: ResourceDirectoryProps) {
               <thead>
                 <tr>
                   <th scope="col">名称</th>
+                  <th scope="col">类型</th>
+                  <th scope="col">方向</th>
                   <th scope="col">简介</th>
                   <th scope="col">推荐理由</th>
                   <th scope="col">标签</th>
@@ -86,6 +114,12 @@ export function ResourceDirectory({ section }: ResourceDirectoryProps) {
                         {entry.title}
                       </a>
                     </th>
+                    <td>{RESOURCE_KIND_LABELS[entry.kind]}</td>
+                    <td>
+                      {entry.sections
+                        .map((item) => RESOURCE_SECTION_LABELS[item])
+                        .join(' / ')}
+                    </td>
                     <td>{entry.description}</td>
                     <td>{entry.recommendation}</td>
                     <td>

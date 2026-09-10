@@ -8,16 +8,20 @@ import type { HomeData } from '@/lib/content'
 const CONTRIBUTION_HREF = '/docs/dev/conventions/open-source-contribution'
 const TOPIC_TAGS = [
   {
-    label: '八股知识',
-    href: '/docs/frontend/knowledge/React/01-核心概念与基础语法',
+    label: '教程',
+    href: '/docs/frontend/tutorial/React/00-React学习路线',
   },
   {
-    label: '面经复盘',
+    label: '八股',
+    href: '/docs/frontend/bagu/handwrite/00-高频前端手写25题',
+  },
+  {
+    label: '面经',
     href: '/docs/frontend/interview/00-面经4.9',
   },
   {
-    label: '优质资源',
-    href: '/docs/frontend/resources',
+    label: '资源推荐',
+    href: '/docs/resources',
   },
   {
     label: 'GitHub 学习项目',
@@ -47,7 +51,7 @@ export function HomeHero({ data }: { data: HomeData }) {
             技术学习资料索引
           </h1>
           <p className="home-subtitle">
-            {data.totalFiles} 篇笔记，整理八股知识、面经复盘、优质资源和可跟练的 GitHub
+            {data.totalFiles} 篇笔记，整理教程、八股、面经、资源推荐和可跟练的 GitHub
             学习项目。
           </p>
 

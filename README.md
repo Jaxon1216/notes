@@ -30,30 +30,32 @@ npm run start
 
 ## 目录结构
 
-内容统一放在 `content/docs/` 下，并保留五个一级方向：
+内容统一放在 `content/docs/` 下：
 
 ```text
 content/docs/
   frontend/
-    knowledge/    # 前端知识八股
+    tutorial/     # 前端教程
+    bagu/         # 前端八股
     interview/    # 前端面经
-    resources/    # 前端优质好文项目
 
   backend/
-    knowledge/    # 服务端知识八股
+    tutorial/     # 服务端教程
+    bagu/         # 服务端八股
     interview/    # 服务端面经
-    resources/    # 服务端优质好文项目
 
   agent/
-    knowledge/    # Agent 与 LLM 知识八股
+    tutorial/     # Agent 教程
+    bagu/         # Agent 与 LLM 八股
       agent/      # Agent 应用开发、RAG、工具调用和协议
       llm/        # LLM 原理、模型机制和微调
     interview/    # Agent 应用开发面经
-    resources/    # Agent 应用开发优质好文项目
 
   algorithm/
     basics/       # 算法基础、STL 和 C++ 常用知识
     leetcode/     # LeetCode 专题与刷题复盘
+
+  resources/      # 按方向和类型筛选的资源推荐
 
   dev/
     conventions/  # 开发规范
@@ -73,7 +75,7 @@ content/docs/
 
 ## 新增笔记
 
-1. 选择合适目录，例如 `content/docs/frontend/knowledge/React/`、`content/docs/agent/knowledge/agent/` 或 `content/docs/algorithm/leetcode/`。
+1. 选择合适目录，例如 `content/docs/frontend/tutorial/React/`、`content/docs/agent/bagu/agent/` 或 `content/docs/algorithm/leetcode/`。
 2. 新增 Markdown 或 MDX 文件，文件名使用清晰标题，可带数字前缀控制排序，例如 `01-核心概念.md`。
 3. 文章内图片放在当前专题附近的 `img/` 目录并使用相对路径引用；截图优先使用 WebP，图示优先使用 SVG。
 4. 如需调整侧边栏展示顺序或目录中文名，编辑对应目录下的 `meta.json`。
@@ -95,34 +97,23 @@ npm run validate
 
 当前项目的本地 hooks 会在 commit 前运行内容结构、图片引用和 Vue 标签闭合检查，在 commit message 阶段运行 commitlint。`npm run validate` 还会执行单元测试、类型检查和生产构建，作为 CI 与 Vercel 的统一门禁。
 
-## 贡献优质好文项目
+## 贡献资源推荐
 
-优质好文和项目推荐放在各方向的 `resources/` 目录下，例如：
+文章、书籍、课程、项目、工具、官方文档和论文等推荐统一维护在
+`lib/resource-directory.ts`，并声明所属技术方向与资源类型。
 
-```text
-content/docs/frontend/resources/
-content/docs/backend/resources/
-content/docs/agent/resources/
-```
+推荐条目结构：
 
-推荐新增文章使用这个结构：
-
-```markdown
-# 推荐标题
-
-## 链接
-
-- 原文或项目：<https://example.com>
-
-## 推荐理由
-
-用 2-5 句话说明它解决了什么问题、适合谁读、为什么值得收录。
-
-## 标签
-
-- React
-- 工程化
-- 性能优化
+```ts
+{
+  title: '推荐标题',
+  href: 'https://example.com',
+  description: '资源简介。',
+  recommendation: '说明适合谁、解决什么问题，以及为什么值得收录。',
+  sections: ['frontend'],
+  kind: 'article',
+  tags: ['React', '工程化'],
+}
 ```
 
 请避免提交：

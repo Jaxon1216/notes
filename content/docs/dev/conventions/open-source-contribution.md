@@ -78,9 +78,10 @@ git push -u origin docs/topic-name
 不使用 AI 时，同样先 Fork、克隆仓库并创建独立分支。再按
 [写作规范](https://github.com/Jaxon1216/notes/blob/main/docs/writing-style.md) 将内容放到合适目录：
 
-- 知识八股：`content/docs/<direction>/knowledge/`
+- 教程：`content/docs/<direction>/tutorial/`
+- 八股：`content/docs/<direction>/bagu/`
 - 面经：`content/docs/<direction>/interview/`
-- 优质文章和项目：`content/docs/<direction>/resources/`
+- 资源推荐：`lib/resource-directory.ts`
 - 算法基础和刷题复盘：`content/docs/algorithm/basics/` 或 `content/docs/algorithm/leetcode/`
 - 零散技巧和未归档资料：`content/docs/dev/notes/`
 

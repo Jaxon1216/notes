@@ -12,7 +12,7 @@ export type NavigationEvent =
 
 export function getActiveSectionKey(pathname: string) {
   const match = pathname.match(
-    /^\/docs\/(frontend|backend|algorithm|agent|dev)(?:\/|$)/,
+    /^\/docs\/(frontend|backend|agent|algorithm|resources|dev)(?:\/|$)/,
   )
 
   return match?.[1] ?? null

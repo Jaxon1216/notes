@@ -14,6 +14,42 @@ const config = {
   turbopack: {
     root,
   },
+  async redirects() {
+    return [
+      {
+        source: '/docs/frontend/knowledge/handwrite/:path*',
+        destination: '/docs/frontend/bagu/handwrite/:path*',
+        permanent: true,
+      },
+      {
+        source: '/docs/frontend/knowledge/:path*',
+        destination: '/docs/frontend/tutorial/:path*',
+        permanent: true,
+      },
+      {
+        source: '/docs/backend/knowledge/:path*',
+        destination: '/docs/backend/tutorial/:path*',
+        permanent: true,
+      },
+      {
+        source: '/docs/agent/knowledge/:path*',
+        destination: '/docs/agent/bagu/:path*',
+        permanent: true,
+      },
+      ...['frontend', 'backend', 'agent'].flatMap((section) => [
+        {
+          source: `/docs/${section}/resources`,
+          destination: '/docs/resources',
+          permanent: true,
+        },
+        {
+          source: `/docs/${section}/resources/:path*`,
+          destination: '/docs/resources',
+          permanent: true,
+        },
+      ]),
+    ]
+  },
 }
 
 const withMDX = createMDX({
