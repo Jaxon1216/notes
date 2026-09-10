@@ -8,7 +8,7 @@
     "build": "next build",
     "typecheck": "tsc --noEmit --pretty false --incremental false",
     "start": "next start",
-    "check:content": "node scripts/check-content-style.cjs content/docs docs README.md AGENTS.md",
+    "check:content": "node scripts/check-content-style.cjs content/docs docs README.md CONTRIBUTING.md AGENTS.md",
     "check:images": "node scripts/check-images.cjs content/docs",
     "check:vue:tags": "node scripts/check-html-tags.cjs content/docs/frontend/tutorial/Vue",
     "validate": "npm run check:content && npm run check:images && npm run check:vue:tags && npm run test:unit && npm run typecheck && npm run build",
@@ -32,7 +32,7 @@
   "main": "index.js",
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@ai-sdk/openai-compatible": "^3.0.39",
     "@ai-sdk/react": "^4.0.86",

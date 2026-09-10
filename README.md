@@ -81,7 +81,7 @@ content/docs/
 4. 如需调整侧边栏展示顺序或目录中文名，编辑对应目录下的 `meta.json`。
 5. 提交前运行 `npm run build`。
 
-更完整的写作约束见 `docs/writing-style.md`，PR 流程见 `docs/pull-request.md`。
+首次参与项目请阅读 `CONTRIBUTING.md`；更完整的写作约束见 `docs/writing-style.md`，PR 流程见 `docs/pull-request.md`。
 
 ## 检查命令
 
@@ -133,3 +133,7 @@ npm run validate
 - 站点信息架构：`site.config.ts`
 - 基础样式：`app/global.css`
 - 文档树顺序与目录标题：`content/docs/**/meta.json`
+
+## License
+
+本项目使用 [MIT License](LICENSE)。
