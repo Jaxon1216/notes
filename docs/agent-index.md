@@ -33,6 +33,7 @@
 | `components/mdx.tsx` | MDX 组件覆盖 |
 | `scripts/check-content-style.cjs` | 文章标题结构检查 |
 | `scripts/check-html-tags.cjs` | Vue 笔记 HTML 标签闭合检查 |
+| `tests/`、`vitest.config.ts` | 单元测试与 Vitest 配置 |
 | `commitlint.config.cjs` | commit message 规则 |
 
 ## 常用工作流

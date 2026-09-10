@@ -78,7 +78,7 @@ npm run validate
 `validate` 会依次执行：
 
 ```text
-check:content -> check:images -> check:vue:tags -> typecheck -> build
+check:content -> check:images -> check:vue:tags -> test:unit -> typecheck -> build
 ```
 
 当前项目尚未接入 ESLint。TypeScript 和 Next.js 构建会覆盖编译错误；如果后续 React 组件和交互代码增多，再补 `eslint.config.mjs`、`lint` 脚本和 CI lint 阶段。
@@ -118,6 +118,7 @@ Review 时优先看这些点：
 - 是否存在多个 H1、标题跳级、标题里嵌套链接。
 - 新目录是否有对应 `meta.json`。
 - 图片是否放在当前专题 `img/` 目录，并使用 `./img/xxx` 引用。
+- 业务逻辑或组件约束变化是否补充或更新 Vitest 测试。
 - 首页、导航、搜索或 Fumadocs 配置是否被误改。
 - 是否运行过必要检查，并在 PR 描述里写明结果。
 - 大改动是否更新 `docs/changelog.md` 或 `docs/todo.md`。

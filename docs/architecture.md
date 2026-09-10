@@ -13,6 +13,7 @@
 - particles.js：复用个人主页同款浅色粒子背景。
 - Simple Icons：负责首页技术栈 LogoLoop 的品牌图标来源。
 - AI SDK：负责文档页 AI 解释挂件的 OpenAI-compatible 模型调用和流式输出。
+- Vitest：独立运行 TypeScript 单元测试，不参与 Next.js 的开发或生产构建。
 - Vercel Analytics：仅在 Vercel 环境中启用访问统计。
 - Husky + commitlint：本地提交信息校验。
 
@@ -68,6 +69,9 @@ scripts/
   check-content-style.cjs     # Markdown/MDX 写作结构检查
   check-images.cjs            # Markdown/MDX 图片引用检查
   check-html-tags.cjs         # Vue 笔记 HTML 标签闭合检查
+
+tests/                        # 业务逻辑、配置边界和静态回归单元测试
+vitest.config.ts              # Vitest 路径别名配置
 
 public/
   favicon.svg                 # 浏览器标签页矢量图标
@@ -134,7 +138,7 @@ sitemap，`app/sitemap.ts` 通过 `source.getPages()` 动态输出首页和全�
 
 `/api/ai/explain` 只支持 OpenAI-compatible 模型服务。请求体按声明的 `Content-Length` 和实际读取的 UTF-8 字节双重限制为 128 KiB；只接受最多 24 条 `user`/`assistant` 文本消息，单条最多 8,000 字符、总计最多 24,000 字符，用户问题仍限制为 1,000 字符，引用仍限制为 4,000 字符。每条消息最多包含 8 个文本 part。`baseURL`、`apiKey`、`model`、各类 `id`、`pageTitle`、`pageUrl` 分别限制为 2,048、4,096、256、128、300、2,048 字符。
 
-生产环境会限制 `baseURL` 为 HTTPS，并要求域名精确匹配内置允许列表或 `AI_ALLOWED_BASE_URL_HOSTS` 环境变量；本地开发环境只额外允许 `localhost` 和 `127.0.0.1` 使用 HTTP，便于调试 LM Studio/Ollama 兼容接口。接口还会解析域名并拦截本机、内网、链路本地及其他非公网地址，模型请求不跟随重定向。
+生产环境会限制 `baseURL` 为 HTTPS，并要求域名精确匹配内置允许列表或 `AI_ALLOWED_BASE_URL_HOSTS` 环境变量；多个自定义中转站域名使用逗号分隔，只填写 hostname，不带协议、端口或路径。本地开发环境只额外允许 `localhost` 和 `127.0.0.1` 使用 HTTP，便于调试 LM Studio/Ollama 兼容接口。接口还会解析域名并拦截本机、内网、链路本地及其他非公网地址，模型请求不跟随重定向。
 
 接口按代理提供的客户端 IP 执行 best-effort 固定窗口限流：每个热实例内每个客户端每 60 秒最多 10 次请求，状态 Map 最多保留 10,000 个客户端；超过限制返回 `429` 和 `Retry-After`。该限制不依赖外部服务，因此不保证跨实例全局计数。Provider 调用错误统一转换为固定提示，不向客户端回显密钥或上游错误详情。
 
@@ -208,12 +212,13 @@ Fumadocs `DocsLayout` 仍负责文档树、侧边栏、搜索和正文区域；`
 npm run check:content
 npm run check:images
 npm run check:vue:tags
+npm run test:unit
 npm run typecheck
 npm run build
 npm run validate
 ```
 
-`npm run validate` 是 PR 前的总检查入口。它会依次执行内容结构检查、图片引用检查、Vue 笔记标签检查、TypeScript 检查和生产构建。
+`npm run validate` 是 PR 前的总检查入口。它会依次执行内容结构检查、图片引用检查、Vue 笔记标签检查、Vitest 单元测试、TypeScript 检查和生产构建。
 
 ## 部署
 

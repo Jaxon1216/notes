@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
 
 import {
+  getAllowedAIHosts,
   isAllowedAIHostname,
   isBlockedHostname,
   isBlockedNetworkAddress,
@@ -61,6 +62,15 @@ describe('AI provider SSRF address boundaries', () => {
 })
 
 describe('AI provider host validation', () => {
+  it('adds configured relay hosts to the production allowlist', () => {
+    const allowedHosts = getAllowedAIHosts(
+      'Relay.Example.com., api.internal-provider.example',
+    )
+
+    expect(allowedHosts.has('relay.example.com')).toBe(true)
+    expect(allowedHosts.has('api.internal-provider.example')).toBe(true)
+  })
+
   it('matches production allowlist hosts exactly', () => {
     const allowedHosts = new Set(['api.example.com'])
 

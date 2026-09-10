@@ -85,13 +85,15 @@ content/docs/
 
 ```bash
 npm run check:content
+npm run check:images
 npm run check:vue:tags
+npm run test:unit
 npm run typecheck
 npm run build
 npm run validate
 ```
 
-当前项目的本地 hooks 会在 commit 前运行内容结构和 Vue 标签闭合检查，在 commit message 阶段运行 commitlint。完整 PR 检查以 `npm run validate` 和 CI 为准。
+当前项目的本地 hooks 会在 commit 前运行内容结构、图片引用和 Vue 标签闭合检查，在 commit message 阶段运行 commitlint。`npm run validate` 还会执行单元测试、类型检查和生产构建，作为 CI 与 Vercel 的统一门禁。
 
 ## 贡献优质好文项目
 
