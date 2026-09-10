@@ -107,6 +107,10 @@ ${sourceLine ? `引用来源：${sourceLine}` : ''}
 回答时请优先围绕这段引用解释。`
 }
 
+// Situation: 公开转发接口会同时面对超大请求、伪造消息、频繁调用和恶意 Provider URL。
+// Task: 在任何模型请求发生前建立可预测的资源上限与安全边界。
+// Action: 依次执行体积检查、限流、JSON 读取、结构校验和 Provider URL 校验。
+// Result: 非法请求会在明确阶段以 400/413/429 拒绝，合法流式会话保持原链路。
 export async function POST(req: Request) {
   const contentLength = validateContentLength(
     req.headers.get('content-length'),

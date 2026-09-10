@@ -34,6 +34,10 @@ function getMessageText(message: UIMessage) {
     .join('')
 }
 
+// Situation: useChat 消息可能包含推理、工具等 UI part，而服务端只接受文本解释会话。
+// Task: 让客户端请求形状与服务端白名单一致，避免正常会话被严格校验误拒绝。
+// Action: 发送前过滤空消息，并把每条消息归一成单一 text part。
+// Result: UI 仍保留完整渲染状态，网络中只传递模型继续对话所需的最小文本。
 function toRequestMessages(messages: UIMessage[]) {
   return messages.flatMap((message) => {
     const text = getMessageText(message)

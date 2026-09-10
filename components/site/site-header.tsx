@@ -59,6 +59,10 @@ export function SiteHeader({ data }: { data: HomeData }) {
     }
   }, [])
 
+  // Situation: AI 教程和贡献入口会在每个页面常驻，但实际点击频率低于主导航。
+  // Task: 避免常驻低频链接在用户未操作时下载额外页面数据。
+  // Action: 保留 Next Link 的客户端导航，仅对这两个低频入口关闭 prefetch。
+  // Result: 全站导航能力不变，同时减少首页和文档页的后台 RSC 请求。
   return (
     <header className="site-header" ref={headerRef}>
       <div className="site-header__inner">

@@ -16,10 +16,10 @@ type FixedWindowRateLimiterOptions = {
   maxEntries: number
 }
 
-/**
- * In-memory fixed-window limiting is intentionally best-effort: each warm
- * server instance has its own bounded state and no external service is needed.
- */
+// Situation: AI 转发接口可能被单个客户端短时间高频调用，但项目没有共享限流服务。
+// Task: 以零外部依赖提供基础保护，同时避免进程内客户端记录无限增长。
+// Action: 每个热实例按客户端执行固定窗口计数，并定期清理或淘汰有界 Map。
+// Result: 超限请求得到 429/Retry-After；跨实例不共享计数，因此明确属于 best-effort。
 export class FixedWindowRateLimiter {
   private readonly entries = new Map<string, FixedWindowEntry>()
   private checksSincePrune = 0

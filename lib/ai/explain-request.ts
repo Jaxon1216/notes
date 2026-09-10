@@ -120,6 +120,10 @@ export function validateContentLength(
   return { ok: true, value: Number(length) }
 }
 
+// Situation: Content-Length 可能缺失或被伪造，直接 request.json() 会先把整包数据读入内存。
+// Task: 无论请求头是否可信，都必须把实际接收的 UTF-8 数据限制在 128 KiB 内。
+// Action: 流式读取字节并累计大小，超限立即取消 reader，再对完整文本执行 JSON.parse。
+// Result: 大包在解析和业务校验前被 413 拒绝，服务端内存占用有明确上限。
 export async function readLimitedJsonBody(
   request: Request,
   maxBytes = MAX_EXPLAIN_REQUEST_BODY_BYTES,
@@ -354,6 +358,10 @@ function validateQuote(value: unknown): ValidationResult<AiQuote> {
   }
 }
 
+// Situation: TypeScript 的 UIMessage 类型只约束编译期，网络请求仍可能携带任意 JSON。
+// Task: 只允许当前解释功能需要的文本会话，并限制历史消息和配置字段规模。
+// Action: 逐层校验根对象、消息、文本 part、Provider 配置和引用后生成干净对象。
+// Result: 下游 AI SDK 不再接触未知 role/part 或无界文本，错误也能返回明确原因。
 export function validateExplainRequestBody(
   value: unknown,
 ): ValidationResult<ExplainRequestBody> {

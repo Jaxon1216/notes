@@ -27,6 +27,10 @@ export function HomeLogoLoop() {
     }
   })
 
+  // Situation: LogoLoop 为无缝滚动复制同一批 Logo，内部 Link 也会随副本一起出现。
+  // Task: 让每个 Logo 仍可点击，但不能让多个副本重复预取同一篇文档。
+  // Action: 所有循环中的内部 Link 都关闭 prefetch，重复副本继续退出键盘顺序。
+  // Result: 动画和客户端跳转不变，循环副本不再制造重复 RSC 请求。
   return (
     <LogoLoop
       ariaLabel="Easton Notes 涉及的技术栈"

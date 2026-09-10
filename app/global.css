@@ -32,6 +32,10 @@ a {
   --fd-banner-height: var(--site-header-height);
 }
 
+/* Situation: 小屏文档页的全站头部与 Fumadocs 移动头部内容重复。 */
+/* Task: 隐藏重复层时还要同步消除 Fumadocs 为它预留的顶部偏移。 */
+/* Action: 仅命中带 .docs-layout 的页面，并把两个头部高度变量一起归零。 */
+/* Result: 文档移动端由三层顶栏收敛为两层，首页和桌面布局不受影响。 */
 @media (width < 48rem) {
   body:has(.docs-layout) .site-header {
     display: none;

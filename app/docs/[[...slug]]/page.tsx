@@ -46,6 +46,10 @@ export function generateStaticParams() {
   }))
 }
 
+// Situation: 只在根布局设置 metadata 会让文章缺少自己的 canonical 和分享地址。
+// Task: 每篇文档必须以实际 Fumadocs 路径对外声明标题、摘要和唯一 URL。
+// Action: 根据 source 页面数据生成 canonical、OpenGraph 与 Twitter metadata。
+// Result: 搜索引擎不会把所有文章归到首页，分享卡片也能指向当前文档。
 export async function generateMetadata({
   params,
 }: DocsPageProps): Promise<Metadata> {

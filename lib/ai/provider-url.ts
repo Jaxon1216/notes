@@ -174,6 +174,10 @@ async function resolvePublicAddresses(hostname: string) {
   })
 }
 
+// Situation: 用户可配置 Provider URL，攻击者可能借服务端请求访问内网或元数据地址。
+// Task: 只允许可信 HTTPS 域名，并防住直接 IP、DNS 私网解析和重定向绕过。
+// Action: 校验协议与精确 allowlist，再解析全部地址并拒绝任一非公网 IPv4/IPv6。
+// Result: 合法 OpenAI-compatible 服务可用，localhost 仅在开发环境例外放行。
 export async function validateProviderBaseURL(
   value: string,
   options: ProviderBaseURLValidationOptions = {},
