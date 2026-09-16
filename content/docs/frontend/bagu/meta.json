@@ -1,5 +1,5 @@
 {
   "title": "八股",
   "description": "前端高频题、手写题、回答重点和面试追问。",
-  "pages": ["handwrite"]
+  "pages": ["handwrite", "mineru-interview"]
 }
