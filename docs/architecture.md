@@ -150,8 +150,7 @@ sitemap，`app/sitemap.ts` 通过 `source.getPages()` 动态输出首页和全�
 
 挂件只把用户主动选中的文本作为引用上下文，不自动读取附近段落、整篇文章或全站内容。
 侧栏打开后继续划选正文时，浮动入口改为“追加引用”，新片段会合并到当前会话上下文且不会清空已有消息；
-累计引用仍受 4,000 字符上限约束。侧栏内部滚动不清空正文选区；正文或其祖先容器滚动时清空浮标，避免位置失效。
-流式回答仅在消息区停留于底部时自动跟随，用户向上滚动后保持当前位置。
+累计引用仍受 4,000 字符上限约束。流式回答仅在消息区停留于底部时自动跟随，用户向上滚动后保持当前位置。
 AI 回答使用 GFM Markdown 渲染，表格带边框和横向滚动容器，围栏代码块通过 `rehype-highlight`
 生成语法高亮。移动端小于 `1024px` 时隐藏入口和侧栏。
 
@@ -165,14 +164,14 @@ AI 回答使用 GFM Markdown 渲染，表格带边框和横向滚动容器，围
 5. `app/docs/layout.tsx` 用 `source.getPageTree()` 生成文档树和侧边栏。
 6. `app/api/search/route.ts` 基于同一个 source 生成搜索数据。
 
-前端、服务端和 Agent 统一使用 `tutorial/`、`bagu/`、`interview/` 三类目录，页面名称固定为“教程”“八股”“面经”。大型连续专题优先保留一个稳定的总览页面，再将正文拆到带数字前缀的子目录中；专题子目录使用 `meta.json` 固定侧边栏顺序。`Agent应用开发.md` 采用这一结构，具体内容位于 `agent/bagu/agent/agent-development/`，旧 URL 由 Next.js 永久重定向承接。
+前端、服务端和 Agent 使用 `tutorial/`、`bagu/`、`interview/` 三类核心目录，页面名称固定为“教程”“八股”“面经”；前端和服务端额外在方向根目录维护 `roadmap.md` 学习路线。大型连续专题优先保留一个稳定的总览页面，再将正文拆到带数字前缀的子目录中；专题子目录使用 `meta.json` 固定侧边栏顺序。`Agent应用开发.md` 采用这一结构，具体内容位于 `agent/bagu/agent/agent-development/`，旧 URL 由 Next.js 永久重定向承接。
 
 ## 首页数据链路
 
 首页不走 Fumadocs 文档树，而是使用独立的数据统计逻辑：
 
 1. `site.config.ts` 维护一级方向、子栏目名称和描述。
-2. `lib/content.ts` 单次扫描 `content/docs/` 下的 Markdown/MDX 文件，再按一级方向和子栏目聚合统计；同一服务端渲染中的首页与导航通过 React `cache` 复用结果。
+2. `lib/content.ts` 单次扫描 `content/docs/` 下的 Markdown/MDX 文件，再按一级方向和子栏目聚合统计；子栏目既可对应目录，也可对应同名 Markdown/MDX 单页，同一服务端渲染中的首页与导航通过 React `cache` 复用结果。
 3. `app/page.tsx` 获取统计结果，并渲染导航栏下的全屏动效首屏。
 4. `components/home/home-hero.tsx` 组合浅色粒子背景、轻量入口文案和技术栈 LogoLoop；`components/home/particles-config.ts` 集中维护桌面/移动端的粒子配置。
 5. `lib/home-visuals.tsx` 维护首页技术栈 LogoLoop 图标白名单，不从正文自动扫描技术词。
@@ -187,7 +186,7 @@ LogoLoop 中会被复制的技术栈链接关闭自动预取，避免首屏可�
 
 ## 导航链路
 
-全站固定顶部导航由 `components/site/site-header.tsx` 提供，并在 `app/layout.tsx` 中挂载。前端、服务端和 Agent 的菜单固定展示“教程”“八股”“面经”；算法和开发常用保留各自子栏目，资源推荐作为直接链接。下拉导航使用 `lib/site-navigation.ts` 的受控状态，任一时刻仅保留一个展开菜单：悬浮会转移菜单归属，点击可固定/关闭，点击栏外、按 Escape 或路由变更都会关闭。当前阅读领域从 `/docs/<section>/...` 推导，并以低干扰的蓝色焦点提示显示；首页和 `/docs` 总览不高亮。CSS 使用首页唯一的 `.home-shell` 标记切换导航外观：首页导航固定覆盖在首屏上且背景透明，非首页导航保持 sticky 并使用不透明的 Fumadocs 主题背景。
+全站固定顶部导航由 `components/site/site-header.tsx` 提供，并在 `app/layout.tsx` 中挂载。前端和服务端的菜单展示“学习路线”“教程”“八股”“面经”，Agent 展示“教程”“八股”“面经”；算法和开发常用保留各自子栏目，资源推荐作为直接链接。下拉导航使用 `lib/site-navigation.ts` 的受控状态，任一时刻仅保留一个展开菜单：悬浮会转移菜单归属，点击可固定/关闭，点击栏外、按 Escape 或路由变更都会关闭。当前阅读领域从 `/docs/<section>/...` 推导，并以低干扰的蓝色焦点提示显示；首页和 `/docs` 总览不高亮。CSS 使用首页唯一的 `.home-shell` 标记切换导航外观：首页导航固定覆盖在首屏上且背景透明，非首页导航保持 sticky 并使用不透明的 Fumadocs 主题背景。
 
 `app/docs/layout.tsx` 通过 `DocsLayout.containerProps` 在文档根容器添加 `.docs-layout` 标记。桌面文档继续显示全站头部，并将 `--site-header-height` 传给 Fumadocs 的 `--fd-banner-height`；小于 Fumadocs `md` 断点时，仅隐藏 docs 页面上的全站头部，并在 `.docs-layout` 内把两个高度变量归零。首页移动端不受该规则影响，文档移动端继续使用 Fumadocs 自带的品牌、搜索、侧边栏触发器和页内目录。
 

@@ -94,6 +94,13 @@ function toPageHref(relativePath: string) {
   return normalizedPath ? `/docs/${normalizedPath}` : '/docs'
 }
 
+function belongsToChild(file: string, relativePath: string) {
+  return (
+    file.replace(/\.mdx?$/, '') === relativePath ||
+    file.startsWith(`${relativePath}/`)
+  )
+}
+
 function childStats(
   section: SiteSection,
   child: SiteChild,
@@ -102,10 +109,10 @@ function childStats(
 ): ChildStat {
   const relativeDir = childPath(section, child)
   const childRouteFiles = routeFiles.filter((file) =>
-    file.startsWith(`${relativeDir}/`),
+    belongsToChild(file, relativeDir),
   )
   const childContentFiles = contentFiles.filter((file) =>
-    file.startsWith(`${relativeDir}/`),
+    belongsToChild(file, relativeDir),
   )
 
   return {

@@ -3,25 +3,50 @@ import path from 'node:path'
 
 import { describe, expect, it } from 'vitest'
 
+import { getHomeData } from '../lib/content'
 import { SITE_SECTIONS } from '../site.config'
 
 const root = process.cwd()
 
 describe('content taxonomy', () => {
-  it('uses 教程、八股、面经 for frontend, backend and Agent', () => {
-    for (const key of ['frontend', 'backend', 'agent']) {
+  it('adds learning routes to frontend and backend while preserving core categories', () => {
+    for (const key of ['frontend', 'backend']) {
       const section = SITE_SECTIONS.find((item) => item.key === key)
 
       expect(section?.children.map((item) => item.title)).toEqual([
+        '学习路线',
         '教程',
         '八股',
         '面经',
       ])
       expect(section?.children.map((item) => item.dir)).toEqual([
+        'roadmap',
         'tutorial',
         'bagu',
         'interview',
       ])
+    }
+
+    const agent = SITE_SECTIONS.find((item) => item.key === 'agent')
+    expect(agent?.children.map((item) => item.title)).toEqual([
+      '教程',
+      '八股',
+      '面经',
+    ])
+  })
+
+  it('counts a direct Markdown page as a navigation child', () => {
+    const data = getHomeData()
+
+    for (const key of ['frontend', 'backend']) {
+      const roadmap = data.sections
+        .find((section) => section.section.key === key)
+        ?.children.find((child) => child.child.key === 'roadmap')
+
+      expect(roadmap).toMatchObject({
+        href: `/docs/${key}/roadmap`,
+        fileCount: 1,
+      })
     }
   })
 

@@ -29,6 +29,12 @@ export const SITE_SECTIONS: SiteSection[] = [
     description: '沉淀 Web 框架、工程化、浏览器基础和前端项目实践。',
     children: [
       {
+        key: 'roadmap',
+        dir: 'roadmap',
+        title: '学习路线',
+        description: '按依赖关系整理前端核心知识与推荐学习顺序。',
+      },
+      {
         key: 'tutorial',
         dir: 'tutorial',
         title: '教程',
@@ -55,6 +61,12 @@ export const SITE_SECTIONS: SiteSection[] = [
     navTitle: '服务端',
     description: '整理 API、数据库、服务治理和后端工程实践。',
     children: [
+      {
+        key: 'roadmap',
+        dir: 'roadmap',
+        title: '学习路线',
+        description: '按依赖关系整理 Go 后端核心知识与推荐学习顺序。',
+      },
       {
         key: 'tutorial',
         dir: 'tutorial',
