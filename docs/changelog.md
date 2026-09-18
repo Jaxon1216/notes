@@ -4,6 +4,7 @@
 
 ## 2026-09-17
 
+- 接入 Giscus 评论系统：新增可复用的 `components/comments/giscus-comments.tsx`，在文档页正文之后、页脚之前渲染；评论区通过 `IntersectionObserver` 在用户接近时才注入 `client.js`，并用 `MutationObserver` 观察 `<html>` 的 `.dark` class 通过 `postMessage` 同步 giscus iframe 明暗主题。仓库和分类 ID 作为公开标识内联在客户端组件中，未引入额外依赖。
 - 新增前端与 Go 后端学习路线同级文档，并将“学习路线”及真实篇数接入顶部下拉导航；内容统计同时支持目录型栏目和同名 Markdown/MDX 单页。
 
 ## 2026-09-11

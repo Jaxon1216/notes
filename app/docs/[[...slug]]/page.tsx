@@ -8,6 +8,7 @@ import {
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
+import { GiscusComments } from '@/components/comments/giscus-comments'
 import { getMDXComponents } from '@/components/mdx'
 import { absoluteSiteUrl } from '@/lib/site-url'
 import { source } from '@/lib/source'
@@ -107,6 +108,7 @@ export default async function Page({ params }: DocsPageProps) {
           />
         </div>
       </DocsBody>
+      <GiscusComments />
     </DocsPage>
   )
 }

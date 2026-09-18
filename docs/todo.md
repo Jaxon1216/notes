@@ -28,7 +28,7 @@
 - [x] 接入 Fumadocs 基础搜索 route；后续按规模继续评估 Orama 静态索引或 Algolia。
 - [x] 建立基础内容统计：文章数、栏目数、已有内容方向。
 - [x] 沿用 Vercel Analytics；后续再评估更完整的访问统计看板。
-- [ ] 第一阶段评论优先评估 Giscus，降低后端维护成本。
+- [x] 第一阶段评论优先评估 Giscus，降低后端维护成本。
 - [ ] 后续如需要点赞、收藏、用户资料和阅读进度，评估 Supabase Auth + Postgres 或 Clerk + 数据库。
 
 ### P3: 内容工程化

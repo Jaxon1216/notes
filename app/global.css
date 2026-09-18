@@ -1683,3 +1683,30 @@ body:has(.home-shell) .site-header {
     display: none;
   }
 }
+
+/* Situation: 评论区放在正文之后，需要与文档正文的排版和明暗主题保持一致。 */
+/* Task: 给 giscus 容器一个清晰的分隔、标题和最小高度，避免加载时抖动。 */
+/* Action: 复用 --color-fd-* 主题变量，giscus 自身跟随 postMessage 切换明暗。 */
+/* Result: 评论区在亮暗主题下都与正文融合，脚本注入前也不会造成布局跳动。 */
+.giscus-comments {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-fd-border);
+}
+
+.giscus-comments__title {
+  margin: 0 0 12px;
+  color: var(--color-fd-foreground);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.giscus-comments__frame {
+  min-height: 160px;
+}
+
+.giscus-comments__noscript {
+  margin: 0;
+  color: var(--color-fd-muted-foreground);
+  font-size: 14px;
+}
