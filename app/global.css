@@ -1292,7 +1292,7 @@ body:has(.home-shell) .site-header {
 }
 
 .ai-explain-sidebar__quote span,
-.ai-explain-message > span {
+.ai-explain-message span {
   display: block;
   margin-bottom: 6px;
   color: var(--color-fd-muted-foreground);
