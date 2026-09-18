@@ -250,6 +250,74 @@ body:has(.home-shell) .site-header {
   gap: 8px;
 }
 
+.docs-sidebar-activity {
+  overflow: hidden;
+  border: 1px solid var(--color-fd-border);
+  border-radius: 12px;
+  background:
+    linear-gradient(135deg, color-mix(in oklab, var(--color-fd-primary) 8%, transparent), transparent 62%),
+    var(--color-fd-secondary);
+  color: var(--color-fd-foreground);
+}
+
+.docs-sidebar-activity__heading {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px 8px;
+  border-bottom: 1px solid color-mix(in oklab, var(--color-fd-border) 72%, transparent);
+  color: var(--color-fd-muted-foreground);
+  font-size: 12px;
+  font-weight: 720;
+}
+
+.docs-sidebar-activity__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #22c55e;
+  box-shadow: 0 0 0 3px color-mix(in srgb, #22c55e 18%, transparent);
+}
+
+.docs-sidebar-activity__realtime {
+  margin-left: auto;
+  color: #16a34a;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.docs-sidebar-activity__metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 10px 4px;
+}
+
+.docs-sidebar-activity__metric {
+  display: grid;
+  gap: 3px;
+  padding: 0 8px;
+}
+
+.docs-sidebar-activity__metric + .docs-sidebar-activity__metric {
+  border-left: 1px solid color-mix(in oklab, var(--color-fd-border) 72%, transparent);
+}
+
+.docs-sidebar-activity__metric strong {
+  overflow: hidden;
+  color: var(--color-fd-foreground);
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 760;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+}
+
+.docs-sidebar-activity__metric span {
+  color: var(--color-fd-muted-foreground);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
 .site-header__ai-guide {
   position: relative;
   display: inline-flex;

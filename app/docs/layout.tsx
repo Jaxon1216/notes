@@ -2,6 +2,7 @@ import { DocsLayout } from 'fumadocs-ui/layouts/docs'
 import type { ReactNode } from 'react'
 
 import { AiExplainWidget } from '@/components/ai/ai-explain-widget'
+import { DocsSidebarActivity } from '@/components/site/docs-sidebar-activity'
 import { baseOptions } from '@/lib/layout.shared'
 import { source } from '@/lib/source'
 
@@ -15,6 +16,11 @@ export default function Layout({ children }: { children: ReactNode }) {
       containerProps={{ className: 'docs-layout' }}
       tree={source.getPageTree()}
       tabs={false}
+      searchToggle={{
+        components: {
+          lg: <DocsSidebarActivity />,
+        },
+      }}
       {...baseOptions()}
     >
       {children}
