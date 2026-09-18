@@ -36,6 +36,8 @@
   "dependencies": {
     "@ai-sdk/openai-compatible": "^3.0.39",
     "@ai-sdk/react": "^4.0.86",
+    "@neon/config": "^1.7.2",
+    "@neon/env": "^1.4.3",
     "@vercel/analytics": "^2.0.1",
     "ai": "^7.0.83",
     "fumadocs-core": "^16.15.1",
