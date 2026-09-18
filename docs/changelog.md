@@ -2,6 +2,10 @@
 
 本文件记录仓库级重大改动、架构决策和维护规则变更。普通笔记内容的小修小补不需要记录。
 
+## 2026-09-18
+
+- 接入 Umami 自托管访问统计：在 `app/layout.tsx` 中通过 `next/script` 注入 `script.js`，并与 Vercel Analytics 一样用 `process.env.VERCEL` 门禁，仅在 Vercel 部署环境加载，避免本地开发流量污染统计。`data-website-id` 作为公开标识内联在根布局中，未引入额外依赖。
+
 ## 2026-09-17
 
 - 接入 Giscus 评论系统：新增可复用的 `components/comments/giscus-comments.tsx`，在文档页正文之后、页脚之前渲染；评论区通过 `IntersectionObserver` 在用户接近时才注入 `client.js`，并用 `MutationObserver` 观察 `<html>` 的 `.dark` class 通过 `postMessage` 同步 giscus iframe 明暗主题。仓库和分类 ID 作为公开标识内联在客户端组件中，未引入额外依赖。

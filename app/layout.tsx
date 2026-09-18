@@ -3,6 +3,7 @@ import './global.css'
 import { Analytics } from '@vercel/analytics/next'
 import { RootProvider } from 'fumadocs-ui/provider/next'
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import type { ReactNode } from 'react'
 
 import { SiteHeader } from '@/components/site/site-header'
@@ -60,6 +61,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           {children}
         </RootProvider>
         {process.env.VERCEL ? <Analytics /> : null}
+        {process.env.VERCEL ? (
+          <Script
+            defer
+            src="https://umami.jiangxu.net/script.js"
+            data-website-id="e7c41115-bc88-4f80-b82b-4afa3b749f5f"
+          />
+        ) : null}
       </body>
     </html>
   )

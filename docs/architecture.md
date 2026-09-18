@@ -15,6 +15,7 @@
 - AI SDK：负责文档页 AI 解释挂件的 OpenAI-compatible 模型调用和流式输出。
 - Vitest：独立运行 TypeScript 单元测试，不参与 Next.js 的开发或生产构建。
 - Vercel Analytics：仅在 Vercel 环境中启用访问统计。
+- Umami：仅在 Vercel 环境中通过 `next/script` 注入自托管访问统计脚本。
 - Husky + commitlint：本地提交信息校验。
 
 ## 目录分层
