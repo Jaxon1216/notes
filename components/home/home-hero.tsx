@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import { HomeLogoLoop } from '@/components/home/home-logo-loop'
 import { ParticlesWrapper } from '@/components/home/particles-wrapper'
+import { DocsSidebarActivity } from '@/components/site/docs-sidebar-activity'
 import type { HomeData } from '@/lib/content'
 
 const CONTRIBUTION_HREF = '/docs/dev/conventions/open-source-contribution'
@@ -97,7 +98,13 @@ export function HomeHero({ data }: { data: HomeData }) {
             </Link>
           </div>
 
-          <p className="home-hero__meta">{data.activeSections} 个内容方向持续维护中</p>
+          <DocsSidebarActivity
+            className="home-site-activity"
+            summary={{
+              value: `${data.totalFiles} 篇`,
+              label: `${data.activeSections} 个内容方向`,
+            }}
+          />
         </div>
 
         <div className="home-hero__loop">

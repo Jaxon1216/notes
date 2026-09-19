@@ -107,6 +107,18 @@ describe('route prefetch policy', () => {
     }
   })
 
+  it('shows the content scale beside the live site activity', () => {
+    const html = renderToStaticMarkup(
+      createElement(HomeHero, {
+        data: { sections: [], totalFiles: 12, activeSections: 3 },
+      }),
+    )
+
+    expect(html).toContain('12 篇')
+    expect(html).toContain('3 个内容方向')
+    expect(html).toContain('累计浏览')
+  })
+
   it('disables prefetch for original and duplicate internal logo links', () => {
     renderToStaticMarkup(
       createElement(HomeHero, {

@@ -8,8 +8,13 @@ type SiteActivity = {
 }
 
 type DocsSidebarActivityProps = {
+  className?: string
   endpoint?: string
   pollInterval?: number
+  summary?: {
+    value: string
+    label: string
+  }
 }
 
 function formatCount(value: number) {
@@ -20,8 +25,10 @@ function formatCount(value: number) {
 }
 
 export function DocsSidebarActivity({
+  className,
   endpoint = '/api/site-activity',
   pollInterval = 30_000,
+  summary,
 }: DocsSidebarActivityProps) {
   const [activity, setActivity] = useState<SiteActivity | null>(null)
 
@@ -56,13 +63,23 @@ export function DocsSidebarActivity({
   }, [endpoint, pollInterval])
 
   return (
-    <section className="docs-sidebar-activity" aria-label="站点动态" aria-live="polite">
+    <section
+      className={['docs-sidebar-activity', className].filter(Boolean).join(' ')}
+      aria-label="站点动态"
+      aria-live="polite"
+    >
       <div className="docs-sidebar-activity__heading">
         <span className="docs-sidebar-activity__dot" aria-hidden="true" />
         <span>站点动态</span>
         <span className="docs-sidebar-activity__realtime">实时</span>
       </div>
       <div className="docs-sidebar-activity__metrics">
+        {summary ? (
+          <div className="docs-sidebar-activity__metric">
+            <strong>{summary.value}</strong>
+            <span>{summary.label}</span>
+          </div>
+        ) : null}
         <div className="docs-sidebar-activity__metric">
           <strong>{activity ? formatCount(activity.online) : '—'}</strong>
           <span>人正在阅读</span>
