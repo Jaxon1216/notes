@@ -88,6 +88,25 @@ describe('route prefetch policy', () => {
     ])
   })
 
+  it('keeps every hero topic link pointed at an available destination', () => {
+    const html = renderToStaticMarkup(
+      createElement(HomeHero, {
+        data: { sections: [], totalFiles: 12, activeSections: 3 },
+      }),
+    )
+
+    for (const href of [
+      '/docs/frontend/tutorial/React/00-React学习路线',
+      '/docs/frontend/bagu/handwrite/00-高频前端手写25题',
+      '/docs/frontend/interview/00-面经4.9',
+      '/docs/resources',
+      'https://github.com/Jaxon1216/notes',
+      '/docs/dev/conventions/open-source-contribution',
+    ]) {
+      expect(html).toContain(`href="${href}"`)
+    }
+  })
+
   it('disables prefetch for original and duplicate internal logo links', () => {
     renderToStaticMarkup(
       createElement(HomeHero, {

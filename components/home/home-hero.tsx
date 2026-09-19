@@ -24,8 +24,8 @@ const TOPIC_TAGS = [
     href: '/docs/resources',
   },
   {
-    label: 'GitHub 学习项目',
-    href: 'https://github.com/Jaxon1216/cpp-notes',
+    label: 'GitHub 开源仓库',
+    href: 'https://github.com/Jaxon1216/notes',
   },
   {
     label: '工程常用',
@@ -48,11 +48,11 @@ export function HomeHero({ data }: { data: HomeData }) {
         <div className="home-hero__content">
           <p className="home-kicker">Easton Notes</p>
           <h1 className="home-title" id="home-title">
-            技术学习资料索引
+            AI 全栈 Club
           </h1>
           <p className="home-subtitle">
-            {data.totalFiles} 篇笔记，整理教程、八股、面经、资源推荐和可跟练的 GitHub
-            学习项目。
+            已沉淀 {data.totalFiles} 篇可阅读内容：从前端、服务端到 Agent 开发，覆盖教程、
+            面试准备、资源与开源实践。
           </p>
 
           <div className="home-topic-tags" aria-label="内容标签">
