@@ -44,21 +44,20 @@
 
 ## 资源推荐规范
 
-资源推荐集中维护在 `lib/resource-directory.ts`，由 `content/docs/resources/index.mdx` 统一展示。
-每条推荐必须声明技术方向与资源类型，并包含可访问的原文或项目链接、2 至 5 句推荐理由和标签。
-AI 不得编造链接、作者、项目状态或阅读感受；无法验证的链接应交给贡献者确认。
+资源推荐集中维护在 `lib/resource-directory.ts`，友链集中维护在
+`lib/friend-links.ts`，由资源中心的对应 MDX 页面展示。每条记录必须使用固定的
+`title`、`scenario`、`description`、`href` 字段；资源推荐额外使用 `kind` 区分博客、项目或工具。
+AI 不得编造链接、作者、项目状态或阅读感受；无法验证的链接应交给贡献者确认。友链还需要确认互链关系后才可收录。
 
 推荐结构如下：
 
 ```ts
 {
-  title: '推荐标题',
+  title: '站点名称',
   href: 'https://example.com',
-  description: '资源简介。',
-  recommendation: '说明适合谁、解决什么问题，以及为什么值得收录。',
-  sections: ['frontend'],
-  kind: 'article',
-  tags: ['React', '工程化'],
+  scenario: '适合在什么情况下使用或阅读。',
+  description: '说明站点内容或工具能力。',
+  kind: 'blog',
 }
 ```
 

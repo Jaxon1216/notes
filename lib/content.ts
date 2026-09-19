@@ -138,11 +138,15 @@ function sectionStats(
   const children = section.children.map((child) =>
     childStats(section, child, sectionRouteFiles, sectionContentFiles),
   )
+  const indexRoute = sectionRouteFiles.find(
+    (file) => file.replace(/\.mdx?$/, '') === `${section.dir}/index`,
+  )
+  const preferredRoute = indexRoute ?? sectionRouteFiles[0]
 
   return {
     section,
-    href: sectionRouteFiles[0]
-      ? toPageHref(sectionRouteFiles[0].replace(/\.mdx?$/, ''))
+    href: preferredRoute
+      ? toPageHref(preferredRoute.replace(/\.mdx?$/, ''))
       : '',
     fileCount: sectionContentFiles.length,
     childCount: section.children.length,

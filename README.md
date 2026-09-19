@@ -55,7 +55,7 @@ content/docs/
     basics/       # 算法基础、STL 和 C++ 常用知识
     leetcode/     # LeetCode 专题与刷题复盘
 
-  resources/      # 按方向和类型筛选的资源推荐
+  resources/      # 资源中心：文章、项目、工具与友情链接
 
   dev/
     conventions/  # 开发规范
@@ -99,20 +99,18 @@ npm run validate
 
 ## 贡献资源推荐
 
-文章、书籍、课程、项目、工具、官方文档和论文等推荐统一维护在
-`lib/resource-directory.ts`，并声明所属技术方向与资源类型。
+优质博客、开源项目和工具统一维护在 `lib/resource-directory.ts`；友链维护在
+`lib/friend-links.ts`。两个目录使用同一份固定字段结构，资源中心的页面会自动渲染卡片。
 
 推荐条目结构：
 
 ```ts
 {
-  title: '推荐标题',
+  title: '站点名称',
   href: 'https://example.com',
-  description: '资源简介。',
-  recommendation: '说明适合谁、解决什么问题，以及为什么值得收录。',
-  sections: ['frontend'],
-  kind: 'article',
-  tags: ['React', '工程化'],
+  scenario: '适合在什么情况下使用或阅读。',
+  description: '说明站点内容或工具能力。',
+  kind: 'blog',
 }
 ```
 
@@ -121,6 +119,8 @@ npm run validate
 - 没有推荐理由的链接堆叠。
 - 明显重复或质量较低的内容。
 - 与当前目录结构无关的文件。
+
+友情链接独立维护在 `lib/friend-links.ts`，只收录已确认互链关系的技术站点或开源社区；不要把普通资源推荐直接复制为友链。友链数据不需要 `kind` 字段。
 - 未经说明的大规模目录调整。
 
 ## 常见维护点

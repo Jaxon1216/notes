@@ -3,52 +3,87 @@ import { describe, expect, it } from 'vitest'
 import {
   RESOURCE_ENTRIES,
   RESOURCE_KIND_LABELS,
-  RESOURCE_SECTION_LABELS,
   filterResourceEntries,
   validateResourceDirectory,
 } from '../lib/resource-directory'
+import { FRIEND_LINKS, validateFriendLinks } from '../lib/friend-links'
 
 describe('resource directories', () => {
-  it('defines stable direction and type filters', () => {
-    expect(Object.keys(RESOURCE_SECTION_LABELS).sort()).toEqual([
-      'agent',
-      'algorithm',
-      'backend',
-      'frontend',
-      'general',
-    ])
+  it('defines a focused set of resource collections', () => {
     expect(Object.keys(RESOURCE_KIND_LABELS).sort()).toEqual([
-      'article',
-      'book',
-      'course',
-      'documentation',
-      'paper',
+      'blog',
       'project',
       'tool',
     ])
   })
 
-  it('requires a unique link, direction, recommendation and tags for each entry', () => {
+  it('includes structured blog content and validates the shared fields', () => {
+    expect(RESOURCE_ENTRIES).toEqual([
+      expect.objectContaining({
+        title: '江旭的技术博客',
+        href: 'https://www.jiangxu.net/blog',
+        kind: 'blog',
+      }),
+    ])
     expect(validateResourceDirectory(RESOURCE_ENTRIES)).toEqual([])
-    expect(new Set(RESOURCE_ENTRIES.map((entry) => entry.href)).size).toBe(
-      RESOURCE_ENTRIES.length,
-    )
-  })
-
-  it('stores cross-direction resources once', () => {
-    const genBi = RESOURCE_ENTRIES.find((entry) => entry.title.startsWith('GenBI'))
-
-    expect(genBi?.sections).toEqual(['backend', 'agent'])
-  })
-
-  it('combines direction and type filters', () => {
     expect(
-      filterResourceEntries(RESOURCE_ENTRIES, 'agent', 'project').map(
-        (entry) => entry.title,
-      ),
-    ).toEqual(['项目分析 Skill', 'GenBI 智能数据分析平台'])
-    expect(filterResourceEntries(RESOURCE_ENTRIES, 'algorithm', 'all')).toEqual(
-      [],
-    )
+      validateResourceDirectory([
+        {
+          title: '',
+          scenario: '',
+          description: '',
+          href: 'http://example.com',
+          kind: 'blog',
+        },
+      ]),
+    ).toEqual([
+      'resources[0] 缺少 title',
+      'resources[0] 缺少 scenario',
+      'resources[0] 缺少 description',
+      'resources[0] 缺少 HTTPS href',
+    ])
+  })
+
+  it('filters a collection by its fixed page type', () => {
+    const entries = [
+      {
+        title: '博客',
+        scenario: '长期订阅',
+        description: '技术博客。',
+        href: 'https://blog.example.com',
+        kind: 'blog' as const,
+      },
+      {
+        title: '工具',
+        scenario: '日常开发',
+        description: '开发工具。',
+        href: 'https://tool.example.com',
+        kind: 'tool' as const,
+      },
+    ]
+
+    expect(filterResourceEntries(entries, 'blog')).toEqual([entries[0]])
+    expect(filterResourceEntries(entries, 'project')).toEqual([])
+  })
+
+  it('keeps friend links as the same structured collection', () => {
+    expect(FRIEND_LINKS).toEqual([
+      expect.objectContaining({
+        title: 'Magic Resume',
+        href: 'https://magic-resume.cn',
+        trackingEvent: 'friend_link_click',
+      }),
+    ])
+    expect(validateFriendLinks(FRIEND_LINKS)).toEqual([])
+    expect(
+      validateFriendLinks([
+        { title: '', scenario: '', href: 'http://example.com', description: '' },
+      ]),
+    ).toEqual([
+      'friendLinks[0] 缺少 title',
+      'friendLinks[0] 缺少 scenario',
+      'friendLinks[0] 缺少 description',
+      'friendLinks[0] 缺少 HTTPS href',
+    ])
   })
 })

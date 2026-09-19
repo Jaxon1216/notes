@@ -2,6 +2,12 @@
 
 本文件记录仓库级重大改动、架构决策和维护规则变更。普通笔记内容的小修小补不需要记录。
 
+## 2026-09-19
+
+- 将原单页“资源推荐”升级为资源中心：Fumadocs 侧边栏提供总览、优质博客、开源项目、工具与平台、友情链接五个入口；首批收录江旭的技术博客与 Magic Resume。
+- 新增通用站点目录结构：`title`、`scenario`、`description`、`href` 由 `lib/link-entry.ts` 集中校验，资源与友链复用同一 flex 卡片组件；卡片在桌面为三列、超宽屏为四列。友链不从资源推荐或搜索结果自动同步，避免将编辑精选与互链关系混为一谈。
+- Magic Resume 友链使用 Umami 的 `data-umami-event` 属性记录 `friend_link_click`，并附带站点名称和目标地址；埋点配置随单条友链数据维护，其他友链默认不采集该事件。复用现有生产环境统计脚本，不新增客户端脚本或服务端接口。
+
 ## 2026-09-18
 
 - 接入 Umami 自托管访问统计：在 `app/layout.tsx` 中通过 `next/script` 注入 `script.js`，并与 Vercel Analytics 一样用 `process.env.VERCEL` 门禁，仅在 Vercel 部署环境加载，避免本地开发流量污染统计。`data-website-id` 作为公开标识内联在根布局中，未引入额外依赖。

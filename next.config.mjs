@@ -36,6 +36,11 @@ const config = {
         destination: '/docs/agent/bagu/:path*',
         permanent: true,
       },
+      {
+        source: '/docs/resources/articles',
+        destination: '/docs/resources/blogs',
+        permanent: true,
+      },
       ...['frontend', 'backend', 'agent'].flatMap((section) => [
         {
           source: `/docs/${section}/resources`,

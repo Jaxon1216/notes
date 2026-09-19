@@ -1,6 +1,6 @@
 {
   "title": "资源推荐",
-  "description": "按技术方向和资源类型筛选值得持续阅读与实践的内容。",
+  "description": "按使用意图与技术方向整理值得长期关注的资源、工具和站点。",
   "root": true,
-  "pages": ["index"]
+  "pages": ["index", "blogs", "projects", "tools", "friends"]
 }

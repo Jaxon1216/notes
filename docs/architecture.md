@@ -52,7 +52,7 @@ content/docs/
       agent-development/      # 按主题拆分的 Agent 八股
     bagu/llm/                 # LLM 原理八股
   algorithm/                  # 算法内容
-  resources/                  # 集中的资源推荐页
+  resources/                  # 资源中心：总览、博客、项目、工具与友链
   dev/                        # 个人开发常用内容
 
 lib/
@@ -183,7 +183,7 @@ AI 回答使用 GFM Markdown 渲染，表格带边框和横向滚动容器，围
 首页只为主要的“进入文档”入口保留 Next.js 路由预取；内容标签、次要贡献入口和
 LogoLoop 中会被复制的技术栈链接关闭自动预取，避免首屏可见链接批量请求 RSC。
 
-独立的资源推荐页位于 `content/docs/resources/`。`lib/resource-directory.ts` 使用扁平数据同时记录技术方向和资源类型，跨方向资源只维护一份；`components/docs/resource-directory.tsx` 提供方向分段控件和类型筛选。每个条目都必须有 HTTPS 链接、简介、推荐理由、方向、类型和至少一个标签。
+独立的资源中心位于 `content/docs/resources/`，在 Fumadocs 侧边栏中按总览、优质博客、开源项目、工具与平台、友情链接组织。`components/docs/resource-hub.tsx` 为总览提供分类跳转卡片；资源页与友链页都复用 `components/docs/link-collection.tsx` 的 flex 卡片布局。数据遵循 `lib/link-entry.ts` 的固定结构：`title`、`scenario`、`description`、`href`；`lib/resource-directory.ts` 只额外维护 `kind`（博客、项目或工具），`lib/friend-links.ts` 保持友链数据独立。卡片会在中等宽度为两列、桌面为三列、超宽屏为四列。需要统计的友链可在自身数据中声明可选 `trackingEvent`；同一组件据此输出 `data-umami-event`，由已注入的 Umami 脚本自动采集点击事件，无需额外客户端逻辑。
 
 ## 导航链路
 
@@ -210,7 +210,7 @@ Fumadocs `DocsLayout` 仍负责文档树、侧边栏、搜索和正文区域；�
 - 首页视觉配置：`components/home/home-hero.tsx`、`lib/home-visuals.tsx`
 - 首页粒子配置：`components/home/particles-config.ts`
 - 全局样式：`app/global.css`
-- 资源目录数据与组件：`lib/resource-directory.ts`、`components/docs/resource-directory.tsx`
+- 资源中心数据与组件：`lib/link-entry.ts`、`lib/resource-directory.ts`、`lib/friend-links.ts`、`components/docs/link-collection.tsx`、`components/docs/resource-directory.tsx`、`components/docs/resource-hub.tsx`、`components/docs/friend-links.tsx`
 - 共享导航：`lib/layout.shared.tsx`
 - 写作结构检查：`scripts/check-content-style.cjs`
 - Vercel 部署命令：`vercel.json`

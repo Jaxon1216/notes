@@ -64,6 +64,14 @@ describe('content taxonomy', () => {
     ).toEqual([])
   })
 
+  it('uses a section index page as the direct navigation destination', () => {
+    const resources = getHomeData().sections.find(
+      (section) => section.section.key === 'resources',
+    )
+
+    expect(resources?.href).toBe('/docs/resources')
+  })
+
   it('removes the old knowledge and per-direction resource directories', () => {
     for (const section of ['frontend', 'backend', 'agent']) {
       expect(
