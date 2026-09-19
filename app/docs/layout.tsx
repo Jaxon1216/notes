@@ -2,6 +2,7 @@ import { DocsLayout } from 'fumadocs-ui/layouts/docs'
 import type { ReactNode } from 'react'
 
 import { AiExplainWidget } from '@/components/ai/ai-explain-widget'
+import { DocsPaginationScrollReset } from '@/components/docs/docs-pagination-scroll-reset'
 import { DocsSidebarActivity } from '@/components/site/docs-sidebar-activity'
 import { baseOptions } from '@/lib/layout.shared'
 import { source } from '@/lib/source'
@@ -25,6 +26,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     >
       {children}
       <AiExplainWidget />
+      <DocsPaginationScrollReset />
     </DocsLayout>
   )
 }

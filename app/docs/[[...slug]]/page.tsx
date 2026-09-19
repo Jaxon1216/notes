@@ -96,7 +96,7 @@ export default async function Page({ params }: DocsPageProps) {
   const hasBodyTitle = page.data.toc.some((item) => item.depth === 1)
 
   return (
-    <DocsPage toc={page.data.toc}>
+    <DocsPage toc={page.data.toc} footer={{ className: 'docs-pagination' }}>
       {hasBodyTitle ? null : <DocsTitle>{title}</DocsTitle>}
       <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>
