@@ -108,7 +108,7 @@ TypeScript 文件的后缀名.ts(.ts，.tsx，.dts)，JavaScript 文件是.js
 
 在编写 TypeScript 的文件的时候就会自动编译成js 文件
 
-更多的区别如下图所示：
+更多的区别如下：
 
 - JavaScript | TypeScript
 - 语言 | 脚本语言 | 面向对象编程语言
@@ -551,7 +551,7 @@ age: number
 const getUserName = (user: User) => user.name
 ```
 
-这些属性并不一定全部实现，上述传入的对象必须拥有 name和 age 属性，否则 typescript 在编译阶段会报错，如下图：
+这些属性并不一定全部实现，上述传入的对象必须拥有 name和 age 属性，否则 typescript 在编译阶段会报错，如下所示：
 
 ```ts
 interface User {
@@ -639,7 +639,7 @@ age: number
 [propName: string]: any;
 5 }
 
-接口还能实现继承，如下图：
+接口还能实现继承，如下所示：
 
 interface Father {
 color: String
@@ -795,7 +795,7 @@ console.log("子类的 doPrint()方法。")
 
 只能够在该类的内部进行访问，实例对象并不能够访问
 
-并且继承该类的子类并不能访问，如下图所示：
+并且继承该类的子类并不能访问。
 
 **受保护修饰符**
 
@@ -1124,7 +1124,7 @@ console.log(Days["Sat"] === 6); // true
 const add = (a: number, b: number) => a + b
 ```
 
-上述只定义了函数的两个参数类型，这个时候整个函数虽然没有被显式定义，但是实际上TypeScript 编译器是能够通过类型推断到这个函数的类型，如下图所示:
+上述只定义了函数的两个参数类型，这个时候整个函数虽然没有被显式定义，但是实际上TypeScript 编译器是能够通过类型推断到这个函数的类型，如下所示:
 
 ```ts
 const add: (a: number， b: number) => number
@@ -1350,7 +1350,7 @@ returnobj[key] // ok
 
 上述为什么需要使用泛型约束，而不是直接定义第一个参数为 object类型，是因为默认情况 object 指的是{}，而我们接收的对象是各种各样的，一个泛型来表示传入的对象类型，比如T extends object
 
-使用如下图所示：
+使用如下所示：
 
 ```ts
 function getValue<T extends object, U extends keyof T>(obj: T, key: U) {
@@ -1533,7 +1533,7 @@ return 'edit'
 
 ```
 
-输出如下图所示：
+输出如下所示：
 
 ```js
 target ▶{constructor: f, say: f} index.ts:12
@@ -1585,7 +1585,7 @@ const emp = new Employee();
 emp.greet('hello');
 ```
 
-输入如下图：
+输入如下所示：
 
 Object1
 constructor:class Employee
@@ -2303,13 +2303,13 @@ HMR Runtime：socket服务器，会被注入到浏览器，更新文件的变化
 
 bundle.js:构建输出的文件
 
-在HMR Runtime 和 HMR Server之间建立websocket，即图上4号线，用于实时更新文件变化上面图中，可以分成两个阶段：
+在HMR Runtime 和 HMR Server之间建立websocket，用于实时更新文件变化。整个流程可以分成两个阶段：
 
-- 启动阶段为上图 1 - 2 - A - B
+- 启动阶段为 1 - 2 - A - B
 
 在编写未经过webpack打包的源代码后， Webpack Compile 将源代码和 HMR Runtime 一起编译成 bundle 文件，传输给 Bundle Server 静态资源服务器
 
-- 更新阶段为上图 1- 2- 3 - 4
+- 更新阶段为 1- 2- 3 - 4
 
 当某一个文件或者模块发生变化时，webpack监听到文件变化对文件重新编译打包，编译生成唯一的hash值，这个hash值用来作为下一次热更新的标识
 
@@ -2321,7 +2321,7 @@ bundle.js:构建输出的文件
 
 在浏览器接受到这条消息之前，浏览器已经在上一次 socket消息中已经记住了此时的hash标识，这时候我们会创建一个 ajax 去服务端请求获取到变化内容的 manifest 文件
 
-manifest文件包含重新 build生成的 hash值，以及变化的模块，对应上图的 c 属性
+manifest文件包含重新 build生成的 hash值，以及变化的模块，对应其中的 c 属性
 
 浏览器根据 manifest 文件获取模块变化的内容，从而触发 render流程，实现局部模块更新
 
@@ -2621,7 +2621,7 @@ app.listen(3000);
 
 loader 用于对模块的"源代码"进行转换，在import或"加载"模块时预处理文件
 
-webpack做的事情，仅仅是分析出各种模块的依赖关系，然后形成资源列表，最终打包生成到指定的文件中。如下图所示：
+webpack做的事情，仅仅是分析出各种模块的依赖关系，然后形成资源列表，最终打包生成到指定的文件中。
 
 在webpack内部中，任何文件都是模块，不仅仅只是js文件
 
@@ -2940,7 +2940,7 @@ after-emit：在将内存中 assets 内容写到磁盘文件夹之后
 
 ### 常见 Plugin 与职责
 
-常见的plugin有如图所示：
+常见的plugin有如下这些：
 
 - AggressiveSplittingPlugin | 将原来的 chunk 分成更小的 chunk
 - BabelMinifyWebpackPlugin | 使用babel-minify进行压缩
@@ -3119,7 +3119,7 @@ globOptions：设置一些额外的选项，其中可以编写需要忽略的文
 
 plugin赋予了webpack各种灵活的功能，例如打包优化、资源管理、环境变量注入等，目的是解决loader无法实现的其他事
 
-从整个运行时机上来看，如下图所示：
+从整个运行时机上来看：
 
 可以看到，两者在运行时机上的区别：
 
@@ -3768,7 +3768,7 @@ log(messages.hi)
 $ npx rollup ./src/index.js --file ./dist/bundle.js
 ```
 
-打包结果如下图
+打包结果如下：
 
 ```js
 JS bundle.js X
@@ -3861,7 +3861,7 @@ Snowpack，是一种闪电般快速的前端构建工具，专为现代Web设计
 
 开发阶段，每次保存单个文件时，Webpack和Parcel都需要重新构建和重新打包应用程序的整个bundle。而Snowpack 为你的应用程序每个文件构建一次，就可以永久缓存，文件更改时，Snowpack 会重新构建该单个文件
 
-下图给出 webpack 与 snowpack 打包区别:
+webpack 与 snowpack 的打包区别在于：
 
 在重新构建每次变更时没有任何的时间浪费，只需要在浏览器中进行HMR更新
 

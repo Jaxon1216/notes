@@ -153,9 +153,7 @@ Advanced RAG 就是把传统 RAG 的三个阶段都加上"外挂"：**检索前�
 
 检索后优化：拿到检索结果后再做一轮处理。重排序用模型给结果打分把最相关的提前、提示压缩砍掉冗余信息、上下文重构让内容逻辑更清晰、内容过滤剔除过时或错误数据。
 
-对比：
-
-上图来自 [https://arxiv.org/pdf/2312.10997](https://arxiv.org/pdf/2312.10997)
+Naive RAG、Advanced RAG、Modular RAG 三种范式的对比可参考综述论文 [Retrieval-Augmented Generation for Large Language Models: A Survey](https://arxiv.org/pdf/2312.10997)。
 
 > 前面很多 RAG 优化相关的面试题，其实都是 Advanced RAG 的某个环节。
 
