@@ -23,7 +23,7 @@
 ### 挂载卷
 挂载卷，`-v` 绑定宿主机和容器，绑定的目录称为挂载卷，好处就是文件持久保存，删除容器，不会删除文件。
 
-例子：`docker run -d -p 80:80 -v /website/html:/user/share/nginx/html nginx`，访问80端口显示403，因为宿主机目录会覆盖容器目录。
+例子：`docker run -d -p 80:80 -v /website/html:/usr/share/nginx/html nginx`，访问80端口显示403，因为宿主机目录会覆盖容器目录。
 
 `cd /website/html` 然后 `sudo vi index.html`，然后写内容。
 然后再访问就可以显示内容了，这种挂载叫绑定挂载。
@@ -33,7 +33,7 @@
 `sudo docker rm`（注意rmi的区别） `-f id`
 
 创建挂载卷 `sudo docker volume create nginx_html`
-`sudo docker run -d -p 80:80 -v nginx_html`（此处不需要目录了，直接使用挂载卷的名字）`:/user/share/nginx/html nginx 1bdc....`
+`sudo docker run -d -p 80:80 -v nginx_html`（此处不需要目录了，直接使用挂载卷的名字）`:/usr/share/nginx/html nginx 1bdc....`
 这行命令可以显示挂载卷的真实目录：`sudo docker volume inspect 名字（nginx_html）`
 进入这个目录要切换成root用户 `sudo -i`
 `~# cd 复制的目录` 然后再 `目录# vi index.html` 查看文件

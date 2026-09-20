@@ -62,7 +62,6 @@ content/docs/
     linux/        # Linux 常用命令
     git/          # Git 基础
     tools/        # 工具配置
-    notes/        # 杂记与读书
 ```
 
 站点信息架构由 `site.config.ts` 统一维护。新增一级方向或调整栏目时，先更新 `site.config.ts`，再新增对应目录和 Fumadocs `meta.json`。

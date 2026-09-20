@@ -6,7 +6,7 @@
 
 ## 实现路线图
 
-```
+```text
 Step 1 ─ 构造函数          定义三属性 + resolve/reject + 执行 executor
   │
 Step 2 ─ then 方法         参数校验 → 返回新 Promise → 微任务 → 处理 pending
@@ -47,7 +47,7 @@ Promise 通过**链式调用**将嵌套变为线性，通过**状态机**统一�
 
 ### 三种状态与状态机规则
 
-```
+```text
 pending ──resolve()──→ fulfilled
    │
    └──reject() / throw──→ rejected

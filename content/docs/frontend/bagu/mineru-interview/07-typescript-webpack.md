@@ -2044,8 +2044,8 @@ type: String, // type: [String , Number]
 default:'default value',//—般为String或Number
 //如果是对象或数组的话。默认值从一个工厂函数中返回
 // default: () => {
-1/ return ['a','b']
-1/}
+// return ['a','b']
+//}
 required: true,
 validator: (value) => {
 return [
@@ -3517,7 +3517,6 @@ minify:{
 minifyCSS:false，// 是否压缩css
 collapseWhitespace:false，//是否折叠空格
 removeComments:true // 是否移除注释
-11 024
 
 ```
 

@@ -72,7 +72,7 @@ ConversationBufferMemory 最简单，把对话历史全存下来。VectorStoreRe
 
 2）**Community 层**：社区贡献的第三方集成，各种 LLM 适配器、向量数据库对接、工具插件都在这，不用重复造轮子
 
-3）**Plus 层**：企业级功能，LangSmith 监控平台、LangServe 部署服务的商用支持
+3）**Partner 层**：官方与合作伙伴维护的独立集成包，比如 langchain-openai、langchain-anthropic，把常用大模型、向量库的适配从社区包里拆出来单独发版，质量和更新更有保证（LangSmith 监控、LangServe 部署属于配套的独立产品，不在这三层包结构里）
 
 ### 统一的 Runnable 接口
 

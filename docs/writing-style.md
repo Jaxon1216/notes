@@ -13,7 +13,6 @@
 - LLM 原理八股：`content/docs/agent/bagu/llm/`
 - 资源推荐：`content/docs/resources/`
 - 算法基础和刷题复盘：`content/docs/algorithm/basics/` 或 `content/docs/algorithm/leetcode/`
-- 零散技巧、读书笔记和未归档资料：`content/docs/dev/notes/`
 
 教程用于系统讲解和按顺序学习，八股用于高频问题、回答重点与追问，面经只记录具体面试过程和真实题目。不要仅因为教程中包含少量问答，就把整篇文章归入八股。
 

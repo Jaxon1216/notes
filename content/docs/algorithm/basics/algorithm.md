@@ -76,6 +76,7 @@ vector<int> baoli(int n, int k) {
 ```cpp
 vector<int> baoli_math(int n, int k) {
     vector<int> people, result;
+    for (int i = 1; i <= n; i++) people.push_back(i);   // 初始化 1~n 的人
     int pos = 0;
     while (!people.empty()) {
         pos = (pos + k - 1) % people.size();    // 这里，计算要删除的位置
@@ -108,7 +109,7 @@ vector<int> baoli_math(int n, int k) {
 
 于是得到递推：
 
-```markdown
+```text
 f(1, k) = 0  
 f(n, k) = (f(n-1, k) + k) % n
 ```

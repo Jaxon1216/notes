@@ -305,7 +305,7 @@ cout << a + b << endl;
 
 让我们继续用笔写字的比喻，但这次更深入细节：
 
-```
+```text
 cout          = 你的右手（主笔）
 ostream &out  = 你借给别人的笔
 return out    = 别人把笔还给你

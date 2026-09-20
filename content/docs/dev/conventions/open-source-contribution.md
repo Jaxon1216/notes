@@ -88,7 +88,6 @@ git push -u origin docs/topic-name
 - 面经：`content/docs/<direction>/interview/`
 - 资源推荐：`lib/resource-directory.ts`
 - 算法基础和刷题复盘：`content/docs/algorithm/basics/` 或 `content/docs/algorithm/leetcode/`
-- 零散技巧和未归档资料：`content/docs/dev/notes/`
 
 完成后检查 `git diff`，运行 `npm run validate`，再按上述命令提交、推送并创建目标为 `main` 的 PR。
 

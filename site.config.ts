@@ -174,12 +174,6 @@ export const SITE_SECTIONS: SiteSection[] = [
         title: '工具配置',
         description: 'Docker、编辑器、Markdown 和常用工具。',
       },
-      {
-        key: 'notes',
-        dir: 'notes',
-        title: '杂记与读书',
-        description: '零散技巧、读书笔记和暂未归档的个人资料。',
-      },
     ],
   },
 ]

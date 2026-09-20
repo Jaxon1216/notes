@@ -941,13 +941,13 @@ let result2 = (undefined === undefined) //true
 
 ```js
 // 原文前两项比较表达式解析损坏，已省略
-0 == '0' true
+0 == '0' // true
 false == 'false'// false
 false == '0'// true
 false ==undefined // false
 false == null // false
 null == undefined // true
-′\t\r\n'== 0 // true
+'\t\r\n'== 0 // true
 ```
 
 但在比较null的情况的时候，我们一般使用相等操作符==
@@ -1352,7 +1352,7 @@ bar()
 下面代码演示下：
 
 ```js
-var sex = ‘'男';
+var sex = '男';
 function person() {
 var name = '张三';
 function student() {
@@ -3376,7 +3376,7 @@ console.log(stringValue.padStart(9, ".")); // "......foo"
 
 ```js
 let stringValue = "hello world";
-console.log(stringValue.toUpperCase()); // "HELL0 WORLD"
+console.log(stringValue.toUpperCase()); // "HELLO WORLD"
 console.log(stringValue.toLowerCase()); //"hello world"
 ```
 
@@ -4001,7 +4001,7 @@ Cookie，类型为「小型文本文件」，指某些网站为了辨别用户�
 Expires 用于设置 Cookie 的过期时间
 
 ```js
-Expires=Wed, 21 0ct 2015 07:28:00 GMT
+Expires=Wed, 21 Oct 2015 07:28:00 GMT
 ```
 
 - Max-Age 用于设置在 Cookie 失效之前需要经过的秒数(优先级比 Expires 高)
@@ -4866,12 +4866,12 @@ const target = document.querySelector('.target');
 const clientRect = target.getBoundingClientRect();
 console.log(clientRect);
 
-11 bottom: 556.21875,
-11 height: 393.59375,
-11 left: 333,
-11 right: 1017,
-11 top: 162.625,
-11 width: 684
+// bottom: 556.21875,
+// height: 393.59375,
+// left: 333,
+// right: 1017,
+// top: 162.625,
+// width: 684
 //}
 ```
 
@@ -5549,7 +5549,7 @@ console.log( string.match(regex) );
 let str = "John Smith";
 
 //交换名字和姓氏
-console.log(str.replace(/(john) (smith)/i, ‘$2, $1')) // Smith, John
+console.log(str.replace(/(john) (smith)/i, '$2, $1')) // Smith, John
 ```
 
 ### 匹配 API

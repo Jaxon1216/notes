@@ -735,6 +735,8 @@ React 所有事件都挂载在 document 对象上
 
 - 最后真正执行document 上挂载的事件
 
+> ⚠️ 版本差异：上面「统一挂载到 `document`」的描述是 **React ≤16** 的行为。从 **React 17 开始，事件委托的挂载点由 `document` 改成了 React 应用的根 DOM 容器**（即 `ReactDOM.render` / `createRoot` 挂载的那个节点）。这样做是为了支持一个页面上多版本 React 共存、以及更好地与非 React 代码集成。因此在 React 17+ 里，上面示例的执行顺序结论需要把「document」替换成「root 容器」来理解。
+
 ### 冒泡控制
 
 我想执行完第④步之后，不要执行第⑤步，需要调用

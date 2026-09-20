@@ -63,7 +63,6 @@
 - Agent 八股再分两层：偏应用工程放 `content/docs/agent/bagu/agent/`，偏 LLM 原理放 `content/docs/agent/bagu/llm/`
 - 资源推荐：`content/docs/resources/`
 - 算法基础和刷题复盘：`content/docs/algorithm/basics/` 或 `content/docs/algorithm/leetcode/`
-- 零散技巧、读书笔记和未归档资料：`content/docs/dev/notes/`
 
 资源推荐必须包含原文或项目链接、技术方向、资源类型、推荐理由和标签。避免只提交链接列表。
 

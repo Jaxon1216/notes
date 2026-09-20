@@ -10,9 +10,9 @@ React 学习按「核心思想 → 组件化 → 工程能力」递进：
 
 | 阶段 | 核心内容 | 对应笔记 |
 |------|----------|----------|
-| **第一阶段** | 核心概念、JSX、useState、useEffect | [[01-核心概念与基础语法]] |
-| **第二阶段** | 组件拆分、props、状态提升、React.memo、useCallback、自定义 Hook | [[02-组件化与性能优化]] |
-| **第三阶段** | React Router、useContext、useReducer | [[03-路由与状态管理]] |
+| **第一阶段** | 核心概念、JSX、useState、useEffect | [核心概念与基础语法](./01-核心概念与基础语法.md) |
+| **第二阶段** | 组件拆分、props、状态提升、React.memo、useCallback、自定义 Hook | [组件化与性能优化](./02-组件化与性能优化.md) |
+| **第三阶段** | React Router、useContext、useReducer | [路由与状态管理](./03-路由与状态管理.md) |
 
 ---
 
@@ -54,9 +54,9 @@ React 学习按「核心思想 → 组件化 → 工程能力」递进：
 
 | 文件 | 内容范围 |
 |------|----------|
-| [[01-核心概念与基础语法]] | JSX/TSX、useState、useEffect、条件渲染与列表渲染、闭包与 key |
-| [[02-组件化与性能优化]] | props、re-render 机制、React.memo、useCallback、useMemo、自定义 Hook |
-| [[03-路由与状态管理]] | React Router、useParams、useContext、useReducer、Context + useReducer 实战 |
+| [核心概念与基础语法](./01-核心概念与基础语法.md) | JSX/TSX、useState、useEffect、条件渲染与列表渲染、闭包与 key |
+| [组件化与性能优化](./02-组件化与性能优化.md) | props、re-render 机制、React.memo、useCallback、useMemo、自定义 Hook |
+| [路由与状态管理](./03-路由与状态管理.md) | React Router、useParams、useContext、useReducer、Context + useReducer 实战 |
 
 ---
 

@@ -160,7 +160,7 @@ service.interceptors.response.use(
 
 ### 拦截器执行顺序
 
-```
+```text
 请求拦截器(config) → 发请求(dispatchRequest) → 响应拦截器(response)
 ```
 
@@ -225,7 +225,7 @@ controller.abort()  // 取消请求（比如用户切换页面时）
 
 ## 七、工程封装模板（可直接用）
 
-```
+```text
 项目结构：
 src/
   utils/request.js    ← 封装 axios 实例 + 拦截器
@@ -263,7 +263,7 @@ const users = await getUsers()  // 直接拿到数据数组，不用 .data
 
 axios 内部是一条 **Promise 链**：
 
-```
+```text
 Promise.resolve(config)
   .then(请求拦截器)        // config → config（加 token 等）
   .then(dispatchRequest)   // config → response（真正发请求）

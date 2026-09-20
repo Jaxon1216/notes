@@ -203,7 +203,7 @@ vector 获取长度的方法 `.size()` 返回值类型为 `size_t`，通常 OJ �
 
 ```cpp
 vector<int> a(65536);
-long long a = a.size() * a.size(); // 直接溢出变成0了
+long long total = a.size() * a.size(); // 直接溢出变成0了
 ```
 
 ### 2.3 栈 stack

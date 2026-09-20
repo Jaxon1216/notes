@@ -700,7 +700,7 @@ vue组件可能会有很多个实例，采用函数返回一个全新data形式�
 ```js
 function initData (vm: Component) {
 let data = vm.\$options.data
-data = vm.\_data = typeof data === ‘function'
+data = vm._data = typeof data === 'function'
 ? getData(data, vm)
 : data || {}
 }
@@ -2830,7 +2830,7 @@ vnode =vnode[0]
 
 if (!(vnode instanceof VNode)) {
 
-if (process.env.NODE_ENV !== ‘production'&& Array.isArray(vnode))
+if (process.env.NODE_ENV !== 'production' && Array.isArray(vnode))
 {
 
 warn(
@@ -6281,7 +6281,7 @@ if (reason && reason.response) {
 
 reason.response.data = transformData(
 
-202 reason.response.data,
+reason.response.data,
 reason.response.headers,
 
 config.transformResponse
