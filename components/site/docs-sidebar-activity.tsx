@@ -69,12 +69,7 @@ export function DocsSidebarActivity({
       aria-live="polite"
     >
       <div className="docs-sidebar-activity__heading">
-        <span className="docs-sidebar-activity__pulse" aria-hidden="true">
-          <i />
-          <i />
-          <i />
-          <i />
-        </span>
+        <span className="docs-sidebar-activity__dot" aria-hidden="true" />
         <span>站点动态</span>
         <span className="docs-sidebar-activity__realtime">实时</span>
       </div>
