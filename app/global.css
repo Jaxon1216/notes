@@ -271,19 +271,93 @@ body:has(.home-shell) .site-header {
   font-weight: 720;
 }
 
-.docs-sidebar-activity__dot {
-  width: 6px;
-  height: 6px;
+/* Situation: “实时”信号原本是向外扩散的脉冲圆环，效果烂大街、含金量低。 */
+/* Task: 换成更贴“实时流量/有人在活动”语义、且更精致的动效。 */
+/* Action: 用四根小竖条组成迷你律动条，各自不同时长错相地 scaleY 起伏。 */
+/* Result: 侧栏“站点动态”行像实时均衡器一样跳动，纯 CSS、跟随明暗主题。 */
+.docs-sidebar-activity__pulse {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 11px;
+}
+
+.docs-sidebar-activity__pulse i {
+  width: 2.5px;
+  height: 100%;
   border-radius: 999px;
-  background: #22c55e;
-  box-shadow: 0 0 0 3px color-mix(in srgb, #22c55e 18%, transparent);
+  background: #2563eb;
+  transform-origin: bottom;
+  transform: scaleY(0.35);
+  animation: docs-activity-bars 1.1s ease-in-out infinite;
+}
+
+.docs-sidebar-activity__pulse i:nth-child(2) {
+  animation-duration: 0.9s;
+  animation-delay: -0.4s;
+}
+
+.docs-sidebar-activity__pulse i:nth-child(3) {
+  animation-duration: 1.3s;
+  animation-delay: -0.7s;
+}
+
+.docs-sidebar-activity__pulse i:nth-child(4) {
+  animation-duration: 0.8s;
+  animation-delay: -0.2s;
 }
 
 .docs-sidebar-activity__realtime {
   margin-left: auto;
-  color: #16a34a;
+  border-radius: 999px;
+  padding: 1px 7px;
+  background: color-mix(in srgb, #2563eb 12%, transparent);
+  color: #2563eb;
   font-size: 11px;
   font-weight: 650;
+  letter-spacing: 0.02em;
+}
+
+@keyframes docs-activity-bars {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+  }
+
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.dark .docs-sidebar-activity__pulse i {
+  background: #60a5fa;
+}
+
+.dark .docs-sidebar-activity__realtime {
+  background: color-mix(in srgb, #60a5fa 16%, transparent);
+  color: #93c5fd;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .docs-sidebar-activity__pulse i {
+    animation: none;
+  }
+
+  .docs-sidebar-activity__pulse i:nth-child(1) {
+    transform: scaleY(0.5);
+  }
+
+  .docs-sidebar-activity__pulse i:nth-child(2) {
+    transform: scaleY(1);
+  }
+
+  .docs-sidebar-activity__pulse i:nth-child(3) {
+    transform: scaleY(0.7);
+  }
+
+  .docs-sidebar-activity__pulse i:nth-child(4) {
+    transform: scaleY(0.9);
+  }
 }
 
 .docs-sidebar-activity__metrics {
