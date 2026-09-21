@@ -34,6 +34,7 @@ export function DocsSidebarActivity({
 
   useEffect(() => {
     let cancelled = false
+    let timer: number | undefined
 
     async function load() {
       try {
@@ -53,12 +54,43 @@ export function DocsSidebarActivity({
       }
     }
 
-    void load()
-    const timer = window.setInterval(() => void load(), pollInterval)
+    function stopPolling() {
+      if (timer !== undefined) {
+        window.clearInterval(timer)
+        timer = undefined
+      }
+    }
+
+    function startPolling() {
+      if (timer !== undefined) return
+      timer = window.setInterval(() => void load(), pollInterval)
+    }
+
+    // Situation: 轮询常驻首页和每个文档页，后台标签页也会每 30 秒请求一次。
+    // Task: 对齐粒子和 LogoLoop 的可见性约定，页面不可见时不再打点。
+    // Action: 隐藏时停止轮询，重新可见时立即补一次数据并恢复定时器。
+    // Result: 后台标签停止请求 /api/site-activity，前台体验和刷新频率保持不变。
+    function handleVisibilityChange() {
+      if (document.hidden) {
+        stopPolling()
+        return
+      }
+
+      void load()
+      startPolling()
+    }
+
+    if (!document.hidden) {
+      void load()
+      startPolling()
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange)
 
     return () => {
       cancelled = true
-      window.clearInterval(timer)
+      stopPolling()
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
     }
   }, [endpoint, pollInterval])
 
