@@ -141,7 +141,38 @@ export const SITE_SECTIONS: SiteSection[] = [
     title: '资源推荐',
     navTitle: '资源推荐',
     description: '按技术方向和资源类型筛选值得持续阅读与实践的内容。',
-    children: [],
+    children: [
+      {
+        key: 'overview',
+        dir: 'index',
+        title: '资源总览',
+        description: '资源推荐首页，按类别浏览全部推荐内容。',
+      },
+      {
+        key: 'blogs',
+        dir: 'blogs',
+        title: '优质博客',
+        description: '只收录持续写作、主题清晰，值得长期订阅的独立技术博客。',
+      },
+      {
+        key: 'projects',
+        dir: 'projects',
+        title: '开源项目',
+        description: '挑选可读源码、可实际运行，或能借鉴工程设计的项目。',
+      },
+      {
+        key: 'tools',
+        dir: 'tools',
+        title: '工具与平台',
+        description: '收录日常开发、部署、协作与观测中真正节省时间的工具。',
+      },
+      {
+        key: 'friends',
+        dir: 'friends',
+        title: '友情链接',
+        description: '认识持续写作、认真做项目，也值得长期关注的独立站点。',
+      },
+    ],
   },
   {
     key: 'dev',

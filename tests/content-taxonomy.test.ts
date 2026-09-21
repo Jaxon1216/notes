@@ -60,8 +60,10 @@ describe('content taxonomy', () => {
       'dev',
     ])
     expect(
-      SITE_SECTIONS.find((section) => section.key === 'resources')?.children,
-    ).toEqual([])
+      SITE_SECTIONS.find((section) => section.key === 'resources')?.children.map(
+        (child) => child.dir,
+      ),
+    ).toEqual(['index', 'blogs', 'projects', 'tools', 'friends'])
   })
 
   it('uses a section index page as the direct navigation destination', () => {

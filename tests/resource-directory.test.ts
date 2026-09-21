@@ -18,13 +18,30 @@ describe('resource directories', () => {
   })
 
   it('includes structured blog content and validates the shared fields', () => {
-    expect(RESOURCE_ENTRIES).toEqual([
-      expect.objectContaining({
-        title: '江旭的技术博客',
-        href: 'https://www.jiangxu.net/blog',
-        kind: 'blog',
-      }),
-    ])
+    expect(RESOURCE_ENTRIES).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          title: '江旭的技术博客',
+          href: 'https://www.jiangxu.net/blog',
+          kind: 'blog',
+        }),
+        expect.objectContaining({
+          title: "🍔hamburger's Notebook",
+          href: 'https://woleigefou.xyz',
+          kind: 'blog',
+        }),
+        expect.objectContaining({
+          title: 'kunxing-blog',
+          href: 'https://kunxing-blog.top',
+          kind: 'blog',
+        }),
+        expect.objectContaining({
+          title: "acye's blog",
+          href: 'https://ye-guan-xing.github.io/',
+          kind: 'blog',
+        }),
+      ]),
+    )
     expect(validateResourceDirectory(RESOURCE_ENTRIES)).toEqual([])
     expect(
       validateResourceDirectory([
