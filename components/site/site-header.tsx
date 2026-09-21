@@ -2,6 +2,7 @@
 
 import {
   ChevronDown,
+  GitFork,
   GitPullRequestArrow,
   Sparkles,
 } from 'lucide-react'
@@ -21,6 +22,7 @@ import {
 } from '@/lib/site-navigation'
 
 const CONTRIBUTION_HREF = '/docs/dev/conventions/open-source-contribution'
+const REPOSITORY_HREF = 'https://github.com/Jaxon1216/notes'
 
 export function SiteHeader({ data }: { data: HomeData }) {
   const pathname = usePathname()
@@ -173,6 +175,18 @@ export function SiteHeader({ data }: { data: HomeData }) {
             <GitPullRequestArrow aria-hidden="true" size={16} />
             <span>参与文档贡献</span>
           </Link>
+          <a
+            className="site-header__repo"
+            href={REPOSITORY_HREF}
+            rel="noreferrer"
+            target="_blank"
+            aria-label="域名可能变更，前往 GitHub 及时 Fork 备份"
+            data-tooltip="域名可能变更，及时 Fork 备份"
+            data-umami-event="header_fork_link_click"
+            data-umami-event-target={REPOSITORY_HREF}
+          >
+            <GitFork aria-hidden="true" size={18} />
+          </a>
           <SiteThemeSwitch />
         </div>
       </div>

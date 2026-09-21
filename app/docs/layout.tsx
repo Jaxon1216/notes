@@ -1,9 +1,10 @@
 import { DocsLayout } from 'fumadocs-ui/layouts/docs'
-import type { ReactNode } from 'react'
+import { Fragment, type ReactNode } from 'react'
 
 import { AiExplainWidget } from '@/components/ai/ai-explain-widget'
 import { DocsScrollReset } from '@/components/docs/docs-scroll-reset'
 import { DocsSidebarActivity } from '@/components/site/docs-sidebar-activity'
+import { DocsSidebarFork } from '@/components/site/docs-sidebar-fork'
 import { baseOptions } from '@/lib/layout.shared'
 import { source } from '@/lib/source'
 
@@ -19,7 +20,12 @@ export default function Layout({ children }: { children: ReactNode }) {
       tabs={false}
       searchToggle={{
         components: {
-          lg: <DocsSidebarActivity />,
+          lg: (
+            <Fragment>
+              <DocsSidebarActivity />
+              <DocsSidebarFork />
+            </Fragment>
+          ),
         },
       }}
       {...baseOptions()}

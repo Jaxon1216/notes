@@ -412,6 +412,145 @@ body:has(.home-shell) .site-header {
   white-space: nowrap;
 }
 
+/* Situation: “站点动态”卡片下方需要一条 fork 提示，但它已有常驻环绕蓝光，不能再叠一道。 */
+/* Task: 让 fork 横条默认安静，只在 hover 时活跃，和上方卡片区分又协调。 */
+/* Action: 平时是描边 pill；hover 触发一道斜向扫光扫过 + 箭头右移，主题色对齐站点蓝。 */
+/* Result: 侧栏多一条低干扰入口，动效只在交互时出现，reduced-motion 下自动静止。 */
+.docs-sidebar-fork {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  overflow: hidden;
+  margin-top: 8px;
+  border: 1px solid var(--color-fd-border);
+  border-radius: 12px;
+  padding: 9px 11px;
+  background: color-mix(in oklab, var(--color-fd-card) 82%, transparent);
+  color: var(--color-fd-foreground);
+  text-decoration: none;
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
+}
+
+/* 一道斜向高光，默认停在左侧看不见，hover 时扫过整条 pill。 */
+.docs-sidebar-fork::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    color-mix(in srgb, #2563eb 22%, transparent) 48%,
+    transparent 66%
+  );
+  transform: translateX(-120%);
+  content: '';
+  pointer-events: none;
+}
+
+.docs-sidebar-fork:hover {
+  border-color: color-mix(in srgb, #2563eb 42%, var(--color-fd-border));
+  background: var(--color-fd-card);
+  box-shadow: 0 10px 24px rgb(37 99 235 / 12%);
+  transform: translateY(-1px);
+}
+
+.docs-sidebar-fork:hover::after {
+  animation: docs-sidebar-fork-sheen 0.85s ease;
+}
+
+@keyframes docs-sidebar-fork-sheen {
+  to {
+    transform: translateX(120%);
+  }
+}
+
+.docs-sidebar-fork__icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: color-mix(in srgb, #2563eb 12%, transparent);
+  color: #2563eb;
+}
+
+.docs-sidebar-fork__text {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+
+.docs-sidebar-fork__text strong {
+  color: var(--color-fd-foreground);
+  font-size: 12.5px;
+  font-weight: 720;
+  line-height: 1.2;
+}
+
+.docs-sidebar-fork__text span {
+  color: var(--color-fd-muted-foreground);
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.docs-sidebar-fork__arrow {
+  flex: 0 0 auto;
+  margin-left: auto;
+  color: var(--color-fd-muted-foreground);
+  transition:
+    transform 0.18s ease,
+    color 0.18s ease;
+}
+
+.docs-sidebar-fork:hover .docs-sidebar-fork__arrow {
+  color: #2563eb;
+  transform: translateX(3px);
+}
+
+.dark .docs-sidebar-fork::after {
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    color-mix(in srgb, #60a5fa 26%, transparent) 48%,
+    transparent 66%
+  );
+}
+
+.dark .docs-sidebar-fork:hover {
+  border-color: color-mix(in srgb, #60a5fa 46%, var(--color-fd-border));
+  box-shadow: 0 10px 24px rgb(96 165 250 / 14%);
+}
+
+.dark .docs-sidebar-fork__icon {
+  background: color-mix(in srgb, #60a5fa 16%, transparent);
+  color: #93c5fd;
+}
+
+.dark .docs-sidebar-fork:hover .docs-sidebar-fork__arrow {
+  color: #93c5fd;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .docs-sidebar-fork,
+  .docs-sidebar-fork__arrow {
+    transition: none;
+  }
+
+  .docs-sidebar-fork:hover::after {
+    animation: none;
+  }
+
+  .docs-sidebar-fork:hover .docs-sidebar-fork__arrow {
+    transform: none;
+  }
+}
+
 .site-header__ai-guide {
   position: relative;
   display: inline-flex;
@@ -539,6 +678,80 @@ body:has(.home-shell) .site-header {
   color: var(--color-fd-accent-foreground);
   box-shadow: 0 10px 24px rgb(15 23 42 / 7%);
   transform: translateY(-1px);
+}
+
+/* Situation: 顶部导航需要一个符合惯例的 GitHub 源码入口，兼作 fork 提示的补充。 */
+/* Task: 图标要安静克制，不和右侧一排彩色按钮抢戏，但 hover/聚焦时给出提示文案。 */
+/* Action: 中性描边方形按钮 + 纯 CSS data-tooltip 气泡，hover 与键盘聚焦都能触发。 */
+/* Result: 习惯从导航找源码的人有惯例入口，提示随交互出现，无常驻动效。 */
+.site-header__repo {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  min-height: 36px;
+  border: 1px solid var(--color-fd-border);
+  border-radius: 10px;
+  background: color-mix(in oklab, var(--color-fd-card) 82%, transparent);
+  color: var(--color-fd-muted-foreground);
+  box-shadow: 0 8px 20px rgb(15 23 42 / 5%);
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.site-header__repo:hover {
+  border-color: color-mix(in srgb, #2563eb 42%, var(--color-fd-border));
+  background: var(--color-fd-card);
+  color: #2563eb;
+  box-shadow: 0 10px 24px rgb(37 99 235 / 12%);
+  transform: translateY(-1px);
+}
+
+.dark .site-header__repo:hover {
+  border-color: color-mix(in srgb, #60a5fa 46%, var(--color-fd-border));
+  color: #93c5fd;
+  box-shadow: 0 10px 24px rgb(96 165 250 / 14%);
+}
+
+.site-header__repo::after {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 50;
+  border-radius: 8px;
+  padding: 6px 10px;
+  background: var(--color-fd-popover, var(--color-fd-card));
+  color: var(--color-fd-popover-foreground, var(--color-fd-foreground));
+  border: 1px solid var(--color-fd-border);
+  box-shadow: 0 12px 28px rgb(15 23 42 / 14%);
+  content: attr(data-tooltip);
+  font-size: 12px;
+  font-weight: 640;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition:
+    opacity 0.16s ease,
+    transform 0.16s ease;
+}
+
+.site-header__repo:hover::after,
+.site-header__repo:focus-visible::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header__repo,
+  .site-header__repo::after {
+    transition: none;
+  }
 }
 
 .home-shell {
