@@ -2,6 +2,10 @@
 
 本文件记录仓库级重大改动、架构决策和维护规则变更。普通笔记内容的小修小补不需要记录。
 
+## 2026-09-21
+
+- 删除 `public/favicon.svg`，浏览器 favicon 与 Apple Touch Icon 统一改用 `public/site-icon.png`（180x180 PNG）；同步更新 `app/layout.tsx` 图标配置、`tests/site-icons.test.ts` 断言、`public/README.md` 与 `docs/architecture.md`。
+
 ## 2026-09-19
 
 - 内容质量整改（分支 `docs/content-quality-pass`）：删除 `content/docs/dev/notes/`（原“杂记与读书”，含 `tips.md` 与半成品读书笔记 `PurpleBook.md`），并同步清理 `site.config.ts`、`content/docs/dev/meta.json`、`README.md`、`docs/writing-style.md`、`AGENTS.md`、`open-source-contribution.md` 中对该目录的引用与归档指引。`dev` 一级方向自此不再保留零散笔记的兜底目录。

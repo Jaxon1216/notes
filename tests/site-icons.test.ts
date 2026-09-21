@@ -18,29 +18,26 @@ function readPngDimensions(filePath: string) {
 }
 
 describe('site icons', () => {
-  it('points metadata at the dedicated browser and Apple icons', () => {
+  it('points metadata at the shared site icon', () => {
     const layout = fs.readFileSync(path.join(root, 'app/layout.tsx'), 'utf8')
     const icons = layout.match(/icons:\s*\{([\s\S]*?)\n  \},/)?.[1]
 
     expect(icons).toContain(
-      "icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }]",
+      "icon: [{ url: '/site-icon.png', type: 'image/png' }]",
     )
     expect(icons).toContain(
       "apple: [{ url: '/site-icon.png', sizes: '180x180', type: 'image/png' }]",
     )
   })
 
-  it('keeps the public assets present and the Apple icon compact', () => {
-    const faviconPath = path.join(root, 'public/favicon.svg')
-    const appleIconPath = path.join(root, 'public/site-icon.png')
+  it('keeps the site icon present and compact', () => {
+    const siteIconPath = path.join(root, 'public/site-icon.png')
 
-    expect(fs.existsSync(faviconPath)).toBe(true)
-    expect(fs.readFileSync(faviconPath, 'utf8')).toContain('<svg')
-    expect(fs.existsSync(appleIconPath)).toBe(true)
-    expect(readPngDimensions(appleIconPath)).toEqual({
+    expect(fs.existsSync(siteIconPath)).toBe(true)
+    expect(readPngDimensions(siteIconPath)).toEqual({
       width: 180,
       height: 180,
     })
-    expect(fs.statSync(appleIconPath).size).toBeLessThan(100 * 1024)
+    expect(fs.statSync(siteIconPath).size).toBeLessThan(100 * 1024)
   })
 })
