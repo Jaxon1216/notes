@@ -216,12 +216,12 @@ console.log(data); // Hello world
 const fs = require("fs");
 
 fs.writeFile("2.txt", "Hello world", err => {
-if (!err) {
-fs.readFile("2.txt", "utf8", (err, data) => {
-console.log(data); // Hello world
-});
-}
-});
+    if (!err) {
+      fs.readFile("2.txt", "utf8", (err, data) => {
+          console.log(data); // Hello world
+        });
+    }
+  });
 ```
 
 **文件追加写入**
@@ -253,12 +253,12 @@ let data = fs.readFileSync("3.txt", "utf8");
 const fs = require("fs");
 
 fs.appendFile("3.txt", " world", err => {
-if (!err) {
-fs.readFile("3.txt", "utf8", (err, data) => {
-console.log(data); // Hello world
-});
-}
-});
+    if (!err) {
+      fs.readFile("3.txt", "utf8", (err, data) => {
+          console.log(data); // Hello world
+        });
+    }
+  });
 ```
 
 ### 文件拷贝与目录创建
@@ -280,10 +280,10 @@ console.log(data); // Hello world
 const fs = require("fs");
 
 fs.copyFile("3.txt", "4.txt", () => {
-fs.readFile("4.txt", "utf8", (err, data) => {
-console.log(data); // Hello world
-});
-});
+    fs.readFile("4.txt", "utf8", (err, data) => {
+        console.log(data); // Hello world
+      });
+  });
 ```
 
 **创建目录**
@@ -303,8 +303,8 @@ fs.mkdirSync("a/b/c")
 
 ```js
 fs.mkdir("a/b/c", err => {
-if(!err) console.log("创建成功");
-});
+    if(!err) console.log("创建成功");
+  });
 ```
 
 ## 3. 说说对 Node 中的 Buffer 的理解？应用场景?
@@ -484,13 +484,13 @@ Node.js中很多对象都实现了流，总之它是会冒数据(以 Buffer 为�
 const { Duplex } = require('stream');
 
 const myDuplex = new Duplex({
-read(size) {
-//..
-},
-write(chunk, encoding, callback) {
-//..
-}
-});
+    read(size) {
+      //..
+    },
+    write(chunk, encoding, callback) {
+      //..
+    }
+  });
 ```
 
 **转换流**
@@ -505,10 +505,10 @@ write(chunk, encoding, callback) {
 const { Transform } = require('stream');
 
 const myTransform = new Transform({
-transform(chunk, encoding, callback) {
-//...
-}
-});
+    transform(chunk, encoding, callback) {
+      //...
+    }
+  });
 ```
 
 ### 应用场景
@@ -531,13 +531,13 @@ get请求返回文件给客户端
 
 ```js
 const server = http.createServer(function (req, res) {
-const method= req.method; //获取请求方法
-if (method === 'GET') { // get 请求
-const fileName = path.resolve(__dirname, 'data.txt');
-let stream = fs.createReadStream(fileName);
-stream.pipe(res); // 将 res 作为 stream 的dest
-}
-});
+    const method= req.method; //获取请求方法
+    if (method === 'GET') { // get 请求
+      const fileName = path.resolve(__dirname, 'data.txt');
+      let stream = fs.createReadStream(fileName);
+      stream.pipe(res); // 将 res 作为 stream 的dest
+    }
+  });
 server.listen(8000);
 ```
 
@@ -560,8 +560,8 @@ const writeStream = fs.createWriteStream(fileName2)
 readStream.pipe(writeStream)
 //数据读取完成监听，即拷贝完成
 readStream.on('end', function () {
-console.log('拷贝完成')
-})
+    console.log('拷贝完成')
+  })
 ```
 
 **一些打包工具的底层操作**
@@ -643,7 +643,7 @@ DE\_ENV 区分 development 和production
 
 ```js
 function foo() {
-console.error('foo');
+  console.error('foo');
 }
 
 process.nextTick(foo);
@@ -692,7 +692,7 @@ class MyEmitter extends EventEmitter {}
 const myEmitter =new MyEmitter()
 
 function callback() {
-console.log('触发了event事件！')
+  console.log('触发了event事件！')
 }
 myEmitter.on('event', callback)
 myEmitter.emit('event')
@@ -721,9 +721,9 @@ emitter.removeAlIListeners([eventName]):移除全部类型为 eventName的监听
 
 ```js
 class EventEmitter {
-constructor() {
-this.events = {};
-}
+  constructor() {
+    this.events = {};
+  }
 }
 ```
 
@@ -731,8 +731,8 @@ this.events = {};
 
 ```js
 {
-"event1": [f1,f2,f3],
-"event2": [f4,f5],
+  "event1": [f1,f2,f3],
+  "event2": [f4,f5],
 }
 ```
 
@@ -740,9 +740,9 @@ this.events = {};
 
 ```js
 emit(type, ...args) {
-this.events[type].forEach((item) => {
-Reflect.apply(item, this, args);
-});
+  this.events[type].forEach((item) => {
+      Reflect.apply(item, this, args);
+    });
 }
 ```
 
@@ -789,22 +789,22 @@ this.removeListener(type,handler)
 ```js
 JavaScr
 once(type, handler) {
-this.on(type, this._onceWrap(type, handler, this));
+  this.on(type, this._onceWrap(type, handler, this));
 }
 
 _onceWrap(type, handler, target) {
-const state = { fired: false, handler, type , target};
-const wrapFn = this._onceWrapper.bind(state);
-state.wrapFn = wrapFn;
-return wrapFn;
+  const state = { fired: false, handler, type , target};
+  const wrapFn = this._onceWrapper.bind(state);
+  state.wrapFn = wrapFn;
+  return wrapFn;
 }
 
 _onceWrapper(...args) {
-if (!this.fired) {
-this.fired = true;
-Reflect.apply(this.handler, this.target, args);
-this.target.off(this.type, this.wrapFn);
-}
+  if (!this.fired) {
+    this.fired = true;
+    Reflect.apply(this.handler, this.target, args);
+    this.target.off(this.type, this.wrapFn);
+  }
 }
 ```
 
@@ -947,7 +947,7 @@ require参数较为简单，但是内部的加载却是十分复杂的，其加�
 
 ```js
 ['c:\\nodejs\\node\_modules',
-'c:\\node\_modules']
+  'c:\\node\_modules']
 ```
 
 JSON
@@ -1131,15 +1131,15 @@ moduleLoadList: [
 
 ```js
 function test() {
-demo( );
+  demo( );
 }
 
 function demo() {
-foo( );
+  foo( );
 }
 
 function foo( ) {
-console.trace();
+  console.trace();
 }
 
 test();
@@ -1272,20 +1272,20 @@ Koa的中间件就是函数，可以是async 函数，或是普通函数
 ```js
 // async 函数
 app.use(async (ctx, next) => {
-const start = Date.now();
-await next();
-const ms = Date.now() - start;
-console.log(^${ctx.method} ${ctx.url} - ${ms}ms^);
-});
+    const start = Date.now();
+    await next();
+    const ms = Date.now() - start;
+    console.log(^${ctx.method} ${ctx.url} - ${ms}ms^);
+  });
 
 // 普通函数
 app.use((ctx, next) => {
-const start = Date.now();
-return next().then(() => {
-const ms = Date.now() - start;
-console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
-});
-});
+    const start = Date.now();
+    return next().then(() => {
+        const ms = Date.now() - start;
+        console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
+      });
+  });
 ```
 
 下面则通过中间件封装http请求过程中几个常用的功能：
@@ -1499,24 +1499,24 @@ poll queue:IO事件
 
 ```js
 async function async1() {
-console.log('async1 start')
-await async2()
-console.log('async1 end')
+  console.log('async1 start')
+  await async2()
+  console.log('async1 end')
 }
 
 async function async2() {
-console.log('async2')
+  console.log('async2')
 }
 
 console.log('script start')
 
 setTimeout(function () {
-console.log('setTimeout0')
-},0)
+    console.log('setTimeout0')
+  },0)
 
 setTimeout(function () {
-console.log('setTimeout2')
-},300)
+    console.log('setTimeout2')
+  },300)
 
 setImmediate(() => console.log('setImmediate'));
 
@@ -1527,12 +1527,12 @@ async1();
 process.nextTick(() => console.log('nextTick2'));
 
 new Promise(function (resolve) {
-console.log('promise1')
-resolve();
-console.log('promise2')
-}).then(function () {
-console.log('promise3')
-})
+    console.log('promise1')
+    resolve();
+    console.log('promise2')
+  }).then(function () {
+    console.log('promise3')
+  })
 
 console.log('script end')
 ```
@@ -1592,12 +1592,12 @@ then里面的回调函数进入微任务队列
 
 ```js
 setTimeout(() => {
-console.log("setTimeout");
-}, 0);
+    console.log("setTimeout");
+  }, 0);
 
 setImmediate(() => {
-console.log("setImmediate");
-});
+    console.log("setImmediate");
+  });
 ```
 
 可能有两种输出：
@@ -1668,13 +1668,13 @@ const sysFree = os.freemem();
 const sysTotal = os.totalmem();
 
 module.exports = {
-memory: ( ) => {
-return {
-sys： 1 - sysFree / sysTotal， // 系统内存占用率
-heap: heapUsed / headTotal, // Node堆内存占用率
-node: rss / sysTotal, // Node占用系统内存的比例
-}
-}
+  memory: ( ) => {
+    return {
+      sys： 1 - sysFree / sysTotal， // 系统内存占用率
+      heap: heapUsed / headTotal, // Node堆内存占用率
+      node: rss / sysTotal, // Node占用系统内存的比例
+    }
+  }
 }
 ```
 
@@ -1747,16 +1747,16 @@ const fs = require('fs');
 
 // bad
 http.createServer(function (req, res) {
-fs.readFile(__dirname + '/data.txt', function (err, data) {
-res.end(data);
-});
-});
+    fs.readFile(__dirname + '/data.txt', function (err, data) {
+        res.end(data);
+      });
+  });
 
 // good
 http.createServer(function (req, res) {
-const stream = fs.createReadStream(__dirname + '/data.txt');
-stream.pipe(res);
-});
+    const stream = fs.createReadStream(__dirname + '/data.txt');
+    stream.pipe(res);
+  });
 ```
 
 **代码层面优化**
@@ -1771,7 +1771,7 @@ let account = user_account.findOne(user_id)
 // good
 const user_account_map = {}//注意这个对象将会消耗大量内存。
 user_account.find(user_id in user_ids).forEach(account){
-user_account_map[account.user_id] = account
+  user_account_map[account.user_id] = account
 }
 for user_id in userIds
 var account = user_account_map[user_id]
@@ -1795,12 +1795,12 @@ var account = user_account_map[user_id]
 const buffer = fs.readFileSync(__dirname + '/source/index.htm');
 
 app.use(
-mount('/', async (ctx) => {
-ctx.status = 200;
-ctx.type = 'html';
-ctx.body = buffer;
-leak.push(fs.readFileSync(__dirname + '/source/index.htm'));
-})
+  mount('/', async (ctx) => {
+      ctx.status = 200;
+      ctx.type = 'html';
+      ctx.body = buffer;
+      leak.push(fs.readFileSync(__dirname + '/source/index.htm'));
+    })
 );
 
 const leak = [];
@@ -1918,11 +1918,11 @@ action 就是我们的提交到的接口，enctype="multipart/form-data" 就是�
 ```js
 const koaBody = require('koa-body');
 app.use(koaBody({
-multipart: true,
-formidable: {
-maxFileSize: 200*1024*1024 // 设置上传文件大小最大限制，默认2M
-}
-}));
+      multipart: true,
+      formidable: {
+        maxFileSize: 200*1024*1024 // 设置上传文件大小最大限制，默认2M
+      }
+    }));
 ```
 
 获取上传的文件
@@ -1960,23 +1960,23 @@ return ctx.body = "上传成功！ ";
 
 ```js
 const storage = multer.diskStorage({
-destination: (req, file, cb) => {
-cb(null, "./upload/")
-},
-filename: (req, file, cb) => {
-cb(null, Date.now() + path.extname(file.originalname))
-}
-})
+    destination: (req, file, cb) => {
+      cb(null, "./upload/")
+    },
+    filename: (req, file, cb) => {
+      cb(null, Date.now() + path.extname(file.originalname))
+    }
+  })
 
 const upload = multer({
-storage
-});
+    storage
+  });
 
 const fileRouter = new Router();
 
 fileRouter.post("/upload", upload.single('file'), (ctx, next) => {
-console.log(ctx.req.file); // 获取文件
-})
+    console.log(ctx.req.file); // 获取文件
+  })
 
 app.use(fileRouter.routes());
 ```
@@ -2110,11 +2110,11 @@ module.exports = UserController;
 
 ```js
 axios.interceptors.request.use(config => {
-const token = localStorage.getItem('token');
-config.headers.common['Authorization'] = 'Bearer '+ token; // 留意这里的
-Authorization
-return config;
-})
+    const token = localStorage.getItem('token');
+    config.headers.common['Authorization'] = 'Bearer '+ token; // 留意这里的
+    Authorization
+    return config;
+  })
 ```
 
 **校验token**
@@ -2124,10 +2124,10 @@ return config;
 ```js
 /注意：放在路由前面
 app.use(koajwt({
-secret: 'test_token'
-}).unless({ // 配置白名单
-path: [/\/api\/register/,/\/api\/login/]
-}))
+      secret: 'test_token'
+    }).unless({ // 配置白名单
+      path: [/\/api\/register/,/\/api\/login/]
+    }))
 ```
 
 secret 必须和 sign 时候保持一致
@@ -2436,15 +2436,15 @@ JS-SDK 解决了移动网页能力不足的问题，通过暴露微信的接口�
 
 ```js
 Component({
-pageLifetimes: {
-show: function() {
-//页面被展示
-},
-hide: function() {
-//页面被隐藏
-},
-}
-})
+    pageLifetimes: {
+      show: function() {
+        //页面被展示
+      },
+      hide: function() {
+        //页面被隐藏
+      },
+    }
+  })
 ```
 
 ### 执行顺序
@@ -2761,23 +2761,23 @@ wx.login获取用户临时登录凭证code，发送到后端服务器换取openl
 
 ```js
 wx.requestPayment({
-//时间戳
-timeStamp:'
-// 随机字符串
-nonceStr: '',
-//统一下单接口返回的 prepay_id 参数值
-package: '',
-//签名类型
-signType: '',
-//签名
-paySign: ',
-//调用成功回调
-success () {},
-//失败回调
-fail () {},
-// 接口调用结束回调
-complete () {}
-})
+    //时间戳
+    timeStamp:'
+    // 随机字符串
+    nonceStr: '',
+    //统一下单接口返回的 prepay_id 参数值
+    package: '',
+    //签名类型
+    signType: '',
+    //签名
+    paySign: ',
+    //调用成功回调
+    success () {},
+    //失败回调
+    fail () {},
+    // 接口调用结束回调
+    complete () {}
+  })
 ```
 
 参数表如下所示：

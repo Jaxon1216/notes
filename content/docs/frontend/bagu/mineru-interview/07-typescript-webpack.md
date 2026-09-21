@@ -65,7 +65,7 @@ Mixin：可以接受任意类型的值
 
 ```ts
 function Add(left: number, right: number): number {
-return left + right;
+  return left + right;
 }
 ```
 
@@ -279,7 +279,7 @@ console.log(num); // 正确
 
 ```ts
 function hello(): void {
-alert("Hello Runoob");
+  alert("Hello Runoob");
 }
 ```
 
@@ -296,12 +296,12 @@ let a:never;
 a = 123; // 错误的写法
 
 a = (() => { // 正确的写法
-throw new Error('错误');
-})()
+    throw new Error('错误');
+  })()
 
 //返回never的函数必须存在无法达到的终点
 function error(message: string): never {
-throw new Error(message);
+  throw new Error(message);
 }
 ```
 
@@ -362,16 +362,16 @@ T&U
 
 ```ts
 function extend<T, U>(first: T, second: U) : T & U {
-let result: <T & U> = {}
-for (let key in first) {
-result[key] = first[key]
-}
-for (let key in second) {
-if(!result.hasOwnProperty(key)) {
-result[key] = second[key]
-}
-}
-return result
+  let result: <T & U> = {}
+  for (let key in first) {
+    result[key] = first[key]
+  }
+  for (let key in second) {
+    if(!result.hasOwnProperty(key)) {
+      result[key] = second[key]
+    }
+  }
+  return result
 }
 ```
 
@@ -424,9 +424,9 @@ type Container<T> = { value: T };
 
 ```ts
 type Tree<T> = {
-value: T;
-left: Tree<T>;
-right: Tree<T>;
+  value: T;
+  left: Tree<T>;
+  right: Tree<T>;
 }
 ```
 
@@ -440,8 +440,8 @@ keyof 类似于 Object.keys，用于获取一个接口中 Key的联合类型。
 
 ```ts
 interface Button {
-type: string
-text: string
+  type: string
+  text: string
 }
 
 type ButtonKeys = keyof Button
@@ -459,7 +459,7 @@ type BaseType = string | number | boolean
 // 这里表示 copy 的参数
 //只能是字符串、数字、布尔这几种基础类型
 function copy<T extends BaseType>(arg: T): T {
-return arg
+  return arg
 }
 ```
 
@@ -467,7 +467,7 @@ return arg
 
 ```ts
 function getValue<T, K extends keyof T>(obj: T, key: K) {
-return obj[key]
+  return obj[key]
 }
 
 const obj = { a: 1 }
@@ -480,11 +480,11 @@ const a = getValue(obj, 'a')
 
 ```ts
 type Readonly<T> = {
-readonly [P in keyof T]: T[P];
+  readonly [P in keyof T]: T[P];
 };
 interface Obj {
-a: string
-b: string
+  a: string
+  b: string
 }
 type ReadonlyObj = Readonly<Obj>
 ```
@@ -499,8 +499,8 @@ P in keyof T等同于 p in 'a'| 'b'，相当于执行了一次 forEach 的逻辑
 
 ```ts
 interface ReadonlyObj {
-readonly a: string;
-readonly b: string;
+  readonly a: string;
+  readonly b: string;
 }
 ```
 
@@ -544,8 +544,8 @@ const getUserName = (user) => user.name
 
 ```ts
 interface User {
-name: string
-age: number
+  name: string
+  age: number
 }
 
 const getUserName = (user: User) => user.name
@@ -607,10 +607,10 @@ user.isOnly= false
 
 ```ts
 interface User {
-name: string
-age?: number
-readonly isMale: boolean
-say: (words: string) => string
+  name: string
+  age?: number
+  readonly isMale: boolean
+  say: (words: string) => string
 }
 ```
 
@@ -620,8 +620,8 @@ say: (words: string) => string
 
 ```ts
 interface User {
-name: string
-age: number
+  name: string
+  age: number
 }
 
 const getUserName = (user: User) => user.name
@@ -674,8 +674,8 @@ age: Number
 
 ```js
 const getUserInfo = function(user) {
-//..
-return name: ${user.name}, age: ${user.age}
+  //..
+  return name: ${user.name}, age: ${user.age}
 }
 ```
 
@@ -684,12 +684,12 @@ return name: ${user.name}, age: ${user.age}
 ```ts
 // 先定义一个接口
 interface IUser {
-name: string;
-age: number;
+  name: string;
+  age: number;
 }
 
 const getUserInfo = (user: IUser): string => {
-return `name: ${user.name}, age: ${user.age}`;
+  return `name: ${user.name}, age: ${user.age}`;
 };
 
 //正确的调用
@@ -722,16 +722,16 @@ TypeScript的 class 支持面向对象的所有特性，比如类、接口等
 
 ```ts
 class Car {
-//字段
-engine:string;
-//构造函数
-constructor(engine:string) {
-this.engine = engine
-}
-11方法
-disp():void {
-console.log("发动机为："+this.engine)
-}
+  //字段
+  engine:string;
+  //构造函数
+  constructor(engine:string) {
+    this.engine = engine
+  }
+  11方法
+  disp():void {
+    console.log("发动机为："+this.engine)
+  }
 }
 ```
 
@@ -741,15 +741,15 @@ console.log("发动机为："+this.engine)
 
 ```ts
 class Animal {
-move(distanceInMeters: number = 0) {
-console.log(`Animal moved ${distanceInMeters}m.`);
-}
+  move(distanceInMeters: number = 0) {
+    console.log(`Animal moved ${distanceInMeters}m.`);
+  }
 }
 
 class Dog extends Animal {
-bark( ) {
-console.log('Woof! Woof!');
-}
+  bark( ) {
+    console.log('Woof! Woof!');
+  }
 }
 
 const dog = new Dog();
@@ -766,18 +766,18 @@ Dog 类继承了 Animal类，因此实例 dog 也能够使用 Animal类move 方�
 
 ```ts
 class PrinterClass {
-doPrint():void {
-console.log("父类的 doPrint() 方法。")
-}
+  doPrint():void {
+    console.log("父类的 doPrint() 方法。")
+  }
 }
 ```
 
 ```ts
 class StringPrinter extends PrinterClass {
-doPrint():void {
-super.doPrint() // 调用父类的函数
-console.log("子类的 doPrint()方法。")
-}
+  doPrint():void {
+    super.doPrint() // 调用父类的函数
+    console.log("子类的 doPrint()方法。")
+  }
 }
 ```
 
@@ -830,7 +830,7 @@ father.name 'change'
 
 ```ts
 class Square {
-static width = '100px'
+  static width = '100px'
 }
 console.log(Square.width) // 100px
 ```
@@ -845,10 +845,10 @@ abstract关键字是用于定义抽象类和在抽象类内部定义抽象方法
 
 ```ts
 abstract class Animal {
-abstract makeSound(): void;
-move(): void {
-console.log('roaming the earch...');
-}
+  abstract makeSound(): void;
+  move(): void {
+    console.log('roaming the earch...');
+  }
 }
 ```
 
@@ -857,9 +857,9 @@ console.log('roaming the earch...');
 ```js
 class Cat extends Animal {
 
-makeSound() {
-console.log('miao miao')
-}
+  makeSound() {
+    console.log('miao miao')
+  }
 }
 
 const cat = new Cat()
@@ -883,17 +883,17 @@ export default class Carousel extends React.Component<Props, State> {}
 ```ts
 // props的类型
 export default class Props {
-public children: Array<React.ReactElement<any>>|React.ReactElement<any
-> | never[] = []
-public speed: number = 500
-public height: number = 160
-public animation: string = 'easeInOutQuad'
-public isAuto: boolean = true
-public autoPlayInterval: number = 4500
-public afterChange: () => {}
-public beforeChange: () => {}
-public selesctedColor: string
-public showDots: boolean = true
+  public children: Array<React.ReactElement<any>>|React.ReactElement<any
+  > | never[] = []
+  public speed: number = 500
+  public height: number = 160
+  public animation: string = 'easeInOutQuad'
+  public isAuto: boolean = true
+  public autoPlayInterval: number = 4500
+  public afterChange: () => {}
+  public beforeChange: () => {}
+  public selesctedColor: string
+  public showDots: boolean = true
 }
 ```
 
@@ -952,10 +952,10 @@ let d: Direction;
 
 ```js
 enum Direction {
-Up，//值默认为 0
-Down，//值默认为 1
-Left，// 值默认为 2
-Right // 值默认为 3
+  Up，//值默认为 0
+  Down，//值默认为 1
+  Left，// 值默认为 2
+  Right // 值默认为 3
 }
 
 console.log(Direction.Up === 0); // true
@@ -968,10 +968,10 @@ console.log(Direction.Right === 3); // true
 
 ```ts
 enum Direction {
-Up = 10,
-Down,
-Left,
-Right
+  Up = 10,
+  Down,
+  Left,
+  Right
 }
 console.log(Direction.Up, Direction.Down, Direction.Left, Direction.Right);
 ```
@@ -984,10 +984,10 @@ console.log(Direction.Up, Direction.Down, Direction.Left, Direction.Right);
 枚举类型的值其实也可以是字符串类型：
 
 enum Direction {
-Up = 'Up',
-Down = 'Down',
-Left = 'Left',
-Right = 'Right'
+  Up = 'Up',
+  Down = 'Down',
+  Left = 'Left',
+  Right = 'Right'
 }
 
 console.log(Direction['Right'], Direction.Up); // Right Up
@@ -997,10 +997,10 @@ console.log(Direction['Right'], Direction.Up); // Right Up
 
 ```ts
 enum Direction {
-Up = 'UP',
-Down, // error TS1061: Enum member must have initializer
-Left, // error TS1061: Enum member must have initializer
-Right // error TS1061: Enum member must have initializer
+  Up = 'UP',
+  Down, // error TS1061: Enum member must have initializer
+  Left, // error TS1061: Enum member must have initializer
+  Right // error TS1061: Enum member must have initializer
 }
 ```
 
@@ -1010,8 +1010,8 @@ Right // error TS1061: Enum member must have initializer
 
 ```ts
 enum BooleanLikeHeterogeneousEnum {
-No = 0,
-Yes = "YES",
+  No = 0,
+  Yes = "YES",
 }
 ```
 
@@ -1023,10 +1023,10 @@ Yes = "YES",
 
 ```ts
 enum Direction {
-Up,
-Down,
-Left,
-Right
+  Up,
+  Down,
+  Left,
+  Right
 }
 ```
 
@@ -1035,11 +1035,11 @@ Right
 ```js
 var Direction;
 (function (Direction) {
-Direction[Direction["Up"] = 0] = "Up";
-Direction[Direction["Down"] = 1] = "Down";
-Direction[Direction["Left"] = 2] = "Left";
-Direction[Direction["Right"] = 3] = "Right";
-})(Direction  (Direction = {}));
+    Direction[Direction["Up"] = 0] = "Up";
+    Direction[Direction["Down"] = 1] = "Down";
+    Direction[Direction["Left"] = 2] = "Left";
+    Direction[Direction["Right"] = 3] = "Right";
+  })(Direction  (Direction = {}));
 ```
 
 上述代码可以看到，Direction[Direction["Up"] = 0] = "Up"可以分成
@@ -1052,10 +1052,10 @@ Direction[Direction["Right"] = 3] = "Right";
 
 ```js
 enum Direction {
-Up,
-Down,
-Left,
-Right
+  Up,
+  Down,
+  Left,
+  Right
 }
 
 console.log(Direction.Up === 0); // true
@@ -1066,13 +1066,13 @@ console.log(Direction[0]); // Up
 
 ```ts
 enum Direction {
-Up = 'Up',
-Down = 'Down',
-Left = 'Left',
-Right = 'Right'
+  Up = 'Up',
+  Down = 'Down',
+  Left = 'Left',
+  Right = 'Right'
 }
 enum Direction {
-Center = 1
+  Center = 1
 }
 ```
 
@@ -1081,14 +1081,14 @@ Center = 1
 ```js
 var Direction;
 (function (Direction) {
-Direction["Up"] = "Up";
-Direction["Down"] = "Down";
-Direction["Left"] = "Left";
-Direction["Right"] = "Right";
-})(Direction | (Direction = {}));
+    Direction["Up"] = "Up";
+    Direction["Down"] = "Down";
+    Direction["Left"] = "Left";
+    Direction["Right"] = "Right";
+  })(Direction | (Direction = {}));
 (function (Direction) {
-Direction[Direction["Center"] = 1] = "Center";
-})(Direction || (Direction = {}));
+    Direction[Direction["Center"] = 1] = "Center";
+  })(Direction || (Direction = {}));
 ```
 
 可以看到，Direction对象属性回叠加
@@ -1138,7 +1138,7 @@ constadd=（a： number，b：number) => a +b
 ```ts
 //方式一
 type LongHand = {
-(a: number): number;
+  (a: number): number;
 };
 
 //方式二
@@ -1165,7 +1165,7 @@ const add = (a: number, b?: number) => a + (b ? b : 0)
 
 ```ts
 const add = (a: number, ...rest: number[]) => rest.reduce(((a, b) => a + b)
-,a)
+  ,a)
 ```
 
 **函数重载**
@@ -1186,12 +1186,12 @@ function add (arg1: number, arg2: number): number
 
 // 下边是实现
 function add (arg1: string | number, arg2: string | number) {
-// 在实现上我们要注意严格判断两个参数的类型是否相等，而不能简单的写一个arg1 + arg2
-if (typeof arg1 ==='string' && typeof arg2 === 'string') {
-return arg1 + arg2
-} else if (typeof arg1 === 'number'&& typeof arg2 === 'number') {
-return arg1 + arg2
-}
+  // 在实现上我们要注意严格判断两个参数的类型是否相等，而不能简单的写一个arg1 + arg2
+  if (typeof arg1 ==='string' && typeof arg2 === 'string') {
+    return arg1 + arg2
+  } else if (typeof arg1 === 'number'&& typeof arg2 === 'number') {
+    return arg1 + arg2
+  }
 }
 ```
 
@@ -1227,7 +1227,7 @@ return para
 
 ```ts
 function returnItem (para: string): string {
-return para
+  return para
 }
 ```
 
@@ -1239,7 +1239,7 @@ return para
 
 ```ts
 function returnItem<T>(para: T): T {
-return para
+  return para
 }
 ```
 
@@ -1282,7 +1282,7 @@ swap([7, 'seven']); // ['seven', 7]
 
 ```ts
 interface ReturnItemFn<T> {
-(para: T): T
+  (para: T): T
 }
 ```
 
@@ -1300,15 +1300,15 @@ const returnItem: ReturnItemFn<number> = para => para
 
 ```ts
 class Stack<T> {
-private arr: T[] = []
+  private arr: T[] = []
 
-public push(item: T) {
-this.arr.push(item)
-}
+  public push(item: T) {
+    this.arr.push(item)
+  }
 
-public pop() {
-this.arr.pop()
-}
+  public pop() {
+    this.arr.pop()
+  }
 }
 ```
 
@@ -1354,13 +1354,13 @@ returnobj[key] // ok
 
 ```ts
 function getValue<T extends object, U extends keyof T>(obj: T, key: U) {
-return obj[key] // ok
+  return obj[key] // ok
 }
 const a = {
-name: 'huihui',
-age: 18
+  name: 'huihui',
+  age: 18
 } getValue(obj: { name: string; age:
-number; }, key: "name" |"age"): string
+    number; }, key: "name" |"age"): string
 number
 getValue(a,)
 ```
@@ -1371,11 +1371,11 @@ getValue(a,)
 
 ```ts
 interface FirstInterface {
-doSomething(): number
+  doSomething(): number
 }
 
 interface SecondInterface {
-doSomethingElse(): string
+  doSomethingElse(): string
 }
 ```
 
@@ -1390,15 +1390,15 @@ interface ChildInterface extends FirstInterface, SecondInterface {
 
 ```ts
 class Demo<T extends ChildInterface> {
-private genericProperty: T
+  private genericProperty: T
 
-constructor(genericProperty: T) {
-this.genericProperty = genericProperty
-}
-useT() {
-this.genericProperty.doSomething()
-this.genericProperty.doSomethingElse()
-}
+  constructor(genericProperty: T) {
+    this.genericProperty = genericProperty
+  }
+  useT() {
+    this.genericProperty.doSomething()
+    this.genericProperty.doSomethingElse()
+  }
 }
 ```
 
@@ -1426,10 +1426,10 @@ expression求值后必须也是一个函数，它会在运行时被调用，被�
 
 ```ts
 {
-"compilerOptions": {
-"target": "ES5",
-"experimentalDecorators": true
-}
+  "compilerOptions": {
+    "target": "ES5",
+    "experimentalDecorators": true
+  }
 }
 ```
 
@@ -1451,16 +1451,16 @@ typescript装饰器的使用和 javascript基本一致
 
 ```ts
 function addAge(constructor: Function) {
-constructor.prototype.age = 18;
+  constructor.prototype.age = 18;
 }
 
 @addAge
 class Person{
-name: string;
-age!: number;
-constructor() {
-this.name = 'huihui';
-}
+  name: string;
+  age!: number;
+  constructor() {
+    this.name = 'huihui';
+  }
 }
 
 let person = new Person();
@@ -1542,15 +1542,15 @@ propertyKey name index.ts:13
 prop say index.ts:6
 desc {"writable":true,"enumerable":false,"configurable":true} index.ts:7
 class Person { index.ts:5
-constructor() {
-this.name = 'xiaomuzhu';
-}
-say() {
-return 'instance method';
-}
-static run() {
-return 'static method';
-}
+  constructor() {
+    this.name = 'xiaomuzhu';
+  }
+  say() {
+    return 'instance method';
+  }
+  static run() {
+    return 'static method';
+  }
 }
 prop run index.ts:6
 desc {"writable":true,"enumerable":false,"configurable":true} index.ts:7
@@ -1571,15 +1571,15 @@ index：参数数组中的位置
 ```ts
 function logParameter(target:Object, propertyName: string, index: number)
 {
-console.log(target);
-console.log(propertyName);
-console.log(index);
+  console.log(target);
+  console.log(propertyName);
+  console.log(index);
 }
 
 class Employee {
-greet(@logParameter message: string): string {
-return `hello ${message}`;
-}
+  greet(@logParameter message: string): string {
+    return `hello ${message}`;
+  }
 }
 const emp = new Employee();
 emp.greet('hello');
@@ -1600,22 +1600,22 @@ greet
 ```ts
 
 function modification(target: Object, propertyKey: string, descriptor: Pro
-pertyDescriptor) {
-console.log(target);
-console.log("prop " + propertyKey);
-console.log("desc " + JSON.stringify(descriptor) + "\n\n");
+  pertyDescriptor) {
+  console.log(target);
+  console.log("prop " + propertyKey);
+  console.log("desc " + JSON.stringify(descriptor) + "\n\n");
 };
 
 class Person{
-_name: string;
-constructor() {
-this._name = 'huihui';
-}
+  _name: string;
+  constructor() {
+    this._name = 'huihui';
+  }
 
-@modification
-get name( ) {
-return this._name
-}
+  @modification
+  get name( ) {
+    return this._name
+  }
 }
 ```
 
@@ -1647,25 +1647,25 @@ let person = new Person();
 
 ```ts
 function f( ) {
-console.log("f(): evaluated");
-return function (target, propertyKey: string, descriptor: PropertyDesc
-riptor) {
-console.log("f(): called");
-}
+  console.log("f(): evaluated");
+  return function (target, propertyKey: string, descriptor: PropertyDesc
+    riptor) {
+    console.log("f(): called");
+  }
 }
 
 function g( ) {
-console.log("g(): evaluated");
-return function (target, propertyKey: string, descriptor: PropertyDesc
-riptor) {
-console.log("g(): called");
-}
+  console.log("g(): evaluated");
+  return function (target, propertyKey: string, descriptor: PropertyDesc
+    riptor) {
+    console.log("g(): called");
+  }
 }
 
 class C {
-@f( )
-@g()
-method() {}
+  @f( )
+  @g()
+  method() {}
 }
 
 //输出
@@ -1709,7 +1709,7 @@ export default a
 ```ts
 export const a = 1
 export type Person = {
-name: String
+  name: String
 }
 ```
 
@@ -1731,8 +1731,8 @@ TypeScript 中命名空间使用 namespace 来定义，语法格式如下：
 
 ```ts
 namespace SomeNameSpaceName {
-export interface ISomeInterfaceName { }
-export class SomeClassName { }
+  export interface ISomeInterfaceName { }
+  export class SomeClassName { }
 }
 ```
 
@@ -1748,11 +1748,11 @@ SomeNameSpaceName.SomeClassName
 
 ```ts
 namespace Letter {
-export let a = 1;
-export let b = 2;
-export let c = 3;
-// ..
-export let z = 26;
+  export let a = 1;
+  export let b = 2;
+  export let c = 3;
+  // ..
+  export let z = 26;
 }
 ```
 
@@ -1761,12 +1761,12 @@ export let z = 26;
 ```js
 var Letter;
 (function (Letter) {
-Letter.a = 1;
-Letter.b = 2;
-Letter.c = 3;
-//..
-Letter.z = 26;
-})(Letter | (Letter = {}));
+    Letter.a = 1;
+    Letter.b = 2;
+    Letter.c = 3;
+    //..
+    Letter.z = 26;
+  })(Letter | (Letter = {}));
 ```
 
 ### 核心区别与选型
@@ -1814,9 +1814,9 @@ npm i @types/react-dom -s
 import * as React from "React";
 
 export const Logo = (props) => {
-const { logo, className, alt } = props;
+  const { logo, className, alt } = props;
 
-return <img src={logo} className={className} alt={alt} />;
+  return <img src={logo} className={className} alt={alt} />;
 };
 ```
 
@@ -1826,15 +1826,15 @@ return <img src={logo} className={className} alt={alt} />;
 import * as React from "React";
 
 interface IProps {
-logo?: string;
-className?: string;
-alt?: string;
+  logo?: string;
+  className?: string;
+  alt?: string;
 }
 
 export const Logo = (props: IProps) => {
-const { logo, className, alt } = props;
+  const { logo, className, alt } = props;
 
-return<img src={logo} className={className} alt={alt} />;
+  return<img src={logo} className={className} alt={alt} />;
 }i
 ```
 
@@ -1842,10 +1842,10 @@ return<img src={logo} className={className} alt={alt} />;
 
 ```ts
 interface IProps {
-logo?: string;
-className?: string;
-alt?: string;
-children?: ReactNode;
+  logo?: string;
+  className?: string;
+  alt?: string;
+  children?: ReactNode;
 }
 ```
 
@@ -1853,9 +1853,9 @@ children?: ReactNode;
 
 ```ts
 export const Logo: React.FC<IProps> = (props) => {
-const { logo, className, alt } = props;
+  const { logo, className, alt } = props;
 
-return <img src={logo} className={className} alt={alt} />;
+  return <img src={logo} className={className} alt={alt} />;
 };
 ```
 
@@ -1875,19 +1875,19 @@ return <img src={logo} className={className} alt={alt} />;
 import * as React from "React";
 
 interface IProps {
-color: string;
-size?: string;
+  color: string;
+  size?: string;
 }
 interface IState {
-count: number;
+  count: number;
 }
 class App extends React.Component<IProps, IState> {
-public state = {
-count: 1,
-};
-public render() {
-return <div>Hello world</div>;
-}
+  public state = {
+    count: 1,
+  };
+  public render() {
+    return <div>Hello world</div>;
+  }
 }
 ```
 
@@ -1897,9 +1897,9 @@ return <div>Hello world</div>;
 
 ```ts
 class Component<P, S> {
-readonly props: Readonly<{ children?: ReactNode }> & Readonly<P>;
+  readonly props: Readonly<{ children?: ReactNode }> & Readonly<P>;
 
-state: Readonly<S>;
+  state: Readonly<S>;
 }
 ```
 
@@ -1915,7 +1915,7 @@ state: Readonly<S>;
 
 ```ts
 private updateValue(e: React.ChangeEvent<HTMLInputElement>) {
-this.setState({ itemText: e.target.value })
+  this.setState({ itemText: e.target.value })
 }
 ```
 
@@ -2033,28 +2033,28 @@ import {Component,Vue,Prop} from vue-property-decorator;
 
 @Component
 export default class YourComponent extends Vue {
-@Prop(String)
-propA:string;
+  @Prop(String)
+  propA:string;
 
-@Prop([String,Number])
-propB:string|number;
+  @Prop([String,Number])
+  propB:string|number;
 
-@Prop({
-type: String, // type: [String , Number]
-default:'default value',//—般为String或Number
-//如果是对象或数组的话。默认值从一个工厂函数中返回
-// default: () => {
-// return ['a','b']
-//}
-required: true,
-validator: (value) => {
-return [
-'InProcess',
-'Settled'
-].indexOf(value) !== -1
-}
-})
-propC:string;
+  @Prop({
+      type: String, // type: [String , Number]
+      default:'default value',//—般为String或Number
+      //如果是对象或数组的话。默认值从一个工厂函数中返回
+      // default: () => {
+      // return ['a','b']
+      //}
+      required: true,
+      validator: (value) => {
+        return [
+          'InProcess',
+          'Settled'
+        ].indexOf(value) !== -1
+      }
+    })
+  propC:string;
 }
 ```
 
@@ -2068,14 +2068,14 @@ import { Vue, Component, Watch } from 'vue-property-decorator'
 
 @Component
 export default class YourComponent extends Vue {
-@Watch('child')
-onChildChanged(val: string, oldVal: string) {}
+  @Watch('child')
+  onChildChanged(val: string, oldVal: string) {}
 
-@Watch('person', { immediate: true, deep: true })
-onPersonChanged1(val: Person, oldVal: Person) {}
+  @Watch('person', { immediate: true, deep: true })
+  onPersonChanged1(val: Person, oldVal: Person) {}
 
-@Watch('person')
-onPersonChanged2(val: Person, oldVal: Person) {}
+  @Watch('person')
+  onPersonChanged2(val: Person, oldVal: Person) {}
 }
 ```
 
@@ -2131,9 +2131,9 @@ Webpack 最初的目标是实现前端项目的模块化，旨在更高效地管
 
 ```js
 window.moduleA = {
-method1: function () {
-console.log('moduleA#method1')
-}
+  method1: function () {
+    console.log('moduleA#method1')
+  }
 }
 ```
 
@@ -2144,17 +2144,17 @@ console.log('moduleA#method1')
 ```js
 // module-a.js
 (function ($) {
-var name = 'module-a'
+    var name = 'module-a'
 
-function method1 () {
-console.log(name + '#method1')
-$('body').animate({ margin: '200px' })
-}
+    function method1 () {
+      console.log(name + '#method1')
+      $('body').animate({ margin: '200px' })
+    }
 
-window.moduleA = {
-method1: method1
-}
-})(jQuery)
+    window.moduleA = {
+      method1: method1
+    }
+  })(jQuery)
 ```
 
 上述的方式都是早期解决模块的方式，但是仍然存在一些没有解决的问题。例如，我们是用
@@ -2270,12 +2270,12 @@ HMR全称 Hot Module Replacement，可以理解为模块热替换，指在应用
 ```js
 const webpack = require('webpack')
 module.exports = {
-//..
-devServer: {
-// 开启 HMR 特性
-hot: true
-// hotOnly: true
-}
+  //..
+  devServer: {
+    // 开启 HMR 特性
+    hot: true
+    // hotOnly: true
+  }
 }
 ```
 
@@ -2283,9 +2283,9 @@ hot: true
 
 ```js
 if(module.hot){
-module.hot.accept('./util.js',()=>{
-console.log("util.js更新了")
-})
+  module.hot.accept('./util.js',()=>{
+      console.log("util.js更新了")
+    })
 }
 ```
 
@@ -2373,37 +2373,37 @@ var node_modules = path.resolve(__dirname, 'node_modules');
 var pathToReact = path.resolve(node_modules,'react/dist/react.min.js');
 
 module.exports = {
-//入口文件，是模块构建的起点，同时每一个入口文件对应最后生成的一个chunk。
-entry: './path/to/my/entry/file.js',
-// 文件路径指向(可加快打包过程)。
-resolve: {
-alias: {
-'react': pathToReact
-}
-},
-//生成文件，是模块构建的终点，包括输出文件与输出路径。
-output: {
-path: path.resolve(__dirname, 'build'),
-filename: '[name].js'
-},
-// 这里配置了处理各模块的 loader，包括 css 预处理 loader，es6 编译 loader，图
-片处理 loader。
-module: {
-loaders: [
-{
-test: /\.js$/,
-loader: 'babel',
-query: {
-presets: ['es2015','react']
-}
-}
-],
-noParse: [pathToReact]
-},
-// webpack 各插件对象，在webpack 的事件流中执行对应的方法。
-plugins: [
-new webpack.HotModuleReplacementPlugin()
-]
+  //入口文件，是模块构建的起点，同时每一个入口文件对应最后生成的一个chunk。
+  entry: './path/to/my/entry/file.js',
+  // 文件路径指向(可加快打包过程)。
+  resolve: {
+    alias: {
+      'react': pathToReact
+    }
+  },
+  //生成文件，是模块构建的终点，包括输出文件与输出路径。
+  output: {
+    path: path.resolve(__dirname, 'build'),
+    filename: '[name].js'
+  },
+  // 这里配置了处理各模块的 loader，包括 css 预处理 loader，es6 编译 loader，图
+  片处理 loader。
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        loader: 'babel',
+        query: {
+          presets: ['es2015','react']
+        }
+      }
+    ],
+    noParse: [pathToReact]
+  },
+  // webpack 各插件对象，在webpack 的事件流中执行对应的方法。
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ]
 };
 ```
 
@@ -2413,23 +2413,23 @@ webpack 将 webpack.config.js 中的各个配置项拷贝到 options 对象中�
 
 ```js
 class Compiler extends Tapable {
-constructor(context) {
-super();
-this.hooks = {
-beforeCompile: new AsyncSeriesHook(["params"]),
-compile: new SyncHook(["params"]),
-afterCompile: new AsyncSeriesHook(["compilation"]),
-make: new AsyncParallelHook(["compilation"]),
-entryOption: new SyncBailHook(["context", "entry"])
-//定义了很多不同类型的钩子
-};
-//...
-}
+  constructor(context) {
+    super();
+    this.hooks = {
+      beforeCompile: new AsyncSeriesHook(["params"]),
+      compile: new SyncHook(["params"]),
+      afterCompile: new AsyncSeriesHook(["compilation"]),
+      make: new AsyncParallelHook(["compilation"]),
+      entryOption: new SyncBailHook(["context", "entry"])
+      //定义了很多不同类型的钩子
+    };
+    //...
+  }
 }
 function webpack(options) {
-var compiler = new Compiler();
-...// 检查options,若watch字段为true,则开启watch线程
-return compiler;
+  var compiler = new Compiler();
+  ...// 检查options,若watch字段为true,则开启watch线程
+  return compiler;
 }
 ```
 
@@ -2441,7 +2441,7 @@ Compiler 对象继承自Tapable，初始化时定义了很多钩子函数
 
 ```js
 module.exports = {
-entry:'./src/file.js'
+  entry:'./src/file.js'
 }
 ```
 
@@ -2595,7 +2595,7 @@ const proxy = require('http-proxy-middleware');
 const app = express();
 
 app.use('/api', proxy({target: 'http://www.example.org', changeOrigin: true
-}));
+    }));
 app.listen(3000);
 
 // http://localhost:3000/api/foo/bar -> http://www.example.org/api/foo/bar
@@ -2732,20 +2732,20 @@ npm install --save-dev css-loader
 
 ```js
 rules: [
-{
-test: /\.css\$/,
-use: {
-loader: "css-loader",
-options: {
-// 启用/禁用 url(）处理
-url: true,
-// 启用/禁用 @import 处理
-import: true,
-// 启用/禁用 Sourcemap
-sourceMap: false
-}
-}
-}
+  {
+    test: /\.css\$/,
+    use: {
+      loader: "css-loader",
+      options: {
+        // 启用/禁用 url(）处理
+        url: true,
+        // 启用/禁用 @import 处理
+        import: true,
+        // 启用/禁用 Sourcemap
+        sourceMap: false
+      }
+    }
+  }
 ]
 ```
 
@@ -2887,10 +2887,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'); // 通过 npm 安装
 const webpack = require('webpack'); // 访问内置的插件
 module.exports = {
 
-plugins:[
-new webpack.ProgressPlugin(),
-new HtmlWebpackPlugin({ template: './src/index.html' }),
-]
+  plugins:[
+    new webpack.ProgressPlugin(),
+    new HtmlWebpackPlugin({ template: './src/index.html' }),
+  ]
 };
 ```
 
@@ -2904,11 +2904,11 @@ apply 方法会被 webpack compiler 调用，并且在整个编译生命周期�
 const pluginName = 'ConsoleLogOnBuildWebpackPlugin';
 
 class ConsoleLogOnBuildWebpackPlugin {
-apply(compiler) {
-compiler.hooks.run.tap(pluginName, (compilation) => {
-console.log('webpack 构建过程开始！');
-});
-}
+  apply(compiler) {
+    compiler.hooks.run.tap(pluginName, (compilation) => {
+        console.log('webpack 构建过程开始！');
+      });
+  }
 }
 
 module.exports = ConsoleLogOnBuildWebpackPlugin;
@@ -2978,13 +2978,13 @@ npm install --save-dev html-webpack-plugin
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
 
-plugins: [
-new HtmlWebpackPlugin({
-title: "My App",
-filename: "app.html",
-template:"./src/html/index.html"
-})
-]
+  plugins: [
+    new HtmlWebpackPlugin({
+        title: "My App",
+        filename: "app.html",
+        template:"./src/html/index.html"
+      })
+  ]
 };
 ```
 
@@ -3150,24 +3150,24 @@ loader 运行在打包文件之前
 ```js
 //导出一个函数，source为webpack传递给loader的文件源内容
 module.exports = function(source) {
-const content = doSomeThing2JsString(source);
+  const content = doSomeThing2JsString(source);
 
-// 如果 loader 配置了 options 对象，那么this.query将指向 options
-const options = this.query;
+  // 如果 loader 配置了 options 对象，那么this.query将指向 options
+  const options = this.query;
 
-//可以用作解析其他模块路径的上下文
-console.log('this.context');
+  //可以用作解析其他模块路径的上下文
+  console.log('this.context');
 
-/*
-* this.callback 参数:
-* error:Error | null,当 loader 出错时向外抛出—个 error
-* content:String | Buffer，经过 loader 编译后需要导出的内容
-* sourceMap:为方便调试生成的编译后内容的 source map
-* ast:本次编译生成的AST静态语法树，之后执行的 loader 可以直接使用这个AST,
-进而省去重复生成AST 的过程
-*/
-this.callback(null, content); // 异步
-return content; // 同步
+  /*
+  * this.callback 参数:
+  * error:Error | null,当 loader 出错时向外抛出—个 error
+  * content:String | Buffer，经过 loader 编译后需要导出的内容
+  * sourceMap:为方便调试生成的编译后内容的 source map
+  * ast:本次编译生成的AST静态语法树，之后执行的 loader 可以直接使用这个AST,
+  进而省去重复生成AST 的过程
+  */
+  this.callback(null, content); // 异步
+  return content; // 同步
 }
 ```
 
@@ -3194,15 +3194,15 @@ compilation:作为plugin内置事件回调函数的参数，包含了当前的�
 
 ```js
 class MyPlugin {
-// Webpack 会调用 MyPlugin 实例的 apply 方法给插件实例传入 compiler 对象
-apply (compiler) {
-//找到合适的事件钩子，实现自己的插件功能
-compiler.hooks.emit.tap('MyPlugin', compilation => {
-// compilation：当前打包构建流程的上下文
-console.log(compilation);
-// do something...
-})
-}
+  // Webpack 会调用 MyPlugin 实例的 apply 方法给插件实例传入 compiler 对象
+  apply (compiler) {
+    //找到合适的事件钩子，实现自己的插件功能
+    compiler.hooks.emit.tap('MyPlugin', compilation => {
+        // compilation：当前打包构建流程的上下文
+        console.log(compilation);
+        // do something...
+      })
+  }
 }
 ```
 
@@ -3265,7 +3265,7 @@ include: path.resolve(__dirname, 'src'),
 ```js
 module.exports = {
 
-extensions:[".warm",".mjs",".js",".json"]
+  extensions:[".warm",".mjs",".js",".json"]
 }
 ```
 
@@ -3280,11 +3280,11 @@ resolve.modules 用于配置 webpack 去哪些目录下寻找第三方模块。�
 
 ```js
 module.exports = {
-resolve: {
-//使用绝对路径指明第三方模块存放的位置，以减少搜索步骤
-//其中__dirname表示当前工作目录，也就是项目根目录
-modules: [path.resolve(__dirname, 'node_modules')]
-},
+  resolve: {
+    //使用绝对路径指明第三方模块存放的位置，以减少搜索步骤
+    //其中__dirname表示当前工作目录，也就是项目根目录
+    modules: [path.resolve(__dirname, 'node_modules')]
+  },
 }
 ```
 
@@ -3297,11 +3297,11 @@ alias给一些常用的路径起一个别名，特别当我们的项目目录结
 ```js
 module.exports = {
 
-resolve:{
-alias:{
-"@":path.resolve(__dirname,'./src')
-}
-}
+  resolve:{
+    alias:{
+      "@":path.resolve(__dirname,'./src')
+    }
+  }
 }
 ```
 
@@ -3339,14 +3339,14 @@ path:path.resolve(__dirname,"./dll/[name].manifest.json")
 ```js
 module.exports = {
 
-new webpack.DllReferencePlugin({
-context:path.resolve(__dirname,"./dll/dll_react.js"),
-manifest:path.resolve(__dirname,"./dll/react.manifest.json")
-}),
-new AddAssetHtmlPlugin({
-outputPath:"./auto",
-filepath:path.resolve(__dirname,"./dll/dll_react.js")
-})
+  new webpack.DllReferencePlugin({
+      context:path.resolve(__dirname,"./dll/dll_react.js"),
+      manifest:path.resolve(__dirname,"./dll/react.manifest.json")
+    }),
+  new AddAssetHtmlPlugin({
+      outputPath:"./auto",
+      filepath:path.resolve(__dirname,"./dll/dll_react.js")
+    })
 }
 ```
 
@@ -3358,15 +3358,15 @@ filepath:path.resolve(__dirname,"./dll/dll_react.js")
 
 ```js
 module.exports = {
-module: {
-rules: [
-{
-test: /\.ext$/,
-use: ['cache-loader', ...loaders],
-include: path.resolve('src'),
-},
-],
-},
+  module: {
+    rules: [
+      {
+        test: /\.ext$/,
+        use: ['cache-loader', ...loaders],
+        include: path.resolve('src'),
+      },
+    ],
+  },
 };
 ```
 
@@ -3376,13 +3376,13 @@ include: path.resolve('src'),
 
 ```js
 module.exports = {
-optimization: {
-minimizer:[
-new TerserPlugin({
-parallel: true,
-}),
-],
-},
+  optimization: {
+    minimizer:[
+      new TerserPlugin({
+          parallel: true,
+        }),
+    ],
+  },
 }
 ```
 
@@ -3445,14 +3445,14 @@ terser 是一个 JavaScript的解释、绞肉机、压缩机的工具集，可�
 const TerserPlugin = require('terser-webpack-plugin')
 module.exports = {
 
-optimization: {
-minimize: true,
-minimizer: [
-new TerserPlugin({
-parallel: true // 电脑cpu核数-1
-})
-]
-}
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+          parallel: true // 电脑cpu核数-1
+        })
+    ]
+  }
 }
 ```
 
@@ -3491,15 +3491,15 @@ npm install css-minimizer-webpack-plugin -D
 ```js
 const CssMinimizerPlugin =require('css-minimizer-webpack-plugin')
 module.exports = {
-// ..
-optimization: {
-minimize: true,
-minimizer: [
-new CssMinimizerPlugin({
-parallel: true
-})
-]
-}
+  // ..
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+          parallel: true
+        })
+    ]
+  }
 }
 ```
 
@@ -3528,11 +3528,11 @@ removeComments:true // 是否移除注释
 
 ```js
 new ComepressionPlugin({
-test:/\.(css|js)$/，// 哪些文件需要压缩
-threshold:500，//设置文件多大开始压缩
-minRatio:0.7，//至少压缩的比例
-algorithm:"gzip"，// 采用的压缩算法
-})
+    test:/\.(css|js)$/，// 哪些文件需要压缩
+    threshold:500，//设置文件多大开始压缩
+    minRatio:0.7，//至少压缩的比例
+    algorithm:"gzip"，// 采用的压缩算法
+  })
 ```
 
 **图片压缩**
@@ -3605,9 +3605,9 @@ usedExports：通过标记某些函数是否被使用，之后通过Terser来进
 ```js
 module.exports ={
 
-optimization:{
-usedExports
-}
+  optimization:{
+    usedExports
+  }
 }
 ```
 
@@ -3629,8 +3629,8 @@ sideEffects 用于告知webpack compiler 哪些模块时有副作用，配置方
 
 ```js
 "sideEffecis":[
-"./src/util/format.js",
-"*.css"// 所有的css文件
+  "./src/util/format.js",
+  "*.css"// 所有的css文件
 ]
 ```
 
@@ -3678,11 +3678,11 @@ standard:["html"]
 ```js
 module.exports = {
 
-optimization:{
-splitChunks:{
-chunks:"all"
-}
-}
+  optimization:{
+    splitChunks:{
+      chunks:"all"
+    }
+  }
 }
 ```
 
@@ -3740,20 +3740,20 @@ Rollup 是一款 ES Modules 打包器，从作用上来看，Rollup 与 Webpack 
 ```ts
 //./src/messages.js
 export default {
-hi: 'Hey Guys, I am zce~'
+  hi: 'Hey Guys, I am zce~'
 }
 
 //./src/logger.js
 export const log = msg => {
-console.log('- INFO- ---')
-console.log(msg)
-console.log(' -')
+  console.log('- INFO- ---')
+  console.log(msg)
+  console.log(' -')
 }
 
 export const error = msg => {
-console.error(' ERROR --')
-console.error(msg)
-console.error(' --')
+  console.error(' ERROR --')
+  console.error(msg)
+  console.error(' --')
 }
 
 // ./src/index.js
@@ -3836,8 +3836,8 @@ import { log } from './logger'
 log('hello parcel')
 // ./src/logger.js
 export const log = msg => {
-console.log(' INF0 -')
-console.log(msg)
+  console.log(' INF0 -')
+  console.log(msg)
 }
 ```
 

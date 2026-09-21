@@ -24,14 +24,14 @@ react 类组件使用一个名为 render() 的方法或者函数组件 return，
 
 ```js
 class HelloMessage extends React.Component {
-render() {
-return <div>Hello {this.props.name}</div>;
-}
+  render() {
+    return <div>Hello {this.props.name}</div>;
+  }
 }
 
 ReactDOM.render(
-<HelloMessage name="Taylor" />,
-document.getElementById("hello-example")
+  <HelloMessage name="Taylor" />,
+  document.getElementById("hello-example")
 );
 ```
 
@@ -67,15 +67,15 @@ React 特性有很多，如：
 ```js
 // 创建地图
 const map = new Map.map(document.getElementById("map"), {
-zoom: 4,
-center: { lat, lng },
-});
+    zoom: 4,
+    center: { lat, lng },
+  });
 
 // 创建标记
 const marker = new Map.marker({
-position: { lat, lng },
-title: "Hello Marker",
-});
+    position: { lat, lng },
+    title: "Hello Marker",
+  });
 
 // 地图上添加标记
 marker.setMap(map);
@@ -99,11 +99,11 @@ marker.setMap(map);
 
 ```ts
 const Header = () => {
-return (
-<Jumbotron style={{ backgroundColor: "orange" }}>
-<h1>TODO App</h1>
-</Jumbotron>
-);
+  return (
+    <Jumbotron style={{ backgroundColor: "orange" }}>
+    <h1>TODO App</h1>
+    </Jumbotron>
+  );
 }
 ```
 
@@ -111,19 +111,19 @@ return (
 
 ```js
 class Dashboard extends React.Component {
-constructor(props) {
-super(props);
+  constructor(props) {
+    super(props);
 
-this.state = {};
-}
-render() {
-return (
-<div className="dashboard">
-<ToDoForm />
-<ToDolist />
-</div>
-);
-}
+    this.state = {};
+  }
+  render() {
+    return (
+      <div className="dashboard">
+      <ToDoForm />
+      <ToDolist />
+      </div>
+    );
+  }
 }
 ```
 
@@ -157,26 +157,26 @@ return (
 
 ```js
 class Button extends React.Component {
-constructor() {
-super();
-this.state = {
-count: 0,
-};
-}
+  constructor() {
+    super();
+    this.state = {
+      count: 0,
+    };
+  }
 
-updateCount() {
-this.setState((prevState, props) => {
-return { count: prevState.count + 1 };
-});
-}
+  updateCount() {
+    this.setState((prevState, props) => {
+        return { count: prevState.count + 1 };
+      });
+  }
 
-render() {
-return (
-<button onClick={() => this.updateCount()}>
-Clicked {this.state.count} times
-</button>
-);
-}
+  render() {
+    return (
+      <button onClick={() => this.updateCount()}>
+      Clicked {this.state.count} times
+      </button>
+    );
+  }
 }
 ```
 
@@ -184,10 +184,10 @@ setState 还可以接受第二个参数，它是一个函数，会在 setState �
 
 ```js
 this.setState(
-{
-name："JS每日一题"，
-},
-() => console.log("setState finished")
+  {
+    name："JS每日一题"，
+  },
+  () => console.log("setState finished")
 );
 ```
 
@@ -203,9 +203,9 @@ props 除了可以传字符串，数字，还可以传递对象，数组甚至�
 
 ```js
 class Welcome extends React.Component {
-render() {
-return <h1>Hello {this.props.name}</h1>;
-}
+  render() {
+    return <h1>Hello {this.props.name}</h1>;
+  }
 }
 
 const element = <Welcome name="Sara" onNameChanged={this.handleName} />;
@@ -279,10 +279,10 @@ ReferenceError: Must call super constructor in derived class before accessing 't
 
 ```js
 class sub extends sup {
-constructor(name, age) {
-this.age = age;
-super(name);// super代表的事父类的构造函数
-}
+  constructor(name, age) {
+    this.age = age;
+    super(name);// super代表的事父类的构造函数
+  }
 }
 ```
 
@@ -304,9 +304,9 @@ instance.props = props;
 
 ```js
 class HelloMessage extends React.Component {
-render() {
-return <div>nice to meet you! {this.props.name}</div>;
-}
+  render() {
+    return <div>nice to meet you! {this.props.name}</div>;
+  }
 }
 ```
 
@@ -317,12 +317,12 @@ return <div>nice to meet you! {this.props.name}</div>;
 
 ```js
 class Button extends React.Component {
-constructor(props) {
-super(); // 没传入 props
-console.log(props); //{}
-console.log(this.props); // undefined
-//..
-}
+  constructor(props) {
+    super(); // 没传入 props
+    console.log(props); //{}
+    console.log(this.props); // undefined
+    //..
+  }
 }
 ```
 
@@ -357,12 +357,12 @@ rps 属性中
 
 ```js
 class Welcome extends React.Component {
-constructor(props) {
-super(props)
-}
-render() {
-return <h1>Hello, {this.props.name}</h1>
-}
+  constructor(props) {
+    super(props)
+  }
+  render() {
+    return <h1>Hello, {this.props.name}</h1>
+  }
 }
 ```
 
@@ -372,7 +372,7 @@ return <h1>Hello, {this.props.name}</h1>
 
 ```js
 function Welcome(props) {
-return <h1>Hello, {props.name}</h1>;
+  return <h1>Hello, {props.name}</h1>;
 }
 ```
 
@@ -400,7 +400,7 @@ return <h1>Hello, {props.name}</h1>;
 
 ```js
 function Welcome(props) {
-return <h1>Hello, {props.name}</h1>;
+  return <h1>Hello, {props.name}</h1>;
 }
 ```
 
@@ -408,12 +408,12 @@ return <h1>Hello, {props.name}</h1>;
 
 ```js
 class Welcome extends React.Component {
-constructor(props) {
-super(props)
-}
-render() {
-return <h1>Hello, {this.props.name}</h1>
-}
+  constructor(props) {
+    super(props)
+  }
+  render() {
+    return <h1>Hello, {this.props.name}</h1>
+  }
 }
 ```
 
@@ -425,14 +425,14 @@ return <h1>Hello, {this.props.name}</h1>
 
 ```js
 const FunctionalComponent = () => {
-const [count, setCount] = React.useState(0);
+  const [count, setCount] = React.useState(0);
 
-return(
-<div>
-<p>count: {count}</p >
-<button onClick={() => setCount(count + 1)}>Click</button>
-</div>
-);
+  return(
+    <div>
+    <p>count: {count}</p >
+    <button onClick={() => setCount(count + 1)}>Click</button>
+    </div>
+  );
 };
 ```
 
@@ -446,10 +446,10 @@ return(
 
 ```js
 const FunctionalComponent = () => {
-useEffect(() => {
-console.log("Hello");
-}, []);
-return <h1>Hello, World</h1>;
+  useEffect(() => {
+      console.log("Hello");
+    }, []);
+  return <h1>Hello, World</h1>;
 };
 ```
 
@@ -459,12 +459,12 @@ return <h1>Hello, World</h1>;
 
 ```js
 const FunctionalComponent = () => {
-React.useEffect(() => {
-return () => {
-console.log("Bye");
-};
-}, []);
-return <h1>Bye, World</h1>;
+  React.useEffect(() => {
+      return () => {
+        console.log("Bye");
+      };
+    }, []);
+  return <h1>Bye, World</h1>;
 };
 ```
 
@@ -475,7 +475,7 @@ return <h1>Bye, World</h1>;
 ```js
 //你的代码
 function SayHi() {
-return<p>Hello, React</p >
+  return<p>Hello, React</p >
 }
 // React内部
 const result = SayHi(props) // » <p>Hello, React</p >
@@ -486,9 +486,9 @@ const result = SayHi(props) // » <p>Hello, React</p >
 ```js
 //你的代码
 class SayHi extends React.Component {
-render() {
-return <p>Hello, React</p >
-}
+  render() {
+    return <p>Hello, React</p >
+  }
 }
 // React内部
 const instance = new SayHi(props) // » SayHi {}
@@ -503,17 +503,17 @@ const result = instance.render() // » <p>Hello, React</p >
 
 ```js
 function ProfilePage(props) {
-const showMessage = () => {
-alert('Followed ' + props.user);
-}
+  const showMessage = () => {
+    alert('Followed ' + props.user);
+  }
 
-const handleClick = () => {
-setTimeout(showMessage, 3000);
-}
+  const handleClick = () => {
+    setTimeout(showMessage, 3000);
+  }
 
-return (
-<button onClick={handleClick}>Follow</button>
-)
+  return (
+    <button onClick={handleClick}>Follow</button>
+  )
 }
 ```
 
@@ -521,17 +521,17 @@ return (
 
 ```js
 class ProfilePage extends React.Component {
-showMessage() {
-alert('Followed'+ this.props.user);
-}
+  showMessage() {
+    alert('Followed'+ this.props.user);
+  }
 
-handleClick() {
-setTimeout(this.showMessage.bind(this), 3000);
-}
+  handleClick() {
+    setTimeout(this.showMessage.bind(this), 3000);
+  }
 
-render() {
-return <button onClick={this.handleClick.bind(this)}>Follow</button>
-}
+  render() {
+    return <button onClick={this.handleClick.bind(this)}>Follow</button>
+  }
 }
 ```
 
@@ -559,13 +559,13 @@ return <button onClick={this.handleClick.bind(this)}>Follow</button>
 
 ```js
 class TestComponent extends React.Component {
-constructor (props) {
-super(props);
-this.state = { username: 'lindaidai' };
-}
-render () {
-return <input name="username"value={this.state.username} />
-}
+  constructor (props) {
+    super(props);
+    this.state = { username: 'lindaidai' };
+  }
+  render () {
+    return <input name="username"value={this.state.username} />
+  }
 }
 ```
 
@@ -589,22 +589,22 @@ return <input name="username"value={this.state.username} />
 import React, { Component } from 'react';
 
 export class UnControll extends Component {
-constructor (props) {
-super(props);
-this.inputRef = React.createRef();
-}
-handleSubmit = (e) => {
-console.log('我们可以获得input内的值为'，this.inputRef.current.value);
-e.preventDefault();
-}
-render () {
-return (
-<form onSubmit={e => this.handleSubmit(e)}>
-<input defaultValue="lindaidai" ref={this.inputRef} />
-<input type="submit" value="提交" />
-</form>
-)
-}
+  constructor (props) {
+    super(props);
+    this.inputRef = React.createRef();
+  }
+  handleSubmit = (e) => {
+    console.log('我们可以获得input内的值为'，this.inputRef.current.value);
+    e.preventDefault();
+  }
+  render () {
+    return (
+      <form onSubmit={e => this.handleSubmit(e)}>
+      <input defaultValue="lindaidai" ref={this.inputRef} />
+      <input type="submit" value="提交" />
+      </form>
+    )
+  }
 }
 ```
 
@@ -776,13 +776,13 @@ React 有一套自己的合成事件 SyntheticEvent
 
 ```js
 class ShowAlert extends React.Component {
-showAlert() {
-console.log("Hi");
-}
+  showAlert() {
+    console.log("Hi");
+  }
 
-render() {
-return <button onClick={this.showAlert}>show</button>;
-}
+  render() {
+    return <button onClick={this.showAlert}>show</button>;
+  }
 }
 ```
 
@@ -808,14 +808,14 @@ render方法中使用bind
 
 ```js
 class App extends React.Component {
-handleClick() {
-console.log('this > ', this);
-}
-render( ) {
-return (
-<div onClick={this.handleClick.bind(this)}>test</div>
-)
-}
+  handleClick() {
+    console.log('this > ', this);
+  }
+  render( ) {
+    return (
+      <div onClick={this.handleClick.bind(this)}>test</div>
+    )
+  }
 }
 ```
 
@@ -827,14 +827,14 @@ return (
 
 ```js
 class App extends React.Component {
-handleClick() {
-console.log('this > ', this);
-}
-render( ) {
-return (
-<div onClick={e => this.handleClick(e)}>test</div>
-)
-}
+  handleClick() {
+    console.log('this > ', this);
+  }
+  render( ) {
+    return (
+      <div onClick={e => this.handleClick(e)}>test</div>
+    )
+  }
 }
 ```
 
@@ -844,18 +844,18 @@ return (
 
 ```js
 class App extends React.Component {
-constructor(props) {
-super(props);
-this.handleClick = this.handleClick.bind(this);
-}
-handleClick() {
-console.log('this > ', this);
-}
-render() {
-return (
-<div onClick={this.handleClick}>test</div>
-)
-}
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    console.log('this > ', this);
+  }
+  render() {
+    return (
+      <div onClick={this.handleClick}>test</div>
+    )
+  }
 }
 ```
 
@@ -865,17 +865,17 @@ return (
 
 ```js
 class App extends React.Component {
-constructor(props) {
-super(props);
-}
-handleClick = () => {
-console.log('this > ', this);
-}
-render() {
-return (
-<div onClick={this.handleClick}>test</div>
-)
-}
+  constructor(props) {
+    super(props);
+  }
+  handleClick = () => {
+    console.log('this > ', this);
+  }
+  render() {
+    return (
+      <div onClick={this.handleClick}>test</div>
+    )
+  }
 }
 ```
 
@@ -923,7 +923,7 @@ return (
 
 ```js
 function HelloComponent(props, /* context */) {
-return <div>Hello {props.name}</div>
+  return <div>Hello {props.name}</div>
 }
 ```
 
@@ -935,12 +935,12 @@ React.createClass是react刚开始推荐的创建组件的方式，目前这种�
 
 ```jsx
 function HelloComponent(props) /\* context \*/{
-return React.createElement(
-"div",
-null,
-"Hello ",
-props.name
-);
+  return React.createElement(
+    "div",
+    null,
+    "Hello ",
+    props.name
+  );
 }
 ```
 
@@ -953,32 +953,32 @@ props.name
 ```js
 
 class Timer extends React.Component {
-constructor(props) {
-super(props);
-this.state = { seconds: 0 };
-}
+  constructor(props) {
+    super(props);
+    this.state = { seconds: 0 };
+  }
 
-tick() {
-this.setState(state => ({
-seconds: state.seconds + 1
-}));
-}
+  tick() {
+    this.setState(state => ({
+          seconds: state.seconds + 1
+        }));
+  }
 
-componentDidMount() {
-this.interval = setInterval(() => this.tick(), 1000);
-}
+  componentDidMount() {
+    this.interval = setInterval(() => this.tick(), 1000);
+  }
 
-componentWillUnmount() {
-clearInterval(this.interval);
-}
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
 
-render() {
-return (
-<div>
-Seconds: {this.state.seconds}
-</div>
-);
-}
+  render() {
+    return (
+      <div>
+      Seconds: {this.state.seconds}
+      </div>
+    );
+  }
 }
 ```
 
@@ -1042,26 +1042,26 @@ lang 属性设置预处理器
 import React, { Component } from "react";
 
 const div1 = {
-width: "300px",
-margin: "30px auto",
-backgroundColor:"#44014C"，//驼峰法
-minHeight: "200px",
-boxSizing: "border-box"
+  width: "300px",
+  margin: "30px auto",
+  backgroundColor:"#44014C"，//驼峰法
+  minHeight: "200px",
+  boxSizing: "border-box"
 };
 
 class Test extends Component {
-constructor(props, context) {
-super(props);
-}
+  constructor(props, context) {
+    super(props);
+  }
 
-render( ) {
-return (
-<div>
-<div style={div1}>123</div>
-<div style={{backgroundColor:"red"}}>
-</div>
-);
-}
+  render( ) {
+    return (
+      <div>
+      <div style={div1}>123</div>
+      <div style={{backgroundColor:"red"}}>
+      </div>
+    );
+  }
 }
 
 export default Test;
@@ -1081,13 +1081,13 @@ export default Test;
 
 ```css
 .title {
-color: red;
-font-size: 20px;
+  color: red;
+  font-size: 20px;
 }
 
 .desc {
-color: green;
-text-decoration: underline;
+  color: green;
+  text-decoration: underline;
 }
 ```
 
@@ -1113,15 +1113,15 @@ import Home from './Home';
 import './App.css';
 
 、 export default class App extends PureComponent {
-render(){
-return (
-<div className="app">
-<h2 className="title">我是App的标题</h2>
-<p className="desc">我是App中的一段文字描述</p >
-<Home/>
-</div>
-)
-}
+  render(){
+    return (
+      <div className="app">
+      <h2 className="title">我是App的标题</h2>
+      <p className="desc">我是App中的一段文字描述</p >
+      <Home/>
+      </div>
+    )
+  }
 }
 ```
 
@@ -1207,21 +1207,21 @@ import React, { Component } from "react";
 import { SelfLink, SelfButton } from "./style";
 
 class Test extends Component {
-constructor(props, context) {
-super(props);
-}
+  constructor(props, context) {
+    super(props);
+  }
 
-render() {
-return (
-<div>
-<SelfLink title="People's Republic of China">app.js</SelfLink>
-<SelfButton color="palevioletred" style={{ color: "pink" }} src={fi
-st}>
-SelfButton
-</SelfButton>
-</div>
-);
-}
+  render() {
+    return (
+      <div>
+      <SelfLink title="People's Republic of China">app.js</SelfLink>
+      <SelfButton color="palevioletred" style={{ color: "pink" }} src={fi
+        st}>
+      SelfButton
+      </SelfButton>
+      </div>
+    );
+  }
 }
 
 export default Test;
@@ -1339,12 +1339,12 @@ export default Test;
 
 ```js
 getSnapshotBeforeUpdate(prevProps, prevState) {
-console.log('#enter getSnapshotBeforeUpdate');
-return 'foo';
+  console.log('#enter getSnapshotBeforeUpdate');
+  return 'foo';
 }
 
 componentDidUpdate(prevProps, prevState, snapshot) {
-console.log('#enter componentDidUpdate snapshot = ', snapshot);
+  console.log('#enter componentDidUpdate snapshot = ', snapshot);
 }
 ```
 
@@ -1418,11 +1418,11 @@ console.log('#enter componentDidUpdate snapshot = ', snapshot);
 
 ```js
 function EmailInput(props) {
-return (
-<label>
-Email: <input value={props.email} />
-</label>
-);
+  return (
+    <label>
+    Email: <input value={props.email} />
+    </label>
+  );
 }
 
 const element = <EmailInput email="123124132@163.com" />;
@@ -1436,28 +1436,28 @@ const element = <EmailInput email="123124132@163.com" />;
 
 ```js
 class Parents extends Component {
-constructor() {
-super();
-this.state = {
-price: 0
-};
-}
+  constructor() {
+    super();
+    this.state = {
+      price: 0
+    };
+  }
 
-getItemPrice(e) {
-this.setState({
-price: e
-});
-}
+  getItemPrice(e) {
+    this.setState({
+        price: e
+      });
+  }
 
-render() {
-return (
-<div>
-<div>price: {this.state.price}</div>
-{/*向子组件中传入一个函数 */}
-<Child getPrice={this.getItemPrice.bind(this)} />
-</div>
-);
-}
+  render() {
+    return (
+      <div>
+      <div>price: {this.state.price}</div>
+      {/*向子组件中传入一个函数 */}
+      <Child getPrice={this.getItemPrice.bind(this)} />
+      </div>
+    );
+  }
 }
 ```
 
@@ -1486,25 +1486,25 @@ return (
 
 ```js
 class Parent extends React.Component {
-constructor(props) {
-super(props)
-this.state = {count: 0}
-}
-setCount = ( ) => {
-this.setState({count: this.state.count + 1})
-}
-render() {
-return(
-<div>
-<SiblingA
-count={this.state.count}
-1>
-<SiblingB
-onClick={this.setCount}
-/>
-</div>
-);
-}
+  constructor(props) {
+    super(props)
+    this.state = {count: 0}
+  }
+  setCount = ( ) => {
+    this.setState({count: this.state.count + 1})
+  }
+  render() {
+    return(
+      <div>
+      <SiblingA
+      count={this.state.count}
+      1>
+      <SiblingB
+      onClick={this.setCount}
+      />
+      </div>
+    );
+  }
 }
 ```
 
@@ -1531,11 +1531,11 @@ Provider 组件通过value 属性用于给后代组件传递数据：
 
 ```js
 class MyClass extends React.Component {
-static contextType = PriceContext;
-render() {
-let price = this.context;
-/* 基于这个值进行渲染工作 */
-}
+  static contextType = PriceContext;
+  render() {
+    let price = this.context;
+    /* 基于这个值进行渲染工作 */
+  }
 }
 ```
 
@@ -1545,7 +1545,7 @@ Consumer组件：
 <PriceContext.Consumer>
 {/*这里是一个函数*/}
 {
-price => <div>price: {price}</div>
+  price => <div>price: {price}</div>
 }
 </PriceContext.Consumer>
 ```
@@ -1586,12 +1586,12 @@ const EnhancedComponent = highOrderComponent(WrappedComponent);
 import React, { Component } from 'react';
 
 export default (WrappedComponent) => {
-return class EnhancedComponent extends Component {
-// do something
-render() {
-return <WrappedComponent />;
-}
-}
+  return class EnhancedComponent extends Component {
+    // do something
+    render() {
+      return <WrappedComponent />;
+    }
+  }
 }
 ```
 
@@ -1625,25 +1625,25 @@ return <WrappedComponent />;
 
 ```js
 function withLogging(WrappedComponent) {
-class Enhance extends WrappedComponent {
-componentWillReceiveProps() {
-console.log('Current props', this.props);
-console.log('Next props', nextProps);
-}
-render() {
-const {forwardedRef, ...rest} = this.props;
-//把 forwardedRef 赋值给 ref
-return <WrappedComponent {...rest} ref={forwardedRef} />;
-}
-};
+  class Enhance extends WrappedComponent {
+    componentWillReceiveProps() {
+      console.log('Current props', this.props);
+      console.log('Next props', nextProps);
+    }
+    render() {
+      const {forwardedRef, ...rest} = this.props;
+      //把 forwardedRef 赋值给 ref
+      return <WrappedComponent {...rest} ref={forwardedRef} />;
+    }
+  };
 
-// React.forwardRef 方法会传入 props 和 ref 两个参数给其回调函数
-// 所以这边的 ref 是由 React.forwardRef 提供的
-function forwardRef(props, ref) {
-return <Enhance {...props} forwardRef={ref} />
-}
+  // React.forwardRef 方法会传入 props 和 ref 两个参数给其回调函数
+  // 所以这边的 ref 是由 React.forwardRef 提供的
+  function forwardRef(props, ref) {
+    return <Enhance {...props} forwardRef={ref} />
+  }
 
-return React.forwardRef(forwardRef);
+  return React.forwardRef(forwardRef);
 }
 const EnhancedComponent = withLogging(SomeComponent);
 ```
@@ -1657,14 +1657,14 @@ import React, { Component } from 'react'
 
 class MyComponent extends Component {
 
-componentWillMount() {
-let data = localStorage.getItem('data');
-this.setState({data});
-}
+  componentWillMount() {
+    let data = localStorage.getItem('data');
+    this.setState({data});
+  }
 
-render() {
-return <div>{this.state.data}</div>
-}
+  render() {
+    return <div>{this.state.data}</div>
+  }
 }
 ```
 
@@ -1676,24 +1676,24 @@ return <div>{this.state.data}</div>
 import React, { Component } from 'react'
 
 function withPersistentData(WrappedComponent) {
-return class extends Component {
-componentWillMount() {
-let data = localStorage.getItem('data');
-this.setState({data});
-}
+  return class extends Component {
+    componentWillMount() {
+      let data = localStorage.getItem('data');
+      this.setState({data});
+    }
 
-render() {
-// 通过{...this.props}把传递给当前组件的属性继续传递给被包装的组件WrappedCo
-mponent
-return <WrappedComponent data={this.state.data} {...this.props} />
-}
-}
+    render() {
+      // 通过{...this.props}把传递给当前组件的属性继续传递给被包装的组件WrappedCo
+      mponent
+      return <WrappedComponent data={this.state.data} {...this.props} />
+    }
+  }
 }
 
 class MyComponent2 extends Component {
-render() {
-return <div>{this.props.data}</div>
-}
+  render() {
+    return <div>{this.props.data}</div>
+  }
 }
 
 const MyComponentWithPersistentData = withPersistentData(MyComponent2)
@@ -1703,31 +1703,31 @@ const MyComponentWithPersistentData = withPersistentData(MyComponent2)
 
 ```js
 class Home extends React.Component {
-render() {
-return (<h1>Hello World.</h1>);
-}
+  render() {
+    return (<h1>Hello World.</h1>);
+  }
 }
 function withTiming(WrappedComponent) {
-return class extends WrappedComponent {
-constructor(props) {
-super(props);
-this.start = 0;
-this.end = 0;
-}
-componentWillMount() {
-super.componentWillMount && super.componentWillMount();
-this.start = Date.now();
-}
-componentDidMount() {
-super.componentDidMount && super.componentDidMount();
-this.end = Date.now();
-console.log(`${WrappedComponent.name}组件渲染时间为 ${this.end
-- this.start} ms`);
-}
-render() {
-return super.render();
-}
-};
+  return class extends WrappedComponent {
+    constructor(props) {
+      super(props);
+      this.start = 0;
+      this.end = 0;
+    }
+    componentWillMount() {
+      super.componentWillMount && super.componentWillMount();
+      this.start = Date.now();
+    }
+    componentDidMount() {
+      super.componentDidMount && super.componentDidMount();
+      this.end = Date.now();
+      console.log(`${WrappedComponent.name}组件渲染时间为 ${this.end
+        - this.start} ms`);
+    }
+    render() {
+      return super.render();
+    }
+  };
 }
 
 export default withTiming(Home);
@@ -1839,35 +1839,35 @@ SwitchTransition组件里面要有 CSSTransition，不能直接包裹你想要�
 import { SwitchTransition, CSSTransition } from "react-transition-group";
 
 export default class SwitchAnimation extends PureComponent {
-constructor(props) {
-super(props);
+  constructor(props) {
+    super(props);
 
-this.state = {
-isOn: true
-}
-}
+    this.state = {
+      isOn: true
+    }
+  }
 
-render() {
-const { isOn } = this.state;
+  render() {
+    const { isOn } = this.state;
 
-return (
-<SwitchTransition mode="out-in">
-<CSSTransition classNames="btn"
-timeout={500}
-key={isOn ? "on" : "off"}>
-{
-<button onClick={this.btnClick.bind(this)}>
-{isOn ? "on": "off"}
-</button>
-}
-</CSSTransition>
-</SwitchTransition>
-)
-}
+    return (
+      <SwitchTransition mode="out-in">
+      <CSSTransition classNames="btn"
+      timeout={500}
+      key={isOn ? "on" : "off"}>
+      {
+        <button onClick={this.btnClick.bind(this)}>
+        {isOn ? "on": "off"}
+        </button>
+      }
+      </CSSTransition>
+      </SwitchTransition>
+    )
+  }
 
-btnClick() {
-this.setState({ isOn: !this.state.isOn })
-}
+  btnClick() {
+    this.setState({ isOn: !this.state.isOn })
+  }
 }
 ```
 
@@ -1875,25 +1875,25 @@ csS 文件对应如下：
 
 ```css
 .btn-enter {
-transform: translate(100%, 0);
-opacity: 0;
+  transform: translate(100%, 0);
+  opacity: 0;
 }
 
 .btn-enter-active {
-transform: translate(0, 0);
-opacity: 1;
-transition: all 500ms;
+  transform: translate(0, 0);
+  opacity: 1;
+  transition: all 500ms;
 }
 
 .btn-exit {
-transform: translate(0, 0);
-opacity: 1;
+  transform: translate(0, 0);
+  opacity: 1;
 }
 
 .btn-exit-active {
-transform: translate(-100%, 0);
-opacity: 0;
-transition: all 500ms;
+  transform: translate(-100%, 0);
+  opacity: 0;
+  transition: all 500ms;
 }
 ```
 
@@ -2006,29 +2006,29 @@ transition: all 500ms;
 
 ```js
 class ErrorBoundary extends React.Component {
-constructor(props) {
-super(props);
-this.state = { hasError: false };
-}
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
 
-static getDerivedStateFromError(error) {
-//更新state 使下一次渲染能够显示降级后的 UI
-return { hasError: true };
-}
+  static getDerivedStateFromError(error) {
+    //更新state 使下一次渲染能够显示降级后的 UI
+    return { hasError: true };
+  }
 
-componentDidCatch(error, errorInfo) {
-//你同样可以将错误日志上报给服务器
-logErrorToMyService(error, errorInfo);
-}
+  componentDidCatch(error, errorInfo) {
+    //你同样可以将错误日志上报给服务器
+    logErrorToMyService(error, errorInfo);
+  }
 
-render() {
-if (this.state.hasError) {
-// 你可以自定义降级后的 UI 并渲染
-return <h1>Something went wrong.</h1>;
-}
+  render() {
+    if (this.state.hasError) {
+      // 你可以自定义降级后的 UI 并渲染
+      return <h1>Something went wrong.</h1>;
+    }
 
-return this.props.children;
-}
+    return this.props.children;
+  }
 }
 ```
 
@@ -2130,13 +2130,13 @@ React 中的 Refs 提供了一种方式，允许我们访问 DOM 节点或在 re
 
 ```js
 class MyComponent extends React.Component {
-constructor(props) {
-super(props);
-this.myRef = React.createRef();
-}
-render() {
-return <div ref="myref" />;
-}
+  constructor(props) {
+    super(props);
+    this.myRef = React.createRef();
+  }
+  render() {
+    return <div ref="myref" />;
+  }
 }
 ```
 
@@ -2152,13 +2152,13 @@ refs 通过React.createRef()创建，然后将ref 属性添加到 React 元素�
 
 ```js
 class MyComponent extends React.Component {
-constructor(props) {
-super(props);
-this.myRef = React.createRef();
-}
-render() {
-return <div ref={this.myRef} />;
-}
+  constructor(props) {
+    super(props);
+    this.myRef = React.createRef();
+  }
+  render() {
+    return <div ref={this.myRef} />;
+  }
 }
 当 ref 被传递给render 中的元素时，对该节点的引用可以在 ref 的 current 属性中访问
 const node = this.myRef.current;
@@ -2170,13 +2170,13 @@ const node = this.myRef.current;
 
 ```js
 class MyComponent extends React.Component {
-constructor(props) {
-super(props);
-this.myRef = React.createRef();
-}
-render( ) {
-return <div ref={element => this.myref = element} />;
-}
+  constructor(props) {
+    super(props);
+    this.myRef = React.createRef();
+  }
+  render( ) {
+    return <div ref={element => this.myref = element} />;
+  }
 }
 ```
 
@@ -2236,28 +2236,28 @@ return (
 import React, { Component } from 'react'
 
 export default class App extends Component {
-constructor(props) {
-super(props);
+  constructor(props) {
+    super(props);
 
-this.state = {
-message: "Hello World"
-}
-}
+    this.state = {
+      message: "Hello World"
+    }
+  }
 
-render() {
-return (
-<div>
-<h2>{this.state.message}</h2>
-<button onClick={e => this.changeText()}>面试官系列</button>
-</div>
-)
-}
+  render() {
+    return (
+      <div>
+      <h2>{this.state.message}</h2>
+      <button onClick={e => this.changeText()}>面试官系列</button>
+      </div>
+    )
+  }
 
-changeText() {
-this.setState({
-message："JS每日一题"
-})
-}
+  changeText() {
+    this.setState({
+        message："JS每日一题"
+      })
+  }
 }
 ```
 
@@ -2267,7 +2267,7 @@ message："JS每日一题"
 
 ```js
 changeText() {
-this.state.message = "你好啊,李银河";
+  this.state.message = "你好啊,李银河";
 }
 ```
 
@@ -2281,14 +2281,14 @@ this.state.message = "你好啊,李银河";
 
 ```js
 Component.prototype.setState = function(partialState, callback) {
-invariant(
-typeof partialState === 'object'||
-typeof partialState === 'function'||
-partialState == null,
-'setState(...): takes an object of state variables to update or a '+
-'function which returns an object of state variables.',
-);
-this.updater.enqueueSetState(this, partialState, callback,'setState');
+  invariant(
+    typeof partialState === 'object'||
+    typeof partialState === 'function'||
+    partialState == null,
+    'setState(...): takes an object of state variables to update or a '+
+    'function which returns an object of state variables.',
+  );
+  this.updater.enqueueSetState(this, partialState, callback,'setState');
 };
 ```
 
@@ -2308,10 +2308,10 @@ this.updater.enqueueSetState(this, partialState, callback,'setState');
 
 ```js
 changeText() {
-this.setState({
-message:"你好啊"
-})
-console.log(this.state.message); // Hello World
+  this.setState({
+      message:"你好啊"
+    })
+  console.log(this.state.message); // Hello World
 }
 ```
 
@@ -2321,11 +2321,11 @@ console.log(this.state.message); // Hello World
 
 ```js
 changeText() {
-this.setState({
-message："你好啊"
-}, ( ) => {
-console.log(this.state.message); // 你好啊
-});
+  this.setState({
+      message："你好啊"
+    }, ( ) => {
+      console.log(this.state.message); // 你好啊
+    });
 }
 ```
 
@@ -2335,12 +2335,12 @@ console.log(this.state.message); // 你好啊
 
 ```js
 changeText() {
-setTimeout(() => {
-this.setState({
-message:"你好啊
-});
-console.log(this.state.message); // 你好啊
-}, 0);
+  setTimeout(() => {
+      this.setState({
+          message:"你好啊
+        });
+      console.log(this.state.message); // 你好啊
+    }, 0);
 }
 ```
 
@@ -2350,13 +2350,13 @@ console.log(this.state.message); // 你好啊
 
 ```js
 componentDidMount() {
-const btnEl = document.getElementById("btn");
-btnEl.addEventListener('click', () => {
-this.setState({
-message："你好啊，李银河"
-});
-console.log(this.state.message); // 你好啊,李银河
-})
+  const btnEl = document.getElementById("btn");
+  btnEl.addEventListener('click', () => {
+      this.setState({
+          message："你好啊，李银河"
+        });
+      console.log(this.state.message); // 你好啊,李银河
+    })
 }
 ```
 
@@ -2370,20 +2370,20 @@ console.log(this.state.message); // 你好啊,李银河
 
 ```js
 handleClick = () => {
-this.setState({
-count: this.state.count + 1,
-})
-console.log(this.state.count) // 1
+  this.setState({
+      count: this.state.count + 1,
+    })
+  console.log(this.state.count) // 1
 
-this.setState({
-count: this.state.count + 1,
-})
-console.log(this.state.count) // 1
+  this.setState({
+      count: this.state.count + 1,
+    })
+  console.log(this.state.count) // 1
 
-this.setState({
-count: this.state.count + 1,
-})
-console.log(this.state.count) // 1
+  this.setState({
+      count: this.state.count + 1,
+    })
+  console.log(this.state.count) // 1
 }
 ```
 
@@ -2406,12 +2406,12 @@ previousState,
 
 ```js
 onClick = ( ) => {
-this.setState((prevState, props) => {
-return {count: prevState.count + 1};
-});
-this.setState((prevState, props) => {
-return {count: prevState.count + 1};
-});
+  this.setState((prevState, props) => {
+      return {count: prevState.count + 1};
+    });
+  this.setState((prevState, props) => {
+      return {count: prevState.count + 1};
+    });
 }
 ```
 
@@ -2427,9 +2427,9 @@ return {count: prevState.count + 1};
 
 ```js
 class Foo extends React.Component {
-render() {
-return <h1> Foo </h1>;
-}
+  render() {
+    return <h1> Foo </h1>;
+  }
 }
 ```
 
@@ -2437,7 +2437,7 @@ return <h1> Foo </h1>;
 
 ```js
 function Foo() {
-return <h1> Foo </h1>;
+  return <h1> Foo </h1>;
 }
 ```
 
@@ -2447,11 +2447,11 @@ babel编译后：
 
 ```jsx
 return (
-<div className='cn'>
-<Header> hello </Header>
-<div> start </div>
-Right Reserve
-</div>
+  <div className='cn'>
+  <Header> hello </Header>
+  <div> start </div>
+  Right Reserve
+  </div>
 )
 ```
 
@@ -2498,27 +2498,27 @@ render的执行时机主要分成了两部分：
 
 ```js
 class Foo extends React.Component {
-state = { count: 0 };
+  state = { count: 0 };
 
-increment = () => {
-const { count } = this.state;
+  increment = () => {
+    const { count } = this.state;
 
-const newCount = count < 10 ? count + 1 : count;
+    const newCount = count < 10 ? count + 1 : count;
 
-this.setState({ count: newCount });
-};
+    this.setState({ count: newCount });
+  };
 
-render() {
-const { count } = this.state;
-console.log("Foo render");
+  render() {
+    const { count } = this.state;
+    console.log("Foo render");
 
-return (
-<div>
-<h1> {count} </h1>
-<button onClick={this.increment}>Increment</button>
-</div>
-);
-}
+    return (
+      <div>
+      <h1> {count} </h1>
+      <button onClick={this.increment}>Increment</button>
+      </div>
+    );
+  }
 }
 ```
 
@@ -2528,21 +2528,21 @@ return (
 
 ```js
 function Foo() {
-const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0);
 
-function increment() {
-const newCount = count < 10 ? count + 1 : count;
-setCount(newCount);
-}
+  function increment() {
+    const newCount = count < 10 ? count + 1 : count;
+    setCount(newCount);
+  }
 
-console.log("Foo render");
+  console.log("Foo render");
 
-return (
-<div>
-<h1> {count} </h1>
-<button onClick={increment}>Increment</button>
-</div>
-);
+  return (
+    <div>
+    <h1> {count} </h1>
+    <button onClick={increment}>Increment</button>
+    </div>
+  );
 }
 ```
 
@@ -2582,26 +2582,26 @@ return (
 
 ```js
 function App(){
-const [name,setName] = useState('App')
+  const [name,setName] = useState('App')
 
-return (
-<div className="App">
-<Foo />
-<button onClick={() => setName("aaa")}>
-{ name }
-</button>
-</div>
-)
+  return (
+    <div className="App">
+    <Foo />
+    <button onClick={() => setName("aaa")}>
+    { name }
+    </button>
+    </div>
+  )
 }
 
 function Foo() {
-console.log("Foo render");
+  console.log("Foo render");
 
-return (
-<div>
-<h1> Foo </h1>
-</div>
-);
+  return (
+    <div>
+    <h1> Foo </h1>
+    </div>
+  );
 }
 ```
 
@@ -2627,7 +2627,7 @@ Real DOM，真实 DOM，意思为文档对象模型，是一个结构化文本�
 
 ```html
 <div id="root">
-<h1>Hello World</h1>
+  <h1>Hello World</h1>
 </div>
 Virtual Dom，本质上是以JavaScript 对象形式存在的对 DOM的描述
 创建虚拟DOM目的就是为了更好将虚拟的节点渲染到页面视图中，虚拟DOM对象的节点与真实 D
@@ -2651,9 +2651,9 @@ JSX 实际是一种语法糖，在使用过程中会被 babel 进行编译转化
 
 ```js
 const vDom = React.createElement(
-'h1',
-{ className: 'hClass', id: 'hId' },
-'hello world'
+  'h1',
+  { className: 'hClass', id: 'hId' },
+  'hello world'
 )
 ```
 
@@ -2740,13 +2740,13 @@ react 通过将组件编写的 JSX映射到屏幕，以及组件中的状态发�
 
 ```js
 React.createElement(
-"div",
-null,
-React.createElement("img", {
-src: "avatar.png",
-className: "profile"
-}),
-React.createElement(Hello, null)
+  "div",
+  null,
+  React.createElement("img", {
+      src: "avatar.png",
+      className: "profile"
+    }),
+  React.createElement(Hello, null)
 );
 ```
 
@@ -2817,33 +2817,33 @@ JavaScrip
 
 ```js
 function createElement(type, config, ...children) {
-if (config) {
-delete config.__self;
-delete config.__source;
-}
-//！源码中做了详细处理，比如过滤掉key、ref等
-const props = {
-...config,
-children: children.map(child =>
-typeof child === "object" ? child : createTextNode(child)
-)
-};
-return {
-type,
-props
-};
+  if (config) {
+    delete config.__self;
+    delete config.__source;
+  }
+  //！源码中做了详细处理，比如过滤掉key、ref等
+  const props = {
+    ...config,
+    children: children.map(child =>
+      typeof child === "object" ? child : createTextNode(child)
+    )
+  };
+  return {
+    type,
+    props
+  };
 }
 function createTextNode(text) {
-return {
-type: TEXT,
-props: {
-children: [],
-nodeValue: text
-}
-};
+  return {
+    type: TEXT,
+    props: {
+      children: [],
+      nodeValue: text
+    }
+  };
 }
 export default {
-createElement
+  createElement
 };
 ```
 
@@ -3117,24 +3117,24 @@ this.sibling = null
 
 ```js
 const data = [
-{ id: 0, name: 'abc' },
-{ id: 1, name: 'def' },
-{ id: 2, name: 'ghi' },
-{ id: 3, name: 'jkl' }
+  { id: 0, name: 'abc' },
+  { id: 1, name: 'def' },
+  { id: 2, name: 'ghi' },
+  { id: 3, name: 'jkl' }
 ];
 
 const ListItem = (props) => {
-return <li>{props.name}</li>;
+  return <li>{props.name}</li>;
 };
 
 const List = () => {
-return (
-<ul>
-{data.map((item) => (
-<ListItem name={item.name}></ListItem>
-))}
-</ul>
-);
+  return (
+    <ul>
+    {data.map((item) => (
+          <ListItem name={item.name}></ListItem>
+        ))}
+    </ul>
+  );
 };
 ```
 
@@ -3198,10 +3198,10 @@ return <li>{item}</li>
 
 ```js
 insertMovie() {
-const newMovies = [000 ,...this.state.numbers];
-this.setState({
-movies: newMovies
-})
+  const newMovies = [000 ,...this.state.numbers];
+  this.setState({
+      movies: newMovies
+    })
 }
 ```
 
@@ -3399,16 +3399,16 @@ Hook 是 React 16.8 的新增特性。它可以让你在不编写 class 的情�
 ```js
 import React, { useState } from 'react';
 function Example() {
-// 声明一个叫 "count"的 state 变量
-const [count, setCount] = useState(0);
-return (
-<div>
-<p>You clicked {count} times</p >
-<button onClick={() => setCount(count + 1)}>
-Click me
-</button>
-</div>
-);
+  // 声明一个叫 "count"的 state 变量
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+    <p>You clicked {count} times</p >
+    <button onClick={() => setCount(count + 1)}>
+    Click me
+    </button>
+    </div>
+  );
 }
 ```
 
@@ -3457,31 +3457,31 @@ useEffect 可以让我们在函数组件中进行一些带有副作用的操作
 
 ```js
 class Example extends React.Component {
-constructor(props) {
-super(props);
-this.state = {
-count: 0
-};
-}
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    };
+  }
 
-componentDidMount() {
-document.title = `You clicked ${this.state.count} times`;
-}
-componentDidUpdate() {
-document.title = `You clicked ${this.state.count} times`;
-}
+  componentDidMount() {
+    document.title = `You clicked ${this.state.count} times`;
+  }
+  componentDidUpdate() {
+    document.title = `You clicked ${this.state.count} times`;
+  }
 
-render() {
-return (
-<div>
-<p>You clicked {this.state.count} times</p >
-<button onClick={() => this.setState({ count: this.state.count + 1
-})}>
-Click me
-</button>
-</div>
-);
-}
+  render() {
+    return (
+      <div>
+      <p>You clicked {this.state.count} times</p >
+      <button onClick={() => this.setState({ count: this.state.count + 1
+          })}>
+      Click me
+      </button>
+      </div>
+    );
+  }
 }
 ```
 
@@ -3492,17 +3492,17 @@ Click me
 ```js
 import React, { useState, useEffect } from 'react';
 function Example() {
-const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0);
 
-useEffect(() => { document.title = `You clicked ${count} times`; });
-return (
-<div>
-<p>You clicked {count} times</p >
-<button onClick={() => setCount(count + 1)}>
-Click me
-</button>
-</div>
-);
+  useEffect(() => { document.title = `You clicked ${count} times`; });
+  return (
+    <div>
+    <p>You clicked {count} times</p >
+    <button onClick={() => setCount(count + 1)}>
+    Click me
+    </button>
+    </div>
+  );
 }
 ```
 
@@ -3512,8 +3512,8 @@ useEffect 第一个参数接受一个回调函数，默认情况下， useEffect
 
 ```js
 useEffect(() => {
-document.title = \`You clicked \${count} times\`;
-}， [count]); // 仅在 count 更改时更新
+    document.title = \`You clicked \${count} times\`;
+  }， [count]); // 仅在 count 更改时更新
 ```
 
 上述传入第二个参数后，如果count的值是 5，而且我们的组件重渲染的时候 count 还是等于 5，React将对前一次渲染的 [5]和后一次渲染的 [5]进行比较，如果是相等则跳过effects执行
@@ -3522,16 +3522,16 @@ document.title = \`You clicked \${count} times\`;
 
 ```js
 useEffect(( ) => {
-function handleStatusChange(status) {
-setIsOnline(status.isOnline);
-}
+    function handleStatusChange(status) {
+      setIsOnline(status.isOnline);
+    }
 
-ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);
-return ( ) => {
-ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusC
-hange);
-};
-});
+    ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);
+    return ( ) => {
+      ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusC
+        hange);
+    };
+  });
 ```
 
 所以， useEffect相当于componentDidMount，componentDidUpdate 和 componentWillUnmount 这三个生命周期函数的组合
@@ -3609,40 +3609,40 @@ const hasOwnProperty = Object.prototype.hasOwnProperty;
 l_Objects/Object/is
 */
 function is(x: mixed, y: mixed): boolean {
-if (x === y) {
-return x !== 0 || y !== 0 || 1 / x === 1 / y;
-} else {
-return x !== x && y !== y;
-}
+  if (x === y) {
+    return x !== 0 || y !== 0 || 1 / x === 1 / y;
+  } else {
+    return x !== x && y !== y;
+  }
 }
 
 function shallowEqual(objA: mixed, objB: mixed): boolean {
-// 首先对基本类型进行比较
-if (is(objA, objB)) {
-return true;
-}
+  // 首先对基本类型进行比较
+  if (is(objA, objB)) {
+    return true;
+  }
 
-if (typeof objA !== 'object' || objA === null ||
-typeof objB !== 'object' || objB === null) {
-return false;
-}
+  if (typeof objA !== 'object' || objA === null ||
+    typeof objB !== 'object' || objB === null) {
+    return false;
+  }
 
-const keysA = Object.keys(objA);
-const keysB = Object.keys(objB);
+  const keysA = Object.keys(objA);
+  const keysB = Object.keys(objB);
 
-// 长度不相等直接返回false
-if (keysA.length !== keysB.length) {
-return false;
-}
+  // 长度不相等直接返回false
+  if (keysA.length !== keysB.length) {
+    return false;
+  }
 
-key相等的情况下，再去循环比较
-for (let i = 0; i < keysA.length; i++) {
-if（
-!hasOwnProperty.call(objB,keysA[i]) ll
-!is(objA[keysA[i]], objB[keysA[i]])
-) {
-return false;
-}
+  key相等的情况下，再去循环比较
+  for (let i = 0; i < keysA.length; i++) {
+    if（
+    !hasOwnProperty.call(objB,keysA[i]) ll
+    !is(objA[keysA[i]], objB[keysA[i]])
+  ) {
+    return false;
+  }
 }
 
 return true;
@@ -3662,7 +3662,7 @@ React.memo用来缓存组件的渲染，避免不必要的更新，其实也是�
 import { memo } from 'react';
 
 function Button(props) {
-// Component code
+  // Component code
 }
 
 export default memo(Button);
@@ -3672,8 +3672,8 @@ export default memo(Button);
 
 ```js
 function arePropsEqual(prevProps, nextProps) {
-// your code
-return prevProps === nextProps;
+  // your code
+  return prevProps === nextProps;
 }
 
 export default memo(Button, arePropsEqual);
@@ -3727,15 +3727,15 @@ React 凭借virtual DOM和 diff 算法拥有高效的性能，但是某些情况
 import React from "react";
 
 export default class InlineFunctionComponent extends React.Component {
-render( ) {
-return (
-<div>
-<h1>Welcome Guest</h1>
-<input type="button" onClick={(e) => { this.setState({inputValue:
-e.target.value}) }} value="Click For Inline Function" />
-</div>
-)
-}
+  render( ) {
+    return (
+      <div>
+      <h1>Welcome Guest</h1>
+      <input type="button" onClick={(e) => { this.setState({inputValue:
+              e.target.value}) }} value="Click For Inline Function" />
+      </div>
+    )
+  }
 }
 ```
 
@@ -3746,21 +3746,21 @@ import React from "react";
 
 export default class InlineFunctionComponent extends React.Component {
 
-setNewStateData = (event) => {
-this.setState({
-inputValue: e.target.value
-})
-}
+  setNewStateData = (event) => {
+    this.setState({
+        inputValue: e.target.value
+      })
+  }
 
-render() {
-return (
-<div>
-<h1>Welcome Guest</h1>
-<input type="button" onClick={this.setNewStateData} value="Click F
-or Inline Function" />
-</div>
-)
-}
+  render() {
+    return (
+      <div>
+      <h1>Welcome Guest</h1>
+      <input type="button" onClick={this.setNewStateData} value="Click F
+      or Inline Function" />
+      </div>
+    )
+  }
 }
 ```
 
@@ -3772,14 +3772,14 @@ or Inline Function" />
 
 ```js
 export default class NestedRoutingComponent extends React.Component {
-render() {
-return (
-<>
-<h1>This is the Header Component</h1>
-<h2>Welcome To Demo Page</h2>
-<1>
-)
-}
+  render() {
+    return (
+      <>
+      <h1>This is the Header Component</h1>
+      <h2>Welcome To Demo Page</h2>
+      <1>
+    )
+  }
 }
 ```
 
@@ -3807,12 +3807,12 @@ Immutable通过is方法则可以完成对比，而无需像一样通过深度比
 
 ```js
 const johanComponent = React.lazy(() => import(/* webpackChunkName: "johanC
-omponent" */'./myAwesome.component'));
+    omponent" */'./myAwesome.component'));
 
 export const johanAsyncComponent = props => (
-<React.Suspense fallback={<Spinner />}>
-<johanComponent {...props} />
-</React.Suspense>
+  <React.Suspense fallback={<Spinner />}>
+  <johanComponent {...props} />
+  </React.Suspense>
 );
 ```
 
@@ -3828,12 +3828,12 @@ export const johanAsyncComponent = props => (
 import { renderToString } from "react-dom/server";
 import MyPage from "./MyPage";
 app.get("/", (req, res) => {
-res.write("<!DOCTYPE html><html><head><title>My Page</title></head><body>");
-res.write("<div id='content'>");
-res.write(renderToString(<MyPage/>));
-res.write("</div></body></html>");
-res.end();
-});
+    res.write("<!DOCTYPE html><html><head><title>My Page</title></head><body>");
+    res.write("<div id='content'>");
+    res.write(renderToString(<MyPage/>));
+    res.write("</div></body></html>");
+    res.end();
+  });
 ```
 
 客户端使用render方法来生成HTML
@@ -3991,11 +3991,11 @@ activeClassName:活跃时添加的class
 
 ```js
 const Contact = ({ history }) => (
-<Fragment>
-<h1>Contact</h1>
-<button onClick={() => history·push("/")}>Go to home</button>
-<FakeText />
-</Fragment>
+  <Fragment>
+  <h1>Contact</h1>
+  <button onClick={() => history·push("/")}>Go to home</button>
+  <FakeText />
+  </Fragment>
 )
 ```
 
@@ -4072,15 +4072,15 @@ return (
 
 ```js
 const About = () => {
-const { name } = useParams();
-return (
-// props.match.params.name
-<Fragment>
-{name !== "John Doe" ? <Redirect to="/" /> : null}
-<h1>About {name}</h1>
-<Route component={Contact} />
-</Fragment>
-);
+  const { name } = useParams();
+  return (
+    // props.match.params.name
+    <Fragment>
+    {name !== "John Doe" ? <Redirect to="/" /> : null}
+    <h1>About {name}</h1>
+    <Route component={Contact} />
+    </Fragment>
+  );
 };
 ```
 
@@ -4092,14 +4092,14 @@ useLocation会返回当前 URL的 location对象
 import { useLocation } from "react-router-dom";
 
 const Contact = ( ) => {
-const { pathname } = useLocation();
+  const { pathname } = useLocation();
 
-return (
-<Fragment>
-<h1>Contact</h1>
-<p>Current URL: {pathname}</p >
-</Fragment>
-);
+  return (
+    <Fragment>
+    <h1>Contact</h1>
+    <p>Current URL: {pathname}</p >
+    </Fragment>
+  );
 };
 ```
 
@@ -4158,11 +4158,11 @@ console.log(props.location.search)
 
 ```js
 <NavLink to={{
-pathname: "/detail2",
-query: {name: "kobe", age: 30},
-state: {height: 1.98, address: "洛杉矶"},
-search:"?apikey=123"
-}}>
+    pathname: "/detail2",
+    query: {name: "kobe", age: 30},
+    state: {height: 1.98, address: "洛杉矶"},
+    search:"?apikey=123"
+  }}>
 详情2
 </NavLink>
 ```
@@ -4205,10 +4205,10 @@ React Router对应的hash模式和history模式对应的组件为：
 
 import React from 'react';
 import {
-BrowserRouter as Router,
-// HashRouter as Router
-Switch,
-Route,
+  BrowserRouter as Router,
+  // HashRouter as Router
+  Switch,
+  Route,
 } from "react-router-dom";
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -4216,14 +4216,14 @@ import Backend from './pages/Backend';
 import Admin from './pages/Admin';
 
 function App() {
-return (
-<Router>
-<Route path="/login"component={Login}/>
-<Route path="/backend" component={Backend}/>
-<Route path="/admin" component={Admin}/>
-<Route path="/" component={Home}/>
-</Router>
-);
+  return (
+    <Router>
+    <Route path="/login"component={Login}/>
+    <Route path="/backend" component={Backend}/>
+    <Route path="/admin" component={Admin}/>
+    <Route path="/" component={Home}/>
+    </Router>
+  );
 }
 
 export default App;
@@ -4298,25 +4298,25 @@ import React, { Component } from 'react';
 import { Consumer } from './context'
 const { pathToRegexp } = require("path-to-regexp");
 class Route extends Component {
-render() {
-return (
-<Consumer>
-{
-state => {
-console.log(state)
-let {path, component: Component} = this.props
-let pathname = state.location.pathname
-let reg = pathToRegexp(path, [], {end: false})
-// 判断当前path是否包含pathname
-if(pathname.match(reg)) {
-return <Component></Component>
-}
-return null
-}
-}
-</Consumer>
-);
-}
+  render() {
+    return (
+      <Consumer>
+      {
+        state => {
+          console.log(state)
+          let {path, component: Component} = this.props
+          let pathname = state.location.pathname
+          let reg = pathToRegexp(path, [], {end: false})
+          // 判断当前path是否包含pathname
+          if(pathname.match(reg)) {
+            return <Component></Component>
+          }
+          return null
+        }
+      }
+      </Consumer>
+    );
+  }
 }
 export default Route;
 ```
@@ -4389,10 +4389,10 @@ connect(mapStateToProps, mapDispatchToProps)(MyComponent)
 
 ```js
 const mapStateToProps = (state) => {
-return {
-// prop ：state.xxx| 意思是将state中的某个数据映射到props中
-foo: state.bar
-}
+  return {
+    // prop ：state.xxx| 意思是将state中的某个数据映射到props中
+    foo: state.bar
+  }
 }
 ```
 
@@ -4400,15 +4400,15 @@ foo: state.bar
 
 ```js
 class Foo extends Component {
-constructor(props){
-super(props);
-}
-render( ){
-return(
-// 这样子渲染的其实就是state.bar的数据了
-<div>this.props.foo</div>
-)
-}
+  constructor(props){
+    super(props);
+  }
+  render( ){
+    return(
+      // 这样子渲染的其实就是state.bar的数据了
+      <div>this.props.foo</div>
+    )
+  }
 }
 Foo = connect()(Foo)
 export default Foo
@@ -4420,27 +4420,27 @@ export default Foo
 
 ```js
 const mapDispatchToProps = (dispatch) => { // 默认传递参数就是dispatch
-return {
-onClick: () => {
-dispatch({
-type:'increatment'
-});
-}
-};
+  return {
+    onClick: () => {
+      dispatch({
+          type:'increatment'
+        });
+    }
+  };
 }
 ```
 
 ```js
 class Foo extends Component {
-constructor(props){
-super(props);
-}
-render( ){
-return(
+  constructor(props){
+    super(props);
+  }
+  render( ){
+    return(
 
-<button onClick = {this.props.onClick}>点击increase</button>
-)
-}
+      <button onClick = {this.props.onClick}>点击increase</button>
+    )
+  }
 }
 Foo = connect()(Foo);
 export default Foo;
@@ -4474,8 +4474,8 @@ redux-thunk：用于异步操作
 
 ```js
 const store = createStore(
-reducer,
-applyMiddleware(thunk, logger)
+  reducer,
+  applyMiddleware(thunk, logger)
 );
 ```
 
@@ -4495,13 +4495,13 @@ getState函数考虑到我们之后的一些操作需要依赖原来的状态，
 
 ```js
 const getHomeMultidataAction = () => {
-return (dispatch) => {
-axios.get("http://xxx.xx.xx.xx/test").then(res => {
-const data = res.data.data;
-dispatch(changeBannersAction(data.banner.list));
-dispatch(changeRecommendsAction(data.recommend.list));
-})
-}
+  return (dispatch) => {
+    axios.get("http://xxx.xx.xx.xx/test").then(res => {
+        const data = res.data.data;
+        dispatch(changeBannersAction(data.banner.list));
+        dispatch(changeRecommendsAction(data.recommend.list));
+      })
+  }
 }
 ```
 
@@ -4516,8 +4516,8 @@ import createLogger from 'redux-logger';
 const logger = createLogger();
 
 const store = createStore(
-reducer,
-applyMiddleware(logger)
+  reducer,
+  applyMiddleware(logger)
 );
 ```
 
@@ -4553,17 +4553,17 @@ return {...store, dispatch}
 
 ```js
 function patchThunk(store) {
-let next = store.dispatch;
+  let next = store.dispatch;
 
-function dispatchAndThunk(action) {
-if (typeof action === "function") {
-action(store.dispatch, store.getState);
-} else {
-next(action);
-}
-}
+  function dispatchAndThunk(action) {
+    if (typeof action === "function") {
+      action(store.dispatch, store.getState);
+    } else {
+      next(action);
+    }
+  }
 
-store.dispatch = dispatchAndThunk;
+  store.dispatch = dispatchAndThunk;
 }
 ```
 
@@ -4573,9 +4573,9 @@ store.dispatch = dispatchAndThunk;
 let next = store.dispatch;
 
 function dispatchAndLog(action) {
-console.log("dispatching:", addAction(10));
-next(addAction(5));
-console.log("新的state:", store.getState());
+  console.log("dispatching:", addAction(10));
+  next(addAction(5));
+  console.log("新的state:", store.getState());
 }
 
 store.dispatch = dispatchAndLog;
@@ -4699,14 +4699,14 @@ this.setState({ data: data });
 
 ```js
 getInitialState() {
-return {
-data: Map({ times: 0 })
-}
+  return {
+    data: Map({ times: 0 })
+  }
 },
 handleAdd() {
-this.setState({ data: this.state.data.update('times', v => v + 1) });
-// 这时的 times 并不会改变
-console.log(this.state.data.get('times'));
+  this.setState({ data: this.state.data.update('times', v => v + 1) });
+  // 这时的 times 并不会改变
+  console.log(this.state.data.get('times'));
 }
 ```
 
@@ -4716,37 +4716,37 @@ console.log(this.state.data.get('times'));
 import * as constants from './constants'
 import {fromJS} from 'immutable'
 const defaultState = fromJS({ //将数据转化成immutable数据
-home:true,
-focused:false,
-mouseIn:false,
-list:[],
-page:1,
-totalPage:1
-})
+    home:true,
+    focused:false,
+    mouseIn:false,
+    list:[],
+    page:1,
+    totalPage:1
+  })
 export default(state=defaultState,action)=>{
-switch(action.type){
-case constants.SEARCH_FOCUS:
-return state.set('focused',true) //更改immutable数据
-case constants.CHANGE _HOME ACTIVE:
-return state.set('home',action.value)
-case constants.SEARCH_BLUR:
-return state.set('focused',false)
-case constants.CHANGE_LIST:
-// return state.set('list',action.data).set('totalPage',actio
-n.totalPage)
-//merge效率更高，执行一次改变多个数据
-return state.merge({
-list:action.data,
-totalPage:action.totalPage
-})
-case constants.MOUSE_ENTER:
-return state.set('mouseIn',true)
-case constants.MOUSE_LEAVE:
-return state.set('mouseIn',false)
-case constants.CHANGE_PAGE:
-return state.set('page',action.page)
-default:
-return state
+  switch(action.type){
+    case constants.SEARCH_FOCUS:
+    return state.set('focused',true) //更改immutable数据
+    case constants.CHANGE _HOME ACTIVE:
+    return state.set('home',action.value)
+    case constants.SEARCH_BLUR:
+    return state.set('focused',false)
+    case constants.CHANGE_LIST:
+    // return state.set('list',action.data).set('totalPage',actio
+    n.totalPage)
+  //merge效率更高，执行一次改变多个数据
+  return state.merge({
+      list:action.data,
+      totalPage:action.totalPage
+    })
+  case constants.MOUSE_ENTER:
+  return state.set('mouseIn',true)
+  case constants.MOUSE_LEAVE:
+  return state.set('mouseIn',false)
+  case constants.CHANGE_PAGE:
+  return state.set('page',action.page)
+  default:
+  return state
 
 }
 ```
@@ -4800,7 +4800,7 @@ import React from 'react'
 
 const Home = ( ) =>{
 
-return <div>home</div>
+  return <div>home</div>
 
 }
 
@@ -4907,29 +4907,29 @@ app.listen(3001, () =>console.log('Example app listening on port 3001!'))
 const path = require('path') //node的path模块
 
 module.exports = {
-mode:'development', //开发模式
-entry:'./src/client/index.js', //入口
-output: { //打包出口
-filename:'index.js', //打包后的文件名
-path:path.resolve(__dirname,'public') //存放到根目录的build文件夹
-},
-module: {
-rules: [{ //打包规则
-test:/\.js?$/, //对所有js文件进行打包
-loader:'babel-loader', //使用babel-loader进行打包
-exclude: /node_modules/, //不打包node_modules中的js文
-件
-options: {
-presets: ['react','stage-0',['env', {
-//loader时额外的打包规则，这里对react,JSX进行转换
-targets: {
-browsers:['last 2versions']//对主流浏览器最近两个
-版本进行兼容
-}
-}]]
-}
-}]
-}
+  mode:'development', //开发模式
+  entry:'./src/client/index.js', //入口
+  output: { //打包出口
+    filename:'index.js', //打包后的文件名
+    path:path.resolve(__dirname,'public') //存放到根目录的build文件夹
+  },
+  module: {
+    rules: [{ //打包规则
+        test:/\.js?$/, //对所有js文件进行打包
+        loader:'babel-loader', //使用babel-loader进行打包
+        exclude: /node_modules/, //不打包node_modules中的js文
+        件
+        options: {
+          presets: ['react','stage-0',['env', {
+                //loader时额外的打包规则，这里对react,JSX进行转换
+                targets: {
+                  browsers:['last 2versions']//对主流浏览器最近两个
+                  版本进行兼容
+                }
+              }]]
+        }
+      }]
+  }
 }
 ```
 
@@ -4959,11 +4959,11 @@ import { BrowserRouter } from'react-router-dom
 import Router from'../Routers'
 
 const App= ( ) => {
-return (
-<BrowserRouter>
-{Router}
-</BrowserRouter>
-)
+  return (
+    <BrowserRouter>
+    {Router}
+    </BrowserRouter>
+  )
 }
 
 ReactDom.hydrate(<App/>, document.getElementById('root'))

@@ -170,19 +170,19 @@ ViewModel 还包含两个主要部分：
 
 ```js
 class Vue {
-constructor(options) {
-this.$options = options;
-this.$data = options.data;
+  constructor(options) {
+    this.$options = options;
+    this.$data = options.data;
 
-//对data选项做响应式处理
-observe(this.$data);
+    //对data选项做响应式处理
+    observe(this.$data);
 
-//代理data到vm上
-proxy(this);
+    //代理data到vm上
+    proxy(this);
 
-//执行编译
-new Compile(options.el, this);
-}
+    //执行编译
+    new Compile(options.el, this);
+  }
 }
 ```
 
@@ -190,22 +190,22 @@ new Compile(options.el, this);
 
 ```js
 function observe(obj) {
-if (typeof obj !== "object" || obj == null) {
-return;
-}
-new Observer(obj);
+  if (typeof obj !== "object" || obj == null) {
+    return;
+  }
+  new Observer(obj);
 }
 
 class Observer {
-constructor(value) {
-this.value = value;
-this.walk(value);
-}
-walk(obj) {
-Object.keys(obj).forEach((key) => {
-defineReactive(obj, key, obj[key]);
-});
-}
+  constructor(value) {
+    this.value = value;
+    this.walk(value);
+  }
+  walk(obj) {
+    Object.keys(obj).forEach((key) => {
+        defineReactive(obj, key, obj[key]);
+      });
+  }
 }
 ```
 
@@ -215,34 +215,34 @@ defineReactive(obj, key, obj[key]);
 
 ```js
 class Compile {
-constructor(el, vm) {
-this.$vm = vm;
-this.$el = document.querySelector(el); //获取dom
-if (this.$el) {
-this.compile(this.$el);
-}
-}
-compile(el) {
-const childNodes = el.childNodes;
-Array.from(childNodes).forEach((node) => { //遍历子元素
-if(this.isElement(node)) {//判断是否为节点
-console.log("编译元素" + node.nodeName);
-} else if (this.isInterpolation(node)) {
-console.log("编译插值文本"+ node.textContent); // 判断是否为插值文本
-{{}}
-}
-if(node.childNodes && node.childNodes.length > 0) { // 判断是否有子
-元素
-this.compile(node);// 对子元素进行递归遍历
-}
-});
-}
-isElement(node) {
-return node.nodeType == 1;
-}
-isInterpolation(node) {
-return node.nodeType == 3 && /\{\{(.*)\}\}/.test(node.textContent);
-}
+  constructor(el, vm) {
+    this.$vm = vm;
+    this.$el = document.querySelector(el); //获取dom
+    if (this.$el) {
+      this.compile(this.$el);
+    }
+  }
+  compile(el) {
+    const childNodes = el.childNodes;
+    Array.from(childNodes).forEach((node) => { //遍历子元素
+        if(this.isElement(node)) {//判断是否为节点
+          console.log("编译元素" + node.nodeName);
+        } else if (this.isInterpolation(node)) {
+          console.log("编译插值文本"+ node.textContent); // 判断是否为插值文本
+          {{}}
+        }
+        if(node.childNodes && node.childNodes.length > 0) { // 判断是否有子
+          元素
+          this.compile(node);// 对子元素进行递归遍历
+        }
+      });
+  }
+  isElement(node) {
+    return node.nodeType == 1;
+  }
+  isInterpolation(node) {
+    return node.nodeType == 3 && /\{\{(.*)\}\}/.test(node.textContent);
+  }
 }
 ```
 
@@ -302,15 +302,15 @@ this.updaterFn.call(this.vm, this.vm[this.key])
 
 ```js
 class Dep {
-constructor() {
-this.deps = []; // 依赖管理
-}
-addDep(dep) {
-this.deps.push(dep);
-}
-notify() {
-this.deps.forEach((dep) => dep.update());
-}
+  constructor() {
+    this.deps = []; // 依赖管理
+  }
+  addDep(dep) {
+    this.deps.push(dep);
+  }
+  notify() {
+    this.deps.forEach((dep) => dep.update());
+  }
 }
 ```
 
@@ -318,11 +318,11 @@ this.deps.forEach((dep) => dep.update());
 
 ```js
 class Watcher {
-constructor(vm, key, updateFn) {
-Dep.target = this;
-this.vm[this.key];
-Dep.target = null;
-}
+  constructor(vm, key, updateFn) {
+    Dep.target = this;
+    this.vm[this.key];
+    Dep.target = null;
+  }
 }
 ```
 
@@ -533,7 +533,7 @@ this.$parent.emit('add')
 
 // Grandson使用
 <div @click="$emit('some-event', 'msg from grandson')">
-{{msg}}
+  {{msg}}
 </div>
 ```
 
@@ -598,18 +598,18 @@ vue实例的时候定义data 属性既可以是一个对象，也可以是一个
 
 ```js
 const app = new Vue({
-el:"#app",
-//对象格式
-data:{
-foo:"foo"
-},
-//函数格式
-data( ){
-return {
-foo:"foo"
-}
-}
-})
+    el:"#app",
+    //对象格式
+    data:{
+      foo:"foo"
+    },
+    //函数格式
+    data( ){
+      return {
+        foo:"foo"
+      }
+    }
+  })
 ```
 
 组件中定义data属性，只能是一个函数
@@ -618,11 +618,11 @@ foo:"foo"
 
 ```js
 Vue.component('component1',{
-template:`<div>组件</div>`,
-data:{
-foo:"foo"
-}
-})
+    template:`<div>组件</div>`,
+    data:{
+      foo:"foo"
+    }
+  })
 ```
 
 则会得到警告信息
@@ -645,7 +645,7 @@ function Component(){
 
 }
 Component.prototype.data = {
-count : 0
+  count : 0
 }
 ```
 
@@ -699,10 +699,10 @@ vue组件可能会有很多个实例，采用函数返回一个全新data形式�
 
 ```js
 function initData (vm: Component) {
-let data = vm.\$options.data
-data = vm._data = typeof data === 'function'
-? getData(data, vm)
-: data || {}
+  let data = vm.\$options.data
+  data = vm._data = typeof data === 'function'
+  ? getData(data, vm)
+  : data || {}
 }
 ```
 
@@ -718,19 +718,19 @@ data既能是object也能是function，那为什么还会出现上文警告呢?
 
 ```js
 Vue.prototype.\_init = function (options?: Object) {
-// merge options
-if (options && options.\_isComponent) {
-// optimize internal component instantiation
-// since dynamic options merging is pretty slow, and none of the
-// internal component options needs special treatment.
-initInternalComponent(vm, options)
-} else {
-vm.\$options =mergeOptions(
-resolveConstructorOptions(vm.constructor),
-options || {},
-vm
-)
-}
+  // merge options
+  if (options && options.\_isComponent) {
+    // optimize internal component instantiation
+    // since dynamic options merging is pretty slow, and none of the
+    // internal component options needs special treatment.
+    initInternalComponent(vm, options)
+  } else {
+    vm.\$options =mergeOptions(
+      resolveConstructorOptions(vm.constructor),
+      options || {},
+      vm
+    )
+  }
 }
 ```
 
@@ -742,25 +742,25 @@ vm
 
 ```ts
 strats.data = function (
-parentVal: any,
-childVal: any,
-vm?: Component
+  parentVal: any,
+  childVal: any,
+  vm?: Component
 ): ?Function {
-if (!vm) {
-if (childVal && typeof childVal !== "function") {
-process.env.NODE_ENV !== "production" &&
-warn(
-'The "data" option should be a function '+
-"that returns a per-instance value in component " +
-"definitions.",
-vm
-);
+  if (!vm) {
+    if (childVal && typeof childVal !== "function") {
+      process.env.NODE_ENV !== "production" &&
+      warn(
+        'The "data" option should be a function '+
+        "that returns a per-instance value in component " +
+        "definitions.",
+        vm
+      );
 
-return parentVal;
-}
-return mergeDataOrFn(parentVal, childVal);
-}
-return mergeDataOrFn(parentVal, childVal, vm);
+      return parentVal;
+    }
+    return mergeDataOrFn(parentVal, childVal);
+  }
+  return mergeDataOrFn(parentVal, childVal, vm);
 };
 ```
 
@@ -782,7 +782,7 @@ return mergeDataOrFn(parentVal, childVal, vm);
 
 ```html
 <p v-for="(value,key) in item" :key="key">
-{{ value }}
+  {{ value }}
 </p>
 <button @click="addProperty">动态添加新属性</button>
 ```
@@ -791,19 +791,19 @@ return mergeDataOrFn(parentVal, childVal, vm);
 
 ```js
 const app =new Vue({
-el:"#app",
-data:()=>{
-item:{
-oldProperty:"I旧属性"
-}
-},
-methods:{
-addProperty(){
-this.items.newProperty = "新属性" // 为items添加新属性
-console.log(this.items) // 输出带有newProperty的items
-}
-}
-})
+    el:"#app",
+    data:()=>{
+      item:{
+        oldProperty:"I旧属性"
+      }
+    },
+    methods:{
+      addProperty(){
+        this.items.newProperty = "新属性" // 为items添加新属性
+        console.log(this.items) // 输出带有newProperty的items
+      }
+    }
+  })
 ```
 
 点击按钮，发现结果不及预期，数据虽然更新了（console打印出了新属性），但页面并没有更新
@@ -882,9 +882,9 @@ ue.set( target, propertyName/index, value )
 
 ```js
 function set (target: Array<any> | Object, key: any, val: any): any {
-defineReactive(ob.value, key, val)
-ob.dep.notify()
-return val
+  defineReactive(ob.value, key, val)
+  ob.dep.notify()
+  return val
 }
 ```
 
@@ -919,7 +919,7 @@ val = newVal
 
 ```js
 this.someObject = Object.assign({},this.someObject,{newProperty1:1,newPrope
-rty2:2 ...})
+    rty2:2 ...})
 ```
 
 **\$forceUpdate**
@@ -966,9 +966,9 @@ v-if 与v-for 都是vue模板系统中的指令
 
 ```html
 <div id="app">
-<p v-if="isShow" v-for="item in items">
-{{ item.title }}
-</p>
+  <p v-if="isShow" v-for="item in items">
+    {{ item.title }}
+  </p>
 </div>
 ```
 
@@ -976,31 +976,31 @@ v-if 与v-for 都是vue模板系统中的指令
 
 ```js
 const app = new Vue({
-el: "#app",
-data() {
-return {
-items:[
-{ title: "foo" },
-{ title: "baz" }]
-}
-},
-computed: {
-isShow() {
-return this.items && this.items.length > 0
-}
-}
-})
+    el: "#app",
+    data() {
+      return {
+        items:[
+          { title: "foo" },
+          { title: "baz" }]
+      }
+    },
+    computed: {
+      isShow() {
+        return this.items && this.items.length > 0
+      }
+    }
+  })
 ```
 
 模板指令的代码都会生成在 render 函数中，通过 app.\$options.render 就能得到渲染函数
 
 ```js
 f anonymous() {
-with (this) { return
-_c('div', { attrs: { "id": "app" } },
-_l((items), function (item)
-{ return (isShow) ? _c('p', [_v("\n" + _s(item.title) + "\n")]) : _e()
-}),0)}
+  with (this) { return
+    _c('div', { attrs: { "id": "app" } },
+      _l((items), function (item)
+        { return (isShow) ? _c('p', [_v("\n" + _s(item.title) + "\n")]) : _e()
+        }),0)}
 }
 ```
 
@@ -1078,11 +1078,11 @@ return genSlot(el, state)
 
 ```js
 computed: {
-items: function() {
-return this.list.filter(function (item) {
-return item.isShow
-})
-}
+  items: function() {
+    return this.list.filter(function (item) {
+        return item.isShow
+      })
+  }
 }
 ```
 
@@ -1222,7 +1222,7 @@ v-if 相比 v-show 开销更大的(直接操作 dom 节点增加与删除)
 
 ```html
 <ul>
-<li v-for="item in items" :key="item.id">...</li>
+  <li v-for="item in items" :key="item.id">...</li>
 </ul>
 ```
 
@@ -1260,22 +1260,22 @@ key是给每一个vnode的唯一id，也是diff的一种优化策略，可以根
 
 ```html
 <body>
-<div id="demo">
-<p v-for="item in items" :key="item">{{item}}</p>
-</div>
-<script src="../../dist/vue.js"></script>
-<script>
-//创建实例
-const app = new Vue({
-el: '#demo',
-data: { items: ['a', 'b', 'c', 'd', 'e'] },
-mounted () {
-setTimeout(() => {
-this.items.splice(2, 0, 'f') //
-}, 2000);
-},
-});
-</script>
+  <div id="demo">
+    <p v-for="item in items" :key="item">{{item}}</p>
+  </div>
+  <script src="../../dist/vue.js"></script>
+  <script>
+    //创建实例
+    const app = new Vue({
+    el: '#demo',
+    data: { items: ['a', 'b', 'c', 'd', 'e'] },
+    mounted () {
+    setTimeout(() => {
+    this.items.splice(2, 0, 'f') //
+    }, 2000);
+    },
+    });
+  </script>
 </body>
 ```
 
@@ -1424,10 +1424,10 @@ mixin (混入），提供了一种非常灵活的方式，来分发 Vue 组件�
 
 ```js
 Vue.mixin({
-created: function () {
-console.log("全局混入")
-}
-})
+    created: function () {
+      console.log("全局混入")
+    }
+  })
 ```
 
 **局部混入**
@@ -1436,14 +1436,14 @@ console.log("全局混入")
 
 ```js
 var myMixin = {
-created: function () {
-this.hello()
-},
-methods: {
-hello: function () {
-console.log('hello from mixin!')
-}
-}
+  created: function () {
+    this.hello()
+  },
+  methods: {
+    hello: function () {
+      console.log('hello from mixin!')
+    }
+  }
 }
 ```
 
@@ -1451,8 +1451,8 @@ console.log('hello from mixin!')
 
 ```js
 Vue.component('componentA',{
-mixins: [myMixin]
-})
+    mixins: [myMixin]
+  })
 ```
 
 该组件在使用的时候，混合了mixin里面的方法，在自动执行 created生命钩子，执行 hello方法
@@ -1481,17 +1481,17 @@ PS：全局混入常用于插件的编写
 
 ```js
 const Modal = {
-template: '#modal',
-data() {
-return {
-isShowing: false
-}
-},
-methods: {
-toggleShow() {
-this.isShowing = !this.isShowing;
-}
-}
+  template: '#modal',
+  data() {
+    return {
+      isShowing: false
+    }
+  },
+  methods: {
+    toggleShow() {
+      this.isShowing = !this.isShowing;
+    }
+  }
 }
 ```
 
@@ -1499,17 +1499,17 @@ this.isShowing = !this.isShowing;
 
 ```js
 const Tooltip = {
-template: '#tooltip',
-data() {
-return {
-isShowing: false
-}
-},
-methods: {
-toggleShow() {
-this.isShowing = !this.isShowing;
-}
-}
+  template: '#tooltip',
+  data() {
+    return {
+      isShowing: false
+    }
+  },
+  methods: {
+    toggleShow() {
+      this.isShowing = !this.isShowing;
+    }
+  }
 }
 ```
 
@@ -1519,16 +1519,16 @@ this.isShowing = !this.isShowing;
 
 ```js
 const toggle = {
-data() {
-return {
-isShowing: false
-}
-},
-methods: {
-toggleShow() {
-this.isShowing = !this.isShowing;
-}
-}
+  data() {
+    return {
+      isShowing: false
+    }
+  },
+  methods: {
+    toggleShow() {
+      this.isShowing = !this.isShowing;
+    }
+  }
 }
 ```
 
@@ -1536,13 +1536,13 @@ this.isShowing = !this.isShowing;
 
 ```js
 const Modal = {
-template:'#modal',
-mixins: [toggle]
+  template:'#modal',
+  mixins: [toggle]
 };
 
 const Tooltip = {
-template:'#tooltip',
-mixins: [toggle]
+  template:'#tooltip',
+  mixins: [toggle]
 }
 ```
 
@@ -1556,10 +1556,10 @@ mixins: [toggle]
 
 ```ts
 export function initMixin (Vue: GlobalAPI) {
-Vue.mixin = function (mixin: Object) {
-this.options = mergeOptions(this.options, mixin)
-return this
-}
+  Vue.mixin = function (mixin: Object) {
+    this.options = mergeOptions(this.options, mixin)
+    return this
+  }
 }
 ```
 
@@ -1766,15 +1766,15 @@ strats.components=
 strats.directives=
 
 strats.filters = function mergeAssets(
-parentVal, childVal, vm, key
+  parentVal, childVal, vm, key
 ) {
-var res = Object.create(parentVal || null);
-if (childVal) {
-for (var key in childVal) {
-res[key] = childVal[key];
-}
-}
-return res
+  var res = Object.create(parentVal || null);
+  if (childVal) {
+    for (var key in childVal) {
+      res[key] = childVal[key];
+    }
+  }
+  return res
 }
 ```
 
@@ -1869,7 +1869,7 @@ vue中修饰符分为以下五种：
 
 ```html
 <div @click="shout(2)">
-<button @click.stop="shout(1)">ok</button>
+  <button @click.stop="shout(1)">ok</button>
 </div>
 //只输出1
 ```
@@ -2063,11 +2063,11 @@ this.$emit('update:myMessage',params);
 
 ```js
 const vm = new Vue({
-el: '#app',
-data: {
-message：'原始值'
-}
-})
+    el: '#app',
+    data: {
+      message：'原始值'
+    }
+  })
 ```
 
 **官方对其的定义**
@@ -2113,7 +2113,7 @@ console.log(vm.$el.textContent) // 原始值
 {{num}}
 ```js
 for(let i=0; i<100000; i++){
-num = i
+  num = i
 }
 ```
 
@@ -2133,9 +2133,9 @@ vm.message = '修改后的值'
 // DOM 还没有更新
 console.log(vm.$el.textContent) // 原始的值
 Vue.nextTick(function () {
-// DOM 更新了
-console.log(vm.$el.textContent) // 修改后的值
-})
+    // DOM 更新了
+    console.log(vm.$el.textContent) // 修改后的值
+  })
 ```
 
 组件内使用vm.\$nextTick() 实例方法只需要通过 this.\$nextTick()，并且回调函数中的this 将自动绑定到当前的 Vue 实例上
@@ -2144,8 +2144,8 @@ console.log(vm.$el.textContent) // 修改后的值
 this.message = '修改后的值'
 console.log(this.$el.textContent) // =>'原始的值'
 this.$nextTick(function () {
-console.log(this.$el.textContent) // =>修改后的值'
-})
+    console.log(this.$el.textContent) // =>修改后的值'
+  })
 ```
 
 \$nextTick() 会返回一个 Promise 对象，可以是用 async/await 完成相同作用的事情
@@ -2166,34 +2166,34 @@ callbacks 新增回调函数后又执行了timerFunc 函数，pending 是用来�
 
 ```ts
 export function nextTick(cb?: Function, ctx?: Object) {
-let _resolve;
+  let _resolve;
 
-// cb 回调函数会经统一处理压入 callbacks 数组
-callbacks.push(() => {
-if (cb) {
-// 给 cb 回调函数执行加上了 try-catch 错误处理
-try {
-cb.call(ctx);
-} catch (e) {
-handleError(e, ctx, 'nextTick');
-}
-} else if (_resolve) {
-_resolve(ctx);
-}
-});
+  // cb 回调函数会经统一处理压入 callbacks 数组
+  callbacks.push(() => {
+      if (cb) {
+        // 给 cb 回调函数执行加上了 try-catch 错误处理
+        try {
+          cb.call(ctx);
+        } catch (e) {
+          handleError(e, ctx, 'nextTick');
+        }
+      } else if (_resolve) {
+        _resolve(ctx);
+      }
+    });
 
-// 执行异步延迟函数 timerFunc
-if (!pending) {
-pending = true;
-timerFunc();
-}
+  // 执行异步延迟函数 timerFunc
+  if (!pending) {
+    pending = true;
+    timerFunc();
+  }
 
-// 当 nextTick 没有传入函数参数的时候，返回一个 Promise 化的调用
-if (!cb && typeof Promise !== 'undefined') {
-return new Promise(resolve => {
-_resolve = resolve;
-});
-}
+  // 当 nextTick 没有传入函数参数的时候，返回一个 Promise 化的调用
+  if (!cb && typeof Promise !== 'undefined') {
+    return new Promise(resolve => {
+        _resolve = resolve;
+      });
+  }
 }
 ```
 
@@ -2282,13 +2282,13 @@ copies[i]()
 
 ```js
 function Vue (options) {
-if (process.env.NODE_ENV !== 'production'&&
-!(this instanceof Vue)
-){
-warn('Vue is a constructor and should be called with the `new keyword'
-)
-}
-this._init(options)
+  if (process.env.NODE_ENV !== 'production'&&
+    !(this instanceof Vue)
+  ){
+    warn('Vue is a constructor and should be called with the `new keyword'
+    )
+  }
+  this._init(options)
 }
 ```
 
@@ -2638,12 +2638,12 @@ return mount.call(this, el, hydrating)
 ```ts
 // public mount method
 Vue.prototype.$mount = function (
-el?: string | Element,
-hydrating?: boolean
+  el?: string | Element,
+  hydrating?: boolean
 ): Component {
-el = el && inBrowser ? query(el) : undefined
-//渲染组件
-return mountComponent(this, el, hydrating)
+  el = el && inBrowser ? query(el) : undefined
+  //渲染组件
+  return mountComponent(this, el, hydrating)
 }
 ```
 
@@ -3457,9 +3457,9 @@ export default{
 </template>
 
 Vue.component('componentA',{
-template:'#testComponent'
-template：`<div>component</div>//组件内容少可以通过这种形式
-})
+    template:'#testComponent'
+    template：`<div>component</div>//组件内容少可以通过这种形式
+  })
 ```
 
 **编写插件**
@@ -3468,31 +3468,31 @@ vue 插件的实现应该暴露一个 install 方法。这个方法的第一个�
 
 ```js
 MyPlugin.install = function (Vue, options) {
-// 1. 添加全局方法或 property
-Vue.myGlobalMethod = function () {
-// 逻辑...
-}
+  // 1. 添加全局方法或 property
+  Vue.myGlobalMethod = function () {
+    // 逻辑...
+  }
 
-// 2. 添加全局资源
-Vue.directive('my-directive', {
-bind (el, binding, vnode, oldVnode) {
-// 逻辑...
-}
+  // 2. 添加全局资源
+  Vue.directive('my-directive', {
+      bind (el, binding, vnode, oldVnode) {
+        // 逻辑...
+      }
 
-})
+    })
 
-// 3. 注入组件选项
-Vue.mixin({
-created: function () {
-//逻辑...
-}
+  // 3. 注入组件选项
+  Vue.mixin({
+      created: function () {
+        //逻辑...
+      }
 
-})
+    })
 
-// 4. 添加实例方法
-Vue.prototype.$myMethod = function (methodOptions) {
-//逻辑...
-}
+  // 4. 添加实例方法
+  Vue.prototype.$myMethod = function (methodOptions) {
+    //逻辑...
+  }
 }
 ```
 
@@ -3514,9 +3514,9 @@ Vue.component('my-component-name', { /* ... */ })
 const component1 = {...} // 定义—个组件
 
 export default {
-components:{
-component1// 局部注册
-}
+  components:{
+    component1// 局部注册
+  }
 }
 ```
 
@@ -3621,23 +3621,23 @@ axios.defaults.baseURL = '/api'
 
 ```js
 amodule.exports = {
-devServer: {
-host: '127.0.0.1',
-port: 8084,
-open：true,// vue项目启动时自动打开浏览器
-proxy: {
-'/api'：{ ///api'是代理标识，用于告诉node，url前面是/api的就是使用
-代理的
-target："http://xxx.xxx.xx.xx:8080"，//目标地址，—般是指后台
-服务器地址
-changeOrigin： true，//是否跨域
-pathRewrite： { // pathRewrite 的作用是把实际Request Url中的'/
-api'用""代替
-'^/api': ""
-}
-}
-}
-}
+  devServer: {
+    host: '127.0.0.1',
+    port: 8084,
+    open：true,// vue项目启动时自动打开浏览器
+    proxy: {
+      '/api'：{ ///api'是代理标识，用于告诉node，url前面是/api的就是使用
+        代理的
+        target："http://xxx.xxx.xx.xx:8080"，//目标地址，—般是指后台
+        服务器地址
+        changeOrigin： true，//是否跨域
+        pathRewrite： { // pathRewrite 的作用是把实际Request Url中的'/
+          api'用""代替
+          '^/api': ""
+        }
+      }
+    }
+  }
 }
 ```
 
@@ -3655,8 +3655,8 @@ const proxy = require('http-proxy-middleware')
 const app = express()
 app.use(express.static(__dirname + '/'))
 app.use('/api', proxy({ target: 'http://localhost:4000', changeOrigin: fals
-e
-}));
+      e
+    }));
 module.exports = app
 ```
 
@@ -3666,20 +3666,20 @@ module.exports = app
 
 ```js
 server {
-listen 80;
-# server\_name www.josephxia.com;
-location / {
-root/var/www/html;
-index index.html index.htm;
-try\_files \$uri \$uri/ /index.html;
-}
-location /api {
-proxy\_pass http://127.0.0.1:3000;
-proxy\_redirect off;
-proxy\_set\_header Host \$host;
-proxy\_set\_header X-Real-IP \$remote\_addr;
-proxy\_set\_header X-Forwarded-For \$proxy\_add\_x\_forwarded\_for;
-}
+  listen 80;
+  # server\_name www.josephxia.com;
+  location / {
+    root/var/www/html;
+    index index.html index.htm;
+    try\_files \$uri \$uri/ /index.html;
+  }
+  location /api {
+    proxy\_pass http://127.0.0.1:3000;
+    proxy\_redirect off;
+    proxy\_set\_header Host \$host;
+    proxy\_set\_header X-Real-IP \$remote\_addr;
+    proxy\_set\_header X-Forwarded-For \$proxy\_add\_x\_forwarded\_for;
+  }
 }
 ```
 
@@ -3723,12 +3723,12 @@ ue.directive 第一个参数是指令的名字(不需要写上 v-前缀)，第�
 ```js
 //注册一个全局自定义指令`v-focus
 Vue.directive('focus', {
-// 当被绑定的元素插入到 DOM 中时....
-inserted:function (el) {
-//聚焦元素
-el.focus() // 页面加载完成之后自动让输入框获取到焦点的小功能
-}
-})
+    // 当被绑定的元素插入到 DOM 中时....
+    inserted:function (el) {
+      //聚焦元素
+      el.focus() // 页面加载完成之后自动让输入框获取到焦点的小功能
+    }
+  })
 ```
 
 局部注册通过在组件options 选项中设置 directive 属性
@@ -3739,12 +3739,12 @@ el.focus() // 页面加载完成之后自动让输入框获取到焦点的小功
 
 ```js
 directives: {
-focus: {
-//指令的定义
-inserted: function (el) {
-el.focus()//页面加载完成之后自动让输入框获取到焦点的小功能
-}
-}
+  focus: {
+    //指令的定义
+    inserted: function (el) {
+      el.focus()//页面加载完成之后自动让输入框获取到焦点的小功能
+    }
+  }
 }
 ```
 
@@ -3791,10 +3791,10 @@ oldVnode：上一个虚拟节点，仅在 update 和 componentUpdated 钩子中�
 ```html
 <div v-demo="{ color: 'white', text: 'hello!' }"></div>
 <script>
-Vue.directive('demo', function (el, binding) {
-console.log(binding.value.color) //"white"
-console.log(binding.value.text)//"hello!"
-})
+  Vue.directive('demo', function (el, binding) {
+  console.log(binding.value.color) //"white"
+  console.log(binding.value.text)//"hello!"
+  })
 </script>
 ```
 
@@ -3817,23 +3817,23 @@ console.log(binding.value.text)//"hello!"
 ```js
 // 1.设置v-throttle自定义指令
 Vue.directive('throttle', {
-bind: (el, binding) => {
-let throttleTime = binding.value; // 节流时间
-if（!throttleTime）{ // 用户若不设置节流时间，则默认2s
-throttleTime = 2000;
-}
-let cbFun;
-el.addEventListener('click', event => {
-if(!cbFun) { // 第一次执行
-cbFun = setTimeout(() => {
-cbFun = null;
-}, throttleTime);
-} else {
-event && event.stopImmediatePropagation();
-}
-}, true);
-},
-});
+    bind: (el, binding) => {
+      let throttleTime = binding.value; // 节流时间
+      if（!throttleTime）{ // 用户若不设置节流时间，则默认2s
+        throttleTime = 2000;
+      }
+      let cbFun;
+      el.addEventListener('click', event => {
+          if(!cbFun) { // 第一次执行
+            cbFun = setTimeout(() => {
+                cbFun = null;
+              }, throttleTime);
+          } else {
+            event && event.stopImmediatePropagation();
+          }
+        }, true);
+    },
+  });
 // 2.为button标签设置v-throttle自定义指令
 <button @click="sayHello" v-throttle>提交</button>
 ```
@@ -4055,11 +4055,11 @@ vue 中的过滤器可以用在两个地方：双花括号插值和 v-bind 表�
 
 ```js
 filters: {
-capitalize: function (value) {
-if (!value) return
-value = value.toString()
-return value.charAt(0).toUpperCase() + value.slice(1)
-}
+  capitalize: function (value) {
+    if (!value) return
+    value = value.toString()
+    return value.charAt(0).toUpperCase() + value.slice(1)
+  }
 }
 ```
 
@@ -4067,14 +4067,14 @@ return value.charAt(0).toUpperCase() + value.slice(1)
 
 ```js
 Vue.filter('capitalize', function (value) {
-if (!value) return
-value =value.toString()
-return value.charAt(0).toUpperCase() + value.slice(1)
-})
+    if (!value) return
+    value =value.toString()
+    return value.charAt(0).toUpperCase() + value.slice(1)
+  })
 
 new Vue({
-//..
-})
+    //..
+  })
 ```
 
 注意：当全局过滤器和局部过滤器重名时，会采用局部过滤器
@@ -4101,16 +4101,16 @@ new Vue({
 
 ```html
 <div id="app">
-<p>{{ msg |msgFormat('疯狂','--')}}</p>
+  <p>{{ msg |msgFormat('疯狂','--')}}</p>
 </div>
 
 <script>
-// 定义一个 Vue 全局的过滤器，名字叫做 msgFormat
-Vue.filter('msgFormat', function(msg, arg, arg2) {
-/ 字符串的 replace 方法，第一个参数，除了可写一个字符串之外，还可以定义一
-个正则
-return msg.replace(/单纯/g, arg+arg2)
-})
+  // 定义一个 Vue 全局的过滤器，名字叫做 msgFormat
+  Vue.filter('msgFormat', function(msg, arg, arg2) {
+  / 字符串的 replace 方法，第一个参数，除了可写一个字符串之外，还可以定义一
+  个正则
+  return msg.replace(/单纯/g, arg+arg2)
+  })
 </script>
 ```
 
@@ -4128,11 +4128,11 @@ return msg.replace(/单纯/g, arg+arg2)
 
 ```js
 Vue.filter('toThousandFilter', function (value) {
-if (!value) return '
-value = value.toString()
-return .replace(str.indexOf('.') > -1 ? /(\d)(?=(\d{3})+\.)/g : /(\d)
-(?=(?:\d{3})+$)/g, '$1,')
-})
+    if (!value) return '
+    value = value.toString()
+    return .replace(str.indexOf('.') > -1 ? /(\d)(?=(\d{3})+\.)/g : /(\d)
+      (?=(?:\d{3})+$)/g, '$1,')
+  })
 ```
 
 ### 编译与运行原理
@@ -4163,7 +4163,7 @@ this.$options.filters['filterFormat'](message) // message为参数
 ```js
 import { identity,resolveAsset } from 'core/util/index'
 export function resolveFilter(id){
-return resolveAsset(this.\$options,'filters',id,true) || identity
+  return resolveAsset(this.\$options,'filters',id,true) || identity
 }
 ```
 
@@ -4264,13 +4264,13 @@ return_f('${name}')(${exp},${args}// 注意这—步少给了—个')'
 
 ```html
 <template id="element-details-template">
-<slot name="element-name">Slot template</slot>
+  <slot name="element-name">Slot template</slot>
 </template>
 <element-details>
-<span slot="element-name">1</span>
+  <span slot="element-name">1</span>
 </element-details>
 <element-details>
-<span slot="element-name">2</span>
+  <span slot="element-name">2</span>
 </element-details>
 ```
 
@@ -4278,16 +4278,16 @@ template不会展示到页面中，需要用先获取它的引用，然后添加
 
 ```ts
 customElements.define('element-details',
-class extends HTMLElement {
-constructor() {
-super();
-const template = document
-.getElementById('element-details-template')
-.content;
-const shadowRoot = this.attachShadow({mode: 'open'})
-.appendChild(template.cloneNode(true));
-}
-})
+  class extends HTMLElement {
+    constructor() {
+      super();
+      const template = document
+      .getElementById('element-details-template')
+      .content;
+      const shadowRoot = this.attachShadow({mode: 'open'})
+      .appendChild(template.cloneNode(true));
+    }
+  })
 ```
 
 **在Vue中的概念也是如此**
@@ -4316,7 +4316,7 @@ slot可以分来以下三种：
 
 ```html
 <Child>
-<div>默认插槽</div>
+  <div>默认插槽</div>
 </Child>
 ```
 
@@ -4330,9 +4330,9 @@ slot可以分来以下三种：
 
 ```html
 <template>
-<slot>
-<p>插槽后备的内容</p>
-</slot>
+  <slot>
+    <p>插槽后备的内容</p>
+  </slot>
 </template>
 ```
 
@@ -4413,8 +4413,8 @@ slot本质上是返回VNode的函数，一般情况下，Vue中的组件要渲�
 
 ```js
 Vue.component('button-counter', {
-template：'<div> <slot>我是默认内容</slot></div>
-})
+    template：'<div> <slot>我是默认内容</slot></div>
+  })
 ```
 
 使用该组件
@@ -4433,27 +4433,27 @@ components:{buttonCounter}
 
 ```js
 (functionanonymous(
-) {
-with(this){return \_c('div',[\_t("default",[\_v("我是默认内容")])],2)}
-})
+  ) {
+    with(this){return \_c('div',[\_t("default",[\_v("我是默认内容")])],2)}
+  })
 ```
 
 \_v表示穿件普通文本节点，\_t表示渲染插槽的函数
 
 ```js
 function renderSlot (
-name,
-fallback,
-props,
-bindObject
+  name,
+  fallback,
+  props,
+  bindObject
 ) {
-//得到渲染插槽内容的函数
-var scopedSlotFn = this.$scopedSlots[name];
-var nodes;
-//如果存在插槽渲染函数，则执行插槽渲染函数，生成nodes节点返回
-// 否则使用默认值
-nodes = scopedSlotFn(props) | fallback;
-return nodes;
+  //得到渲染插槽内容的函数
+  var scopedSlotFn = this.$scopedSlots[name];
+  var nodes;
+  //如果存在插槽渲染函数，则执行插槽渲染函数，生成nodes节点返回
+  // 否则使用默认值
+  nodes = scopedSlotFn(props) | fallback;
+  return nodes;
 }
 ```
 
@@ -4464,7 +4464,7 @@ name属性表示定义插槽的名字，默认值为default，fallback表示子�
 ```js
 function initRender (vm) {
 
-vm.$slots = resolveSlots(options._renderChildren, renderContext);
+  vm.$slots = resolveSlots(options._renderChildren, renderContext);
 
 }
 ```
@@ -4521,9 +4521,9 @@ return slots
 
 ```js
 vm.$scopedSlots = normalizeScopedSlots(
-_parentVnode.data.scopedSlots,
-vm.$slots,
-vm.$scopedSlots
+  _parentVnode.data.scopedSlots,
+  vm.$slots,
+  vm.$scopedSlots
 );
 ```
 
@@ -4556,20 +4556,20 @@ vm.$scopedSlots
 
 ```js
 const app = new Vue({
-el:"#app",
-data:{
-foo:"foo"
-}
-})
+    el:"#app",
+    data:{
+      foo:"foo"
+    }
+  })
 ```
 
 观察 render 的 render，我们能得到虚拟 DOM
 
 ```js
 (function anonymous(
-) {
-with(this){return _c('div',{attrs:{"id":"app"}},[_c('p',{staticClass:"p"}
-[_v("节点内容")]),_v(" "),_c('h3',[_v(_s(foo))])])}})
+  ) {
+    with(this){return _c('div',{attrs:{"id":"app"}},[_c('p',{staticClass:"p"}
+            [_v("节点内容")]),_v(" "),_c('h3',[_v(_s(foo))])])}})
 ```
 
 通过VNode，vue 可以对这颗抽象树进行创建节点,删除节点以及修改节点的操作，经过 diff 算法得出一些需要修改的最小单位,再更新视图，减少了dom操作，提高了性能
@@ -4718,22 +4718,22 @@ vue 是通过 createElement 生成 VNode
 
 ```ts
 export function createElement (
-context: Component,
-tag: any,
-data: any,
-children: any,
-normalizationType: any,
-alwaysNormalize: boolean
+  context: Component,
+  tag: any,
+  data: any,
+  children: any,
+  normalizationType: any,
+  alwaysNormalize: boolean
 ): VNode | Array<VNode> {
-if (Array.isArray(data) || isPrimitive(data)) {
-normalizationType = children
-children = data
-data = undefined
-}
-if (isTrue(alwaysNormalize)) {
-normalizationType = ALWAYS_NORMALIZE
-}
-return _createElement(context, tag, data, children, normalizationType)
+  if (Array.isArray(data) || isPrimitive(data)) {
+    normalizationType = children
+    children = data
+    data = undefined
+  }
+  if (isTrue(alwaysNormalize)) {
+    normalizationType = ALWAYS_NORMALIZE
+  }
+  return _createElement(context, tag, data, children, normalizationType)
 }
 ```
 
@@ -4741,44 +4741,44 @@ return _createElement(context, tag, data, children, normalizationType)
 
 ```ts
 export function _createElement(
-context: Component,
-tag?: string | Class<Component> | Function | Object,
-data?: VNodeData,
-children?: any,
-normalizationType?: number
+  context: Component,
+  tag?: string | Class<Component> | Function | Object,
+  data?: VNodeData,
+  children?: any,
+  normalizationType?: number
 ): VNode | Array<VNode> {
-if (isDef(data) && isDef((data: any).__ob__)) {
-process.env.NoDE_ENV !== production'&& warn(
-Avoid using observed data object as vnode data: ${JSON.string
-ify(data)}\n+
-'Always create fresh vnode data objects in each render!',
-context
-)
-return createEmptyVNode()
+  if (isDef(data) && isDef((data: any).__ob__)) {
+    process.env.NoDE_ENV !== production'&& warn(
+    Avoid using observed data object as vnode data: ${JSON.string
+      ify(data)}\n+
+    'Always create fresh vnode data objects in each render!',
+    context
+  )
+  return createEmptyVNode()
 }
 // object syntax in v-bind
 if (isDef(data) && isDef(data.is)) {
-tag = data.is
+  tag = data.is
 }
 if (!tag) {
-// in case of component :is set to falsy value
-return createEmptyVNode()
+  // in case of component :is set to falsy value
+  return createEmptyVNode()
 }
 
 // support single function children as default scoped slot
 if (Array.isArray(children) &&
-typeof children[0] === 'function'
+  typeof children[0] === 'function'
 ) {
-data = data || {}
-data.scopedSlots = { default: children[0] }
-children.length = 0
+  data = data || {}
+  data.scopedSlots = { default: children[0] }
+  children.length = 0
 
-if (normalizationType === ALWAYS_NORMALIZE) {
-children = normalizeChildren(children)
-else if （ === SIMPLE_NORMALIZE) {
-children = simpleNormalizeChildren(children)
-}
-// 创建VNode
+  if (normalizationType === ALWAYS_NORMALIZE) {
+    children = normalizeChildren(children)
+    else if （ === SIMPLE_NORMALIZE) {
+    children = simpleNormalizeChildren(children)
+  }
+  // 创建VNode
 
 }
 ```
@@ -4805,9 +4805,9 @@ render 函数是编译生成的还是用户手写的
 
 ```js
 if (normalizationType === ALWAYS_NORMALIZE) {
-children = normalizeChildren(children)
+  children = normalizeChildren(children)
 } else if ( === SIMPLE_NORMALIZE) {
-children = simpleNormalizeChildren(children)
+  children = simpleNormalizeChildren(children)
 }
 ```
 
@@ -5051,34 +5051,34 @@ import axios from 'axios'
 
 ```js
 axios({
-url:'xxx', //设置请求的地址
-method:"GET"，// 设置请求方法
-params:{ //get请求使用params进行参数凭借，如果是post请求用data
-type: '',
-page: 1
-}
-}).then(res => {
-// res为后端返回的数据
-console.log(res);
-})
+    url:'xxx', //设置请求的地址
+    method:"GET"，// 设置请求方法
+    params:{ //get请求使用params进行参数凭借，如果是post请求用data
+      type: '',
+      page: 1
+    }
+  }).then(res => {
+    // res为后端返回的数据
+    console.log(res);
+  })
 ```
 
 并发请求axios.all([])
 
 ```js
 function getUserAccount() {
-return axios.get('/user/12345');
+  return axios.get('/user/12345');
 }
 
 function getUserPermissions() {
-return axios.get('/user/12345/permissions');
+  return axios.get('/user/12345/permissions');
 }
 
 axios.all([getUserAccount(), getUserPermissions()])
 .then(axios.spread(function (res1, res2) {
-// res1第一个请求的返回的内容，res2第二个请求返回的内容
-//两个请求都执行完成才会执行
-}));
+      // res1第一个请求的返回的内容，res2第二个请求返回的内容
+      //两个请求都执行完成才会执行
+    }));
 ```
 
 ### 为什么需要二次封装
@@ -5093,33 +5093,33 @@ axios 的API很友好，你完全可以很轻松地在项目中直接使用。
 
 ```js
 axios('http://localhost:3000/data', {
-//配置代码
-method: 'GET',
-timeout: 1000,
-withCredentials: true,
-headers: {
-'Content-Type': 'application/json',
-Authorization: 'xxx',
-},
-transformRequest: [function (data, headers) {
-return data;
-}],
-// 其他请求配置...
-})
+    //配置代码
+    method: 'GET',
+    timeout: 1000,
+    withCredentials: true,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'xxx',
+    },
+    transformRequest: [function (data, headers) {
+        return data;
+      }],
+    // 其他请求配置...
+  })
 .then((data) => {
-// todo：真正业务逻辑代码
-console.log(data);
-}, (err) => {
-// 错误处理代码
-if (err.response.status === 401) {
-// handle authorization error
-}
-if (err.response.status === 403) {
-// handle server forbidden error
-}
-// 其他错误处理.....
-console.log(err);
-});
+    // todo：真正业务逻辑代码
+    console.log(data);
+  }, (err) => {
+    // 错误处理代码
+    if (err.response.status === 401) {
+      // handle authorization error
+    }
+    if (err.response.status === 403) {
+      // handle server forbidden error
+    }
+    // 其他错误处理.....
+    console.log(err);
+  });
 ```
 
 如果每个页面都发送类似的请求，都要写一堆的配置与错误处理，就显得过于繁琐了
@@ -5177,19 +5177,19 @@ pathRewrite: {
 ```js
 const service = axios.create({
 
-timeout： 30000,// 请求 30s 超时
-headers: {
-get: {
-'Content-Type':'application/x-www-form-urlencoded;charset=utf-
-'
-//在开发中，一般还需要单点登录或者其他功能的通用请求头，可以一并配置进来
-},
-post: {
-'Content-Type': 'application/json;charset=utf-8'
-//在开发中，一般还需要单点登录或者其他功能的通用请求头，可以一并配置进来
-}
-},
-})
+    timeout： 30000,// 请求 30s 超时
+    headers: {
+      get: {
+        'Content-Type':'application/x-www-form-urlencoded;charset=utf-
+        '
+        //在开发中，一般还需要单点登录或者其他功能的通用请求头，可以一并配置进来
+      },
+      post: {
+        'Content-Type': 'application/json;charset=utf-8'
+        //在开发中，一般还需要单点登录或者其他功能的通用请求头，可以一并配置进来
+      }
+    },
+  })
 ```
 
 **封装请求方法**
@@ -5259,8 +5259,8 @@ t', params })
 import { getorglist } from '@/assets/js/api'
 
 getorglist({ id: 200 }).then(res => {
-console.log(res)
-})
+    console.log(res)
+  })
 ```
 
 这样可以把 api统一管理起来，以后维护修改只需要在api.js 文件操作即可
@@ -5272,16 +5272,16 @@ console.log(res)
 ```js
 //请求拦截器
 axios.interceptors.request.use(
-config => {
-// 每次发送请求之前判断是否存在token
-//如果存在，则统一在http请求的header都加上token，这样后台根据token判断你的登录
-情况，此处token一般是用户完成登录后储存到localstorage里的
-token&& (config.headers.Authorization = token)
-return config
-}
-error => {
-return Promise.error(error)
-})
+  config => {
+    // 每次发送请求之前判断是否存在token
+    //如果存在，则统一在http请求的header都加上token，这样后台根据token判断你的登录
+    情况，此处token一般是用户完成登录后储存到localstorage里的
+    token&& (config.headers.Authorization = token)
+    return config
+  }
+  error => {
+    return Promise.error(error)
+  })
 ```
 
 **响应拦截器**
@@ -5291,27 +5291,27 @@ return Promise.error(error)
 ```js
 // 响应拦截器
 axios.interceptors.response.use(response => {
-//如果返回的状态码为200，说明接口请求成功，可以正常拿到数据
-// 否则的话抛出错误
-if (response.status === 200) {
-if (response.data.code === 511) {
-// 未授权调取授权接口
-} else if (response.data.code === 510) {
-// 未登录跳转登录页
-} else {
-return Promise.resolve(response)
-}
-} else {
-return Promise.reject(response)
-}
-}, error => {
-// 我们可以在这里对异常状态作统一处理
-if (error.response.status) {
-//处理请求失败的情况
-//对不同返回码对相应处理
-return Promise.reject(error.response)
-}
-})
+    //如果返回的状态码为200，说明接口请求成功，可以正常拿到数据
+    // 否则的话抛出错误
+    if (response.status === 200) {
+      if (response.data.code === 511) {
+        // 未授权调取授权接口
+      } else if (response.data.code === 510) {
+        // 未登录跳转登录页
+      } else {
+        return Promise.resolve(response)
+      }
+    } else {
+      return Promise.reject(response)
+    }
+  }, error => {
+    // 我们可以在这里对异常状态作统一处理
+    if (error.response.status) {
+      //处理请求失败的情况
+      //对不同返回码对相应处理
+      return Promise.reject(error.response)
+    }
+  })
 ```
 
 ### 选型总结
@@ -5364,9 +5364,9 @@ return Promise.reject(error);
 
 ```js
 Vue.config.errorHandler = function (err, vm, info) {
-// handle error
-//\`info是Vue特定的错误信息，比如错误所在的生命周期钩子
-// 只在 2.2.0+可用
+  // handle error
+  //\`info是Vue特定的错误信息，比如错误所在的生命周期钩子
+  // 只在 2.2.0+可用
 }
 ```
 
@@ -5410,46 +5410,46 @@ errorCaptured是2.5.0新增的一个生命钩子函数，当捕获到一个来�
 
 ```js
 Vue.component('cat', {
-template:
-<div>
-<h1>Cat： </h1>
-<slot></slot>
-</div>`,
-props:{
-name:{
-required:true,
-type:String
-}
-},
-errorCaptured(err,vm,info) {
-console.log(`cat EC: ${err.toString()}\ninfo: ${info}`);
-return false;
-}
+    template:
+    <div>
+    <h1>Cat： </h1>
+    <slot></slot>
+    </div>`,
+    props:{
+      name:{
+        required:true,
+        type:String
+      }
+    },
+    errorCaptured(err,vm,info) {
+      console.log(`cat EC: ${err.toString()}\ninfo: ${info}`);
+      return false;
+    }
 
-});
+  });
 ```
 
 定义一个子组件 kitten，其中 dontexist()并没有定义，存在错误
 
 ```js
 Vue.component('kitten', {
-template:'<div><h1>Kitten: {{ dontexist() }}</h1></div>',
-props:{
-name:{
-required:true,
-type:String
-}
-}
-});
+    template:'<div><h1>Kitten: {{ dontexist() }}</h1></div>',
+    props:{
+      name:{
+        required:true,
+        type:String
+      }
+    }
+  });
 ```
 
 页面中使用组件
 
 ```html
 <div id="app" v-cloak>
-<cat name="my cat">
-<kitten></kitten>
-</cat>
+  <cat name="my cat">
+    <kitten></kitten>
+  </cat>
 </div>
 ```
 
@@ -5667,7 +5667,7 @@ const axiosInstance = axios.create(config)
 // axiosInstance 也具有以上 axios 的能力
 
 axios.all([axiosInstance1, axiosInstance2]).then(axios.spread(response1, r
-esponse2))
+    esponse2))
 // 调用 all 和传入 spread 回调
 ```
 
@@ -5675,24 +5675,24 @@ esponse2))
 
 ```js
 axios.interceptors.request.use(function (config) {
-// 这里写发送请求前处理的代码
-return config;
-}, function (error) {
-//这里写发送请求错误相关的代码
-return Promise.reject(error);
-});
+    // 这里写发送请求前处理的代码
+    return config;
+  }, function (error) {
+    //这里写发送请求错误相关的代码
+    return Promise.reject(error);
+  });
 ```
 
 **响应拦截器**
 
 ```js
 axios.interceptors.response.use(function (response) {
-//这里写得到响应数据后处理的代码
-return response;
-}, function (error) {
-// 这里写得到错误响应处理的代码
-return Promise.reject(error);
-});
+    //这里写得到响应数据后处理的代码
+    return response;
+  }, function (error) {
+    // 这里写得到错误响应处理的代码
+    return Promise.reject(error);
+  });
 ```
 
 **取消请求**
@@ -5703,8 +5703,8 @@ const CancelToken = axios.CancelToken;
 const source = CancelToken.source();
 
 axios.get('xxxx', {
-cancelToken: source.token
-})
+    cancelToken: source.token
+  })
 // 取消请求(请求原因是可选的)
 source.cancel('主动取消请求');
 
@@ -5713,10 +5713,10 @@ const CancelToken = axios.CancelToken;
 let cancel;
 
 axios.get('xxxx', {
-cancelToken: new CancelToken(function executor(c) {
-cancel = c;
-})
-});
+    cancelToken: new CancelToken(function executor(c) {
+        cancel = c;
+      })
+  });
 cancel('主动取消请求');
 ```
 
@@ -5751,9 +5751,9 @@ xhr.send(data);
 ```js
 //最终导出axios的方法，即实例的request方法
 function CreateAxiosFn() {
-let axios = new Axios();
-let req= axios.request.bind(axios);
-returnreq;
+  let axios = new Axios();
+  let req= axios.request.bind(axios);
+  returnreq;
 }
 
 //得到最后的全局变量axios
@@ -5796,18 +5796,18 @@ data: arguments[1] || {},
 
 ```js
 const utils = {
-extend(a,b, context) {
-for(let key in b) {
-if(b.hasOwnProperty(key)) {
-if (typeof b[key] === 'function') {
-a[key] = b[key].bind(context);
-} else {
-a[key] = b[key]
-}
-}
+  extend(a,b, context) {
+    for(let key in b) {
+      if(b.hasOwnProperty(key)) {
+        if (typeof b[key] === 'function') {
+          a[key] = b[key].bind(context);
+        } else {
+          a[key] = b[key]
+        }
+      }
 
-}
-}
+    }
+  }
 }
 ```
 
@@ -5815,13 +5815,13 @@ a[key] = b[key]
 
 ```js
 function CreateAxiosFn() {
-let axios = new Axios();
+  let axios = new Axios();
 
-let req = axios.request.bind(axios);
-//增加代码
-utils.extend(req, Axios.prototype, axios)
+  let req = axios.request.bind(axios);
+  //增加代码
+  utils.extend(req, Axios.prototype, axios)
 
-return req;
+  return req;
 }
 ```
 
@@ -5829,16 +5829,16 @@ return req;
 
 ```js
 class InterceptorsManage {
-constructor() {
-this.handlers = [];
-}
+  constructor() {
+    this.handlers = [];
+  }
 
-use(fullfield, rejected) {
-this.handlers.push({
-fullfield,
-rejected
-})
-}
+  use(fullfield, rejected) {
+    this.handlers.push({
+        fullfield,
+        rejected
+      })
+  }
 }
 ```
 
@@ -5846,17 +5846,17 @@ rejected
 
 ```js
 class Axios {
-constructor() {
-//新增代码
-this.interceptors = {
-request: new InterceptorsManage,
-response: new InterceptorsManage
-}
-}
+  constructor() {
+    //新增代码
+    this.interceptors = {
+      request: new InterceptorsManage,
+      response: new InterceptorsManage
+    }
+  }
 
-request(config) {
+  request(config) {
 
-}
+  }
 }
 ```
 
@@ -5866,14 +5866,14 @@ request(config) {
 
 ```js
 function CreateAxiosFn() {
-let axios = new Axios();
+  let axios = new Axios();
 
-let req = axios.request.bind(axios);
-// 混入方法，处理axios的request方法，使之拥有get,post...方法
-utils.extend(req, Axios.prototype, axios)
-//新增代码
-utils.extend(req, axios)
-return req;
+  let req = axios.request.bind(axios);
+  // 混入方法，处理axios的request方法，使之拥有get,post...方法
+  utils.extend(req, Axios.prototype, axios)
+  //新增代码
+  utils.extend(req, axios)
+  return req;
 }
 ```
 
@@ -5905,26 +5905,26 @@ xhr.send(data);
 
 ```js
 request(config) {
-//拦截器和请求组装队列
-let chain = [this.sendAjax.bind(this), undefined] // 成对出现的，失败回调
-暂时不处理
+  //拦截器和请求组装队列
+  let chain = [this.sendAjax.bind(this), undefined] // 成对出现的，失败回调
+  暂时不处理
 
-//请求拦截
-this.interceptors.request.handlers.forEach(interceptor => {
-chain.unshift(interceptor.fullfield, interceptor.rejected)
-})
+  //请求拦截
+  this.interceptors.request.handlers.forEach(interceptor => {
+      chain.unshift(interceptor.fullfield, interceptor.rejected)
+    })
 
-//响应拦截
-this.interceptors.response.handlers.forEach(interceptor => {
-chain.push(interceptor.fullfield, interceptor.rejected)
-})
+  //响应拦截
+  this.interceptors.response.handlers.forEach(interceptor => {
+      chain.push(interceptor.fullfield, interceptor.rejected)
+    })
 
-//执行队列，每次执行一对，并给promise赋最新的值
-let promise = Promise.resolve(config);
-while(chain.length > 0) {
-promise = promise.then(chain.shift(), chain.shift())
-}
-return promise;
+  //执行队列，每次执行一对，并给promise赋最新的值
+  let promise = Promise.resolve(config);
+  while(chain.length > 0) {
+    promise = promise.then(chain.shift(), chain.shift())
+  }
+  return promise;
 }
 ```
 
@@ -5961,25 +5961,25 @@ axios发送请求有很多实现的方法，实现入口文件为axios.js
 
 ```js
 function createInstance(defaultConfig) {
-var context = new Axios(defaultConfig);
+  var context = new Axios(defaultConfig);
 
-//instance指向了request方法，且上下文指向context，所以可以直接以instance(opt
-ion）方式调用
-// Axios.prototype.request 内对第一个参数的数据类型判断，使我们能够以 instance
-(url，option) 方式调用
-var instance = bind(Axios.prototype.request, context);
+  //instance指向了request方法，且上下文指向context，所以可以直接以instance(opt
+  ion）方式调用
+  // Axios.prototype.request 内对第一个参数的数据类型判断，使我们能够以 instance
+  (url，option) 方式调用
+  var instance = bind(Axios.prototype.request, context);
 
-//把Axios.prototype上的方法扩展到instance对象上，
-//并指定上下文为context，这样执行Axios原型链上的方法时，this会指向context
-utils.extend(instance, Axios.prototype, context);
+  //把Axios.prototype上的方法扩展到instance对象上，
+  //并指定上下文为context，这样执行Axios原型链上的方法时，this会指向context
+  utils.extend(instance, Axios.prototype, context);
 
-// Copy context to instance
-//把context对象上的自身属性和方法扩展到instance上
-//注:因为extend内部使用的forEach方法对对象做forin遍历时，只遍历对象本身的属
-性，而不会遍历原型链上的属性
-//这样，instance 就有了defaults、interceptors 属性。
-utils.extend(instance, context);
-return instance;
+  // Copy context to instance
+  //把context对象上的自身属性和方法扩展到instance上
+  //注:因为extend内部使用的forEach方法对对象做forin遍历时，只遍历对象本身的属
+  性，而不会遍历原型链上的属性
+  //这样，instance 就有了defaults、interceptors 属性。
+  utils.extend(instance, context);
+  return instance;
 }
 
 // Create the default instance to be exported 创建—个由默认配置生成的axios实
@@ -5989,18 +5989,18 @@ var axios = createInstance(defaults);
 // Factory for creating new instances 扩展axios.create工厂函数，内部也是 crea
 teInstance
 axios.create = function create(instanceConfig) {
-return createInstance(mergeConfig(axios.defaults, instanceConfig));
+  return createInstance(mergeConfig(axios.defaults, instanceConfig));
 };
 
 // Exposeall/spread
 axios.all = function all(promises) {
-return Promise.all(promises);
+  return Promise.all(promises);
 };
 
 axios.spread = function spread(callback) {
-return function wrap(arr) {
-return callback.apply(null, arr);
-};
+  return function wrap(arr) {
+    return callback.apply(null, arr);
+  };
 };
 module.exports = axios;
 ```
@@ -6009,50 +6009,50 @@ module.exports = axios;
 
 ```js
 Axios.prototype.request = function request(config) {
-// Allow for axios('example/url'[, config]) a la fetch API
-// 判断 config 参数是否是字符串，如果是则认为第一个参数是 URL，第二个参数是真正的c
-onfig
-if (typeof config === 'string') {
-config = arguments[1] || {};
-//把 url 放置到 config 对象中，便于之后的 mergeConfig
-config.url = arguments[0];
-} else {
-// 如果 config 参数是否是字符串，则整体都当做config
-config = config || {};
-}
-// 合并默认配置和传入的配置
-config = mergeConfig(this.defaults, config);
-//设置请求方法
-config.method = config.method ? config.method.toLowerCase() : 'get';
-/*
-something...此部分会在后续拦截器单独讲述
-*/
+  // Allow for axios('example/url'[, config]) a la fetch API
+  // 判断 config 参数是否是字符串，如果是则认为第一个参数是 URL，第二个参数是真正的c
+  onfig
+  if (typeof config === 'string') {
+    config = arguments[1] || {};
+    //把 url 放置到 config 对象中，便于之后的 mergeConfig
+    config.url = arguments[0];
+  } else {
+    // 如果 config 参数是否是字符串，则整体都当做config
+    config = config || {};
+  }
+  // 合并默认配置和传入的配置
+  config = mergeConfig(this.defaults, config);
+  //设置请求方法
+  config.method = config.method ? config.method.toLowerCase() : 'get';
+  /*
+  something...此部分会在后续拦截器单独讲述
+  */
 };
 
 // 在 Axios 原型上挂载'delete'，'get'，'head'，'options'且不传参的请求方法，
 实现内部也是 request
 utils.forEach(['delete','get', 'head', 'options'], function forEachMethod
-NoData(method) {
-Axios.prototype[method] = function(url, config) {
-return this.request(utils.merge(config || {}, {
-method: method,
-url: url
-}));
-};
-});
+  NoData(method) {
+    Axios.prototype[method] = function(url, config) {
+      return this.request(utils.merge(config || {}, {
+            method: method,
+            url: url
+          }));
+    };
+  });
 
 //在 Axios 原型上挂载'post'，'put'，patch'且传参的请求方法，实现内部同样也是
 request
 utils.forEach(['post','put','patch'], function forEachMethodWithData(met
-hod) {
-Axios.prototype[method] = function(url, data, config) {
-return this.request(utils.merge(config || {}, {
-method: method,
-url: url,
-data: data
-}));
-};
-});
+    hod) {
+    Axios.prototype[method] = function(url, data, config) {
+      return this.request(utils.merge(config || {}, {
+            method: method,
+            url: url,
+            data: data
+          }));
+    };
+  });
 ```
 
 request入口参数为config，可以说config贯彻了 axios的一生
@@ -6074,7 +6074,7 @@ var axios = createInstance(defaults);
 
 // 扩展axios.create工厂函数，内部也是 createInstance
 axios.create = function create(instanceConfig) {
-return createInstance(mergeConfig(axios.defaults, instanceConfig));
+  return createInstance(mergeConfig(axios.defaults, instanceConfig));
 };
 
 // Axios.js
@@ -6092,37 +6092,37 @@ s.default request参数
 
 ```js
 Axios.prototype.request = function request(config) {
-/*
-先是 mergeConfig ...等，不再阐述
-*/
-// Hook up interceptors middleware 创建拦截器链. dispatchRequest 是重中之
-重，后续重点
-var chain = [dispatchRequest, undefined];
+  /*
+  先是 mergeConfig ...等，不再阐述
+  */
+  // Hook up interceptors middleware 创建拦截器链. dispatchRequest 是重中之
+  重，后续重点
+  var chain = [dispatchRequest, undefined];
 
-// push各个拦截器方法 注意:interceptor.fulfilled 或 interceptor.rejected 是
-可能为undefined
-this.interceptors.request.forEach(function unshiftRequestInterceptors(in
-terceptor) {
-//请求拦截器逆序注意此处的 forEach是自定义的拦截器的forEach方法
-chain.unshift(interceptor.fulfilled, interceptor.rejected);
-});
+  // push各个拦截器方法 注意:interceptor.fulfilled 或 interceptor.rejected 是
+  可能为undefined
+  this.interceptors.request.forEach(function unshiftRequestInterceptors(in
+      terceptor) {
+      //请求拦截器逆序注意此处的 forEach是自定义的拦截器的forEach方法
+      chain.unshift(interceptor.fulfilled, interceptor.rejected);
+    });
 
-this.interceptors.response.forEach(function pushResponseInterceptors(int
-erceptor) {
-//响应拦截器顺序 注意此处的 forEach 是自定义的拦截器的forEach方法
-chain.push(interceptor.fulfilled, interceptor.rejected);
-});
+  this.interceptors.response.forEach(function pushResponseInterceptors(int
+      erceptor) {
+      //响应拦截器顺序 注意此处的 forEach 是自定义的拦截器的forEach方法
+      chain.push(interceptor.fulfilled, interceptor.rejected);
+    });
 
-//初始化一个promise对象，状态为resolved，接收到的参数为已经处理合并过的config对象
-var promise = Promise.resolve(config);
+  //初始化一个promise对象，状态为resolved，接收到的参数为已经处理合并过的config对象
+  var promise = Promise.resolve(config);
 
-// 循环拦截器的链
-while (chain.length) {
-promise = promise.then(chain.shift(), chain.shift()); // 每—次向外弹出
-拦截器
-}
-// 返回 promise
-return promise;
+  // 循环拦截器的链
+  while (chain.length) {
+    promise = promise.then(chain.shift(), chain.shift()); // 每—次向外弹出
+    拦截器
+  }
+  // 返回 promise
+  return promise;
 };
 ```
 
@@ -6130,11 +6130,11 @@ return promise;
 
 ```js
 function Axios(instanceConfig) {
-this.defaults = instanceConfig;
-this.interceptors = {
-request: new InterceptorManager(), // 请求拦截
-response: new InterceptorManager() // 响应拦截
-};
+  this.defaults = instanceConfig;
+  this.interceptors = {
+    request: new InterceptorManager(), // 请求拦截
+    response: new InterceptorManager() // 响应拦截
+  };
 }
 ```
 
@@ -6305,43 +6305,43 @@ return Promise.reject(reason);
 
 ```js
 function CancelToken(executor) {
-if (typeof executor !== 'function') {
-throw new TypeError('executor must be a function.');
-}
-// 在 CancelToken 上定义—个pending 状态的 promise，将 resolve 回调赋值给外
-部变量 resolvePromise
-var resolvePromise;
-this.promise = new Promise(function promiseExecutor(resolve) {
-resolvePromise = resolve;
-});
+  if (typeof executor !== 'function') {
+    throw new TypeError('executor must be a function.');
+  }
+  // 在 CancelToken 上定义—个pending 状态的 promise，将 resolve 回调赋值给外
+  部变量 resolvePromise
+  var resolvePromise;
+  this.promise = new Promise(function promiseExecutor(resolve) {
+      resolvePromise = resolve;
+    });
 
-var token = this;
-//立即执行传入的executor函数，将真实的cancel 方法通过参数传递出去。
-//—旦调用就执行 resolvePromise 即前面的 promise 的 resolve，就更改promise的
-状态为resolve。
-//那么xhr中定义的 CancelToken.promise.then方法就会执行，从而xhr内部会取消请求
-executor(function cancel(message) {
-//判断请求是否已经取消过，避免多次执行
-if (token.reason) {
-return;
-}
-token.reason = new Cancel(message);
-resolvePromise(token.reason);
-});
+  var token = this;
+  //立即执行传入的executor函数，将真实的cancel 方法通过参数传递出去。
+  //—旦调用就执行 resolvePromise 即前面的 promise 的 resolve，就更改promise的
+  状态为resolve。
+  //那么xhr中定义的 CancelToken.promise.then方法就会执行，从而xhr内部会取消请求
+  executor(function cancel(message) {
+      //判断请求是否已经取消过，避免多次执行
+      if (token.reason) {
+        return;
+      }
+      token.reason = new Cancel(message);
+      resolvePromise(token.reason);
+    });
 }
 
 CancelToken.source = function source() {
-// source 方法就是返回了一个 CancelToken 实例，与直接使用 new CancelToken 是一
-样的操作
-var cancel;
-var token = new CancelToken(function executor(c) {
-cancel = c;
-});
-// 返回创建的 CancelToken 实例以及取消方法
-return {
-token: token,
-cancel: cancel
-};
+  // source 方法就是返回了一个 CancelToken 实例，与直接使用 new CancelToken 是一
+  样的操作
+  var cancel;
+  var token = new CancelToken(function executor(c) {
+      cancel = c;
+    });
+  // 返回创建的 CancelToken 实例以及取消方法
+  return {
+    token: token,
+    cancel: cancel
+  };
 };
 ```
 
@@ -6350,14 +6350,14 @@ cancel: cancel
 ```js
 D JavaScript
 if (config.cancelToken) {
-config.cancelToken.promise.then(function onCanceled(cancel) {
-if (!request) {
-return;
-}
-// 取消请求
-request.abort();
-reject(cancel);
-});
+  config.cancelToken.promise.then(function onCanceled(cancel) {
+      if (!request) {
+        return;
+      }
+      // 取消请求
+      request.abort();
+      reject(cancel);
+    });
 }
 ```
 
@@ -6403,15 +6403,15 @@ reject(cancel);
 
 ```js
 axios.interceptors.request.use(config => {
-config.headers['token'] = cookie.get('token')
-return config
-})
+    config.headers['token'] = cookie.get('token')
+    return config
+  })
 axios.interceptors.response.use(res=>{},{response}=>{
-if (response.data.code === 40099 || response.data.code === 40098) { //t
-oken过期或者错误
-router.push('/login')
-}
-})
+    if (response.data.code === 40099 || response.data.code === 40098) { //t
+      oken过期或者错误
+      router.push('/login')
+    }
+  })
 ```
 
 ### 路由与菜单权限
@@ -6424,35 +6424,35 @@ router.push('/login')
 
 ```js
 const routerMap = [
-{
-path: '/permission',
-component: Layout,
-redirect: '/permission/index',
-alwaysShow: true, // will always show the root menu
-meta: {
-title: 'permission',
-icon: 'lock',
-roles: ['admin', 'editor'] // you can set roles in root nav
-},
-children: [{
-path: 'page',
-component: () => import('@/views/permission/page'),
-name: 'pagePermission',
-meta: {
-title: 'pagePermission',
-roles: ['admin'] // or you can only set roles in sub nav
-}
-}, {
-path: 'directive',
-component: () => import('@/views/permission/directive'),
-name: 'directivePermission',
-meta: {
-title: 'directivePermission'
-// if do not set roles, means: this page does not require permissi
-on
-}
-}]
-}]
+  {
+    path: '/permission',
+    component: Layout,
+    redirect: '/permission/index',
+    alwaysShow: true, // will always show the root menu
+    meta: {
+      title: 'permission',
+      icon: 'lock',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [{
+        path: 'page',
+        component: () => import('@/views/permission/page'),
+        name: 'pagePermission',
+        meta: {
+          title: 'pagePermission',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      }, {
+        path: 'directive',
+        component: () => import('@/views/permission/directive'),
+        name: 'directivePermission',
+        meta: {
+          title: 'directivePermission'
+          // if do not set roles, means: this page does not require permissi
+          on
+        }
+      }]
+  }]
 ```
 
 这种方式存在以下四种缺点：
@@ -6593,9 +6593,9 @@ NProgress.done() // finish progress bar
 
 ```js
 {
-name: "login",
-path: "/login",
-component: () => import("@/pages/Login.vue")
+  name: "login",
+  path: "/login",
+  component: () => import("@/pages/Login.vue")
 }
 ```
 
@@ -6697,8 +6697,8 @@ window.scrollTo(0, 0);
 const Home = () => import("../pages/Home.vue");
 const UserInfo = () => import("../pages/UserInfo.vue");
 export default {
-home: Home,
-userInfo: UserInfo
+  home: Home,
+  userInfo: UserInfo
 };
 ```
 
@@ -6707,14 +6707,14 @@ userInfo: UserInfo
 ```js
 
 {
-name: "home",
-path: "/",
-component: "home"
+  name: "home",
+  path: "/",
+  component: "home"
 },
 {
-name: "home",
-path: "/userinfo",
-component: "userInfo"
+  name: "home",
+  path: "/userinfo",
+  component: "userInfo"
 }
 ```
 
@@ -6746,29 +6746,29 @@ component: "userInfo"
 
 ```js
 {
-path: '/permission',
-component: Layout,
-name：'权限测试'，
-meta: {
-btnPermissions: ['admin', 'supper', 'normal']
-},
-//页面需要的权限
-children: [{
-path: 'supper',
-component: _import('system/supper'),
-name：「权限测试页'
-meta: {
-btnPermissions: ['admin','supper']
-}//页面需要的权限
-},
-{
-path: 'normal',
-component: _import('system/normal'),
-name：'权限测试页'
-meta: {
-btnPermissions: ['admin']
-}//页面需要的权限
-}]
+  path: '/permission',
+  component: Layout,
+  name：'权限测试'，
+  meta: {
+    btnPermissions: ['admin', 'supper', 'normal']
+  },
+  //页面需要的权限
+  children: [{
+      path: 'supper',
+      component: _import('system/supper'),
+      name：「权限测试页'
+      meta: {
+        btnPermissions: ['admin','supper']
+      }//页面需要的权限
+    },
+    {
+      path: 'normal',
+      component: _import('system/normal'),
+      name：'权限测试页'
+      meta: {
+        btnPermissions: ['admin']
+      }//页面需要的权限
+    }]
 }
 ```
 
@@ -6778,34 +6778,34 @@ btnPermissions: ['admin']
 import Vue from 'vue'
 /**权限指令**/
 const has = Vue.directive('has', {
-bind: function (el, binding, vnode) {
-//获取页面按钮权限
-let btnPermissionsArr = [];
-if(binding.value){
-//如果指令传值，获取指令参数，根据指令参数和当前登录人按钮权限做比较。
-btnPermissionsArr = Array.of(binding.value);
-}else{
-//否则获取路由中的参数，根据路由的btnPermissionsArr和当前登录人按钮权
-限做比较。
-btnPermissionsArr = vnode.context.$route.meta.btnPermissions;
-}
-if (!Vue.prototype.$_has(btnPermissionsArr)) {
-el.parentNode.removeChild(el);
-}
-}
-});
+    bind: function (el, binding, vnode) {
+      //获取页面按钮权限
+      let btnPermissionsArr = [];
+      if(binding.value){
+        //如果指令传值，获取指令参数，根据指令参数和当前登录人按钮权限做比较。
+        btnPermissionsArr = Array.of(binding.value);
+      }else{
+        //否则获取路由中的参数，根据路由的btnPermissionsArr和当前登录人按钮权
+        限做比较。
+        btnPermissionsArr = vnode.context.$route.meta.btnPermissions;
+      }
+      if (!Vue.prototype.$_has(btnPermissionsArr)) {
+        el.parentNode.removeChild(el);
+      }
+    }
+  });
 // 权限检查方法
 Vue.prototype.$_has = function (value) {
-let isExist = false;
-//获取用户按钮权限
-let btnPermissionsStr = sessionStorage.getItem("btnPermissions");
-if (btnPermissionsStr == undefined || btnPermissionsStr == null) {
-return false;
-}
-if (value.indexOf(btnPermissionsStr) > -1) {
-isExist = true;
-}
-return isExist;
+  let isExist = false;
+  //获取用户按钮权限
+  let btnPermissionsStr = sessionStorage.getItem("btnPermissions");
+  if (btnPermissionsStr == undefined || btnPermissionsStr == null) {
+    return false;
+  }
+  if (value.indexOf(btnPermissionsStr) > -1) {
+    isExist = true;
+  }
+  return isExist;
 };
 export {has}
 ```
@@ -6886,15 +6886,15 @@ deactivated
 
 ```js
 {
-path: 'list',
-name:'itemList'，// 列表页
-component (resolve) {
-require(['@/pages/item/list'], resolve)
-},
-meta: {
-keepAlive: true,
-title:'列表页'
-}
+  path: 'list',
+  name:'itemList'，// 列表页
+  component (resolve) {
+    require(['@/pages/item/list'], resolve)
+  },
+  meta: {
+    keepAlive: true,
+    title:'列表页'
+  }
 }
 ```
 
@@ -7034,9 +7034,9 @@ return vnode || (slot && slot[0])
 
 ```js
 this.cache = {
-'key1':'组件1',
-'key2':'组件2',
-// ...
+  'key1':'组件1',
+  'key2':'组件2',
+  // ...
 }
 ```
 
@@ -7044,18 +7044,18 @@ this.cache = {
 
 ```ts
 function pruneCacheEntry (
-cache: VNodeCache,
-key: string,
-keys: Array<string>,
-current?: VNode
+  cache: VNodeCache,
+  key: string,
+  keys: Array<string>,
+  current?: VNode
 ) {
-const cached = cache[key]
-/*判断当前没有处于被渲染状态的组件，将其销毁*/
-if (cached && (!current || cached.tag !== current.tag)) {
-cached.componentInstance.$destroy()
-}
-cache[key] = null
-remove(keys, key)
+  const cached = cache[key]
+  /*判断当前没有处于被渲染状态的组件，将其销毁*/
+  if (cached && (!current || cached.tag !== current.tag)) {
+    cached.componentInstance.$destroy()
+  }
+  cache[key] = null
+  remove(keys, key)
 }
 ```
 
@@ -7076,16 +7076,16 @@ pruneCache(this, name => !matches(val, name))
 
 ```js
 function pruneCache (keepAliveInstance, filter) {
-const { cache, keys, \_vnode } = keepAliveInstance
-for (const key in cache) {
-const cachedNode = cache[key]
-if (cachedNode) {
-const name = getComponentName(cachedNode.componentOptions)
-if (name && !filter(name)) {
-pruneCacheEntry(cache, key, keys, \_vnode)
-}
-}
-}
+  const { cache, keys, \_vnode } = keepAliveInstance
+  for (const key in cache) {
+    const cachedNode = cache[key]
+    if (cachedNode) {
+      const name = getComponentName(cachedNode.componentOptions)
+      if (name && !filter(name)) {
+        pruneCacheEntry(cache, key, keys, \_vnode)
+      }
+    }
+  }
 }
 ```
 
@@ -7106,10 +7106,10 @@ const key = vnode.key == null
 ```js
 /*如果命中缓存，则直接从缓存中拿vnode的组件实例*/
 if (cache[key]) {
-vnode.componentInstance = cache[key].componentInstance
-/*调整该组件key的顺序，将其从原来的地方删掉并重新放在最后一个*/
-remove(keys, key)
-keys.push(key)
+  vnode.componentInstance = cache[key].componentInstance
+  /*调整该组件key的顺序，将其从原来的地方删掉并重新放在最后一个*/
+  remove(keys, key)
+  keys.push(key)
 }
 ```
 
@@ -7120,12 +7120,12 @@ this.cache对象中没有该key值的情况，如下：
 ```js
 /* 如果没有命中缓存，则将其设置进缓存 */
 else {
-cache[key] = vnode
-keys.push(key)
-/* 如果配置了max并且缓存的长度超过了this.max，则从缓存中删除第一个 */
-if (this.max && keys.length > parseInt(this.max)) {
-pruneCacheEntry(cache, keys[0], keys, this.\_vnode)
-}
+  cache[key] = vnode
+  keys.push(key)
+  /* 如果配置了max并且缓存的长度超过了this.max，则从缓存中删除第一个 */
+  if (this.max && keys.length > parseInt(this.max)) {
+    pruneCacheEntry(cache, keys[0], keys, this.\_vnode)
+  }
 }
 ```
 
@@ -7147,11 +7147,11 @@ pruneCacheEntry(cache, keys[0], keys, this.\_vnode)
 
 ```js
 beforeRouteEnter(to, from, next){
-next(vm=>{
-console.log(vm)
-// 每次进入路由执行
-vm.getData()// 获取数据
-})
+  next(vm=>{
+      console.log(vm)
+      // 每次进入路由执行
+      vm.getData()// 获取数据
+    })
 },
 ```
 
@@ -7161,7 +7161,7 @@ vm.getData()// 获取数据
 
 ```js
 activated(){
-this.getData() // 获取数据
+  this.getData() // 获取数据
 }，
 ```
 注意:服务器端渲染期间avtived不被调用
@@ -7222,22 +7222,22 @@ SPA(single-pageapplication)，翻译过来就是单页应用 SPA是一种网络�
 ```js
 // 定义 Router
 class Router {
-constructor () {
-this.routes = {}; // 存放路由path及callback
-this.currentUrl = '';
+  constructor () {
+    this.routes = {}; // 存放路由path及callback
+    this.currentUrl = '';
 
-//监听路由change调用相对应的路由回调
-window.addEventListener('load', this.refresh, false);
-window.addEventListener('hashchange', this.refresh, false);
-}
+    //监听路由change调用相对应的路由回调
+    window.addEventListener('load', this.refresh, false);
+    window.addEventListener('hashchange', this.refresh, false);
+  }
 
-route(path, callback){
-this.routes[path] = callback;
-}
+  route(path, callback){
+    this.routes[path] = callback;
+  }
 
-push(path) {
-this.routes[path] && this.routes[path]()
-}
+  push(path) {
+    this.routes[path] && this.routes[path]()
+  }
 }
 
 // 使用 router
@@ -7331,18 +7331,18 @@ miniRouter.push('/page2') // page2
 ```js
 //方案一：
 document.addEventListener('DOMContentLoaded', (event) => {
-console.log('first contentful painting');
-});
+    console.log('first contentful painting');
+  });
 // 方案二:
 performance.getEntriesByName("first-contentful-paint")[0].startTime
 
 // performance.getEntriesByName("first-contentful-paint")[0]
 // 会返回一个 PerformancePaintTiming的实例，结构如下：
 {
-name:"first-contentful-paint",
-entryType: "paint",
-startTime:507.80000002123415,
-duration: 0,
+  name:"first-contentful-paint",
+  entryType: "paint",
+  startTime:507.80000002123415,
+  duration: 0,
 };
 ```
 
@@ -7554,11 +7554,11 @@ ue 是属于单页应用(single-page application)
 
 ```js
 server {
-listen 80;
-server\_name www.xxx.com;
-location / {
-index /data/dist/index.html;
-}
+  listen 80;
+  server\_name www.xxx.com;
+  location / {
+    index /data/dist/index.html;
+  }
 }
 ```
 
@@ -7605,11 +7605,11 @@ try\_files \$uri \$uri/ /index.html;
 
 ```js
 const router = new VueRouter({
-mode: 'history',
-routes: [
-{ path: '*', component: NotFoundComponent }
-]
-})
+    mode: 'history',
+    routes: [
+      { path: '*', component: NotFoundComponent }
+    ]
+  })
 ```
 
 ## 28. SSR解决了什么问题？有做过SSR吗？你是怎么做的？
@@ -7739,13 +7739,13 @@ import { createRouter } from "./router";
 //导出Vue实例工厂函数，为每次请求创建独立实例
 //上下文用于给vue实例传递参数
 export function createApp(context) {
-const router = createRouter();
-constapp = new Vue({
-router,
-context,
-render: h => h(App)
-});
-return { app, router };
+  const router = createRouter();
+  constapp = new Vue({
+      router,
+      context,
+      render: h => h(App)
+    });
+  return { app, router };
 }
 ```
 
@@ -7757,16 +7757,16 @@ return { app, router };
 import { createApp } from "./main";
 //返回一个函数，接收请求上下文，返回创建的vue实例
 export default context => {
-//这里返回一个Promise，确保路由或组件准备就绪
-return new Promise((resolve, reject) => {
-const { app, router } = createApp(context);
-// 跳转到首屏的地址
-router.push(context.url);
-// 路由就绪，返回结果
-router.onReady(() => {
-resolve(app);
-}, reject);
-});
+  //这里返回一个Promise，确保路由或组件准备就绪
+  return new Promise((resolve, reject) => {
+      const { app, router } = createApp(context);
+      // 跳转到首屏的地址
+      router.push(context.url);
+      // 路由就绪，返回结果
+      router.onReady(() => {
+          resolve(app);
+        }, reject);
+    });
 };
 ```
 
@@ -7780,8 +7780,8 @@ import { createApp } from "./main";
 const { app, router } = createApp();
 // 路由就绪，执行挂载
 router.onReady(() => {
-app.$mount("#app");
-});
+    app.$mount("#app");
+  });
 ```
 
 ### 构建、数据预取与激活
@@ -7887,9 +7887,9 @@ optimizeSSR: false
 
 ```js
 "scripts": {
-"build:client": "vue-cli-service build",
-"build:server": "cross-env WEBPACK\_TARGET=node vue-cli-service build",
-"build": "npm run build:server && npm run build:client"
+  "build:client": "vue-cli-service build",
+  "build:server": "cross-env WEBPACK\_TARGET=node vue-cli-service build",
+  "build": "npm run build:server && npm run build:client"
 }
 ```
 
@@ -7946,13 +7946,13 @@ state.count += 1;
 ```ts
 import { createStore } from './store'
 export function createApp (context) {
-//创建实例
-const store = createStore()
-const app = new Vue({
-store，// 挂载
-render: h => h(App)
-})
-return { app, router, store }
+  //创建实例
+  const store = createStore()
+  const app = new Vue({
+      store，// 挂载
+      render: h => h(App)
+    })
+  return { app, router, store }
 }
 ```
 
@@ -7962,25 +7962,25 @@ return { app, router, store }
 
 ```js
 export function createStore() {
-return new Vuex.Store({
-mutations: {
-// 加一个初始化
-init(state, count) {
-state.count = count;
-},
-},
-actions: {
-// 加一个异步请求count的action
-getCount({ commit }) {
-return new Promise(resolve => {
-setTimeout(() => {
-commit("init", Math.random() * 100);
-resolve();
-}, 1000);
-});
-},
-},
-});
+  return new Vuex.Store({
+      mutations: {
+        // 加一个初始化
+        init(state, count) {
+          state.count = count;
+        },
+      },
+      actions: {
+        // 加一个异步请求count的action
+        getCount({ commit }) {
+          return new Promise(resolve => {
+              setTimeout(() => {
+                  commit("init", Math.random() * 100);
+                  resolve();
+                }, 1000);
+            });
+        },
+      },
+    });
 }
 ```
 
@@ -7988,10 +7988,10 @@ resolve();
 
 ```js
 export default {
-asyncData({ store, route }) { // 约定预取逻辑编写在预取钩子asyncData中
-// 触发 action 后，返回 Promise 以便确定请求结果
-return store.dispatch("getCount");
-}
+  asyncData({ store, route }) { // 约定预取逻辑编写在预取钩子asyncData中
+    // 触发 action 后，返回 Promise 以便确定请求结果
+    return store.dispatch("getCount");
+  }
 };
 ```
 
@@ -8000,41 +8000,41 @@ return store.dispatch("getCount");
 ```js
 import { createApp } from "./app";
 export default context => {
-return new Promise((resolve, reject) => {
-// 拿出store和router实例
-const { app, router, store } = createApp(context);
-router.push(context.url);
-router.onReady(() => {
-//获取匹配的路由组件数组
-const matchedComponents = router.getMatchedComponents();
+  return new Promise((resolve, reject) => {
+      // 拿出store和router实例
+      const { app, router, store } = createApp(context);
+      router.push(context.url);
+      router.onReady(() => {
+          //获取匹配的路由组件数组
+          const matchedComponents = router.getMatchedComponents();
 
-//若无匹配则抛出异常
-if (!matchedComponents.length) {
-return reject({ code: 404 });
-}
+          //若无匹配则抛出异常
+          if (!matchedComponents.length) {
+            return reject({ code: 404 });
+          }
 
-//对所有匹配的路由组件调用可能存在的`asyncData()
-Promise.all(
-matchedComponents.map(Component => {
-if (Component.asyncData) {
-return Component.asyncData({
-store,
-route: router.currentRoute,
-});
-}
-}),
-)
-.then(() => {
-//所有预取钩子 resolve后，
-// store 已经填充入渲染应用所需状态
-//将状态附加到上下文，且template选项用于renderer时，
-//状态将自动序列化为`window.__INITIAL_STATE_`，并注入HTML
-context.state = store.state;
-resolve(app);
-})
-.catch(reject);
-}, reject);
-});
+          //对所有匹配的路由组件调用可能存在的`asyncData()
+          Promise.all(
+            matchedComponents.map(Component => {
+                if (Component.asyncData) {
+                  return Component.asyncData({
+                      store,
+                      route: router.currentRoute,
+                    });
+                }
+              }),
+          )
+          .then(() => {
+              //所有预取钩子 resolve后，
+              // store 已经填充入渲染应用所需状态
+              //将状态附加到上下文，且template选项用于renderer时，
+              //状态将自动序列化为`window.__INITIAL_STATE_`，并注入HTML
+              context.state = store.state;
+              resolve(app);
+            })
+          .catch(reject);
+        }, reject);
+    });
 };
 ```
 
@@ -8047,7 +8047,7 @@ const { app, router, store } = createApp();
 入到最终的 HTML
 //在客户端挂载到应用程序之前，store 就应该获取到状态：
 if (window.__INITIAL_STATE_) {
-store.replaceState(window._INITIAL_STATE_);
+  store.replaceState(window._INITIAL_STATE_);
 }
 ```
 
@@ -8055,19 +8055,19 @@ store.replaceState(window._INITIAL_STATE_);
 
 ```js
 Vue.mixin({
-beforeMount() {
-const { asyncData } = this.$options;
-if (asyncData) {
-// 将获取数据操作分配给promise
-//以便在组件中，我们可以在数据准备就绪后
-//通过运行this.dataPromise.then(...)来执行其他任务
-this.dataPromise = asyncData({
-store: this.$store,
-route: this.$route,
-});
-}
-},
-});
+    beforeMount() {
+      const { asyncData } = this.$options;
+      if (asyncData) {
+        // 将获取数据操作分配给promise
+        //以便在组件中，我们可以在数据准备就绪后
+        //通过运行this.dataPromise.then(...)来执行其他任务
+        this.dataPromise = asyncData({
+            store: this.$store,
+            route: this.$route,
+          });
+      }
+    },
+  });
 ```
 
 **修改服务器启动文件**
@@ -8322,12 +8322,12 @@ Teleport 是一种能够将我们的模板移动到 DOM 中 Vue app 之外的其
 import { createRenderer } from '@vue/runtime-core'
 
 const { render, createApp } = createRenderer({
-patchProp,
-insert,
-remove,
-createElement,
-//...
-})
+    patchProp,
+    insert,
+    remove,
+    createElement,
+    //...
+  })
 
 export { render, createApp }
 
@@ -8344,19 +8344,19 @@ compositionApi，也就是组合式 api，通过这种形式，我们能够更�
 
 ```js
 export default {
-setup() {
-const count = ref(0)
-const double = computed(() => count.value * 2)
-function increment() {
-count.value++
-}
-onMounted(() => console.log('component mounted!'))
-return {
-count,
-double,
-increment
-}
-}
+  setup() {
+    const count = ref(0)
+    const double = computed(() => count.value * 2)
+    function increment() {
+      count.value++
+    }
+    onMounted(() => console.log('component mounted!'))
+    return {
+      count,
+      double,
+      increment
+    }
+  }
 }
 ```
 
@@ -8500,22 +8500,22 @@ Options API，即大家常说的选项API，即以 vue 为后缀的文件，通�
 
 ```js
 function useCount() {
-let count = ref(10);
-let double = computed(() => {
-return count.value * 2;
-});
+  let count = ref(10);
+  let double = computed(() => {
+      return count.value * 2;
+    });
 
-const handleConut = () => {
-count.value = count.value * 2;
-};
+  const handleConut = () => {
+    count.value = count.value * 2;
+  };
 
-console.log(count);
+  console.log(count);
 
-return {
-count,
-double,
-handleConut,
-};
+  return {
+    count,
+    double,
+    handleConut,
+  };
 }
 ```
 
@@ -8523,15 +8523,15 @@ handleConut,
 
 ```js
 export default defineComponent({
-setup() {
-const { count, double, handleConut } = useCount();
-return {
-count,
-double,
-handleConut
-}
-},
-});
+    setup() {
+      const { count, double, handleConut } = useCount();
+      return {
+        count,
+        double,
+        handleConut
+      }
+    },
+  });
 ```
 
 再来一张图进行对比，可以很直观地感受到 Composition API在逻辑组织方面的优势，以后修改一个属性功能的时候，只需要跳到控制该属性的方法中即可
@@ -8593,7 +8593,7 @@ Mouse position: x {{ x }} / y {{ y }}
 <script>
 import mousePositionMixin from './mouse'
 export default {
-mixins: [mousePositionMixin]
+  mixins: [mousePositionMixin]
 }
 </script>
 ```
@@ -8615,43 +8615,43 @@ mixins: [mousePositionMixin, fooMixin, barMixin, otherMixin]
 ```js
 import { onMounted, onUnmounted, reactive } from "vue";
 export function useMove() {
-const position = reactive({
-x: 0,
-y: 0,
-});
+  const position = reactive({
+      x: 0,
+      y: 0,
+    });
 
-const handleKeyup = (e) => {
-console.log(e.code);
-// 上下左右 x y
-switch (e.code) {
-case "ArrowUp":
-// y.value--;
-position.y--;
-break;
-case "ArrowDown":
-// y.value++;
-position.y++;
-break;
-case "ArrowLeft":
-// x.value--;
-position.x--;
-break;
-case "ArrowRight":
-// x.value++;
-position.x++;
-break;
-}
-};
+  const handleKeyup = (e) => {
+    console.log(e.code);
+    // 上下左右 x y
+    switch (e.code) {
+      case "ArrowUp":
+      // y.value--;
+      position.y--;
+      break;
+      case "ArrowDown":
+      // y.value++;
+      position.y++;
+      break;
+      case "ArrowLeft":
+      // x.value--;
+      position.x--;
+      break;
+      case "ArrowRight":
+      // x.value++;
+      position.x++;
+      break;
+    }
+  };
 
-onMounted(() => {
-window.addEventListener("keyup", handleKeyup);
-});
+  onMounted(() => {
+      window.addEventListener("keyup", handleKeyup);
+    });
 
-onUnmounted(() => {
-window.removeEventListener("keyup", handleKeyup);
-});
+  onUnmounted(() => {
+      window.removeEventListener("keyup", handleKeyup);
+    });
 
-return { position };
+  return { position };
 }
 ```
 
@@ -8820,13 +8820,13 @@ vue3 是从什么哪些方面对性能进行进一步优化呢?
 
 ```js
 Object.defineProperty(data, 'a',{
-get( ){
-// track
-},
-set( ){
-// trigger
-}
-})
+    get( ){
+      // track
+    },
+    set( ){
+      // trigger
+    }
+  })
 ```
 
 尽管Vue为了解决这个问题提供了set和delete实例方法，但是对于用户来说，还是增加了一定的心智负担
@@ -8871,19 +8871,19 @@ d：1
 ```js
 import { toRefs, reactive, onUnmounted, onMounted } from 'vue';
 function useMouse(){
-const state = reactive({x:0,y:0});
-const update = e=>{
-state.x = e.pageX;
-state.y = e.pageY;
-}
-onMounted(()=>{
-window.addEventListener('mousemove',update);
-})
-onUnmounted(()=>{
-window.removeEventListener('mousemove',update);
-})
+  const state = reactive({x:0,y:0});
+  const update = e=>{
+    state.x = e.pageX;
+    state.y = e.pageY;
+  }
+  onMounted(()=>{
+      window.addEventListener('mousemove',update);
+    })
+  onUnmounted(()=>{
+      window.removeEventListener('mousemove',update);
+    })
 
-return toRefs(state);
+  return toRefs(state);
 }
 ```
 
@@ -9014,11 +9014,11 @@ modal.type.ts // ts类型声明相关
 
 ```html
 <div class="modal content">
-<Content v-if="typeof content==='function'"
-:render="content" />
-<slot v-else>
-{{content}}
-</slot>
+  <Content v-if="typeof content==='function'"
+  :render="content" />
+  <slot v-else>
+    {{content}}
+  </slot>
 </div>
 ```
 
@@ -9045,35 +9045,35 @@ content="hello world~"/>
 
 ```js
 $modal.show({
-title:'演示 h 函数'
-content(h) {
-return h(
-'div',
-{
-style: 'color:red;',
-onClick: ($event: Event) => console.log('clicked', $event.target)
-},
-'hello world ~'
-);
-}
-});
+    title:'演示 h 函数'
+    content(h) {
+      return h(
+        'div',
+        {
+          style: 'color:red;',
+          onClick: ($event: Event) => console.log('clicked', $event.target)
+        },
+        'hello world ~'
+      );
+    }
+  });
 ```
 
 - JSX
 
 ```ts
 $modal.show({
-title:'演示 jsx 语法',
-content() {
-return (
-<div
-onClick={($event: Event) => console.log('clicked', $event.target)}
->
-hello world ~
-</div>
-);
-}
-});
+    title:'演示 jsx 语法',
+    content() {
+      return (
+        <div
+        onClick={($event: Event) => console.log('clicked', $event.target)}
+        >
+        hello world ~
+        </div>
+      );
+    }
+  });
 ```
 
 ### API 调用方式
@@ -9104,9 +9104,9 @@ document.body.appendChild(container);
 
 ```js
 export default {
-install(vue) {
-vue.prototype.$create = create
-}
+  install(vue) {
+    vue.prototype.$create = create
+  }
 }
 ```
 
@@ -9114,9 +9114,9 @@ vue.prototype.$create = create
 
 ```js
 export default {
-install(app) {
-app.config.globalProperties.$create = create
-}
+  install(app) {
+    app.config.globalProperties.$create = create
+  }
 }
 ```
 
@@ -9127,28 +9127,28 @@ app.config.globalProperties.$create = create
 ```js
 // Modal.vue
 setup(props, ctx) {
-let instance = getCurrentInstance(); // 获得当前组件实例
-onBeforeMount(() => {
-instance._hub = {
-'on-cancel': () => {},
-'on-confirm': () => {}
-};
-});
+  let instance = getCurrentInstance(); // 获得当前组件实例
+  onBeforeMount(() => {
+      instance._hub = {
+        'on-cancel': () => {},
+        'on-confirm': () => {}
+      };
+    });
 
-const handleConfirm = () => {
-ctx.emit('on-confirm');
-instance._hub['on-confirm']();
-};
-const handleCancel = () => {
-ctx.emit('on-cancel');
-ctx.emit('update:modelValue', false);
-instance._hub['on-cancel']();
-};
+  const handleConfirm = () => {
+    ctx.emit('on-confirm');
+    instance._hub['on-confirm']();
+  };
+  const handleCancel = () => {
+    ctx.emit('on-cancel');
+    ctx.emit('update:modelValue', false);
+    instance._hub['on-cancel']();
+  };
 
-return {
-handleConfirm,
-handleCancel
-};
+  return {
+    handleConfirm,
+    handleCancel
+  };
 }
 ```
 
@@ -9388,22 +9388,22 @@ onClick: _cache[1] | (_cache[1] = (...args) =>(_ctx.onClick(...args
 ```js
 import { computed, defineComponent, ref } from 'vue';
 export default defineComponent({
-setup(props, context) {
-const age = ref(18)
+    setup(props, context) {
+      const age = ref(18)
 
-let state = reactive({
-name:'test'
-})
+      let state = reactive({
+          name:'test'
+        })
 
-const readonlyAge = computed(() => age.value++) // 19
+      const readonlyAge = computed(() => age.value++) // 19
 
-return {
-age,
-state,
-readonlyAge
-}
-}
-});
+      return {
+        age,
+        state,
+        readonlyAge
+      }
+    }
+  });
 ```
 
 **响应式系统**
@@ -9464,8 +9464,8 @@ update()
 const obj = {}
 defineReactive(obj, 'foo','')
 setTimeout(()=>{
-obj.foo = new Date().toLocaleTimeString()
-},1000)
+    obj.foo = new Date().toLocaleTimeString()
+  },1000)
 ```
 
 在对象存在多个key情况下，需要进行遍历
@@ -9485,19 +9485,19 @@ defineReactive(obj, key, obj[key])
 
 ```js
 function defineReactive(obj, key, val) {
-observe(val)
-Object.defineProperty(obj, key, {
-get( ) {
-console.log(`get ${key}:${val}`);
-return val
-},
-set(newVal) {
-if (newVal !== val) {
-val = newVal
-update()
-}
-}
-})
+  observe(val)
+  Object.defineProperty(obj, key, {
+      get( ) {
+        console.log(`get ${key}:${val}`);
+        return val
+      },
+      set(newVal) {
+        if (newVal !== val) {
+          val = newVal
+          update()
+        }
+      }
+    })
 }
 ```
 
@@ -9505,10 +9505,10 @@ update()
 
 ```js
 set(newVal) {
-if (newVal !== val) {
-observe(newVal) //新值是对象的情况
-notifyUpdate()
-}
+  if (newVal !== val) {
+    observe(newVal) //新值是对象的情况
+    notifyUpdate()
+  }
 }
 ```
 
@@ -9518,8 +9518,8 @@ notifyUpdate()
 
 ```js
 const obj = {
-foo: "foo",
-bar: "bar"
+  foo: "foo",
+  bar: "bar"
 }
 observe(obj)
 delete obj.foo // no ok
@@ -9531,8 +9531,8 @@ obj.jar = 'xxx' // no ok
 ```js
 const arrData = [1,2,3,4,5];
 arrData.forEach((val,index)=>{
-defineProperty(arrData,index,val)
-})
+    defineProperty(arrData,index,val)
+  })
 arrData.push() // no ok
 arrData.pop() // no ok
 arrDate[0] = 99 // ok
@@ -9593,8 +9593,8 @@ return observed
 
 ```js
 const state = reactive({
-foo:'foo'
-})
+    foo:'foo'
+  })
 //1.获取
 state.foo// ok
 // 2.设置已存在属性
@@ -9620,8 +9620,8 @@ defineReactive(obj, key, obj[key])
 
 ```js
 const state = reactive({
-bar: { a: 1 }
-})
+    bar: { a: 1 }
+  })
 //设置嵌套对象属性
 state.bar.a = 10 // no ok
 ```
@@ -9652,28 +9652,28 @@ Proxy直接可以劫持整个对象，并返回一个新对象，我们可以只
 
 ```js
 function reactive(obj) {
-if (typeof obj !== 'object' && obj != null) {
-return obj
-}
-// Proxy相当于在对象外层加拦截
-const observed = new Proxy(obj, {
-get(target, key, receiver) {
-const res = Reflect.get(target, key, receiver)
-console.log(`获取${key}:${res}`)
-return res
-},
-set(target, key, value, receiver) {
-const res = Reflect.set(target, key, value, receiver)
-console.log(`设置${key}:${value}`)
-return res
-},
-deleteProperty(target, key) {
-const res = Reflect.deleteProperty(target, key)
-console.log(`删除${key}:${res}`)
-return res
-}
-})
-return observed
+  if (typeof obj !== 'object' && obj != null) {
+    return obj
+  }
+  // Proxy相当于在对象外层加拦截
+  const observed = new Proxy(obj, {
+      get(target, key, receiver) {
+        const res = Reflect.get(target, key, receiver)
+        console.log(`获取${key}:${res}`)
+        return res
+      },
+      set(target, key, value, receiver) {
+        const res = Reflect.set(target, key, value, receiver)
+        console.log(`设置${key}:${value}`)
+        return res
+      },
+      deleteProperty(target, key) {
+        const res = Reflect.deleteProperty(target, key)
+        console.log(`删除${key}:${res}`)
+        return res
+      }
+    })
+  return observed
 }
 ```
 
@@ -9815,15 +9815,15 @@ dist/js/app.94092e3d.js                     2.07 KiB
 ```js
 import { reactive, defineComponent } from "vue";
 export default defineComponent({
-setup( ) {
-const state = reactive({
-count: 1,
-});
-return {
-state,
-};
-}
-});
+    setup( ) {
+      const state = reactive({
+          count: 1,
+        });
+      return {
+        state,
+      };
+    }
+  });
 ```
 
 将项目进行打包
@@ -9842,27 +9842,27 @@ Gzipped 29.62 KiB 0.93 KiB
 ```js
 import { reactive, defineComponent, computed, watch } from "vue";
 export default defineComponent({
-setup() {
-const state = reactive({
-count: 1,
-});
-const double = computed(() => {
-return state.count * 2;
-});
+    setup() {
+      const state = reactive({
+          count: 1,
+        });
+      const double = computed(() => {
+          return state.count * 2;
+        });
 
-watch(
-() => state.count,
-(count, preCount) => {
-console.log(count);
-console.log(preCount);
-}
-);
-return {
-state,
-double,
-};
-},
-});
+      watch(
+        () => state.count,
+        (count, preCount) => {
+          console.log(count);
+          console.log(preCount);
+        }
+      );
+      return {
+        state,
+        double,
+      };
+    },
+  });
 ```
 
 再次对项目进行打包，可以看到在引入 computer和watch之后，项目整体体积变大了

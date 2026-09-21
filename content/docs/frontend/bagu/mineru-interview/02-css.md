@@ -25,11 +25,11 @@ margin，即外边距，在元素外创建额外的空白，空白通常指不�
 
 ```html
 <style>
-.box {
-width: 200px;
-height: 100px;
-padding: 20px;
-}
+  .box {
+  width: 200px;
+  height: 100px;
+  padding: 20px;
+  }
 </style>
 ```
 
@@ -91,15 +91,15 @@ content-box默认值，元素的 width/height 不包含padding，border，与标
 
 ```html
 <style>
-.box {
-width: 200px;
-height: 100px;
-padding: 20px;
-box-sizing: border-box;
-}
+  .box {
+  width: 200px;
+  height: 100px;
+  padding: 20px;
+  box-sizing: border-box;
+  }
 </style>
 <div class="box">
-盒子模型
+  盒子模型
 </div>
 ```
 
@@ -157,18 +157,18 @@ display的值为inline-block、inltable-cell、table-caption、table、inline-ta
 
 ```html
 <style>
-p {
-color: #f55;
-background: #fcc;
-width: 200px;
-line-height: 100px;
-text-align:center;
-margin: 100px;
-}
+  p {
+  color: #f55;
+  background: #fcc;
+  width: 200px;
+  line-height: 100px;
+  text-align:center;
+  margin: 100px;
+  }
 </style>
 <body>
-<p>Haha</p >
-<p>Hehe</p >
+  <p>Haha</p >
+  <p>Hehe</p >
 </body>
 ```
 
@@ -180,23 +180,23 @@ margin: 100px;
 
 ```html
 <style>
-.wrap {
-overflow:hidden;//新的BFC
-}
-p {
-color: #f55;
-background: #fcc;
-width: 200px;
-line-height: 100px;
-text-align:center;
-margin: 100px;
-}
+  .wrap {
+  overflow:hidden;//新的BFC
+  }
+  p {
+  color: #f55;
+  background: #fcc;
+  width: 200px;
+  line-height: 100px;
+  text-align:center;
+  margin: 100px;
+  }
 </style>
 <body>
-<p>Haha</p >
-<div class="wrap">
-<p>Hehe</p >
-</div>
+  <p>Haha</p >
+  <div class="wrap">
+    <p>Hehe</p >
+  </div>
 </body>
 ```
 
@@ -210,23 +210,23 @@ Hehe
 
 ```html
 <style>
-.par {
-border: 5px solid #fcc;
-width: 300px;
-}
+  .par {
+  border: 5px solid #fcc;
+  width: 300px;
+  }
 
-.child {
-border: 5px solid #f66;
-width:100px;
-height: 100px;
-float: left;
-}
+  .child {
+  border: 5px solid #f66;
+  width:100px;
+  height: 100px;
+  float: left;
+  }
 </style>
 <body>
-<div class="par">
-<div class="child"></div>
-<div class="child"></div>
-</div>
+  <div class="par">
+    <div class="child"></div>
+    <div class="child"></div>
+  </div>
 </body>
 ```
 
@@ -234,7 +234,7 @@ float: left;
 
 ```css
 .par {
-overflow: hidden;
+  overflow: hidden;
 }
 ```
 
@@ -246,26 +246,26 @@ overflow: hidden;
 
 ```html
 <style>
-body {
-width: 300px;
-position: relative;
-}
+  body {
+  width: 300px;
+  position: relative;
+  }
 
-.aside {
-width: 100px;
-height: 150px;
-float: left;
-background: #f66;
-}
+  .aside {
+  width: 100px;
+  height: 150px;
+  float: left;
+  background: #f66;
+  }
 
-.main {
-height: 200px;
-background: #fcc;
-}
+  .main {
+  height: 200px;
+  background: #fcc;
+  }
 </style>
 <body>
-<divclass="aside"></div>
-<div class="main"></div>
+  <divclass="aside"></div>
+  <div class="main"></div>
 </body>
 ```
 
@@ -279,7 +279,7 @@ background: #fcc;
 
 ```css
 .main {
-overflow: hidden;
+  overflow: hidden;
 }
 ```
 
@@ -347,9 +347,9 @@ CSS3中的增加了更多的媒体查询，就像if条件表达式一样，我�
 
 ```css
 @media screen (min-width: 375px) and (max-width: 600px) {
-body {
-font-size: 18px;
-}
+  body {
+    font-size: 18px;
+  }
 }
 ```
 
@@ -391,21 +391,21 @@ vw表示相对于视图窗口的宽度，vh表示相对于视图窗口高度。�
 
 ```css
 @media screen and (max-width: 414px) {
-html {
-font-size: 18px
-}
+  html {
+    font-size: 18px
+  }
 }
 
 @media screen and (max-width:375px) {
-html {
-font-size: 16px
-}
+  html {
+    font-size: 16px
+  }
 }
 
 @media screen and (max-width: 320px) {
-html {
-font-size: 12px
-}
+  html {
+    font-size: 12px
+  }
 }
 ```
 
@@ -414,10 +414,10 @@ font-size: 12px
 ```js
 //动态为根元素设置字体大小
 function init () {
-// 获取屏幕宽度
-var width = document.documentElement.clientWidth
-//设置根元素字体大小。此时为宽的10等分
-document.documentElement.style.fontSize = width / 10 + 'px'
+  // 获取屏幕宽度
+  var width = document.documentElement.clientWidth
+  //设置根元素字体大小。此时为宽的10等分
+  document.documentElement.style.fontSize = width / 10 + 'px'
 }
 
 //首次加载应用，设置一次
@@ -498,26 +498,26 @@ window.addEventListener('resize', init)
 
 ```html
 <style>
-.father{
-width:500px;
-height:300px;
-border:1px solid #0a3b98;
-position: relative;
-}
-.son{
-width:100px;
-height:40px;
-background: #f0a238;
-position: absolute;
-top:0;
-left:0;
-right:0;
-bottom:0;
-margin:auto;
-}
+  .father{
+  width:500px;
+  height:300px;
+  border:1px solid #0a3b98;
+  position: relative;
+  }
+  .son{
+  width:100px;
+  height:40px;
+  background: #f0a238;
+  position: absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  margin:auto;
+  }
 </style>
 <div class="father">
-<div class="son"></div>
+  <div class="son"></div>
 </div>
 ```
 
@@ -531,25 +531,25 @@ margin:auto;
 
 ```html
 <style>
-.father {
-position: relative;
-width: 200px;
-height: 200px;
-background: skyblue;
-}
-.son {
-position: absolute;
-top: 50%;
-left: 50%;
-margin-left:-50px;
-margin-top:-50px;
-width: 100px;
-height: 100px;
-background: red;
-}
+  .father {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background: skyblue;
+  }
+  .son {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left:-50px;
+  margin-top:-50px;
+  width: 100px;
+  height: 100px;
+  background: red;
+  }
 </style>
 <div class="father">
-<div class="son"></div>
+  <div class="son"></div>
 </div>
 ```
 
@@ -571,24 +571,24 @@ background: red;
 
 ```html
 <style>
-.father {
-position: relative;
-width: 200px;
-height: 200px;
-background: skyblue;
-}
-.son {
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%,-50%);
-width: 100px;
-height: 100px;
-background: red;
-}
+  .father {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background: skyblue;
+  }
+  .son {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 100px;
+  height: 100px;
+  background: red;
+  }
 </style>
 <div class="father">
-<div class="son"></div>
+  <div class="son"></div>
 </div>
 ```
 
@@ -604,23 +604,23 @@ translate(-50%，-50%)将会将元素位移自己宽度和高度的-50%
 
 ```html
 <style>
-.father {
-display: table-cell;
-width: 200px;
-height: 200px;
-background: skyblue;
-vertical-align: middle;
-text-align: center;
-}
-.son {
-display: inline-block;
-width: 100px;
-height: 100px;
-background: red;
-}
+  .father {
+  display: table-cell;
+  width: 200px;
+  height: 200px;
+  background: skyblue;
+  vertical-align: middle;
+  text-align: center;
+  }
+  .son {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background: red;
+  }
 </style>
 <div class="father">
-<div class="son"></div>
+  <div class="son"></div>
 </div>
 ```
 
@@ -630,22 +630,22 @@ background: red;
 
 ```html
 <style>
-.father {
-display: flex;
-justify-content: center;
-align-items: center;
-width: 200px;
-height: 200px;
-background: skyblue;
-}
-.son {
-width: 100px;
-height: 100px;
-background: red;
-}
+  .father {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  background: skyblue;
+  }
+  .son {
+  width: 100px;
+  height: 100px;
+  background: red;
+  }
 </style>
 <div class="father">
-<div class="son"></div>
+  <div class="son"></div>
 </div>
 ```
 
@@ -663,23 +663,23 @@ css3中了 flex布局，可以非常简单实现垂直水平居中
 
 ```html
 <style>
-.father {
-display: grid;
-align-items:center;
-justify-content: center;
-width: 200px;
-height: 200px;
-background: skyblue;
+  .father {
+  display: grid;
+  align-items:center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  background: skyblue;
 
-}
-.son {
-width: 10px;
-height: 10px;
-border: 1px solid red
-}
+  }
+  .son {
+  width: 10px;
+  height: 10px;
+  border: 1px solid red
+  }
 </style>
 <div class="father">
-<div class="son"></div>
+  <div class="son"></div>
 </div>
 ```
 
@@ -771,24 +771,24 @@ border: 1px solid red
 
 ```html
 <style>
-.box{
-overflow: hidden; 添加BFC
-}
-.left {
-float: left;
-width: 200px;
-background-color: gray;
-height: 400px;
-}
-.right {
-margin-left: 210px;
-background-color: lightgray;
-height: 200px;
-}
+  .box{
+  overflow: hidden; 添加BFC
+  }
+  .left {
+  float: left;
+  width: 200px;
+  background-color: gray;
+  height: 400px;
+  }
+  .right {
+  margin-left: 210px;
+  background-color: lightgray;
+  height: 200px;
+  }
 </style>
 <div class="box">
-<div class="left">左边</div>
-<div class="right">右边</div>
+  <div class="left">左边</div>
+  <div class="right">右边</div>
 </div>
 ```
 
@@ -798,19 +798,19 @@ height: 200px;
 
 ```html
 <style>
-.box{
-display: flex;
-}
-.left
-width: 100px;
-一
-right {
-flex: 1;
-}
+  .box{
+  display: flex;
+  }
+  .left
+  width: 100px;
+  一
+  right {
+  flex: 1;
+  }
 </style>
 <div class="box">
-<div class="left">左边</div>
-<div class="right">右边</div>
+  <div class="left">左边</div>
+  <div class="right">右边</div>
 </div>
 ```
 
@@ -894,45 +894,45 @@ margin-right: 140px;
 
 ```html
 <style>
-.container {
-position: relative;
-}
+  .container {
+  position: relative;
+  }
 
-.left,
-.right,
-.main {
-height: 200px;
-line-height: 200px;
-text-align: center;
-}
+  .left,
+  .right,
+  .main {
+  height: 200px;
+  line-height: 200px;
+  text-align: center;
+  }
 
-.left {
-position: absolute;
-top: 0;
-left: 0;
-width: 100px;
-background: green;
-}
+  .left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  background: green;
+  }
 
-.right {
-position: absolute;
-top: 0;
-right: 0;
-width: 100px;
-background: green;
-}
+  .right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  background: green;
+  }
 
-.main {
-margin: 0 110px;
-background: black;
-color:white;
+  .main {
+  margin: 0 110px;
+  background: black;
+  color:white;
 
 </style>
 
 <div class="container">
-<div class="left">左边固定宽度</div>
-<div class="right">右边固定宽度</div>
-<div class="main">中间自适应</div>
+  <div class="left">左边固定宽度</div>
+  <div class="right">右边固定宽度</div>
+  <div class="main">中间自适应</div>
 </div>
 ```
 
@@ -944,40 +944,40 @@ color:white;
 
 ```html
 <style>
-.left,
-.right,
-.main {
-height: 200px;
-line-height: 200px;
-text-align: center;
-}
+  .left,
+  .right,
+  .main {
+  height: 200px;
+  line-height: 200px;
+  text-align: center;
+  }
 
-.main-wrapper {
-float: left;
-width: 100%;
-}
+  .main-wrapper {
+  float: left;
+  width: 100%;
+  }
 
-.main {
-margin: 0 110px;
-background: black;
-color: white;
-}
+  .main {
+  margin: 0 110px;
+  background: black;
+  color: white;
+  }
 
-.left,
-.right {
-float: left;
-width: 100px;
-margin-left: -100%;
-background: green;
-}
+  .left,
+  .right {
+  float: left;
+  width: 100px;
+  margin-left: -100%;
+  background: green;
+  }
 
-right
-margin-left: -100px; /* 同自身宽度 */
+  right
+  margin-left: -100px; /* 同自身宽度 */
 
 </style>
 
 <div class="main-wrapper">
-<div class="main">中间自适应</div>
+  <div class="main">中间自适应</div>
 </div>
 <div class="left">左边固定宽度</div>
 <div class="right">右边固定宽度</div>
@@ -1001,38 +1001,38 @@ margin-left: -100px; /* 同自身宽度 */
 
 ```html
 <style>
-.container {
-height: 200px;
-line-height: 200px;
-text-align: center;
-display: table;
-table-layout: fixed;
-width: 100%;
-}
+  .container {
+  height: 200px;
+  line-height: 200px;
+  text-align: center;
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  }
 
-.left,
-.right,
-.main {
-display: table-cell;
-}
+  .left,
+  .right,
+  .main {
+  display: table-cell;
+  }
 
-.left,
-.right {
-width: 100px;
-background: green;
-}
+  .left,
+  .right {
+  width: 100px;
+  background: green;
+  }
 
-.main {
-background: black;
-color: white;
-width: 100%;
-}
+  .main {
+  background: black;
+  color: white;
+  width: 100%;
+  }
 </style>
 
 <div class="container">
-<div class="left">左边固定宽度</div>
-<div class="main">中间自适应</div>
-<div class="right">右边固定宽度</div>
+  <div class="left">左边固定宽度</div>
+  <div class="main">中间自适应</div>
+  <div class="right">右边固定宽度</div>
 </div>
 ```
 
@@ -1055,37 +1055,37 @@ width: 100%;
 ```html
 
 <style type="text/css">
-.wrap {
-display: flex;
-justify-content: space-between;
-}
+  .wrap {
+  display: flex;
+  justify-content: space-between;
+  }
 
-.left,
-.right,
-.middle {
-height: 100px;
-}
+  .left,
+  .right,
+  .middle {
+  height: 100px;
+  }
 
-.left {
-width: 200px;
-background: coral;
-}
+  .left {
+  width: 200px;
+  background: coral;
+  }
 
-.right {
-width: 120px;
-background: lightblue;
-}
+  .right {
+  width: 120px;
+  background: lightblue;
+  }
 
-.middle {
-background: #555;
-width: 100%;
-margin: 0 20px;
-}
+  .middle {
+  background: #555;
+  width: 100%;
+  margin: 0 20px;
+  }
 </style>
 <div class="wrap">
-<divclass="left">左侧</div>
-<div class="middle">中间</div>
-<div class="right">右侧</div>
+  <divclass="left">左侧</div>
+  <div class="middle">中间</div>
+  <div class="right">右侧</div>
 </div>
 ```
 
@@ -1107,34 +1107,34 @@ margin: 0 20px;
 
 ```html
 <style>
-.wrap {
-display: grid;
-width: 100%;
-grid-template-columns: 300px auto 300px;
-}
+  .wrap {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 300px auto 300px;
+  }
 
-.left,
-.right,
-.middle {
-height: 100px;
-}
+  .left,
+  .right,
+  .middle {
+  height: 100px;
+  }
 
-.left {
-background: coral;
-}
+  .left {
+  background: coral;
+  }
 
-.right {
-background: lightblue;
-}
+  .right {
+  background: lightblue;
+  }
 
-middle {
-background: #555;
+  middle {
+  background: #555;
 
 </style>
 <div class="wrap">
-<div class="left">左侧</div>
-<div class="middle">中间</div>
-<div class="right">右侧</div>
+  <div class="left">左侧</div>
+  <div class="middle">中间</div>
+  <div class="right">右侧</div>
 </div>
 ```
 
@@ -1152,15 +1152,15 @@ CSS选择器是CSS规则的第一部分
 
 ```html
 <div id="box">
-<div class="one">
-<p class="one_1">
-</p>
-<p class="one_1">
-</p >
-</div>
-<divclass="two"></div>
-<div class="two"></div>
-<div class="two"></div>
+  <div class="one">
+    <p class="one_1">
+    </p>
+    <p class="one_1">
+    </p >
+  </div>
+  <divclass="two"></div>
+  <div class="two"></div>
+  <div class="two"></div>
 </div>
 ```
 
@@ -1372,7 +1372,7 @@ a标签的字体颜色不能被继承
 
 ```css
 .hide {
-display:none;
+  display:none;
 }
 ```
 
@@ -1416,7 +1416,7 @@ display:none;
 
 ```css
 .hidden{
-visibility:hidden
+  visibility:hidden
 }
 ```
 
@@ -1434,7 +1434,7 @@ opacity属性表示元素的透明度，将元素的透明度设置为0后，在
 
 ```css
 .transparent {
-opacity:0;
+  opacity:0;
 }
 ```
 
@@ -1450,12 +1450,12 @@ opacity:0;
 
 ```css
 .hiddenBox {
-margin:0;
-border:0;
-padding:0;
-height:0;
-width:0;
-overflow:hidden;
+  margin:0;
+  border:0;
+  padding:0;
+  height:0;
+  width:0;
+  overflow:hidden;
 }
 ```
 
@@ -1481,7 +1481,7 @@ left: -9999px;
 
 ```css
 .hide {
-clip-path: polygon(0px 0px,0px 0px,0px 0px,0px 0px);
+  clip-path: polygon(0px 0px,0px 0px,0px 0px,0px 0px);
 }
 ```
 
@@ -1540,14 +1540,14 @@ text-overflow 只有在设置了 overflow:hidden和 white-space:nowrap才能够�
 
 ```html
 <style>
-overflow: hidden;
-line-height: 40px;
-width:400px;
-height:40px;
-border:1px solid red;
-text-overflow: ellipsis;
-white-space: nowrap;
-}
+  overflow: hidden;
+  line-height: 40px;
+  width:400px;
+  height:40px;
+  border:1px solid red;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  }
 </style>
 <p 这是一些文本这是一些文本这是一些文本这是一些文本这是一些文本这是一些文本这是一些文本
 ```
@@ -1588,23 +1588,23 @@ line-height:20px:结合元素高度,高度固定的情况下,设定行高，控�
 
 ```html
 <style>
-.demo {
-position: relative;
-line-height: 20px;
-height: 40px;
-overflow: hidden;
-}
-.demo::after {
-content: "...";
-position: absolute;
-bottom: 0;
-right: 0;
-padding: 0 20px 0 10px;
-}
+  .demo {
+  position: relative;
+  line-height: 20px;
+  height: 40px;
+  overflow: hidden;
+  }
+  .demo::after {
+  content: "...";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 0 20px 0 10px;
+  }
 </style>
 
 <body>
-<div class='demo'>这是一段很长的文本</div>
+  <div class='demo'>这是一段很长的文本</div>
 </body>
 ```
 
@@ -1634,19 +1634,19 @@ overflow: hidden：文本溢出限定的宽度就隐藏内容
 
 ```html
 <style>
-p {
-width: 400px;
-border-radius: 1px solid red;
-webkit-line-clamp: 2;
-display: -webkit-box;
-webkit-box-orient: vertical;
-overflow: hidden;
-text-overflow: ellipsis;
-}
+  p {
+  width: 400px;
+  border-radius: 1px solid red;
+  webkit-line-clamp: 2;
+  display: -webkit-box;
+  webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  }
 </style>
 <p>
-这是一些文本这是一些文本这是一些文本这是一些文本这是一些文本
-这是一些文本这是一些文本这是一些文本这是一些文本这是一些文本
+  这是一些文本这是一些文本这是一些文本这是一些文本这是一些文本
+  这是一些文本这是一些文本这是一些文本这是一些文本这是一些文本
 </p >
 ```
 
@@ -1681,19 +1681,19 @@ javascript代码如下：
 
 ```js
 $(function(){
-//获取文本的行高，并获取文本的高度，假设我们规定的行数是五行，那么对超过行数的部分进行
-限制高度，并加上省略号
-$('p').each(function(i, obj){
-var lineHeight = parseInt($(this).css("line-height"));
-var height = parseInt($(this).height());
-if((height / lineHeight) >3 ){
-$(this).addClass("p-after")
-$(this).css("height","60px");
-}else{
-$(this).removeClass("p-after");
-}
-});
-})
+    //获取文本的行高，并获取文本的高度，假设我们规定的行数是五行，那么对超过行数的部分进行
+    限制高度，并加上省略号
+    $('p').each(function(i, obj){
+        var lineHeight = parseInt($(this).css("line-height"));
+        var height = parseInt($(this).height());
+        if((height / lineHeight) >3 ){
+          $(this).addClass("p-after")
+          $(this).css("height","60px");
+        }else{
+          $(this).removeClass("p-after");
+        }
+      });
+  })
 ```
 
 ## 9. CSS如何画一个三角形？原理是什么？
@@ -1712,12 +1712,12 @@ $(this).removeClass("p-after");
 
 ```html
 <style>
-.border {
-width: 50px;
-height: 50px;
-border: 2px solid;
-border-color: #96ceb4 #ffeead #d9534f #ffad60;
-}
+  .border {
+  width: 50px;
+  height: 50px;
+  border: 2px solid;
+  border-color: #96ceb4 #ffeead #d9534f #ffad60;
+  }
 </style>
 <div class="border"></div>
 ```
@@ -1736,11 +1736,11 @@ border-color: #96ceb4 #ffeead #d9534f #ffad60;
 
 ```css
 .border {
-width: 0;
-height: 0;
-border-style:solid;
-border-width: 0 50px 50px;
-border-color: transparent transparent #d9534f;
+  width: 0;
+  height: 0;
+  border-style:solid;
+  border-width: 0 50px 50px;
+  border-color: transparent transparent #d9534f;
 }
 ```
 
@@ -1774,13 +1774,13 @@ left: 0;
 
 ```css
 .border:after {
-content: '';
-border-style: solid;
-border-width: 0 40px 40px;
-border-color: transparent transparent #96ceb4;
-position: absolute;
-top: 6px;
-left: -40px;
+  content: '';
+  border-style: solid;
+  border-width: 0 40px 40px;
+  border-color: transparent transparent #96ceb4;
+  position: absolute;
+  top: 6px;
+  left: -40px;
 }
 ```
 
@@ -1800,15 +1800,15 @@ left: -40px;
 
 ```scss
 .box {
-/*内部大小*/
-width: 0px;
-height: 0px;
-/*边框大小只设置两条边*/
-border-top: #4285f4 solid;
-border-right: transparent solid;
-border-width: 85px;
-/*其他设置*/
-margin: 50px;
+  /*内部大小*/
+  width: 0px;
+  height: 0px;
+  /*边框大小只设置两条边*/
+  border-top: #4285f4 solid;
+  border-right: transparent solid;
+  border-width: 85px;
+  /*其他设置*/
+  margin: 50px;
 }
 ```
 
@@ -1848,13 +1848,13 @@ inherit：继承父元素background-attachment属性的值
 
 ```css
 section {
-height: 100vh;
+  height: 100vh;
 }
 .g-img {
-background-image: url(...);
-background-attachment: fixed;
-background-size: cover;
-background-position: center center;
+  background-image: url(...);
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center center;
 }
 ```
 
@@ -2253,30 +2253,30 @@ delay:动画效果的延迟触发时间
 
 ```html
 <style>
-.base {
-width: 100px;
-height: 100px;
-display: inline-block;
-background-color:#0EA9FF;
-border-width: 5px;
-border-style: solid;
-border-color: #5daf34;
-transition-property: width, height, background-color, border-w
-idth;
-transition-duration: 2s;
-transition-timing-function: ease-in;
-transition-delay:500ms;
-一
+  .base {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  background-color:#0EA9FF;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #5daf34;
+  transition-property: width, height, background-color, border-w
+  idth;
+  transition-duration: 2s;
+  transition-timing-function: ease-in;
+  transition-delay:500ms;
+  一
 
-/*简写*/
-/*transition: all 2s ease-in 500ms;*/
-.base:hover {
-width: 200px;
-height: 200px;
-background-color: #5daf34;
-border-width: 10px;
-border-color:#3a8ee6;
-}
+  /*简写*/
+  /*transition: all 2s ease-in 500ms;*/
+  .base:hover {
+  width: 200px;
+  height: 200px;
+  background-color: #5daf34;
+  border-width: 10px;
+  border-color:#3a8ee6;
+  }
 </style>
 <div class="base"></div>
 ```
@@ -2299,29 +2299,29 @@ border-color:#3a8ee6;
 
 ```html
 <style>
-.base {
-width: 100px;
-height: 100px;
-display: inline-block;
-background-color: #0EA9FF;
-border-width: 5px;
-border-style: solid;
-border-color: #5daf34;
-transition-property: width, height, background-color, border-width
-transition-duration: 2s;
-transition-timing-function: ease-in;
-transition-delay: 500ms;
-}
-.base2 {
-transform: none;
-transition-property: transform;
-transition-delay: 5ms;
-}
+  .base {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  background-color: #0EA9FF;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #5daf34;
+  transition-property: width, height, background-color, border-width
+  transition-duration: 2s;
+  transition-timing-function: ease-in;
+  transition-delay: 500ms;
+  }
+  .base2 {
+  transform: none;
+  transition-property: transform;
+  transition-delay: 5ms;
+  }
 
-.base2:hover {
-transform: scale(0.8, 1.5) rotate(35deg) skew(5deg) translate(15px
-, 25px);
-}
+  .base2:hover {
+  transform: scale(0.8, 1.5) rotate(35deg) skew(5deg) translate(15px
+  , 25px);
+  }
 </style>
 <div class="base base2"></div>
 ```
@@ -2365,15 +2365,15 @@ from 表示最开始的那一帧，to 表示结束时的那一帧
 
 ```css
 @keyframes rotate{
-0%{
-transform: rotate(0deg);
-}
-50%{
-transform: rotate(180deg);
-}
-100%{
-transform: rotate(360deg);
-}
+  0%{
+    transform: rotate(0deg);
+  }
+  50%{
+    transform: rotate(180deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
 }
 ```
 
@@ -2402,11 +2402,11 @@ Grid 布局即网格布局，是一个二维的布局方式，由纵横相交的
 
 ```html
 <div class="container">
-<div class="item item-1">
-<p class="sub-item"></p >
-</div>
-<div class="item item-2"></div>
-<div class="item item-3"></div>
+  <div class="item item-1">
+    <p class="sub-item"></p >
+  </div>
+  <div class="item item-2"></div>
+  <div class="item item-3"></div>
 </div>
 ```
 
@@ -2440,12 +2440,12 @@ grid-template-columns 属性设置列宽，grid-template-rows 属性设置行高
 
 ```css
 .wrapper {
-display: grid;
-/\* 声明了三列，宽度分别为 200px 200px 200px \*/
-grid-template-columns: 200px 200px 200px;
-grid-gap: 5px;
-/\*声明了两行，行高分别为 50px 50px \*/
-grid-template-rows: 50px 50px;
+  display: grid;
+  /\* 声明了三列，宽度分别为 200px 200px 200px \*/
+  grid-template-columns: 200px 200px 200px;
+  grid-gap: 5px;
+  /\*声明了两行，行高分别为 50px 50px \*/
+  grid-template-rows: 50px 50px;
 }
 ```
 
@@ -2461,10 +2461,10 @@ grid-template-rows: 50px 50px;
 
 ```css
 wrapper {
-display: grid;
-grid-template-columns: repeat(3,200px);
-grid-gap: 5px;
-grid-template-rows:repeat(2,50px);
+  display: grid;
+  grid-template-columns: repeat(3,200px);
+  grid-gap: 5px;
+  grid-template-rows:repeat(2,50px);
 }
 ```
 
@@ -2504,12 +2504,12 @@ grid-gap： 10px 20px等同上述两个属性
 
 ```scss
 container {
-display: grid;
-grid-template-columns: 100px 100px 100px;
-grid-template-rows: 100px 100px 100px;
-grid-template-areas: 'a b c'
-'d e f'
-'g h i';
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  grid-template-rows: 100px 100px 100px;
+  grid-template-areas: 'a b c'
+  'd e f'
+  'g h i';
 }
 ```
 
@@ -2543,8 +2543,8 @@ justify-items 属性设置单元格内容的水平位置（左中右），align-
 
 ```ts
 .container {
-justify-items: start | end | center | stretch;
-align-items: start | end | center | stretch;
+  justify-items: start | end | center | stretch;
+  align-items: start | end | center | stretch;
 }
 ```
 
@@ -2566,10 +2566,10 @@ justify-content属性是整个内容区域在容器里面的水平位置(左中�
 
 ```ts
 .container {
-justify-content: start | end | center | stretch | space-around | space-be
-tween | space-evenly;
-align-content: start | end | center | stretch | space-around | space-betw
-een | space-evenly;
+  justify-content: start | end | center | stretch | space-around | space-be
+  tween | space-evenly;
+  align-content: start | end | center | stretch | space-around | space-betw
+  een | space-evenly;
 }
 ```
 
@@ -2635,21 +2635,21 @@ grid-row-start 属性：上边框所在的水平网格线
 
 ```html
 <style>
-#container{
-display: grid;
-grid-template-columns: 100px 100px 100px;
-grid-template-rows: 100px 100px 100px;
-}
-.item-1 {
-grid-column-start: 2;
-grid-column-end: 4;
-}
+  #container{
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  grid-template-rows: 100px 100px 100px;
+  }
+  .item-1 {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  }
 </style>
 
 <div id="container">
-<div class="item item-1">1</div>
-<div class="item item-2">2</div>
-<div class="item item-3">3</div>
+  <div class="item item-1">1</div>
+  <div class="item item-2">2</div>
+  <div class="item item-3">3</div>
 </div>
 ```
 
@@ -2663,7 +2663,7 @@ grid-area 属性指定项目放在哪一个区域
 
 ```scss
 .item-1 {
-grid-area: e;
+  grid-area: e;
 }
 ```
 
@@ -2679,8 +2679,8 @@ align-self属性设置单元格内容的垂直位置（上中下），跟 align-
 
 ```css
 .item {
-justify-self: start | end | center | stretch;
-align-self: start | end | center | stretch;
+  justify-self: start | end | center | stretch;
+  align-self: start | end | center | stretch;
 }
 ```
 
@@ -2739,7 +2739,7 @@ Flexible Box 简称flex，意为”弹性布局”，可以简便、完整、响
 
 ```css
 .container {
-flex-direction: row | row-reverse | column | column-reverse;
+  flex-direction: row | row-reverse | column | column-reverse;
 }
 ```
 
@@ -2836,8 +2836,8 @@ stretch(默认值):如果项目未设置高度或设为auto，将占满整个容
 
 ```ts
 .box {
-align-content: flex-start | flex-end | center | space-between | space-a
-round | stretch;
+  align-content: flex-start | flex-end | center | space-between | space-a
+  round | stretch;
 }
 ```
 
@@ -2879,7 +2879,7 @@ align-self
 
 ```css
 .item {
-order: <integer>;
+  order: <integer>;
 }
 ```
 
@@ -2893,7 +2893,7 @@ order: <integer>;
 
 ```css
 .item {
-flex-grow: <number>;
+  flex-grow: <number>;
 }
 ```
 
@@ -2913,7 +2913,7 @@ flex-grow: 1
 
 ```css
 .item {
-flex-shrink: <number>; /\* default 1 \*/
+  flex-shrink: <number>; /\* default 1 \*/
 }
 ```
 
@@ -2931,7 +2931,7 @@ flex-shrink: <number>; /\* default 1 \*/
 
 ```css
 .item {
-flex-basis: <length> | auto; /\* default auto \*/
+  flex-basis: <length> | auto; /\* default auto \*/
 }
 ```
 
@@ -2976,7 +2976,7 @@ flex:1 和 flex:auto 的区别，可以归结于 flex-basis:0和 flex-basis:auto
 
 ```ts
 .item {
-align-self: auto | flex-start | flex-end | center | baseline | stretch;
+  align-self: auto | flex-start | flex-end | center | baseline | stretch;
 }
 ```
 
@@ -3256,19 +3256,19 @@ zoom:0.5，表示缩小到原来的一半
 
 ```html
 <style type="text/css">
-.span1{
-font-size: 12px;
-display: inline-block;
-zoom: 0.8;
-}
-.span2{
-display: inline-block;
-font-size: 12px;
-}
+  .span1{
+  font-size: 12px;
+  display: inline-block;
+  zoom: 0.8;
+  }
+  .span2{
+  display: inline-block;
+  font-size: 12px;
+  }
 </style>
 <body>
-<span class="span1">测试10px</span>
-<span class="span2">测试12px</span>
+  <span class="span1">测试10px</span>
+  <span class="span2">测试12px</span>
 </body>
 ```
 
@@ -3300,19 +3300,19 @@ html { -webkit-text-size-adjust: none; }
 
 ```html
 <style type="text/css">
-.span1{
-font-size: 12px;
-display: inline-block;
-webkit-transform:scale(0.8);
-}
-.span2{
-display: inline-block;
-font-size: 12px;
-}
+  .span1{
+  font-size: 12px;
+  display: inline-block;
+  webkit-transform:scale(0.8);
+  }
+  .span2{
+  display: inline-block;
+  font-size: 12px;
+  }
 </style>
 <body>
-<span class="span1">测试10px</span>
-<span class="span2">测试12px</span>
+  <span class="span1">测试10px</span>
+  <span class="span2">测试12px</span>
 </body>
 ```
 
@@ -3444,8 +3444,8 @@ scrollHeight、clientTop、clientLeft、clientWidth、clientHeight
 ```js
 const el = document.getElementById('el')
 for(let i=0;i<10;i++) {
-el.style.top = el.offsetTop + 10 + "px";
-el.style.left = el.offsetLeft + 10 + "px";
+  el.style.top = el.offsetTop + 10 + "px";
+  el.style.left = el.offsetLeft + 10 + "px";
 }
 ```
 
@@ -3458,8 +3458,8 @@ let offLeft = el.offsetLeft, offTop = el.offsetTop
 
 //在JS层面进行计算
 for(let i=0;i<10;i++) {
-offLeft += 10
-offTop += 10
+  offLeft += 10
+  offTop += 10
 }
 
 //一次性将计算结果应用到DOM上
@@ -3481,16 +3481,16 @@ container.style.color = 'red'
 
 ```html
 <style>
-.basic_style {
-width: 100px;
-height: 200px;
-border: 10px solid red;
-color: red;
-}
+  .basic_style {
+  width: 100px;
+  height: 200px;
+  border: 10px solid red;
+  color: red;
+  }
 </style>
 <script>
-const container = document.getElementById('container')
-container.classList.add('basic_style')
+  const container = document.getElementById('container')
+  container.classList.add('basic_style')
 </script>
 ```
 
@@ -3583,7 +3583,7 @@ less和scss
 
 ```css
 .box {
-display: block;
+  display: block;
 }
 ```
 
@@ -3607,9 +3607,9 @@ less
 
 ```css
 a a{
-&.b {
-color: red;
-}
+  &.b {
+    color: red;
+  }
 }
 ```
 
@@ -3622,7 +3622,7 @@ less声明的变量必须以@开头，后面紧跟变量名和变量值，而且
 ```css
 @red: #c00;
 strong {
-color: @red;
+  color: @red;
 }
 ```
 
@@ -3631,7 +3631,7 @@ sass 声明的变量跟less十分的相似，只是变量名前面使用@开头
 ```css
 \$red: #c00;
 strong {
-color: \$red;
+  color: \$red;
 }
 ```
 
@@ -3685,13 +3685,13 @@ less 与 stylus的作用域跟 javascript 十分的相似，首先会查找局�
 
 ```css
 .scoped {
-@bg: blue;
-@color: white;
-color: @color;
-background-color:@bg;
+  @bg: blue;
+  @color: white;
+  color: @color;
+  background-color:@bg;
 }
 .unscoped {
-color:@color;
+  color:@color;
 }
 ```
 
@@ -3699,11 +3699,11 @@ color:@color;
 
 ```css
 .scoped {
-color:white;/\*白色（调用了局部变量）\*/
-background-color:blue;
+  color:white;/\*白色（调用了局部变量）\*/
+  background-color:blue;
 }
 .unscoped {
-color:black;/\*黑色（调用了全局变量）\*/
+  color:black;/\*黑色（调用了全局变量）\*/
 }
 ```
 
@@ -3717,7 +3717,7 @@ color:black;/\*黑色（调用了全局变量）\*/
 
 ```css
 .alert {
-font-weight: 700;
+  font-weight: 700;
 }
 ```
 
@@ -3735,12 +3735,12 @@ color: @color;
 
 ```css
 .alert {
-font-weight: 700;
+  font-weight: 700;
 }
 .heads-up {
-font-weight: 700;
-font-size: 1.2em;
-color: red;
+  font-weight: 700;
+  font-size: 1.2em;
+  color: red;
 }
 ```
 
@@ -3748,18 +3748,18 @@ Sass 声明 mixins时需要使用 @mixinn，后面紧跟mixin的名，也可以�
 
 ```scss
 @mixin large-text {
-font: {
-family: Arial;
-size: 20px;
-weight: bold;
-}
-color: #ff0000;
+  font: {
+    family: Arial;
+    size: 20px;
+    weight: bold;
+  }
+  color: #ff0000;
 }
 
 .page-title {
-@include large-text;
-padding: 4px;
-margin-top: 10px;
+  @include large-text;
+  padding: 4px;
+  margin-top: 10px;
 }
 ```
 
@@ -3845,7 +3845,7 @@ myCSS.rel = "stylesheet";
 myCSS.href = "mystyles.css";
 //插入到header的最后位置
 document.head.insertBefore( myCSS, document.head.childNodes[ document.head.
-childNodes.length - 1 ].nextSibling );
+    childNodes.length - 1 ].nextSibling );
 ```
 
 - 设置link标签media属性为noexis，浏览器会认为当前样式表不适用当前类型，会在不阻塞页面渲染的情况下再进行下载。加载完成后，将media的值设为screen或all，从而让浏览器开始解析CSS
