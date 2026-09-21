@@ -13,7 +13,7 @@ export const FRIEND_LINKS: FriendLink[] = [
     description:
       'AI 原生简历工作台：提供可审核的岗位化修改建议，支持模板排版、双语、模拟面试，以及 PDF / JSON 导出。',
     href: 'https://magic-resume.cn',
-    trackingEvent: 'friend_link_click',
+    trackingEvent: 'magic_resume_link_click',
   },
 ]
 
