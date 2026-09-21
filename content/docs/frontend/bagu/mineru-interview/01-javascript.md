@@ -158,7 +158,7 @@ console.log(fooSymbol == otherFooSymbol); // false
 
 ```js
 let sum = function(num1, num2) {
-return num1 + num2;
+  return num1 + num2;
 };
 ```
 
@@ -195,7 +195,7 @@ function sum(num1, num2) {
 
 ```js
 let sum = (num1, num2) => {
-return num1 + num2;
+  return num1 + num2;
 };
 ```
 
@@ -224,7 +224,7 @@ console.log(a); // 10值
 
 a的值为一个基本类型，是存储在栈中，将 a的值赋给b，虽然两个变量的值相等，但是两个变量保存了两个不同的内存地址
 
-下图演示了基本类型赋值的过程：
+基本类型赋值的过程如下：
 
 **栈内存**
 
@@ -256,7 +256,7 @@ console.log(obj1.name); // xxx
 
 obj1是一个引用类型，在赋值操作过程汇总，实际是将堆内存对象在栈内存的引用地址复制了一份给了obj2，实际上他们共同指向了同一个堆内存对象，所以更改obj2会对obj1产生影响
 
-下图演示这个引用类型赋值过程
+这个引用类型赋值的过程如下：
 
 **引用类型的栈内存**
 
@@ -392,12 +392,12 @@ JavaScript中数组的主要问题时，它们被实现成了对象，
 
 ```html
 <html>
-<head>
-<title>Page</title>
-</head>
-<body>
-<p>Hello World!</p >
-</body>
+  <head>
+    <title>Page</title>
+  </head>
+  <body>
+    <p>Hello World!</p >
+  </body>
 </html>
 ```
 
@@ -405,9 +405,9 @@ DOM像原子包含着亚原子微粒那样，也有很多类型的DOM节点包�
 
 ```html
 <div>
-<p title="title">
-content
-</p >
+  <p title="title">
+    content
+  </p >
 </div>
 ```
 
@@ -512,7 +512,7 @@ document.all[''];获取页面中的所有元素节点的对象集合型
 
 除此之外，每个 DOM元素还
 
-有parentNode、 childNodes、 firstChild lastChild、nextSibling、previousSibling 属性，关系图如下图所示
+有parentNode、 childNodes、 firstChild lastChild、nextSibling、previousSibling 属性
 
 childNodes
 
@@ -695,7 +695,7 @@ Bom的核心对象是window，它表示浏览器的一个实例
 ```js
 var name = 'js每日一题';
 function lookName(){
-alert(this.name);
+  alert(this.name);
 }
 
 console.log(window.name);//js每日一题
@@ -941,13 +941,13 @@ let result2 = (undefined === undefined) //true
 
 ```js
 // 原文前两项比较表达式解析损坏，已省略
-0 == '0' true
+0 == '0' // true
 false == 'false'// false
 false == '0'// true
 false ==undefined // false
 false == null // false
 null == undefined // true
-′\t\r\n'== 0 // true
+'\t\r\n'== 0 // true
 ```
 
 但在比较null的情况的时候，我们一般使用相等操作符==
@@ -956,7 +956,7 @@ null == undefined // true
 const obj = {};
 
 if(obj.x == null){
-console.log("1"); //执行
+  console.log("1"); //执行
 }
 ```
 
@@ -1012,7 +1012,7 @@ typeof console.log // 'function'
 
 ```js
 if(typeof a != 'undefined'){
-//变量存在
+  //变量存在
 }
 ```
 
@@ -1139,22 +1139,22 @@ console.log( doSomething.prototype );
 
 ```js
 {
-constructor: f doSomething(),
-_proto_: {
-constructor: f Object(),
-hasOwnProperty: f hasOwnProperty(),
-isPrototypeOf: f isPrototypeOf(),
-propertyIsEnumerable: f propertyIsEnumerable(),
-toLocaleString: f toLocaleString(),
-toString: f toString(),
-valueOf: f valueOf()
-}
+  constructor: f doSomething(),
+  _proto_: {
+    constructor: f Object(),
+    hasOwnProperty: f hasOwnProperty(),
+    isPrototypeOf: f isPrototypeOf(),
+    propertyIsEnumerable: f propertyIsEnumerable(),
+    toLocaleString: f toLocaleString(),
+    toString: f toString(),
+    valueOf: f valueOf()
+  }
 }
 ```
 
 上面这个对象，就是大家常说的原型对象
 
-可以看到，原型对象有一个自有属性constructor，这个属性指向该函数，如下图关系展示
+可以看到，原型对象有一个自有属性constructor，这个属性指向该函数
 
 ### 原型链
 
@@ -1164,17 +1164,17 @@ valueOf: f valueOf()
 
 ```js
 function Person(name) {
-this.name = name;
-this.age = 18;
-this.sayName = function() {
-console.log(this.name);
-}
+  this.name = name;
+  this.age = 18;
+  this.sayName = function() {
+    console.log(this.name);
+  }
 }
 // 第二步 创建实例
 var person = new Person('person')
 ```
 
-根据代码，我们可以得到下图
+根据代码，我们可以得到如下关系：
 
 - person
 - proto | 地址
@@ -1245,7 +1245,7 @@ Function对象的\_\_proto\_会指向自己的原型对象，最终还是继承�
 
 ```js
 function myFunction() {
-let inVariable = "函数内部变量";
+  let inVariable = "函数内部变量";
 }
 myFunction();//要先执行这个函数，否则根本不知道里面是啥
 console.log(inVariable); // Uncaught ReferenceError: inVariable is not defi
@@ -1273,7 +1273,7 @@ ned
 //全局变量
 var greeting = 'Hello World!';
 function greet() {
-console.log(greeting);
+  console.log(greeting);
 }
 // 打印'Hello World!'
 greet();
@@ -1285,8 +1285,8 @@ greet();
 
 ```js
 function greet() {
-var greeting = 'Hello World!';
-console.log(greeting);
+  var greeting = 'Hello World!';
+  console.log(greeting);
 }
 // 打印 Hello World!'
 greet();
@@ -1302,10 +1302,10 @@ ES6引入了 let 和 const 关键字,和var关键字不同，在大括号中使�
 
 ```js
 {
-//块级作用域中的变量
-let greeting = 'Hello World!';
-var lang = 'English';
-console.log(greeting); // Prints 'Hello World!'
+  //块级作用域中的变量
+  let greeting = 'Hello World!';
+  var lang = 'English';
+  console.log(greeting); // Prints 'Hello World!'
 }
 // 变量'English'
 console.log(lang);
@@ -1337,7 +1337,7 @@ bar()
 
 如果在全局作用域里仍然找不到该变量，它就会在全局范围内隐式声明该变量(非严格模式下)或是直接报错
 
-这里拿《你不知道的Javascript(上)》中的一张图解释：
+这里借用《你不知道的Javascript(上)》中的比喻来解释：
 
 把作用域比喻成一个建筑，这份建筑代表程序中的嵌套作用域链，第一层代表当前的执行作用域，顶层代表全局作用域
 
@@ -1352,16 +1352,16 @@ bar()
 下面代码演示下：
 
 ```js
-var sex = ‘'男';
+var sex = '男';
 function person() {
-var name = '张三';
-function student() {
-var age = 18;
-console.log(name); // 张三
-console.log(sex); //男
-}
-student();
-console.log(age); // Uncaught ReferenceError: age is not defined
+  var name = '张三';
+  function student() {
+    var age = 18;
+    console.log(name); // 张三
+    console.log(sex); //男
+  }
+  student();
+  console.log(age); // Uncaught ReferenceError: age is not defined
 }
 person();
 ```
@@ -1416,12 +1416,12 @@ console.log(person()); //Jenny
 ```js
 var a = 10;
 var obj = {
-a:20
+  a:20
 }
 
 function fn( ) {
-this = obj; // 修改this，运行后会报错
-console.log(this.a);
+  this = obj; // 修改this，运行后会报错
+  console.log(this.a);
 }
 
 fn( );
@@ -1455,7 +1455,7 @@ fn( );
 
 ```js
 function test() {
-console.log(this.x);
+  console.log(this.x);
 }
 
 var obj = {};
@@ -1469,12 +1469,12 @@ obj.m(); // 1
 
 ```js
 var o = {
-a:10,
-b:{
-fn:function(){
-console.log(this.a); //undefined
-}
-}
+  a:10,
+  b:{
+    fn:function(){
+      console.log(this.a); //undefined
+    }
+  }
 }
 0.b.fn();
 ```
@@ -1483,14 +1483,14 @@ console.log(this.a); //undefined
 
 ```js
 var o = {
-a:10,
-b:{
-a:12,
-fn:function(){
-console.log(this.a); //undefined
-console.log(this); //window
-}
-}
+  a:10,
+  b:{
+    a:12,
+    fn:function(){
+      console.log(this.a); //undefined
+      console.log(this); //window
+    }
+  }
 }
 var j = o.b.fn;
 j( );
@@ -1504,7 +1504,7 @@ j( );
 
 ```js
 function test() {
-this.x = 1;
+  this.x = 1;
 }
 
 var obj = new test();
@@ -1518,8 +1518,8 @@ new过程遇到return一个对象，此时 this指向为返回的对象
 ```js
 function fn()
 {
-this.user = 'xxx';
-return {};
+  this.user = 'xxx';
+  return {};
 }
 var a = new fn();
 console.log(a.user); //undefined
@@ -1530,8 +1530,8 @@ console.log(a.user); //undefined
 ```js
 function fn()
 {
-this.user = 'xxx';
-return 1;
+  this.user = 'xxx';
+  return 1;
 }
 var a = new fn;
 console.log(a.user); //xxx
@@ -1542,8 +1542,8 @@ console.log(a.user); //xxx
 ```js
 function fn()
 {
-this.user = 'xxx';
-return null;
+  this.user = 'xxx';
+  return null;
 }
 var a = new fn;
 console.log(a.user); //xxx
@@ -1556,7 +1556,7 @@ apply()、call()、bind()是函数的一个方法，作用是改变函数的调�
 ```js
 var x = 0;
 function test() {
-console.log(this.x);
+  console.log(this.x);
 }
 
 var obj = {};
@@ -1573,9 +1573,9 @@ obj.m.apply(obj) // 1
 
 ```js
 const obj = {
-sayThis: () => {
-console.log(this);
-}
+  sayThis: () => {
+    console.log(this);
+  }
 };
 
 obj.sayThis(); // window 因为 JavaScript 没有块作用域，所以在定义 sayThis 的时
@@ -1593,9 +1593,9 @@ globalSay();// window 浏览器中的 global 对象
 ```js
 const button = document.getElementById('mngb');
 button.addEventListener('click', ()=> {
-console.log(this === window) // true
-this.innerHTML = 'clicked button'
-})
+    console.log(this === window) // true
+    this.innerHTML = 'clicked button'
+  })
 ```
 
 上述可以看到，我们其实是想要 this 为点击的 button，但此时 this 指向了 window
@@ -1604,8 +1604,8 @@ this.innerHTML = 'clicked button'
 
 ```js
 Cat.prototype.sayName = () => {
-console.log(this === window) //true
-return this.name
+  console.log(this === window) //true
+  return this.name
 }
 const cat = new Cat('mm');
 cat.sayName()
@@ -1619,17 +1619,17 @@ cat.sayName()
 
 ```js
 function foo() {
-console.log( this.a );
+  console.log( this.a );
 }
 
 var obj1 = {
-a: 2,
-foo: foo
+  a: 2,
+  foo: foo
 };
 
 var obj2 = {
-a: 3,
-foo: foo
+  a: 3,
+  foo: foo
 };
 
 obj1.foo(); // 2
@@ -1645,11 +1645,11 @@ obj2.foo.call( obj1 ); // 2
 
 ```js
 function foo(something) {
-this.a = something;
+  this.a = something;
 }
 
 var obj1 = {
-foo: foo
+  foo: foo
 };
 
 var obj2 = {};
@@ -1673,7 +1673,7 @@ console.log( bar.a ); // 4
 
 ```js
 function foo(something) {
-this.a = something;
+  this.a = something;
 }
 
 var obj1 = {};
@@ -1722,8 +1722,8 @@ new 通过构造函数 Person 创建出来的实例可以访问到构造函数�
 
 ```js
 function Test(name) {
-this.name = name
-return 1
+  this.name = name
+  return 1
 }
 const t = new Test('xxx')
 console.log(t.name) // 'xxx'
@@ -1735,9 +1735,9 @@ console.log(t.name) // 'xxx'
 
 ```js
 function Test(name) {
-this.name = name
-console.log(this) // Test { name: 'xxx'}
-return { age: 26 }
+  this.name = name
+  console.log(this) // Test { name: 'xxx'}
+  return { age: 26 }
 }
 const t = new Test('xxx')
 console.log(t) // { age: 26 }
@@ -1760,8 +1760,8 @@ console.log(t.name) // 'undefined'
 
 ```js
 function Person(name, age){
-this.name = name;
-this.age = age;
+  this.name = name;
+  this.age = age;
 }
 const person1 = new Person('Tom', 20)
 console.log(person1) // Person {name: "Tom", age: 20}
@@ -1774,19 +1774,19 @@ const person1 = new Person('Tom', 20)
 {}
 . 将新对象的[[prototype]]指向为Person.prototype
 {
-_proto__= Person.prototype;
+  _proto__= Person.prototype;
 }
 .将Person构造函数的this设置为新创建的对象，执行
 {
-_proto__= Person.prototype;
-name = 'Tom';
-age = 20;
+  _proto__= Person.prototype;
+  name = 'Tom';
+  age = 20;
 }
 .构造函数Person没有return语句，则将该新创建的对象返回
 const person1 = {
-__proto__= Person.prototype;
-name = 'Tom';
-age = 20;
+  __proto__= Person.prototype;
+  name = 'Tom';
+  age = 20;
 }
 ```
 
@@ -1798,14 +1798,14 @@ age = 20;
 
 ```js
 function mynew(Func, ...args) {
-// 1.创建一个新对象
-const obj = {}
-//2.新对象原型指向构造函数原型对象
-obj.__proto__= Func.prototype
-//3.将构建函数的this指向新对象
-let result = Func.apply(obj, args)
-// 4.根据返回值判断
-return result instanceof Object ? result : obj
+  // 1.创建一个新对象
+  const obj = {}
+  //2.新对象原型指向构造函数原型对象
+  obj.__proto__= Func.prototype
+  //3.将构建函数的this指向新对象
+  let result = Func.apply(obj, args)
+  // 4.根据返回值判断
+  return result instanceof Object ? result : obj
 }
 ```
 
@@ -1813,17 +1813,17 @@ return result instanceof Object ? result : obj
 
 ```js
 function mynew(func, ...args) {
-const obj = {}
-obj.__proto__ = func.prototype
-let result = func.apply(obj, args)
-return result instanceof Object ? result : obj
+  const obj = {}
+  obj.__proto__ = func.prototype
+  let result = func.apply(obj, args)
+  return result instanceof Object ? result : obj
 }
 function Person(name, age) {
-this.name = name;
-this.age = age;
+  this.name = name;
+  this.age = age;
 }
 Person.prototype.say = function () {
-console.log(this.name)
+  console.log(this.name)
 }
 
 letp = mynew(Person, "huihui", 123)
@@ -1844,10 +1844,10 @@ call、apply、bind作用是改变函数执行时的上下文，简而言之就�
 ```js
 var name = "lucy";
 var obj = {
-name: "martin",
-say: function () {
-console.log(this.name);
-}
+  name: "martin",
+  say: function () {
+    console.log(this.name);
+  }
 }
 obj.say(); // martin， this 指向 obj 对象
 setTimeout(obj.say,0); // lucy, this指向 window 对象
@@ -1875,10 +1875,10 @@ apply接受两个参数，第一个参数是this的指向，第二个参数是�
 
 ```js
 function fn(...args){
-console.log(this,args);
+  console.log(this,args);
 }
 let obj = {
-myname:"张三"
+  myname:"张三"
 }
 
 fn.apply(obj,[1,2]);// this会变成传入的obj，传入的参数必须是一个数组;
@@ -1925,10 +1925,10 @@ bind方法和call很相似，第一参数也是this的指向，后面传入的�
 
 ```js
 function fn(...args){
-console.log(this,args);
+  console.log(this,args);
 }
 let obj = {
-myname:"张三"
+  myname:"张三"
 }
 
 const bindFn = fn.bind(obj); // this 也会变成传入的obj ，bind不是立即执行需要执
@@ -1971,21 +1971,21 @@ fn.bind(obj,1,2)()
 
 ```js
 Function.prototype.myBind = function (context) {
-//判断调用对象是否为函数
-if (typeof this !== "function") {
-throw new TypeError("Error");
-}
+  //判断调用对象是否为函数
+  if (typeof this !== "function") {
+    throw new TypeError("Error");
+  }
 
-//获取参数
-const args = [...arguments].slice(1),
-fn = this;
+  //获取参数
+  const args = [...arguments].slice(1),
+  fn = this;
 
-return function Fn() {
+  return function Fn() {
 
-//根据调用方式，传入不同绑定值
-return fn.apply(this instanceof Fn ? new fn(...arguments) : contex
-t, args.concat(...arguments));
-}
+    //根据调用方式，传入不同绑定值
+    return fn.apply(this instanceof Fn ? new fn(...arguments) : contex
+      t, args.concat(...arguments));
+  }
 }
 ```
 
@@ -2042,9 +2042,9 @@ alert(sayHello + firstName() +'+ lastName());
 
 ```js
 ExecutionContext = {
-ThisBinding = <this value>, //确定this
-LexicalEnvironment = { ... }, //词法环境
-VariableEnvironment = { ... }, // 变量环境
+  ThisBinding = <this value>, //确定this
+  LexicalEnvironment = { ... }, //词法环境
+  VariableEnvironment = { ... }, // 变量环境
 }
 ```
 
@@ -2095,8 +2095,8 @@ const b = 30;
 var c;
 
 function multiply(e, f) {
-var g = 20;
-return e * f * g;
+  var g = 20;
+  return e * f * g;
 }
 
 c = multiply(20, 30);
@@ -2175,12 +2175,12 @@ outer: <GlobalLexicalEnvironment>
 ```js
 let a = 'Hello World!';
 function first() {
-console.log('Inside first function');
-second();
-console.log('Again inside first function');
+  console.log('Inside first function');
+  second();
+  console.log('Again inside first function');
 }
 function second() {
-console.log('Inside second function');
+  console.log('Inside second function');
 }
 first();
 console.log('Inside Global Execution Context');
@@ -2221,13 +2221,13 @@ javascript中的事件，可以理解就是在HTML文档或者浏览器中发生
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Event Bubbling</title>
-</head>
-<body>
-<button id="clickMe">Click Me</button>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <title>Event Bubbling</title>
+  </head>
+  <body>
+    <button id="clickMe">Click Me</button>
+  </body>
 </html>
 ```
 
@@ -2237,16 +2237,16 @@ javascript中的事件，可以理解就是在HTML文档或者浏览器中发生
 var button = document.getElementById('clickMe');
 
 button.onclick = function() {
-console.log('1.Button');
+  console.log('1.Button');
 };
 document.body.onclick = function() {
-console.log('2.body');
+  console.log('2.body');
 };
 document.onclick = function() {
-console.log('3.document');
+  console.log('3.document');
 };
 window.onclick = function() {
-console.log('4.window');
+  console.log('4.window');
 };
 ```
 
@@ -2369,9 +2369,9 @@ btn.addEventListener('click', showMessage3, false);
 
 ```html
 <div id='div'>
-<p id='p'>
-<span id='span'>Click Me!</span>
-</p >
+  <p id='p'>
+    <span id='span'>Click Me!</span>
+  </p >
 </div>
 ```
 
@@ -2382,9 +2382,9 @@ var div =document.getElementById('div');
 var p = document.getElementById('p');
 
 function onClickFn (event) {
-var tagName = event.currentTarget.tagName;
-var phase = event.eventPhase;
-console.log(tagName, phase);
+  var tagName = event.currentTarget.tagName;
+  var phase = event.eventPhase;
+  console.log(tagName, phase);
 }
 
 div.addEventListener('click', onClickFn, false);
@@ -2497,14 +2497,14 @@ console.log(e.target.innerHTML)
 ```js
 // 给父层元素绑定事件
 document.getElementById('list').addEventListener('click', function (e) {
-// 兼容性处理
-var event = e || window.event;
-var target = event.target || event.srcElement;
-//判断是否匹配目标元素
-if (target.nodeName.toLocaleLowerCase === 'li') {
-console.log('the content is: ', target.innerHTML);
-}
-});
+    // 兼容性处理
+    var event = e || window.event;
+    var target = event.target || event.srcElement;
+    //判断是否匹配目标元素
+    if (target.nodeName.toLocaleLowerCase === 'li') {
+      console.log('the content is: ', target.innerHTML);
+    }
+  });
 ```
 
 还有一种场景是上述列表项并不多，我们给每个列表项都绑定了事件
@@ -2520,10 +2520,10 @@ console.log('the content is: ', target.innerHTML);
 ```html
 <input type="button" name="" id="btn" value="添加" />
 <ul id="ul1">
-<li>item 1</li>
-<li>item 2</li>
-<li>item 3</li>
-<li>item 4</li>
+  <li>item 1</li>
+  <li>item 2</li>
+  <li>item 3</li>
+  <li>item 4</li>
 </ul>
 ```
 
@@ -2536,20 +2536,20 @@ const num = 4;
 
 //事件委托，添加的子元素也有事件
 oUl.onclick = function (ev) {
-ev = ev || window.event;
-const target = ev.target || ev.srcElement;
-if (target.nodeName.toLowerCase() == 'li') {
-console.log('the content is: ', target.innerHTML);
-}
+  ev = ev || window.event;
+  const target = ev.target || ev.srcElement;
+  if (target.nodeName.toLowerCase() == 'li') {
+    console.log('the content is: ', target.innerHTML);
+  }
 
 };
 
 //添加新节点
 oBtn.onclick = function () {
-num++;
-const oLi = document.createElement('li');
-oLi.innerHTML = `item ${num}`;
-oUl.appendChild(oLi);
+  num++;
+  const oLi = document.createElement('li');
+  oLi.innerHTML = `item ${num}`;
+  oUl.appendChild(oLi);
 };
 ```
 
@@ -2614,9 +2614,9 @@ displayName(）没有自己的局部变量。然而，由于闭包的特性，�
 
 ```js
 function makeSizer(size) {
-return function() {
-document.body.style.fontSize = size + 'px';
-};
+  return function() {
+    document.body.style.fontSize = size + 'px';
+  };
 }
 
 var size12 = makeSizer(12);
@@ -2635,7 +2635,7 @@ document.getElementById('size-16').onclick =size16;
 ```js
 //假设我们有一个求长方形面积的函数
 function getArea(width, height) {
-return width * height
+  return width * height
 }
 //如果我们碰到的长方形的宽老是10
 const area1 = getArea(10, 20)
@@ -2644,9 +2644,9 @@ const area3 = getArea(10, 40)
 
 //我们可以使用闭包柯里化这个计算面积的函数
 function getArea(width) {
-return height => {
-return width * height
-}
+  return height => {
+    return width * height
+  }
 }
 
 const getTenWidthArea = getArea(10)
@@ -2663,22 +2663,22 @@ const getTwentyWidthArea = getArea(20)
 
 ```js
 var Counter = (function() {
-var privateCounter = 0;
-function changeBy(val) {
-privateCounter += val;
-}
-return {
-increment: function() {
-changeBy(1);
-},
-decrement: function() {
-changeBy(-1);
-},
-value: function() {
-return privateCounter;
-}
-}
-})( );
+    var privateCounter = 0;
+    function changeBy(val) {
+      privateCounter += val;
+    }
+    return {
+      increment: function() {
+        changeBy(1);
+      },
+      decrement: function() {
+        changeBy(-1);
+      },
+      value: function() {
+        return privateCounter;
+      }
+    }
+  })( );
 
 var Counter1 = makeCounter();
 var Counter2 = makeCounter();
@@ -2707,15 +2707,15 @@ console.log(Counter2.value()); /* logs 0 */
 
 ```js
 function MyObject(name, message) {
-this.name = name.toString();
-this.message = message.toString();
-this.getName = function() {
-return this.name;
-};
+  this.name = name.toString();
+  this.message = message.toString();
+  this.getName = function() {
+    return this.name;
+  };
 
-this.getMessage = function() {
-return this.message;
-};
+  this.getMessage = function() {
+    return this.message;
+  };
 }
 ```
 
@@ -2723,14 +2723,14 @@ return this.message;
 
 ```js
 function MyObject(name, message) {
-this.name = name.toString();
-this.message = message.toString();
+  this.name = name.toString();
+  this.message = message.toString();
 }
 MyObject.prototype.getName = function() {
-return this.name;
+  return this.name;
 };
 MyObject.prototype.getMessage = function() {
-return this.message;
+  return this.message;
 };
 ```
 
@@ -2958,13 +2958,13 @@ null转为数值时，值为0。undefined转为数值时，值为NaN
 
 ```js
 function shallowClone(obj) {
-const newObj = {};
-for(let prop in obj) {
-if(obj.hasOwnProperty(prop)){
-newObj[prop] = obj[prop];
-}
-}
-return newObj;
+  const newObj = {};
+  for(let prop in obj) {
+    if(obj.hasOwnProperty(prop)){
+      newObj[prop] = obj[prop];
+    }
+  }
+  return newObj;
 }
 ```
 
@@ -2980,15 +2980,15 @@ Array.prototype.slice(),Array.prototype.concat()
 
 ```js
 var obj = {
-age: 18,
-nature: ['smart', 'good'],
-names: {
-name1: 'fx',
-name2: 'xka'
-},
-love: function () {
-console.log('fx is a great girl')
-}
+  age: 18,
+  nature: ['smart', 'good'],
+  names: {
+    name1: 'fx',
+    name2: 'xka'
+  },
+  love: function () {
+    console.log('fx is a great girl')
+  }
 }
 var newObj = Object.assign({}, fxObj);
 ```
@@ -3042,9 +3042,9 @@ console.log(fxArrs) // ["One","love","Three"]
 ```js
 const _ = require('lodash');
 const obj1 = {
-a: 1,
-b: { f: { g: 1 } },
-c: [1, 2, 3]
+  a: 1,
+  b: { f: { g: 1 } },
+  c: [1, 2, 3]
 };
 const obj2 = _.cloneDeep(obj1);
 console.log(obj1.b.f === obj2.b.f);// false
@@ -3055,9 +3055,9 @@ console.log(obj1.b.f === obj2.b.f);// false
 ```js
 const $ = require('jquery');
 const obj1 = {
-a: 1,
-b: { f: { g: 1 } },
-c: [1, 2, 3]
+  a: 1,
+  b: { f: { g: 1 } },
+  c: [1, 2, 3]
 };
 const obj2 = $.extend(true, {}, obj1);
 console.log(obj1.b.f === obj2.b.f); // false
@@ -3073,10 +3073,10 @@ const obj2=JSON.parse(JSON.stringify(obj1));
 
 ```js
 const obj = {
-name: 'A',
-name1: undefined,
-name3: function() {},
-name4: Symbol('A')
+  name: 'A',
+  name1: undefined,
+  name3: function() {},
+  name4: Symbol('A')
 }
 const obj2 = JSON.parse(JSON.stringify(obj));
 console.log(obj2); // {name: "A"}
@@ -3086,31 +3086,31 @@ console.log(obj2); // {name: "A"}
 
 ```js
 function deepClone(obj, hash = new WeakMap()) {
-if(obj === null) return obj;// 如果是null或者undefined我就不进行拷贝操作
-if (obj instanceof Date) return new Date(obj);
-if (obj instanceof RegExp) return new RegExp(obj);
-//可能是对象或者普通的值如果是函数的话是不需要深拷贝
-if (typeof obj !== "object") return obj;
-//是对象的话就要进行深拷贝
-if (hash.get(obj)) return hash.get(obj);
-let cloneObj = new obj.constructor();
-//找到的是所属类原型上的constructor,而原型上的constructor指向的是当前类本身
-hash.set(obj, cloneObj);
-for (let key in obj) {
-if (obj.hasOwnProperty(key)) {
-// 实现一个递归拷贝
-cloneObj[key] = deepClone(obj[key], hash);
-}
-}
-return cloneObj;
+  if(obj === null) return obj;// 如果是null或者undefined我就不进行拷贝操作
+  if (obj instanceof Date) return new Date(obj);
+  if (obj instanceof RegExp) return new RegExp(obj);
+  //可能是对象或者普通的值如果是函数的话是不需要深拷贝
+  if (typeof obj !== "object") return obj;
+  //是对象的话就要进行深拷贝
+  if (hash.get(obj)) return hash.get(obj);
+  let cloneObj = new obj.constructor();
+  //找到的是所属类原型上的constructor,而原型上的constructor指向的是当前类本身
+  hash.set(obj, cloneObj);
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      // 实现一个递归拷贝
+      cloneObj[key] = deepClone(obj[key], hash);
+    }
+  }
+  return cloneObj;
 }
 ```
 
 ### 核心区别
 
-下面首先借助两张图，可以更加清晰看到浅拷贝与深拷贝的区别
+下面来看浅拷贝与深拷贝的区别
 
-从上图发现，浅拷贝和深拷贝都创建出一个新的对象，但在复制对象属性的时候，行为就不一样浅拷贝只复制属性指向某个对象的指针，而不复制对象本身，新旧对象还是共享同一块内存，修改对象属性会影响原对象
+浅拷贝和深拷贝都创建出一个新的对象，但在复制对象属性的时候，行为就不一样浅拷贝只复制属性指向某个对象的指针，而不复制对象本身，新旧对象还是共享同一块内存，修改对象属性会影响原对象
 
 ```js
 //浅拷贝
@@ -3199,16 +3199,16 @@ add函数本身，以及其内部可访问的变量，即 a = 1，这两个组�
 ```js
 //非函数柯里化
 var add = function (x,y) {
-return x+y;
+  return x+y;
 }
 add(3,4) //7
 
 // 函数柯里化
 var add2 = function (x) {
-//**返回函数**
-return function (y) {
-return x+y;
-}
+  //**返回函数**
+  return function (y) {
+    return x+y;
+  }
 }
 add2(3)(4)1/7
 ```
@@ -3221,12 +3221,12 @@ add2(3)(4)1/7
 
 ```js
 function foo(){
-var a = 2;
+  var a = 2;
 
-function bar() {
-console.log(a);
-}
-return bar;
+  function bar() {
+    console.log(a);
+  }
+  return bar;
 }
 var baz = foo();
 baz();//2
@@ -3242,14 +3242,14 @@ baz();//2
 
 ```js
 const memoize = function (func, content) {
-let cache = Object.create(null)
-content = content || this
-return (...key) => {
-if (!cache[key]) {
-cache[key] = func.apply(content, key)
-}
-return cache[key]
-}
+  let cache = Object.create(null)
+  content = content || this
+  return (...key) => {
+    if (!cache[key]) {
+      cache[key] = func.apply(content, key)
+    }
+    return cache[key]
+  }
 }
 ```
 
@@ -3376,7 +3376,7 @@ console.log(stringValue.padStart(9, ".")); // "......foo"
 
 ```js
 let stringValue = "hello world";
-console.log(stringValue.toUpperCase()); // "HELL0 WORLD"
+console.log(stringValue.toUpperCase()); // "HELLO WORLD"
 console.log(stringValue.toLowerCase()); //"hello world"
 ```
 
@@ -3642,14 +3642,14 @@ numbers.includes(4) // true
 
 ```js
 const people = [
-{
-name: "Matt",
-age: 27
-},
-{
-name: "Nicholas",
-age:29
-}
+  {
+    name: "Matt",
+    age: 27
+  },
+  {
+    name: "Nicholas",
+    age:29
+  }
 ];
 people.find((element, index, array) => element.age < 28) // // {name: "Mat
 t", age: 27}
@@ -3677,13 +3677,13 @@ sort()方法接受一个比较函数，用于判断哪个值应该排在前面
 
 ```js
 function compare(value1, value2) {
-if (value1 < value2) {
-return -1;
-} else if (value1 > value2) {
-return 1;
-} else {
-return 0;
-}
+  if (value1 < value2) {
+    return -1;
+  } else if (value1 > value2) {
+    return 1;
+  } else {
+    return 0;
+  }
 }
 let values = [0, 1, 5, 10, 15];
 values.sort(compare);
@@ -3739,8 +3739,8 @@ console.log(everyResult) // false
 ```js
 let numbers = [1, 2, 3, 4, 5, 4, 3, 2, 1];
 numbers.forEach((item, index, array) => {
-//执行某些操作
-});
+    //执行某些操作
+  });
 ```
 
 **filter()**
@@ -3775,9 +3775,9 @@ console.log(mapResult) // 2,4,6,8,10,8,6,4,2
 
 - 异步任务：异步执行的任务，比如 ajax网络请求，setTimeout 定时函数等
 
-同步任务与异步任务的运行流程图如下：
+同步任务与异步任务的运行流程如下：
 
-从上面我们可以看到，同步任务进入主线程，即主执行栈，异步任务进入任务队列，主线程内的任务执行完毕为空，会去任务队列读取对应的任务，推入主线程执行。上述过程的不断重复就事件循环
+从上面可以看到，同步任务进入主线程，即主执行栈，异步任务进入任务队列，主线程内的任务执行完毕为空，会去任务队列读取对应的任务，推入主线程执行。上述过程的不断重复就事件循环
 
 ### 宏任务与微任务
 
@@ -3787,20 +3787,20 @@ console.log(mapResult) // 2,4,6,8,10,8,6,4,2
 console.log(1)
 
 setTimeout(()=>{
-console.log(2)
-},0)
+    console.log(2)
+  },0)
 
 new Promise((resolve, reject)=>{
-console.log('new Promise')
-resolve()
-}).then(()=>{
-console.log('then')
-})
+    console.log('new Promise')
+    resolve()
+  }).then(()=>{
+    console.log('then')
+  })
 
 console.log(3)
 ```
 
-如果按照上面流程图来分析代码，我们会得到下面的执行步骤：
+如果按照上面的流程来分析代码，我们会得到下面的执行步骤：
 
 console.log(1)，同步任务，主线程中执行
 
@@ -3848,7 +3848,7 @@ Object.observe(已废弃；Proxy对象替代)
 
 - setImmediate、I/O(Node.js)
 
-这时候，事件循环，宏任务，微任务的关系如图所示
+这时候，事件循环，宏任务，微任务的关系如下
 
 按照这个流程，它的执行机制是：
 执行一个宏任务，如果遇到微任务就将它放到微任务的事件队列中
@@ -3857,14 +3857,14 @@ Object.observe(已废弃；Proxy对象替代)
 ```js
 console.log(1)
 setTimeout(()=>{
-console.log(2)
-},0)
+    console.log(2)
+  },0)
 new Promise((resolve, reject)=>{
-console.log('new Promise')
-resolve()
-}).then(()=>{
-console.log('then')
-})
+    console.log('new Promise')
+    resolve()
+  }).then(()=>{
+    console.log('then')
+  })
 console.log(3)
 ```
 
@@ -3905,9 +3905,9 @@ return 'TEST';
 
 ```js
 async function f(){
-//等同于
-// return 123
-return await 123
+  //等同于
+  // return 123
+  return await 123
 }
 f().then(v => console.log(v)) // 123
 ```
@@ -3916,13 +3916,13 @@ f().then(v => console.log(v)) // 123
 
 ```js
 async function fn1 (){
-console.log(1)
-await fn2()
-console.log(2) // 阻塞
+  console.log(1)
+  await fn2()
+  console.log(2) // 阻塞
 }
 
 async function fn2 (){
-console.log('fn2')
+  console.log('fn2')
 }
 
 fn1()
@@ -3939,24 +3939,24 @@ console.log(3)
 
 ```js
 async function async1() {
-console.log('async1 start')
-await async2()
-console.log('async1 end')
+  console.log('async1 start')
+  await async2()
+  console.log('async1 end')
 }
 async function async2() {
-console.log('async2')
+  console.log('async2')
 }
 console.log('script start')
 setTimeout(function () {
-console.log('settimeout')
-})
+    console.log('settimeout')
+  })
 async1()
 new Promise(function (resolve) {
-console.log('promise1')
-resolve()
-}).then(function () {
-console.log('promise2')
-})
+    console.log('promise1')
+    resolve()
+  }).then(function () {
+    console.log('promise2')
+  })
 console.log('script end')
 ```
 
@@ -4001,7 +4001,7 @@ Cookie，类型为「小型文本文件」，指某些网站为了辨别用户�
 Expires 用于设置 Cookie 的过期时间
 
 ```js
-Expires=Wed, 21 0ct 2015 07:28:00 GMT
+Expires=Wed, 21 Oct 2015 07:28:00 GMT
 ```
 
 - Max-Age 用于设置在 Cookie 失效之前需要经过的秒数(优先级比 Expires 高)
@@ -4178,8 +4178,6 @@ indexedDB是一种低级API，用于客户端存储大量结构化数据(包括�
 
 分片上传，就是将所要上传的文件，按照一定的大小，将整个文件分隔成多个数据块(Part)来进行分片上传
 
-如下图
-
 上传完之后再由服务端对所有上传的文件进行汇总整合成原始的文件
 
 大致流程如下：
@@ -4219,8 +4217,8 @@ indexedDB是一种低级API，用于客户端存储大量结构化数据(包括�
 ```js
 const input= document.querySelector('input');
 input.addEventListener('change', function() {
-var file = this.files[0];
-});
+    var file = this.files[0];
+  });
 ```
 
 可以使用 md5实现文件的唯一性
@@ -4235,9 +4233,9 @@ const md5code = md5(file);
 var reader = new FileReader();
 reader.readAsArrayBuffer(file);
 reader.addEventListener("load", function(e) {
-//每10M切割一段，这里只做一个切割演示，实际切割需要循环切割，
-var slice = e.target.result.slice(0, 10*1024*1024);
-});
+    //每10M切割一段，这里只做一个切割演示，实际切割需要循环切割，
+    var slice = e.target.result.slice(0, 10*1024*1024);
+  });
 ```
 
 h5上传一个（一片）
@@ -4249,17 +4247,17 @@ formdata.append('0', slice);
 formdata.append('filename', file.filename);
 var xhr = new XMLHttpRequest();
 xhr.addEventListener('load', function() {
-//xhr.responseText
-});
+    //xhr.responseText
+  });
 xhr.open('POST', '');
 xhr.send(formdata);
 xhr.addEventListener('progress', updateProgress);
 xhr.upload.addEventListener('progress', updateProgress);
 
 function updateProgress(event) {
-if (event.lengthComputable) {
-//进度条
-}
+  if (event.lengthComputable) {
+    //进度条
+  }
 }
 ```
 
@@ -4412,9 +4410,9 @@ back(type);
 
 ```js
 checkFileType('(mov|mp4|avi)',file,function(fileType){
-// fileType = mp4,
-//如果file的类型不在枚举之列，则返回false
-});
+    // fileType = mp4,
+    //如果file的类型不在枚举之列，则返回false
+  });
 ```
 
 上面上传文件的一步，可以改成：
@@ -4531,7 +4529,7 @@ body：在XHR 请求中要发送的数据体，如果不传递数据则为 null
 
 onreadystatechange 事件用于监听服务器端的通信状态，主要监听的属性为XMLHttpRequest. readyState,
 
-关于XMLHttpRequest.readyState属性有五个状态，如下图显示
+关于XMLHttpRequest.readyState属性有五个状态，如下所示：
 
 - 值 状态 | 描述
 - 0 | UNSENT(未打开) | open()方法还未被调用
@@ -4549,13 +4547,13 @@ XMLHttpRequest.responseText 属性用于接收服务器端的响应结果
 ```js
 const request = new XMLHttpRequest()
 request.onreadystatechange = function(e){
-if(request.readyState === 4){ // 整个请求过程完毕
-if(request.status >= 200 && request.status <=300){
-console.log(request.responseText) // 服务端返回的结果
-}else if(request.status >=400){
-console.log("错误信息：" + request.status)
-}
-}
+  if(request.readyState === 4){ // 整个请求过程完毕
+    if(request.status >= 200 && request.status <=300){
+      console.log(request.responseText) // 服务端返回的结果
+    }else if(request.status >=400){
+      console.log("错误信息：" + request.status)
+    }
+  }
 }
 request.open('POST','http://xxxx')
 request.send()
@@ -4602,17 +4600,17 @@ options.fail && options.fail(status)
 
 ```js
 ajax({
-type: 'post',
-dataType: 'json',
-data: {},
-url: 'https://xxxx',
-success：function(text,xml){//请求成功后的回调函数
-console.log(text)
-},
-fail: function(status){////请求失败后的回调函数
-console.log(status)
-}
-})
+    type: 'post',
+    dataType: 'json',
+    data: {},
+    url: 'https://xxxx',
+    success：function(text,xml){//请求成功后的回调函数
+      console.log(text)
+    },
+    fail: function(status){////请求失败后的回调函数
+      console.log(status)
+    }
+  })
 ```
 
 ## 25. 什么是防抖和节流？有什么区别？如何实现?
@@ -4664,15 +4662,15 @@ oldtime = Date.now()
 
 ```js
 function throttled2(fn, delay = 500) {
-let timer = null
-return function (...args) {
-if (!timer) {
-timer = setTimeout(() => {
-fn.apply(this, args)
-timer = null
-}, delay);
-}
-}
+  let timer = null
+  return function (...args) {
+    if (!timer) {
+      timer = setTimeout(() => {
+          fn.apply(this, args)
+          timer = null
+        }, delay);
+    }
+  }
 }
 ```
 
@@ -4704,17 +4702,17 @@ timer = setTimeout(fn, remaining);
 
 ```js
 function debounce(func, wait) {
-let timeout;
+  let timeout;
 
-return function () {
-let context = this; // 保存this指向
-let args = arguments; // 拿到event对象
+  return function () {
+    let context = this; // 保存this指向
+    let args = arguments; // 拿到event对象
 
-clearTimeout(timeout)
-timeout = setTimeout(function(){
-func.apply(context, args)
-}, wait);
-}
+    clearTimeout(timeout)
+    timeout = setTimeout(function(){
+        func.apply(context, args)
+      }, wait);
+  }
 }
 ```
 
@@ -4762,8 +4760,6 @@ func.apply(context, args)
 
 - 函数防抖关注一定时间连续触发的事件，只在最后执行一次，而函数节流一段时间内只执行一次例如，都设置时间频率为500ms，在2秒时间内，频繁触发函数，节流，每隔500ms就执行一次。防抖，则不管调动多少次方法，在2s后，只会执行一次
 
-如下图所示：
-
 **适用场景**
 
 防抖在连续的事件，只需触发一次回调的场景有：
@@ -4784,7 +4780,7 @@ func.apply(context, args)
 
 ### 使用场景
 
-可视区域即我们浏览网页的设备肉眼可见的区域，如下图
+可视区域即我们浏览网页的设备肉眼可见的区域
 
 在日常开发中，我们经常需要判断目标元素是否在视窗之内或者和视窗的距离小于一个值(例如100px)，从而实现一些常用的功能，例如：
 
@@ -4808,7 +4804,7 @@ func.apply(context, args)
 
 **offsetTop、scrollTop**
 
-offsetTop，元素的上外边框至包含元素的上内边框之间的像素距离，其他offset属性如下图所示：
+offsetTop，元素的上外边框至包含元素的上内边框之间的像素距离，其他offset属性如下：
 
 offsetParent
 
@@ -4846,13 +4842,13 @@ el.offsetTop - document.documentElement.scrollTop <= viewPortHeight
 
 ```js
 function isInViewPortOfOne (el) {
-// viewPortHeight 兼容所有浏览器写法
-const viewPortHeight = window.innerHeight || document.documentElement.c
-lientHeight Il document.body.clientHeight
-const offsetTop = el.offsetTop
-const scrollTop = document.documentElement.scrollTop
-const top = offsetTop - scrollTop
-return top <= viewPortHeight
+  // viewPortHeight 兼容所有浏览器写法
+  const viewPortHeight = window.innerHeight || document.documentElement.c
+  lientHeight Il document.body.clientHeight
+  const offsetTop = el.offsetTop
+  const scrollTop = document.documentElement.scrollTop
+  const top = offsetTop - scrollTop
+  return top <= viewPortHeight
 }
 ```
 
@@ -4866,16 +4862,14 @@ const target = document.querySelector('.target');
 const clientRect = target.getBoundingClientRect();
 console.log(clientRect);
 
-11 bottom: 556.21875,
-11 height: 393.59375,
-11 left: 333,
-11 right: 1017,
-11 top: 162.625,
-11 width: 684
+// bottom: 556.21875,
+// height: 393.59375,
+// left: 333,
+// right: 1017,
+// top: 162.625,
+// width: 684
 //}
 ```
-
-属性对应的关系图如下所示：
 
 当页面发生滚动的时候，top与 left属性值都会随之改变如果一个元素在视窗之内的话，那么它一定满足下面四个条件：
 
@@ -4927,10 +4921,10 @@ Intersection 0bserver 即重叠观察者，从这个命名就可以看出它用�
 
 ```js
 const options = {
-// 表示重叠面积占被观察者的比例，从0 - 1 取值，
-//1 表示完全被包含
-threshold: 1.0,
-root:document.querySelector('#scrollArea') //必须是目标元素的父级元素
+  // 表示重叠面积占被观察者的比例，从0 - 1 取值，
+  //1 表示完全被包含
+  threshold: 1.0,
+  root:document.querySelector('#scrollArea') //必须是目标元素的父级元素
 };
 
 const callback = (entries, observer) => { ....}
@@ -4980,14 +4974,14 @@ CSS 样式如下：
 
 ```css
 .container {
-display: flex;
-flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 .target {
-margin: 5px;
-width: 20px;
-height: 20px;
-background: red;
+  margin: 5px;
+  width: 20px;
+  height: 20px;
+  background: red;
 }
 ```
 
@@ -4998,10 +4992,10 @@ const $container = $(".container");
 
 // 插入 100000 个 <div class="target"></div>
 function createTargets() {
-const htmlString = new Array(100000)
-.fill('<div class="target"></div>')
-.join("");
-$container.html(htmlString);
+  const htmlString = new Array(100000)
+  .fill('<div class="target"></div>')
+  .join("");
+  $container.html(htmlString);
 }
 ```
 
@@ -5009,14 +5003,14 @@ $container.html(htmlString);
 
 ```js
 function isInViewPort(element) {
-const viewWidth = window.innerWidth || document.documentElement.clientW
-idth;
-const viewHeight =
-window.innerHeight || document.documentElement.clientHeight;
-const { top, right, bottom, left } = element.getBoundingClientRect();
+  const viewWidth = window.innerWidth || document.documentElement.clientW
+  idth;
+  const viewHeight =
+  window.innerHeight || document.documentElement.clientHeight;
+  const { top, right, bottom, left } = element.getBoundingClientRect();
 
-return top >= 0 && left >= 0 && right <= viewWidth && bottom <= viewHei
-ght;
+  return top >= 0 && left >= 0 && right <= viewWidth && bottom <= viewHei
+  ght;
 }
 ```
 
@@ -5024,13 +5018,13 @@ ght;
 
 ```js
 $(window).on("scroll", () => {
-console.log("scroll !");
-$targets.each((index, element) => {
-if (isInViewPort(element)) {
-$(element).css("background-color", "yellow");
-}
-});
-});
+    console.log("scroll !");
+    $targets.each((index, element) => {
+        if (isInViewPort(element)) {
+          $(element).css("background-color", "yellow");
+        }
+      });
+  });
 ```
 
 通过上述方式，可以看到可视区域颜色会变成黄色了，但是可以明显看到有卡顿的现象，原因在于我们绑定了scroll事件，scroll事件伴随了大量的计算，会造成资源方面的浪费
@@ -5045,9 +5039,9 @@ getYellow回调函数实现对背景颜色改变，如下：
 
 ```js
 function getYellow(entries, observer) {
-entries.forEach(entry => {
-$(entry.target).css("background-color","yellow");
-});
+  entries.forEach(entry => {
+      $(entry.target).css("background-color","yellow");
+    });
 }
 ```
 
@@ -5055,8 +5049,8 @@ $(entry.target).css("background-color","yellow");
 
 ```js
 $targets.each((index, element) => {
-observer.observe(element);
-});
+    observer.observe(element);
+  });
 ```
 
 可以看到功能同样完成，并且页面不会出现卡顿的情况
@@ -5071,7 +5065,7 @@ SSO一般都需要一个独立的认证中心(passport)，子系统的登录均�
 
 当一个系统成功登录以后，passport将会颁发一个令牌给各个子系统，子系统可以拿着令牌会获取各自的受保护资源，为了减少频繁认证，各个子系统在被passport授权以后，会建立一个局部会话，在一定时间内可以无需再次向passport发起认证
 
-上图有四个系统，分别是Application1、Application2、Application3、和 SS0，当Application1、Application2、Application3需要登录时，将跳到SS0系统，SS0系统完成登录，其他的应用系统也就随之登录了
+在一个典型的场景中，有四个系统，分别是Application1、Application2、Application3、和 SS0，当Application1、Application2、Application3需要登录时，将跳到SS0系统，SS0系统完成登录，其他的应用系统也就随之登录了
 
 淘宝、天猫都属于阿里旗下，当用户登录淘宝后，再打开天猫，系统便自动帮用户登录了天猫，这种现象就属于单点登录
 
@@ -5123,17 +5117,17 @@ iframe.src ="http://app1.com/localstorage.html";
 document.body.append(iframe);
 //使用postMessage()方法将token传递给iframe
 setTimeout(function () {
-iframe.contentWindow.postMessage(token,"http://app1.com");
-}, 4000);
+    iframe.contentWindow.postMessage(token,"http://app1.com");
+  }, 4000);
 setTimeout(function () {
-iframe.remove();
-}, 6000);
+    iframe.remove();
+  }, 6000);
 
 //在这个iframe所加载的HTML中绑定一个事件监听器，当事件被触发时，把接收到的token数据
 写入localStorage
 window.addEventListener('message', function (event) {
-localStorage.setItem('token', event.data)
-}, false);
+    localStorage.setItem('token', event.data)
+  }, false);
 ```
 
 前端通过 iframe + postMessage() 方式，将同一份 Token 写入到了多个域下的 LocalStorage 中，前端每次在向后端发送请求之前，都会主动从 LocalStorage 中读取Token并在请求中携带，这样就实现了同一份Token 被多个域所共享
@@ -5142,7 +5136,7 @@ localStorage.setItem('token', event.data)
 
 ### 标准认证流程
 
-单点登录的流程图如下所示：
+单点登录的标准流程如下：
 
 - 用户访问系统1的受保护资源，系统1发现用户未登录，跳转至sSo认证中心，并将自己的地址作为参数
 
@@ -5204,8 +5198,6 @@ localStorage.setItem('token', event.data)
 
 ### 上拉加载
 
-首先可以看一张图
-
 上拉加载的本质是页面触底，或者快要触底时的动作
 
 判断页面触底我们需要先了解一下下面几个属性
@@ -5234,7 +5226,7 @@ let scrollTop = document.documentElement.scrollTop;
 let distance = 50; //距离视窗还用50的时候，开始触发;
 
 if ((scrollTop + clientHeight) >= (scrollHeight - distance)) {
-console.log("开始加载数据");
+  console.log("开始加载数据");
 }
 ```
 
@@ -5256,15 +5248,15 @@ Html结构如下：
 
 ```html
 <main>
-<p class="refreshText"></p >
-<ul id="refreshContainer">
-<li>111</li>
-<li>222</li>
-<li>333</li>
-<li>444</li>
-<li>555</li>
+  <p class="refreshText"></p >
+  <ul id="refreshContainer">
+    <li>111</li>
+    <li>222</li>
+    <li>333</li>
+    <li>444</li>
+    <li>555</li>
 
-</ul>
+  </ul>
 </main>
 ```
 
@@ -5277,40 +5269,40 @@ _startPos = 0, //初始的值
 _transitionHeight = 0; // 移动的距离
 
 _element.addEventListener('touchstart', function(e) {
-_startPos = e.touches[0].pageY; // 记录初始位置
-_element.style.position = 'relative';
-_element.style.transition = 'transform 0s';
-}, false);
+    _startPos = e.touches[0].pageY; // 记录初始位置
+    _element.style.position = 'relative';
+    _element.style.transition = 'transform 0s';
+  }, false);
 ```
 
 **touchmove：记录滑动差值**
 
 ```js
 _element.addEventListener('touchmove',function(e) {
-e.touches[0].pageY 当前位置
-transitionHeight = e.touches[0].pageY - _startPos; // 记录差值
+    e.touches[0].pageY 当前位置
+    transitionHeight = e.touches[0].pageY - _startPos; // 记录差值
 
-if (_transitionHeight > 0 && _transitionHeight < 60) {
-_refreshText.innerText ='下拉刷新';
-_element.style.transform = 'translateY('+_transitionHeight+'px)';
+    if (_transitionHeight > 0 && _transitionHeight < 60) {
+      _refreshText.innerText ='下拉刷新';
+      _element.style.transform = 'translateY('+_transitionHeight+'px)';
 
-if (_transitionHeight > 55) {
-_refreshText.innerText = '释放更新';
-}
-}
-}, false);
+      if (_transitionHeight > 55) {
+        _refreshText.innerText = '释放更新';
+      }
+    }
+  }, false);
 ```
 
 最后，就是监听touchend离开的事件
 
 ```js
 _element.addEventListener('touchend', function(e) {
-_element.style.transition = 'transform 0.5s ease 1s';
-_element.style.transform = 'translateY(0px)';
-_refreshText.innerText = '更新中...';
-// todo...
+    _element.style.transition = 'transform 0.5s ease 1s';
+    _element.style.transform = 'translateY(0px)';
+    _refreshText.innerText = '更新中...';
+    // todo...
 
-}, false);
+  }, false);
 ```
 
 从上面可以看到，在下拉到松手的过程中，经历了三个阶段：
@@ -5329,13 +5321,13 @@ HTML结构
 
 ```html
 <div id="position-wrapper">
-<div>
-<p class="refresh">下拉刷新</p >
-<div class="position-list">
-<！--列表内容-->
-</div>
-<p class="more">查看更多</p >
-</div>
+  <div>
+    <p class="refresh">下拉刷新</p >
+    <div class="position-list">
+      <！--列表内容-->
+    </div>
+    <p class="more">查看更多</p >
+  </div>
 </div>
 ```
 
@@ -5549,7 +5541,7 @@ console.log( string.match(regex) );
 let str = "John Smith";
 
 //交换名字和姓氏
-console.log(str.replace(/(john) (smith)/i, ‘$2, $1')) // Smith, John
+console.log(str.replace(/(john) (smith)/i, '$2, $1')) // Smith, John
 ```
 
 ### 匹配 API
@@ -5780,7 +5772,7 @@ console.log(execUrlParams('test=a=b=c&&==&a='));//{test: "a=b=c","":
 // 命令式编程
 var array = [0, 1, 2, 3]
 for(let i = 0; i < array.length; i++) {
-array[i] = Math.pow(array[i], 2)
+  array[i] = Math.pow(array[i], 2)
 }
 
 //函数式方式
@@ -5819,8 +5811,8 @@ let double = value=>value*2;
 
 ```js
 test('double(2) 等于 4', () => {
-expect(double(2)).toBe(4);
-})
+    expect(double(2)).toBe(4);
+  })
 ```
 
 不依赖外部环境计算，不会产生副作用，提高函数的复用性
@@ -5833,20 +5825,20 @@ expect(double(2)).toBe(4);
 
 在我们的编程世界中，我们需要处理的其实也只有“数据”和“关系”，而关系就是函数
 
-编程工作也就是在找一种映射关系，一旦关系找到了，问题就解决了，剩下的事情，就是让数据流过这种关系，然后转换成另一个数据，如下图所示
+编程工作也就是在找一种映射关系，一旦关系找到了，问题就解决了，剩下的事情，就是让数据流过这种关系，然后转换成另一个数据
 
 在这里，就是高阶函数的作用。高级函数，就是以函数作为输入或者输出的函数被称为高阶函数通过高阶函数抽象过程，注重结果，如下面例子
 
 ```js
 const forEach = function(arr,fn){
-for(let i=0;i<arr.length;i++){
-fn(arr[i]);
-}
+  for(let i=0;i<arr.length;i++){
+    fn(arr[i]);
+  }
 }
 let arr = [1,2,3];
 forEach(arr,(item)=>{
-console.log(item);
-})
+    console.log(item);
+  })
 ```
 
 上面通过高阶函数forEach来抽象循环如何做的逻辑，直接关注做了什么高阶函数存在缓存的特性，主要是利用闭包作用
@@ -5857,15 +5849,15 @@ let fn = (x,y)=>x+y;
 
 ```js
 const once = (fn)=>{
-let done = false;
-return function(){
-if(!done){
-fn.apply(this,fn);
-}else{
-console.log("该函数已经执行");
-}
-done = true;
-}
+  let done = false;
+  return function(){
+    if(!done){
+      fn.apply(this,fn);
+    }else{
+      console.log("该函数已经执行");
+    }
+    done = true;
+  }
 }
 ```
 
@@ -5893,14 +5885,14 @@ console.log( myfn(1)(2) );
 ```js
 // 多参数柯里化;
 const curry = function(fn){
-return function curriedFn(...args){
-if(args.length<fn.length){
-return function(){
-return curriedFn(...args.concat([...arguments]));
-}
-}
-return fn(...args);
-}
+  return function curriedFn(...args){
+    if(args.length<fn.length){
+      return function(){
+        return curriedFn(...args.concat([...arguments]));
+      }
+    }
+    return fn(...args);
+  }
 }
 const fn = (x,y,z,a)=>x+y+z+a;
 const myfn = curry(fn);
@@ -6005,7 +5997,7 @@ XSS的攻击目标是为了盗取存储在客户端的cookie或者其他网站�
 <input type="text" value="<%= getParameter("keyword") %>">
 <button>搜索</button>
 <div>
-您搜索的关键词是：<%= getParameter("keyword")%>
+  您搜索的关键词是：<%= getParameter("keyword")%>
 </div>
 ```
 
@@ -6017,7 +6009,7 @@ XSS的攻击目标是为了盗取存储在客户端的cookie或者其他网站�
 <input type="text"value=""><script>alert('XSS');</script>">
 <button>搜索</button>
 <div>
-您搜索的关键词是："><script>alert('XSS');</script>
+  您搜索的关键词是："><script>alert('XSS');</script>
 </div>
 ```
 
@@ -6150,9 +6142,9 @@ a.com以受害者的名义执行了act=xx
 
 ```html
 <form action="http://bank.example/withdraw" method="POST">
-<input type="hidden" name="account"value="xiaoming" />
-<input type="hidden" name="amount"value="10000" />
-<input type="hidden"name="for"value="hacker" />
+  <input type="hidden" name="account"value="xiaoming" />
+  <input type="hidden" name="amount"value="10000" />
+  <input type="hidden"name="for"value="hacker" />
 </form>
 <script> document.forms[0].submit(); </script>
 ```
@@ -6297,9 +6289,9 @@ var m = 0,n = 19 // 把 m,n,add() 标记为进入环境。
 add(m，n) //把 a，b，c标记为进入环境。
 console.log(n)// a,b,c标记为离开环境，等待垃圾回收。
 function add(a, b) {
-a++
-var c = a + b
-return c
+  a++
+  var c = a + b
+  return c
 }
 ```
 
@@ -6332,7 +6324,7 @@ arr = null
 
 ```js
 function foo(arg) {
-bar = "this is a hidden global variable";
+  bar = "this is a hidden global variable";
 }
 ```
 
@@ -6340,7 +6332,7 @@ bar = "this is a hidden global variable";
 
 ```js
 function foo() {
-this.variable = "potential accidental global";
+  this.variable = "potential accidental global";
 }
 // foo 调用自己，this 指向了全局对象(window)
 foo( );
@@ -6367,11 +6359,11 @@ node.innerHTML = JSON.stringify(someResource));
 
 ```js
 function bindEvent() {
-var obj = document.createElement('XXX');
-var unused = function () {
-console.log(obj，'闭包内引用obj obj不会被释放');
-};
-obj = null; // 解决方法
+  var obj = document.createElement('XXX');
+  var unused = function () {
+    console.log(obj，'闭包内引用obj obj不会被释放');
+  };
+  obj = null; // 解决方法
 }
 ```
 
@@ -6409,11 +6401,11 @@ console.log(refA,'refA'); // 解除引|用
 
 ```js
 class Car{
-constructor(color,speed){
-this.color = color
-this.speed = speed
-//..
-}
+  constructor(color,speed){
+    this.color = color
+    this.speed = speed
+    //..
+  }
 }
 ```
 
@@ -6433,11 +6425,11 @@ this.Container = true // 货箱
 
 ```js
 class Truck extends Car{
-constructor(color,speed){
-super(color,speed)
-this.color = "black" //覆盖
-this.Container = true // 货箱
-}
+  constructor(color,speed){
+    super(color,speed)
+    this.color = "black" //覆盖
+    this.Container = true // 货箱
+  }
 }
 ```
 
@@ -6467,11 +6459,11 @@ this.Container = true // 货箱
 
 ```js
 function Parent() {
-this.name = 'parent1';
-this.play = [1, 2, 3]
+  this.name = 'parent1';
+  this.play = [1, 2, 3]
 }
 function Child() {
-this.type = 'child2';
+  this.type = 'child2';
 }
 Child1.prototype = new Parent();
 console.log(new Child())
@@ -6494,16 +6486,16 @@ console.log(s1.play, s2.play); // [1,2,3,4]
 
 ```js
 function Parent( ){
-this.name = 'parent1';
+  this.name = 'parent1';
 }
 
 Parent.prototype.getName = function () {
-return this.name;
+  return this.name;
 }
 
 function Child(){
-Parent1.call(this);
-this.type = 'child'
+  Parent1.call(this);
+  this.type = 'child'
 }
 
 let child = new Child();
@@ -6521,17 +6513,17 @@ console.log(child.getName()); // 会报错
 
 ```js
 function Parent3 () {
-this.name = 'parent3';
-this.play = [1, 2, 3];
+  this.name = 'parent3';
+  this.play = [1, 2, 3];
 }
 
 Parent3.prototype.getName = function () {
-return this.name;
+  return this.name;
 }
 function Child3() {
-// 第二次调用 Parent3()
-Parent3.call(this);
-this.type = 'child3';
+  // 第二次调用 Parent3()
+  Parent3.call(this);
+  this.type = 'child3';
 }
 
 // 第一次调用 Parent3()
@@ -6558,11 +6550,11 @@ console.log(s4.getName()); // 正常输出'parent3'
 
 ```js
 let parent4 = {
-name: "parent4",
-friends: ["p1", "p2", "p3"],
-getName: function() {
-return this.name;
-}
+  name: "parent4",
+  friends: ["p1", "p2", "p3"],
+  getName: function() {
+    return this.name;
+  }
 };
 
 let person4 = Object.create(parent4);
@@ -6587,19 +6579,19 @@ console.log(person5.friends); // ["p1", "p2", "p3","jerry","lucy"]
 
 ```js
 let parent5 = {
-name: "parent5",
-friends: ["p1", "p2", "p3"],
-getName: function() {
-return this.name;
-}
+  name: "parent5",
+  friends: ["p1", "p2", "p3"],
+  getName: function() {
+    return this.name;
+  }
 };
 
 function clone(original) {
-let clone = Object.create(original);
-clone.getFriends = function() {
-return this.friends;
-};
-return clone;
+  let clone = Object.create(original);
+  clone.getFriends = function() {
+    return this.friends;
+  };
+  return clone;
 }
 
 let person5 = clone(parent5);
@@ -6616,32 +6608,32 @@ console.log(person5.getFriends()); // ["p1", "p2", "p3"]
 
 ```js
 function clone (parent, child) {
-// 这里改用Object.create 就可以减少组合继承中多进行一次构造的过程
-child.prototype = Object.create(parent.prototype);
-child.prototype.constructor = child;
+  // 这里改用Object.create 就可以减少组合继承中多进行一次构造的过程
+  child.prototype = Object.create(parent.prototype);
+  child.prototype.constructor = child;
 }
 
 function Parent6() {
-this.name = 'parent6';
-this.play = [1, 2, 3];
+  this.name = 'parent6';
+  this.play = [1, 2, 3];
 }
 Parent6.prototype.getName = function () {
-return this.name;
+  return this.name;
 
-function Child6() {
-Parent6.call(this);
-this.friends = 'child5';
-}
+  function Child6() {
+    Parent6.call(this);
+    this.friends = 'child5';
+  }
 
-clone(Parent6, Child6);
+  clone(Parent6, Child6);
 
-Child6.prototype.getFriends = function () {
-return this.friends;
-}
+  Child6.prototype.getFriends = function () {
+    return this.friends;
+  }
 
-let person6 = new Child6();
-console.log(person6); //{friends:"child5",name:"child5",play:[1,2,3],_pro
-to__:Parent6}
+  let person6 = new Child6();
+  console.log(person6); //{friends:"child5",name:"child5",play:[1,2,3],_pro
+  to__:Parent6}
 console.log(person6.getName()); // parent6
 console.log(person6.getFriends()); // child5
 ```
@@ -6675,7 +6667,7 @@ asuna.getName()//成功访问到父类的方法
 
 利用babel工具进行转换，我们会发现extends实际采用的也是寄生组合继承方式，因此也证明了这种方式是较优的解决继承的方式
 
-下面以一张图作为总结：
+下面做一个总结：
 
 通过Object.create 来划分不同的继承方式，最后的寄生式组合继承方式是通过组合继承改造之后的最优继承方式，而extends 的语法糖和寄生组合继承的方式基本类似
 
@@ -6726,8 +6718,6 @@ asuna.getName()//成功访问到父类的方法
 - 指数位E：中间的11位存储指数(exponent)，用来表示次方数，可以为正负数。在双精度浮点数中，指数的固定偏移量为1023
 
 尾数位M:最后的52位是尾数(mantissa)，超出的部分自动进一舍零
-
-如下图所示：
 
 举个例子：
 
@@ -6805,7 +6795,7 @@ Infinity
 
 ```js
 function strip(num, precision = 12) {
-return +parseFloat(num.toPrecision(precision));
+  return +parseFloat(num.toPrecision(precision));
 }
 ```
 
@@ -6822,10 +6812,10 @@ parseFloat(1.4000000000000001.toPrecision(12)) === 1.4 // True
 *精确加法
 */
 function add(num1, num2) {
-const num1Digits = (num1.toString().split('.')[1] I'').length;
-const num2Digits = (num2.toString().split('.')[1] l '').length;
-const baseNum = Math.pow(10, Math.max(num1Digits, num2Digits));
-return (num1 * baseNum + num2 * baseNum) / baseNum;
+  const num1Digits = (num1.toString().split('.')[1] I'').length;
+  const num2Digits = (num2.toString().split('.')[1] l '').length;
+  const baseNum = Math.pow(10, Math.max(num1Digits, num2Digits));
+  return (num1 * baseNum + num2 * baseNum) / baseNum;
 }
 ```
 
@@ -6851,13 +6841,13 @@ return (num1 * baseNum + num2 * baseNum) / baseNum;
 
 ```js
 function pow(x, n) {
-let result = 1;
+  let result = 1;
 
-// 再循环中，用 x 乘以 result n 次
-for (let i = 0; i < n; i++) {
-result *= x;
-}
-return result;
+  // 再循环中，用 x 乘以 result n 次
+  for (let i = 0; i < n; i++) {
+    result *= x;
+  }
+  return result;
 }
 ```
 
@@ -6865,11 +6855,11 @@ return result;
 
 ```js
 function pow(x, n) {
-if (n == 1) {
-return x;
-} else {
-return x \* pow(x, n - 1);
-}
+  if (n == 1) {
+    return x;
+  } else {
+    return x \* pow(x, n - 1);
+  }
 }
 ```
 
@@ -6915,8 +6905,8 @@ else = x * pow(x, n - 1)
 
 ```js
 function factorial(n) {
-if (n === 1) return 1;
-return n * factorial(n - 1);
+  if (n === 1) return 1;
+  return n * factorial(n - 1);
 }
 
 factorial(5) // 120
@@ -6928,8 +6918,8 @@ factorial(5) // 120
 
 ```js
 function factorial(n, total) {
-if (n === 1) return total;
-return factorial(n - 1, n * total);
+  if (n === 1) return total;
+  return factorial(n - 1, n * total);
 }
 
 factorial(5, 1) // 120
@@ -6943,17 +6933,17 @@ factorial(5, 1) // 120
 
 ```js
 function factorial2 (n, start = 1, total = 1) {
-if(n <= 2){
-return total
-}
-return factorial2 (n -1, total, total + start)
+  if(n <= 2){
+    return total
+  }
+  return factorial2 (n -1, total, total + start)
 }
 
 function sumArray(arr, total) {
-if(arr.length === 1) {
-return total
-}
-return sum(arr, total + arr.pop())
+  if(arr.length === 1) {
+    return total
+  }
+  return sum(arr, total + arr.pop())
 }
 ```
 

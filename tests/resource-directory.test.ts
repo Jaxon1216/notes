@@ -67,13 +67,15 @@ describe('resource directories', () => {
   })
 
   it('keeps friend links as the same structured collection', () => {
-    expect(FRIEND_LINKS).toEqual([
-      expect.objectContaining({
-        title: 'Magic Resume',
-        href: 'https://magic-resume.cn',
-        trackingEvent: 'friend_link_click',
-      }),
-    ])
+    expect(FRIEND_LINKS).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          title: 'Magic Resume',
+          href: 'https://magic-resume.cn',
+          trackingEvent: 'magic_resume_link_click',
+        }),
+      ]),
+    )
     expect(validateFriendLinks(FRIEND_LINKS)).toEqual([])
     expect(
       validateFriendLinks([

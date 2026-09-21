@@ -17,7 +17,7 @@ HTTP（HyperText Transfer Protocol）超文本传输协议，是浏览器与Web�
 
 ### 关键代码
 
-```
+```text
 请求报文格式：
 POST  /s?ie=utf-8  HTTP/1.1 
 Host: atguigu.com
@@ -28,7 +28,7 @@ User-Agent: chrome 83
 username=admin&password=admin
 ```
 
-```
+```text
 响应报文格式：
 HTTP/1.1  200  OK
 Content-Type: text/html;charset=utf-8
@@ -348,6 +348,8 @@ try {
 
 **IE缓存问题**：IE浏览器会缓存GET请求结果，相同URL的请求直接返回缓存，导致数据不更新。解决方法是在URL后添加时间戳参数，使每次请求URL不同。
 
+> ⚠️ 时效说明：这个"缓存 GET 请求"的坑主要是老 IE 的行为，现代浏览器（Chrome/Edge/Firefox/Safari）不会这样激进缓存，IE 也已停止支持，实际开发中基本不用再为它单独处理。不过"加时间戳/随机参数做 cache busting"这个思路本身仍然有用：需要绕过 CDN 或 HTTP 缓存拿最新数据时依然会用到，只是现在更推荐用响应头（`Cache-Control`、`ETag`）从服务端控制缓存。
+
 **超时处理**：通过`xhr.timeout`设置超时时间（毫秒），`xhr.ontimeout`监听超时事件。网络异常通过`xhr.onerror`监听。
 
 **请求控制**：使用`xhr.abort()`可以取消正在进行的请求。结合标识变量可以实现防重复请求：检测到有未完成的请求时，先取消旧请求再发送新请求。
@@ -514,239 +516,12 @@ setTimeout(() => xhr.abort(), 1000);
 ## 六、Axios现代化AJAX库
 
 ### 核心概念
-Axios是目前最流行的HTTP客户端库，基于Promise设计，支持浏览器和Node.js环境。相比jQuery AJAX，Axios专注于HTTP请求，体积更小（约13KB），功能更强大。
 
-Axios提供了三种调用方式：`axios.get()`、`axios.post()`和通用方法`axios()`。所有方法都返回Promise，支持async/await语法。
+Axios 是目前最流行的 HTTP 客户端库，基于 Promise 设计，浏览器和 Node.js 都能用，体积小、自动转 JSON、支持拦截器和请求取消，是 React/Vue 项目的首选。
 
-响应对象结构统一为`{data, status, statusText, headers, config}`，data属性包含服务器返回的数据，已自动解析JSON。
+相比原生 XHR，它把请求配置、响应结构（`{data, status, headers, config}`）、错误处理都统一封装好了；相比 jQuery.ajax，它只专注 HTTP、不含 DOM 操作，且提供 jQuery 没有的拦截器机制。
 
-### 关键代码
-
-```javascript
-// 配置默认baseURL
-axios.defaults.baseURL = 'http://127.0.0.1:8000';
-
-// GET请求
-axios.get('/server', {
-    params: {id: 100, vip: 7},  // URL参数
-    headers: {name: 'atguigu'}   // 请求头
-}).then(response => {
-    console.log(response.data);   // 响应体数据
-    console.log(response.status); // 状态码
-});
-
-// POST请求
-axios.post('/server', 
-    {username: 'admin', password: 'admin'}, // 请求体数据
-    {
-        params: {id: 200},      // URL参数
-        headers: {token: 'xxx'}  // 请求头
-    }
-).then(response => {
-    console.log(response.data);
-});
-
-// 通用方法
-axios({
-    method: 'POST',
-    url: '/server',
-    params: {vip: 10},          // URL参数
-    data: {username: 'admin'},   // 请求体参数
-    headers: {a: 100},           // 请求头
-    timeout: 5000                // 超时时间
-}).then(response => {
-    console.log(response.status);
-    console.log(response.data);
-}).catch(error => {
-    console.log('请求失败', error);
-});
-```
-
-Axios的核心优势是Promise风格，支持.then()和.catch()链式调用，也可以使用async/await。响应数据在response.data中，已自动解析JSON。
-
-### 📝 要点测验
-
-<details>
-<summary>Axios的params和data参数有什么区别？</summary>
-
-**核心区别：**
-
-**params参数：**
-- 会被拼接到URL后面作为查询字符串
-- 适用于GET、DELETE等请求
-- 格式：`?key1=value1&key2=value2`
-
-```javascript
-axios.get('/api/users', {
-    params: {id: 123, page: 1}
-});
-// 实际请求: /api/users?id=123&page=1
-```
-
-**data参数：**
-- 会放在请求体（body）中
-- 适用于POST、PUT、PATCH等请求
-- 默认序列化为JSON格式
-
-```javascript
-axios.post('/api/users', {
-    name: 'zhangsan',
-    age: 18
-});
-// 请求体: {"name":"zhangsan","age":18}
-```
-
-**同时使用：**
-POST请求可以同时使用params和data：
-```javascript
-axios.post('/api/users',
-    {name: 'zhangsan'},  // 请求体
-    {params: {type: 'new'}} // URL参数
-);
-// 请求: POST /api/users?type=new
-// 请求体: {"name":"zhangsan"}
-```
-
-**面试要点：**
-- params → URL查询参数（所有请求都可用）
-- data → 请求体数据（POST/PUT/PATCH使用）
-- GET请求的参数应该用params而非data
-</details>
-
-<details>
-<summary>Axios如何进行全局配置和拦截器设置？</summary>
-
-**全局配置：**
-```javascript
-// 基础URL
-axios.defaults.baseURL = 'https://api.example.com';
-// 超时时间
-axios.defaults.timeout = 5000;
-// 默认请求头
-axios.defaults.headers.common['Authorization'] = 'Bearer token';
-axios.defaults.headers.post['Content-Type'] = 'application/json';
-```
-
-**请求拦截器：**
-在请求发送前统一处理（如添加token）：
-```javascript
-axios.interceptors.request.use(
-    config => {
-        // 发送请求前的处理
-        const token = localStorage.getItem('token');
-        if(token){
-            config.headers.Authorization = `Bearer ${token}`;
-        }
-        return config;
-    },
-    error => {
-        // 请求错误处理
-        return Promise.reject(error);
-    }
-);
-```
-
-**响应拦截器：**
-在接收响应后统一处理（如统一错误处理）：
-```javascript
-axios.interceptors.response.use(
-    response => {
-        // 响应成功处理
-        return response.data; // 只返回data部分
-    },
-    error => {
-        // 响应错误处理
-        if(error.response.status === 401){
-            // 跳转到登录页
-            window.location.href = '/login';
-        }
-        return Promise.reject(error);
-    }
-);
-```
-
-**创建实例：**
-针对不同API创建不同配置的实例：
-```javascript
-const instance1 = axios.create({
-    baseURL: 'https://api1.example.com',
-    timeout: 3000
-});
-
-const instance2 = axios.create({
-    baseURL: 'https://api2.example.com',
-    timeout: 5000
-});
-```
-
-**实际应用场景：**
-- 请求拦截器：添加token、loading动画、请求日志
-- 响应拦截器：统一错误处理、数据转换、关闭loading
-- 创建实例：多个后端服务、不同超时配置
-</details>
-
-<details>
-<summary>为什么Axios比jQuery AJAX更受欢迎？</summary>
-
-**Axios优势对比：**
-
-1. **基于Promise设计**:
-```javascript
-// Axios - 支持async/await
-async function getUser(){
-    const res = await axios.get('/api/user');
-    return res.data;
-}
-
-// jQuery - 回调函数
-$.ajax({
-    url: '/api/user',
-    success: function(data){
-        // 回调地狱
-    }
-});
-```
-
-2. **体积更小**:
-- Axios: ~13KB（仅HTTP功能）
-- jQuery: ~30KB（包含DOM操作等）
-
-3. **自动JSON转换**:
-```javascript
-// Axios自动转换
-axios.post('/api', {name: 'test'});
-// 自动转为JSON: {"name":"test"}
-
-// jQuery需要手动处理
-$.ajax({
-    data: JSON.stringify({name: 'test'}),
-    contentType: 'application/json'
-});
-```
-
-4. **拦截器机制**:
-Axios提供请求/响应拦截器，jQuery没有。
-
-5. **防御XSRF**:
-Axios内置XSRF防护，自动添加token。
-
-6. **浏览器和Node.js通用**:
-Axios可在Node.js环境使用，jQuery只能在浏览器。
-
-7. **更好的错误处理**:
-```javascript
-axios.get('/api').catch(error => {
-    console.log(error.response.status);
-    console.log(error.response.data);
-});
-```
-
-**现代项目推荐：**
-- React/Vue/Angular项目首选Axios
-- 不需要jQuery的DOM操作功能
-- TypeScript支持更好
-- 社区活跃，持续更新
-</details>
+> Axios 的完整用法（GET/POST、`async/await`、三种错误类型、`axios.create` 实例、请求/响应拦截器、文件上传下载、请求取消、工程封装模板）见同目录专篇 [Axios 学习笔记](./04-axios.md)，这里不再展开。
 
 ## 七、Fetch原生API
 
@@ -1275,7 +1050,7 @@ fetch('http://api.example.com/data', {
 ```
 
 **预检流程：**
-```
+```text
 1. 浏览器发送OPTIONS请求:
    OPTIONS /api/data HTTP/1.1
    Origin: http://localhost:3000
@@ -1578,14 +1353,14 @@ xhr.send();
 - 将域名解析为IP地址
 
 **4. TCP三次握手**
-```
+```text
 客户端 → SYN → 服务器
 客户端 ← SYN+ACK ← 服务器
 客户端 → ACK → 服务器
 ```
 
 **5. 发送HTTP请求**
-```
+```text
 GET /users HTTP/1.1
 Host: api.example.com
 User-Agent: Mozilla/5.0
@@ -1601,7 +1376,7 @@ Accept: application/json
 - 构建响应
 
 **7. 返回HTTP响应**
-```
+```text
 HTTP/1.1 200 OK
 Content-Type: application/json
 Access-Control-Allow-Origin: *
@@ -1610,7 +1385,7 @@ Access-Control-Allow-Origin: *
 ```
 
 **8. TCP四次挥手**
-```
+```text
 客户端 → FIN → 服务器
 客户端 ← ACK ← 服务器
 客户端 ← FIN ← 服务器

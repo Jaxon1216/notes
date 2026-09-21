@@ -2,7 +2,17 @@
 
 本文件记录仓库级重大改动、架构决策和维护规则变更。普通笔记内容的小修小补不需要记录。
 
+## 2026-09-21
+
+- 删除 `public/favicon.svg`，浏览器 favicon 与 Apple Touch Icon 统一改用 `public/site-icon.png`（180x180 PNG）；同步更新 `app/layout.tsx` 图标配置、`tests/site-icons.test.ts` 断言、`public/README.md` 与 `docs/architecture.md`。
+
 ## 2026-09-19
+
+- 内容质量整改（分支 `docs/content-quality-pass`）：删除 `content/docs/dev/notes/`（原“杂记与读书”，含 `tips.md` 与半成品读书笔记 `PurpleBook.md`），并同步清理 `site.config.ts`、`content/docs/dev/meta.json`、`README.md`、`docs/writing-style.md`、`AGENTS.md`、`open-source-contribution.md` 中对该目录的引用与归档指引。`dev` 一级方向自此不再保留零散笔记的兜底目录。
+- 统一命名与目录元信息：`axios.md → 04-axios.md`、算法总览 `Basic1.md → 00-总览.md`（消除同目录数字前缀混用，并修复总览页排序落到末尾的问题，注意这两页线上 URL 变化）；为 `React/`、`Vue/`、`Express/` 补中文 `meta.json`；删除 `agent-development`、`js2go` 中与文件名前缀重复的 `pages` 列表；修复 React 学习路线与算法总览页的 Obsidian `[[]]` 双链为标准 Markdown 链接。
+- 精简 `dev/git/git.md`：去掉“要点测验”问答与冗长的 Conventional Commits 章节（改为链接到开源贡献规范），聚焦 add/commit/push/pull/fetch、branch/checkout（含 `-b`/`-t`）、merge/rebase，并推荐 VS Code 插件 Git Graph。
+- 重排 `dev/linux/linux.md` 主命令表为“左场景 / 右命令”，按前端日常使用频率排序。
+- 修正确定性技术错误与去重：docker 挂载路径 `/user→/usr`、算法示例缺失的函数闭合与 `vector` 初始化、STL 变量重名、Agent 文档中 BGE 归属（智源）、GPT-4 上下文窗口、Computer Use 原理、LangChain 分层、Express HTTP/2 示例、HTTP 202 状态码标签等；合并 Agent 与 LLM 文档中整段重复的题目（CoT、System Prompt、PEFT），并对 React 合成事件绑定层级、`csurf`、Mongoose 连接选项、IE 缓存等过时内容补充版本说明。（mineru-interview 七篇的 OCR 清洗留待单独一轮处理。）
 
 - 将原单页“资源推荐”升级为资源中心：Fumadocs 侧边栏提供总览、优质博客、开源项目、工具与平台、友情链接五个入口；首批收录江旭的技术博客与 Magic Resume。
 - 新增通用站点目录结构：`title`、`scenario`、`description`、`href` 由 `lib/link-entry.ts` 集中校验，资源与友链复用同一 flex 卡片组件；卡片在桌面为三列、超宽屏为四列。友链不从资源推荐或搜索结果自动同步，避免将编辑精选与互链关系混为一谈。

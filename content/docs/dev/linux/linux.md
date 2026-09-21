@@ -1,31 +1,34 @@
-## macOS前端开发常用Linux命令速查表
+# macOS 前端开发常用命令
 
-| 命令 | 用途 | 前端常见场景 |
-|------|------|-------------|
-| `ls -la` | 查看文件详细列表 | 查看项目目录结构、检查隐藏文件 |
-| `cd` | 切换目录 | `cd ~/projects` 进入项目目录 |
-| `pwd` | 显示当前目录 | 确认当前工作路径 |
-| `mkdir` | 创建目录 | `mkdir src/components` 创建组件目录 |
-| `rm -rf` | 强制删除 | `rm -rf node_modules` 删除依赖（谨慎使用） |
-| `cp` | 复制文件 | `cp .env.example .env` 复制环境配置文件 |
-| `mv` | 移动/重命名 | `mv old.js new.js` 重命名文件 |
-| `cat` | 查看文件内容 | `cat package.json` 查看项目配置 |
-| `head/tail` | 查看文件头尾 | `tail -f server.log` 实时查看日志 |
-| `grep` | 搜索文本 | `grep -r "export const" src/` 搜索导出声明 |
-| `find` | 查找文件 | `find . -name "*.jsx"` 查找React组件文件 |
-| `ps aux` | 查看进程 | `ps aux \| grep node` 查找Node进程 |
-| `kill -9` | 强制结束进程 | `kill -9 <PID>` 结束卡死的开发服务器 |
-| `lsof -i` | 查看端口占用 | `lsof -i :3000` 检查3000端口谁在用 |
-| `curl` | HTTP请求 | `curl localhost:3000/api/health` 测试API |
-| `chmod +x` | 添加执行权限 | `chmod +x deploy.sh` 使部署脚本可执行 |
-| `df -h` | 查看磁盘空间 | 检查磁盘剩余空间 |
-| `du -sh` | 查看目录大小 | `du -sh node_modules` 查看依赖包大小 |
-| `history` | 查看命令历史 | 找回忘记的命令 |
-| `\|\|` | 管道组合 | `npm run build \|\| echo "构建失败"` |
-| `alias` | 命令别名 | `alias gp="git pull"` 简化常用命令 |
-| `open` | 打开文件/目录 | `open .` 在Finder中打开当前目录 |
+## 常用命令速查表
 
+按前端日常使用频率从高到低排列，左列是使用场景，右列是对应命令。
 
+| 场景 | 命令 |
+|------|------|
+| 进入项目目录 | `cd ~/projects/my-app` |
+| 返回上一级目录 | `cd ..` |
+| 查看当前目录文件（含隐藏文件） | `ls -la` |
+| 确认当前所在路径 | `pwd` |
+| 删除依赖重装（谨慎） | `rm -rf node_modules` |
+| 查看谁占用了 3000 端口 | `lsof -i :3000` |
+| 结束卡死的开发服务器 | `kill -9 <PID>` |
+| 查找 Node 进程 | `ps aux \| grep node` |
+| 实时查看日志输出 | `tail -f server.log` |
+| 查看文件内容 | `cat package.json` |
+| 在项目里搜索代码 | `grep -r "export const" src/` |
+| 按文件名查找文件 | `find . -name "*.tsx"` |
+| 复制环境配置文件 | `cp .env.example .env` |
+| 移动或重命名文件 | `mv old.js new.js` |
+| 创建目录 | `mkdir src/components` |
+| 在 Finder 中打开当前目录 | `open .` |
+| 测试本地接口 | `curl localhost:3000/api/health` |
+| 给脚本添加执行权限 | `chmod +x deploy.sh` |
+| 查看某个目录占用空间 | `du -sh node_modules` |
+| 查看磁盘剩余空间 | `df -h` |
+| 设置命令别名 | `alias gp="git pull"` |
+| 查找忘记的历史命令 | `history \| grep npm` |
+| 用管道组合命令 | `npm run build \|\| echo "构建失败"` |
 
 ## 前端开发术语扫盲表
 

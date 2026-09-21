@@ -251,6 +251,10 @@ body:has(.home-shell) .site-header {
 }
 
 .docs-sidebar-activity {
+  /* 环绕光束转一圈的时长：数字越大越慢，越小越快。 */
+  --docs-activity-orbit-duration: 7s;
+
+  position: relative;
   overflow: hidden;
   border: 1px solid var(--color-fd-border);
   border-radius: 12px;
@@ -271,19 +275,109 @@ body:has(.home-shell) .site-header {
   font-weight: 720;
 }
 
+/* Situation: 侧栏“站点动态”卡片需要一个更贴“实时运转”语义、又高级的动效。 */
+/* Task: 让一道蓝色光束沿卡片四条边循环游走（蛇形环绕），主角只有它一个。 */
+/* Action: @property 注册可动画角度 → conic-gradient 生成一段弧光 → mask 只留描边挖空中心。 */
+/* Result: 卡片四周有一道匀速环绕的蓝光，纯 CSS、跟随明暗主题，reduced-motion 下静止。 */
+@property --docs-activity-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.docs-sidebar-activity::before {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--docs-activity-angle),
+    transparent 0deg,
+    transparent 250deg,
+    color-mix(in srgb, #2563eb 55%, transparent) 312deg,
+    #2563eb 348deg,
+    transparent 360deg
+  );
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  content: '';
+  pointer-events: none;
+  animation: docs-activity-orbit var(--docs-activity-orbit-duration) linear infinite;
+}
+
+@keyframes docs-activity-orbit {
+  to {
+    --docs-activity-angle: 360deg;
+  }
+}
+
+/* 让卡片内容盖在环绕光束之上，光束只在四边描边处露出。 */
+.docs-sidebar-activity__heading,
+.docs-sidebar-activity__metrics {
+  position: relative;
+  z-index: 1;
+}
+
 .docs-sidebar-activity__dot {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 999px;
-  background: #22c55e;
-  box-shadow: 0 0 0 3px color-mix(in srgb, #22c55e 18%, transparent);
+  background: #2563eb;
+  box-shadow: 0 0 0 3px color-mix(in srgb, #2563eb 16%, transparent);
+  animation: docs-activity-breathe 2.6s ease-in-out infinite;
+}
+
+@keyframes docs-activity-breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
 
 .docs-sidebar-activity__realtime {
   margin-left: auto;
-  color: #16a34a;
+  border-radius: 999px;
+  padding: 1px 7px;
+  background: color-mix(in srgb, #2563eb 12%, transparent);
+  color: #2563eb;
   font-size: 11px;
   font-weight: 650;
+  letter-spacing: 0.02em;
+}
+
+.dark .docs-sidebar-activity::before {
+  background: conic-gradient(
+    from var(--docs-activity-angle),
+    transparent 0deg,
+    transparent 250deg,
+    color-mix(in srgb, #60a5fa 55%, transparent) 312deg,
+    #60a5fa 348deg,
+    transparent 360deg
+  );
+}
+
+.dark .docs-sidebar-activity__dot {
+  background: #60a5fa;
+  box-shadow: 0 0 0 3px color-mix(in srgb, #60a5fa 20%, transparent);
+}
+
+.dark .docs-sidebar-activity__realtime {
+  background: color-mix(in srgb, #60a5fa 16%, transparent);
+  color: #93c5fd;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .docs-sidebar-activity::before,
+  .docs-sidebar-activity__dot {
+    animation: none;
+  }
 }
 
 .docs-sidebar-activity__metrics {

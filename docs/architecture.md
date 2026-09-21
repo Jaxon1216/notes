@@ -77,8 +77,7 @@ tests/                        # 业务逻辑、配置边界和静态回归单元
 vitest.config.ts              # Vitest 路径别名配置
 
 public/
-  favicon.svg                 # 浏览器标签页矢量图标
-  site-icon.png               # 180x180 Apple Touch Icon，路径保持兼容
+  site-icon.png               # 180x180 站点图标，浏览器 favicon 与 Apple Touch Icon 共用
 
 vercel.json                   # Vercel 安装和构建命令
 
@@ -119,9 +118,8 @@ Metadata 和图标。文档动态路由使用各自的 Fumadocs 页面 URL 生�
 OpenGraph URL，避免所有文章继承首页地址。`app/robots.ts` 开放全站抓取并声明
 sitemap，`app/sitemap.ts` 通过 `source.getPages()` 动态输出首页和全部文档 URL。
 
-普通浏览器 favicon 指向轻量的 `/favicon.svg`；Apple Touch Icon 指向规范的
-180x180 PNG `/site-icon.png`。后者保留原公开路径以兼容旧引用，资源用途和尺寸约束
-记录在 `public/README.md`。
+浏览器 favicon 与 Apple Touch Icon 统一指向 180x180 PNG `/site-icon.png`，
+资源用途和尺寸约束记录在 `public/README.md`。
 
 ## AI 解释挂件
 
@@ -205,7 +203,7 @@ Fumadocs `DocsLayout` 仍负责文档树、侧边栏、搜索和正文区域；�
 - AI 解释接口：`app/api/ai/explain/route.ts`
 - AI 挂件 UI：`components/ai/`
 - 首页：`app/page.tsx`、`lib/content.ts`
-- 全站 Metadata 与图标：`app/layout.tsx`、`public/favicon.svg`、`public/site-icon.png`
+- 全站 Metadata 与图标：`app/layout.tsx`、`public/site-icon.png`
 - 全站固定导航：`components/site/site-header.tsx`，挂载在 `app/layout.tsx`
 - 首页视觉配置：`components/home/home-hero.tsx`、`lib/home-visuals.tsx`
 - 首页粒子配置：`components/home/particles-config.ts`

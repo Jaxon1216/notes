@@ -216,12 +216,12 @@ console.log(data); // Hello world
 const fs = require("fs");
 
 fs.writeFile("2.txt", "Hello world", err => {
-if (!err) {
-fs.readFile("2.txt", "utf8", (err, data) => {
-console.log(data); // Hello world
-});
-}
-});
+    if (!err) {
+      fs.readFile("2.txt", "utf8", (err, data) => {
+          console.log(data); // Hello world
+        });
+    }
+  });
 ```
 
 **文件追加写入**
@@ -253,12 +253,12 @@ let data = fs.readFileSync("3.txt", "utf8");
 const fs = require("fs");
 
 fs.appendFile("3.txt", " world", err => {
-if (!err) {
-fs.readFile("3.txt", "utf8", (err, data) => {
-console.log(data); // Hello world
-});
-}
-});
+    if (!err) {
+      fs.readFile("3.txt", "utf8", (err, data) => {
+          console.log(data); // Hello world
+        });
+    }
+  });
 ```
 
 ### 文件拷贝与目录创建
@@ -280,10 +280,10 @@ console.log(data); // Hello world
 const fs = require("fs");
 
 fs.copyFile("3.txt", "4.txt", () => {
-fs.readFile("4.txt", "utf8", (err, data) => {
-console.log(data); // Hello world
-});
-});
+    fs.readFile("4.txt", "utf8", (err, data) => {
+        console.log(data); // Hello world
+      });
+  });
 ```
 
 **创建目录**
@@ -303,8 +303,8 @@ fs.mkdirSync("a/b/c")
 
 ```js
 fs.mkdir("a/b/c", err => {
-if(!err) console.log("创建成功");
-});
+    if(!err) console.log("创建成功");
+  });
 ```
 
 ## 3. 说说对 Node 中的 Buffer 的理解？应用场景?
@@ -323,7 +323,7 @@ if(!err) console.log("创建成功");
 
 例如：
 
-其存储过程如下图所示：
+其存储过程可以理解为按字节依次存放。
 
 ### 创建与编码
 
@@ -454,7 +454,7 @@ Node.js中很多对象都实现了流，总之它是会冒数据(以 Buffer 为�
 
 流可以分成三部分： source、dest、pipe
 
-在 source 和 dest之间有一个连接的管道 pipe,它的基本语法是 source.pipe(dest)，source和dest就是通过pipe连接，让数据从 source 流向了 dest，如下图所示：
+在 source 和 dest之间有一个连接的管道 pipe,它的基本语法是 source.pipe(dest)，source和dest就是通过pipe连接，让数据从 source 流向了 dest。
 
 ### 流的类型
 
@@ -476,7 +476,7 @@ Node.js中很多对象都实现了流，总之它是会冒数据(以 Buffer 为�
 
 之前了解过websocket通信，是一个全双工通信，发送方和接受方都是各自独立的方法，发送和接收都没有任何关系
 
-如下图所示：
+二者互不影响。
 
 基本代码如下：
 
@@ -484,13 +484,13 @@ Node.js中很多对象都实现了流，总之它是会冒数据(以 Buffer 为�
 const { Duplex } = require('stream');
 
 const myDuplex = new Duplex({
-read(size) {
-//..
-},
-write(chunk, encoding, callback) {
-//..
-}
-});
+    read(size) {
+      //..
+    },
+    write(chunk, encoding, callback) {
+      //..
+    }
+  });
 ```
 
 **转换流**
@@ -505,10 +505,10 @@ write(chunk, encoding, callback) {
 const { Transform } = require('stream');
 
 const myTransform = new Transform({
-transform(chunk, encoding, callback) {
-//...
-}
-});
+    transform(chunk, encoding, callback) {
+      //...
+    }
+  });
 ```
 
 ### 应用场景
@@ -531,13 +531,13 @@ get请求返回文件给客户端
 
 ```js
 const server = http.createServer(function (req, res) {
-const method= req.method; //获取请求方法
-if (method === 'GET') { // get 请求
-const fileName = path.resolve(__dirname, 'data.txt');
-let stream = fs.createReadStream(fileName);
-stream.pipe(res); // 将 res 作为 stream 的dest
-}
-});
+    const method= req.method; //获取请求方法
+    if (method === 'GET') { // get 请求
+      const fileName = path.resolve(__dirname, 'data.txt');
+      let stream = fs.createReadStream(fileName);
+      stream.pipe(res); // 将 res 作为 stream 的dest
+    }
+  });
 server.listen(8000);
 ```
 
@@ -560,8 +560,8 @@ const writeStream = fs.createWriteStream(fileName2)
 readStream.pipe(writeStream)
 //数据读取完成监听，即拷贝完成
 readStream.on('end', function () {
-console.log('拷贝完成')
-})
+    console.log('拷贝完成')
+  })
 ```
 
 **一些打包工具的底层操作**
@@ -643,7 +643,7 @@ DE\_ENV 区分 development 和production
 
 ```js
 function foo() {
-console.error('foo');
+  console.error('foo');
 }
 
 process.nextTick(foo);
@@ -692,7 +692,7 @@ class MyEmitter extends EventEmitter {}
 const myEmitter =new MyEmitter()
 
 function callback() {
-console.log('触发了event事件！')
+  console.log('触发了event事件！')
 }
 myEmitter.on('event', callback)
 myEmitter.emit('event')
@@ -721,9 +721,9 @@ emitter.removeAlIListeners([eventName]):移除全部类型为 eventName的监听
 
 ```js
 class EventEmitter {
-constructor() {
-this.events = {};
-}
+  constructor() {
+    this.events = {};
+  }
 }
 ```
 
@@ -731,8 +731,8 @@ this.events = {};
 
 ```js
 {
-"event1": [f1,f2,f3],
-"event2": [f4,f5],
+  "event1": [f1,f2,f3],
+  "event2": [f4,f5],
 }
 ```
 
@@ -740,9 +740,9 @@ this.events = {};
 
 ```js
 emit(type, ...args) {
-this.events[type].forEach((item) => {
-Reflect.apply(item, this, args);
-});
+  this.events[type].forEach((item) => {
+      Reflect.apply(item, this, args);
+    });
 }
 ```
 
@@ -789,22 +789,22 @@ this.removeListener(type,handler)
 ```js
 JavaScr
 once(type, handler) {
-this.on(type, this._onceWrap(type, handler, this));
+  this.on(type, this._onceWrap(type, handler, this));
 }
 
 _onceWrap(type, handler, target) {
-const state = { fired: false, handler, type , target};
-const wrapFn = this._onceWrapper.bind(state);
-state.wrapFn = wrapFn;
-return wrapFn;
+  const state = { fired: false, handler, type , target};
+  const wrapFn = this._onceWrapper.bind(state);
+  state.wrapFn = wrapFn;
+  return wrapFn;
 }
 
 _onceWrapper(...args) {
-if (!this.fired) {
-this.fired = true;
-Reflect.apply(this.handler, this.target, args);
-this.target.off(this.type, this.wrapFn);
-}
+  if (!this.fired) {
+    this.fired = true;
+    Reflect.apply(this.handler, this.target, args);
+    this.target.off(this.type, this.wrapFn);
+  }
 }
 ```
 
@@ -933,9 +933,9 @@ require 方法接收一下几种参数的传递：
 
 - 非原生模块的文件模块：mod
 
-require参数较为简单，但是内部的加载却是十分复杂的，其加载优先级也各自不同，如下图：
+require参数较为简单，但是内部的加载却是十分复杂的，其加载优先级也各自不同。
 
-从上图可以看见，文件模块存在缓存区，寻找模块路径的时候都会优先从缓存中加载已经存在的模块
+由此可见，文件模块存在缓存区，寻找模块路径的时候都会优先从缓存中加载已经存在的模块
 
 **原生模块**
 
@@ -947,7 +947,7 @@ require参数较为简单，但是内部的加载却是十分复杂的，其加�
 
 ```js
 ['c:\\nodejs\\node\_modules',
-'c:\\node\_modules']
+  'c:\\node\_modules']
 ```
 
 JSON
@@ -1131,15 +1131,15 @@ moduleLoadList: [
 
 ```js
 function test() {
-demo( );
+  demo( );
 }
 
 function demo() {
-foo( );
+  foo( );
 }
 
 function foo( ) {
-console.trace();
+  console.trace();
 }
 
 test();
@@ -1272,20 +1272,20 @@ Koa的中间件就是函数，可以是async 函数，或是普通函数
 ```js
 // async 函数
 app.use(async (ctx, next) => {
-const start = Date.now();
-await next();
-const ms = Date.now() - start;
-console.log(^${ctx.method} ${ctx.url} - ${ms}ms^);
-});
+    const start = Date.now();
+    await next();
+    const ms = Date.now() - start;
+    console.log(^${ctx.method} ${ctx.url} - ${ms}ms^);
+  });
 
 // 普通函数
 app.use((ctx, next) => {
-const start = Date.now();
-return next().then(() => {
-const ms = Date.now() - start;
-console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
-});
-});
+    const start = Date.now();
+    return next().then(() => {
+        const ms = Date.now() - start;
+        console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
+      });
+  });
 ```
 
 下面则通过中间件封装http请求过程中几个常用的功能：
@@ -1435,9 +1435,9 @@ koa 本身比较简洁，但是通过中间件的机制能够实现各种所需�
 
 在浏览器事件循环中，我们了解到javascript在浏览器中的事件循环机制，其是根据HTML5定义的规范来实现
 
-而在NodeJS中，事件循环是基于 libuv实现，libuv是一个多平台的专注于异步IO的库，如下图最右侧所示：
+而在NodeJS中，事件循环是基于 libuv实现，libuv是一个多平台的专注于异步IO的库。
 
-上图EVENT\_QUEUE 给人看起来只有一个队列，但EventLoop存在6个阶段，每个阶段都有对应的一个先进先出的回调队列
+EVENT\_QUEUE 给人看起来只有一个队列，但EventLoop存在6个阶段，每个阶段都有对应的一个先进先出的回调队列
 
 ### 阶段与任务队列
 
@@ -1499,24 +1499,24 @@ poll queue:IO事件
 
 ```js
 async function async1() {
-console.log('async1 start')
-await async2()
-console.log('async1 end')
+  console.log('async1 start')
+  await async2()
+  console.log('async1 end')
 }
 
 async function async2() {
-console.log('async2')
+  console.log('async2')
 }
 
 console.log('script start')
 
 setTimeout(function () {
-console.log('setTimeout0')
-},0)
+    console.log('setTimeout0')
+  },0)
 
 setTimeout(function () {
-console.log('setTimeout2')
-},300)
+    console.log('setTimeout2')
+  },300)
 
 setImmediate(() => console.log('setImmediate'));
 
@@ -1527,12 +1527,12 @@ async1();
 process.nextTick(() => console.log('nextTick2'));
 
 new Promise(function (resolve) {
-console.log('promise1')
-resolve();
-console.log('promise2')
-}).then(function () {
-console.log('promise3')
-})
+    console.log('promise1')
+    resolve();
+    console.log('promise2')
+  }).then(function () {
+    console.log('promise3')
+  })
 
 console.log('script end')
 ```
@@ -1592,12 +1592,12 @@ then里面的回调函数进入微任务队列
 
 ```js
 setTimeout(() => {
-console.log("setTimeout");
-}, 0);
+    console.log("setTimeout");
+  }, 0);
 
 setImmediate(() => {
-console.log("setImmediate");
-});
+    console.log("setImmediate");
+  });
 ```
 
 可能有两种输出：
@@ -1668,13 +1668,13 @@ const sysFree = os.freemem();
 const sysTotal = os.totalmem();
 
 module.exports = {
-memory: ( ) => {
-return {
-sys： 1 - sysFree / sysTotal， // 系统内存占用率
-heap: heapUsed / headTotal, // Node堆内存占用率
-node: rss / sysTotal, // Node占用系统内存的比例
-}
-}
+  memory: ( ) => {
+    return {
+      sys： 1 - sysFree / sysTotal， // 系统内存占用率
+      heap: heapUsed / headTotal, // Node堆内存占用率
+      node: rss / sysTotal, // Node占用系统内存的比例
+    }
+  }
 }
 ```
 
@@ -1747,16 +1747,16 @@ const fs = require('fs');
 
 // bad
 http.createServer(function (req, res) {
-fs.readFile(__dirname + '/data.txt', function (err, data) {
-res.end(data);
-});
-});
+    fs.readFile(__dirname + '/data.txt', function (err, data) {
+        res.end(data);
+      });
+  });
 
 // good
 http.createServer(function (req, res) {
-const stream = fs.createReadStream(__dirname + '/data.txt');
-stream.pipe(res);
-});
+    const stream = fs.createReadStream(__dirname + '/data.txt');
+    stream.pipe(res);
+  });
 ```
 
 **代码层面优化**
@@ -1771,7 +1771,7 @@ let account = user_account.findOne(user_id)
 // good
 const user_account_map = {}//注意这个对象将会消耗大量内存。
 user_account.find(user_id in user_ids).forEach(account){
-user_account_map[account.user_id] = account
+  user_account_map[account.user_id] = account
 }
 for user_id in userIds
 var account = user_account_map[user_id]
@@ -1795,12 +1795,12 @@ var account = user_account_map[user_id]
 const buffer = fs.readFileSync(__dirname + '/source/index.htm');
 
 app.use(
-mount('/', async (ctx) => {
-ctx.status = 200;
-ctx.type = 'html';
-ctx.body = buffer;
-leak.push(fs.readFileSync(__dirname + '/source/index.htm'));
-})
+  mount('/', async (ctx) => {
+      ctx.status = 200;
+      ctx.type = 'html';
+      ctx.body = buffer;
+      leak.push(fs.readFileSync(__dirname + '/source/index.htm'));
+    })
 );
 
 const leak = [];
@@ -1918,11 +1918,11 @@ action 就是我们的提交到的接口，enctype="multipart/form-data" 就是�
 ```js
 const koaBody = require('koa-body');
 app.use(koaBody({
-multipart: true,
-formidable: {
-maxFileSize: 200*1024*1024 // 设置上传文件大小最大限制，默认2M
-}
-}));
+      multipart: true,
+      formidable: {
+        maxFileSize: 200*1024*1024 // 设置上传文件大小最大限制，默认2M
+      }
+    }));
 ```
 
 获取上传的文件
@@ -1960,23 +1960,23 @@ return ctx.body = "上传成功！ ";
 
 ```js
 const storage = multer.diskStorage({
-destination: (req, file, cb) => {
-cb(null, "./upload/")
-},
-filename: (req, file, cb) => {
-cb(null, Date.now() + path.extname(file.originalname))
-}
-})
+    destination: (req, file, cb) => {
+      cb(null, "./upload/")
+    },
+    filename: (req, file, cb) => {
+      cb(null, Date.now() + path.extname(file.originalname))
+    }
+  })
 
 const upload = multer({
-storage
-});
+    storage
+  });
 
 const fileRouter = new Router();
 
 fileRouter.post("/upload", upload.single('file'), (ctx, next) => {
-console.log(ctx.req.file); // 获取文件
-})
+    console.log(ctx.req.file); // 获取文件
+  })
 
 app.use(fileRouter.routes());
 ```
@@ -1985,7 +1985,7 @@ app.use(fileRouter.routes());
 
 ### JWT 结构与鉴权流程
 
-JWT(JSON WebToken)，本质就是一个字符串书写规范，如下图，作用是用来在用户和服务器之间传递安全可靠的信息
+JWT(JSON WebToken)，本质就是一个字符串书写规范，作用是用来在用户和服务器之间传递安全可靠的信息
 
 示例 Token：
 
@@ -2110,11 +2110,11 @@ module.exports = UserController;
 
 ```js
 axios.interceptors.request.use(config => {
-const token = localStorage.getItem('token');
-config.headers.common['Authorization'] = 'Bearer '+ token; // 留意这里的
-Authorization
-return config;
-})
+    const token = localStorage.getItem('token');
+    config.headers.common['Authorization'] = 'Bearer '+ token; // 留意这里的
+    Authorization
+    return config;
+  })
 ```
 
 **校验token**
@@ -2124,10 +2124,10 @@ return config;
 ```js
 /注意：放在路由前面
 app.use(koajwt({
-secret: 'test_token'
-}).unless({ // 配置白名单
-path: [/\/api\/register/,/\/api\/login/]
-}))
+      secret: 'test_token'
+    }).unless({ // 配置白名单
+      path: [/\/api\/register/,/\/api\/login/]
+    }))
 ```
 
 secret 必须和 sign 时候保持一致
@@ -2436,15 +2436,15 @@ JS-SDK 解决了移动网页能力不足的问题，通过暴露微信的接口�
 
 ```js
 Component({
-pageLifetimes: {
-show: function() {
-//页面被展示
-},
-hide: function() {
-//页面被隐藏
-},
-}
-})
+    pageLifetimes: {
+      show: function() {
+        //页面被展示
+      },
+      hide: function() {
+        //页面被隐藏
+      },
+    }
+  })
 ```
 
 ### 执行顺序
@@ -2503,7 +2503,7 @@ hide: function() {
 
 ### 登录与会话流程
 
-微信小程序登陆具体实现的逻辑如下图所示：
+微信小程序登陆具体实现的逻辑如下：
 
 通过wx.login()获取到用户的code判断用户是否授权读取用户信息，调用wx.getUserlnfo 读取用户数据
 
@@ -2689,7 +2689,7 @@ reLanch页面全部出栈，只留下新的页面
 
 代码上传完毕，就可以登陆微信公众号的官网首页，点击【开发管理】，查看应用详情：
 
-提交审核过程需要填写审核信息，如下图：
+提交审核过程需要填写审核信息。
 
 **发布版本**
 
@@ -2721,9 +2721,7 @@ reLanch页面全部出栈，只留下新的页面
 
 ### 支付场景
 
-微信小程序为电商类小程序，提供了非常完善、优秀、安全的支付功能在小程序内可调用微信的API完成支付功能，方便、快捷场景如下图所示：
-
-图2 请求微信支付
+微信小程序为电商类小程序，提供了非常完善、优秀、安全的支付功能在小程序内可调用微信的API完成支付功能，方便、快捷，请求微信支付的场景如下：
 
 用户通过分享或扫描二维码进入商户小程序，用户选择购买，完成选购流程
 
@@ -2763,23 +2761,23 @@ wx.login获取用户临时登录凭证code，发送到后端服务器换取openl
 
 ```js
 wx.requestPayment({
-//时间戳
-timeStamp:'
-// 随机字符串
-nonceStr: '',
-//统一下单接口返回的 prepay_id 参数值
-package: '',
-//签名类型
-signType: '',
-//签名
-paySign: ',
-//调用成功回调
-success () {},
-//失败回调
-fail () {},
-// 接口调用结束回调
-complete () {}
-})
+    //时间戳
+    timeStamp:'
+    // 随机字符串
+    nonceStr: '',
+    //统一下单接口返回的 prepay_id 参数值
+    package: '',
+    //签名类型
+    signType: '',
+    //签名
+    paySign: ',
+    //调用成功回调
+    success () {},
+    //失败回调
+    fail () {},
+    // 接口调用结束回调
+    complete () {}
+  })
 ```
 
 参数表如下所示：
@@ -2850,7 +2848,7 @@ complete () {}
 
 ### 启动流程
 
-小程序启动会常常遇到如下图场景：
+小程序启动时常常会遇到这样的场景：
 
 这是因为，小程序首次启动前，微信会在小程序启动前为小程序准备好通用的运行环境，如运行中的线程和一些基础库的初始化
 
@@ -2864,9 +2862,9 @@ complete () {}
 
 下载到的小程序代码包不是小程序的源代码，而是编译、压缩、打包之后的代码包
 
-整体流程如下图：
+整体流程大致如此。
 
-围绕上图小程序的启动流程，我们可以从加载、渲染两个纬度进行切入
+围绕上面小程序的启动流程，我们可以从加载、渲染两个纬度进行切入
 
 ### 加载优化
 
@@ -2934,7 +2932,7 @@ OSI(Open System Interconnect)模型全称为开放式通信系统互连参考模
 
 ### 七层职责
 
-OSI 主要划分了七层，如下图所示：
+OSI 主要划分了七层，分别如下：
 
 **应用层**
 
@@ -2988,7 +2986,7 @@ head标明数据发送者、接受者、数据类型，如MAC地址
 
 ### 数据封装与传输
 
-数据在各层之间的传输如下图所示：
+数据在各层之间的传输过程如下：
 
 应用层报文被传送到运输层
 
@@ -3030,7 +3028,7 @@ TCP/IP协议族按层次分别了五层体系或者四层体系
 
 五层协议的体系结构只是为介绍网络原理而设计的，实际应用还是TCP/IP四层体系结构，包括应用层、传输层、网络层(网际互联层)、网络接口层
 
-如下图所示：
+其分层如下：
 
 **TCP/IP五层模型**
 
@@ -3103,7 +3101,7 @@ OSI参考模型虽然网络划分为七层，但实现起来较困难。TCP/IP�
 
 - TCP/IP协议去掉表示层和会话层的原因在于会话层、表示层、应用层都是在应用程序内部实现的，最终产出的是一个应用数据包，而应用程序之间是几乎无法实现代码的抽象共享的，这也就造成0SI设想中的应用程序维度的分层是无法实现的
 
-三种模型对应关系如下图所示：
+三种模型对应关系如下：
 
 - 区域 | TCP/IP四层模型 | TCP/IP五层模型 | OSI七层模型 | 单位 | 地址 | 功能 | 对应设备 | 协议
 - 计算机高层 | 应用层 | 应用层 | 应用层 | 应用进程 | 进程号 | 应用程序与协议 | 应用程序（eg：FTP、HTTP) | FTP、NFS
@@ -3154,7 +3152,7 @@ TCP报文首部有20个字节，额外开销大
 
 ### 核心区别与场景
 
-UDP 与 TCP 两者的都位于传输层，如下图所示：
+UDP 与 TCP 两者的都位于传输层，两者的区别对比如下：
 
 - TCP | UDP
 - 可靠性 | 可靠 | 不可靠
@@ -3173,7 +3171,7 @@ UDP 与 TCP 两者的都位于传输层，如下图所示：
 
 - TCP面向字节流，将应用层报文看成一串无结构的字节流，分解为多个TCP报文段传输后，在目的站重新装配。UDP协议面向报文，不拆分应用层报文，只保留报文边界，一次发送一个报文，接收方去除报文首部后，原封不动将报文交给上层应用
 
-TCP只能点对点全双工通信。UDP支持一对一、一对多、多对一和多对多的交互通信两者应用场景如下图：
+TCP只能点对点全双工通信。UDP支持一对一、一对多、多对一和多对多的交互通信，两者应用场景如下：
 
 - 应用层协议 | 应用 | 传输层协议
 - SMTP | 电子邮件 | TCP
@@ -3340,7 +3338,7 @@ TCP 终止一个连接，需要经过四次挥手。
 
 服务端在收到客户端断开连接Fin报文后，并不会立即关闭连接，而是先发送一个ACK包先告诉客户端收到关闭连接的请求，只有当服务器的所有报文发送完毕之后，才发送FIN报文断开连接，因此需要四次挥手
 
-一个完整的三次握手四次挥手如下图所示：
+一个完整的三次握手四次挥手的过程就是如此。
 
 ## 6. 说说 HTTP 常见的请求头有哪些？作用？
 
@@ -3473,7 +3471,7 @@ HTTP状态码（英语：HTTP Status Code)，用以表示网页服务器超文�
 
 - 201(已创建)：请求成功并且服务器创建了新的资源
 
-- 202（已创建）：服务器已经接收请求，但尚未处理
+- 202（已接受）：服务器已经接收请求，但尚未处理
 
 - 203（非授权信息）：服务器已成功处理请求，但返回的信息可能来自另一来源
 
@@ -3691,7 +3689,7 @@ HTTP/2在客户端和服务器端使用“首部表”来跟踪和存储之前�
 
 首部表在HTTP/2的连接存续期内始终存在，由客户端和服务器共同渐进地更新
 
-例如：下图中的两个请求，请求一发送了所有的头部字段，第二个请求则只需要发送差异数据，这样可以减少冗余数据，降低开销
+例如：连续的两个请求，请求一发送了所有的头部字段，第二个请求则只需要发送差异数据，这样可以减少冗余数据，降低开销
 
 **服务器推送**
 
@@ -3825,7 +3823,7 @@ SSL的实现这些功能主要依赖于三种手段：
 
 CA对公钥的签名认证要求包括序列号、用途、颁发者、有效时间等等，把这些打成一个包再签名，完整地证明公钥关联的各种信息，形成“数字证书”
 
-流程如下图：
+流程如下：
 
 - 服务器的运营人员向数字证书认证机构提出公开密钥的申请
 
@@ -3861,7 +3859,7 @@ CDN(全称 Content Delivery Network)，即内容分发网络
 
 简单来讲，CDN就是根据用户位置分配最近的资源
 
-于是，用户在上网的时候不用直接访问源站，而是访问离他“最近的”一个CDN节点，术语叫边缘节点，其实就是缓存了源站内容的代理服务器。如下图：
+于是，用户在上网的时候不用直接访问源站，而是访问离他“最近的”一个CDN节点，术语叫边缘节点，其实就是缓存了源站内容的代理服务器。
 
 ### 请求调度与负载均衡
 
@@ -3887,7 +3885,7 @@ CNAME实际上在域名解析的过程中承担了中间人(或者说代理）�
 
 结合上面的因素，得到最合适的边缘节点，然后把这个节点返回给用户，用户就能够就近访问CDN的缓存代理
 
-整体流程如下图：
+整体流程即是如此。
 
 ### 缓存与回源
 
@@ -3929,7 +3927,7 @@ IP地址：一长串能够唯一地标记网络上的计算机的数字
 
 例如www.xxx.com，www为三级域名、 xxx为二级域名、com为顶级域名，系统为用户做了兼容，域名末尾的根域名.一般不需要输入
 
-在域名的每一层都会有一个域名服务器，如下图：
+在域名的每一层都会有一个域名服务器。
 
 除此之外，还有电脑默认的本地域名服务器
 
@@ -3975,7 +3973,7 @@ DNS 查询的方式有两种：
 
 - 至此，浏览器就得到了域名对应的IP地址，并将IP地址缓存起
 
-流程如下图所示：
+上述流程即是完整的解析过程。
 
 ## 13. 说说对WebSocket的理解？应用场景?
 
@@ -3985,7 +3983,7 @@ WebSocket，是一种网络传输协议，位于0SI模型的应用层。可在�
 
 客户端和服务器只需要完成一次握手，两者之间就可以创建持久性的连接，并进行双向数据传输
 
-从上图可见， websocket服务器与客户端通过握手连接，连接成功后，两者都能主动的向对方发送或接受数据
+由此可见，websocket服务器与客户端通过握手连接，连接成功后，两者都能主动的向对方发送或接受数据
 
 而在websocket出现之前，开发实时web应用的方式为轮询
 
@@ -4122,7 +4120,7 @@ hat
 
 在之前文章中讲过DNS的查询，这里就不再讲述了
 
-整个查询过程如下图所示：
+整个查询过程如前所述。
 
 最终，获取到了域名对应的目标服务器IP地址
 

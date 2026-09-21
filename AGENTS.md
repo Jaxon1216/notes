@@ -53,6 +53,16 @@
 - 基础样式在 `app/global.css`；第一阶段保持轻量样式，后续再做系统化视觉升级。
 - 空栏目仍应在首页保留可见入口，但 docs sidebar 只保证已有内容可导航。
 
+## 样式规范
+
+技术栈是 Fumadocs + Tailwind CSS v4，`app/global.css` 是 Tailwind 的官方入口。样式按职责分工，不要一律往 `global.css` 堆：
+
+- 组件级样式（卡片、按钮、标签、单个组件的布局和状态）优先用 Tailwind utility class，写在组件的 `className` 上，跟着组件走，删组件即删样式。
+- 全局与主题样式留在 `app/global.css`：`:root` 变量、Fumadocs `--color-fd-*` 覆盖、`@keyframes` 动画、`prefers-reduced-motion` 降级、`:has()` 等全局选择器、粒子背景、giscus 等第三方容器覆盖。这些 utility 表达不了，也不该拆进组件。
+- 颜色和明暗适配优先复用 `--color-fd-*` 主题变量与原生 `color-mix()`，强调色向站点蓝 `#2563eb`（暗色 `#60a5fa`）靠拢，避免再引入裸色值。
+- 不要新增 Less/Sass/CSS-in-JS：嵌套、变量、颜色函数已被 Tailwind v4 与 `color-mix()` 覆盖，CSS-in-JS 与 RSC 架构冲突。确需局部作用域时用 Next.js 原生支持的 `*.module.css`。
+- 从 `global.css` 迁出组件样式时同步删除旧规则，不要新旧两份并存；改样式后按需运行 `npm run build` 校验。
+
 ## 内容贡献
 
 新增笔记时选择最贴近的目录：
@@ -63,7 +73,6 @@
 - Agent 八股再分两层：偏应用工程放 `content/docs/agent/bagu/agent/`，偏 LLM 原理放 `content/docs/agent/bagu/llm/`
 - 资源推荐：`content/docs/resources/`
 - 算法基础和刷题复盘：`content/docs/algorithm/basics/` 或 `content/docs/algorithm/leetcode/`
-- 零散技巧、读书笔记和未归档资料：`content/docs/dev/notes/`
 
 资源推荐必须包含原文或项目链接、技术方向、资源类型、推荐理由和标签。避免只提交链接列表。
 

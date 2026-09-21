@@ -40,12 +40,12 @@ export const metadata: Metadata = {
     title: siteName,
     description: siteDescription,
   },
-  // Situation: 1080x1080 PNG 曾同时承担 favicon 和 Apple 图标，单文件约 862 KB。
-  // Task: 保持现有品牌图案和旧 PNG 路径，同时降低浏览器标签页的资源成本。
-  // Action: favicon 改用轻量 SVG，Apple Touch Icon 使用缩放后的 180x180 PNG。
-  // Result: PNG 降至约 54 KB，普通浏览器主要加载约 805 B 的矢量图标。
+  // Situation: 站点图标此前区分轻量 SVG favicon 与 180x180 PNG 的 Apple 图标。
+  // Task: 按需求移除独立 favicon，统一改用 site-icon.png 承担浏览器与 Apple 图标。
+  // Action: icon 与 apple 均指向 site-icon.png，并删除不再引用的 favicon.svg。
+  // Result: 全站图标来源单一，浏览器标签页与桌面书签共用同一品牌图案。
   icons: {
-    icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
+    icon: [{ url: '/site-icon.png', type: 'image/png' }],
     apple: [{ url: '/site-icon.png', sizes: '180x180', type: 'image/png' }],
   },
 }

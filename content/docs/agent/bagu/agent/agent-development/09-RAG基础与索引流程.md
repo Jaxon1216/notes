@@ -224,7 +224,7 @@ LangChain 的 RecursiveCharacterTextSplitter 支持滑动窗口和语义拆分�
 
 选择 Embedding 模型要考虑四个核心因素：语言支持、效果质量、成本和维度。
 
-语言支持是首要考虑的。如果做中文 RAG，必须选对中文友好的模型。OpenAI 的 text-embedding-ada-002 和 text-embedding-3 系列对中文支持不错，国产模型如阿里云的 text-embedding-v4、智谱的 embedding-3、百度的 bge 系列专门针对中文优化，效果通常更好。如果是多语言场景，要选跨语言能力强的模型。
+语言支持是首要考虑的。如果做中文 RAG，必须选对中文友好的模型。OpenAI 的 text-embedding-ada-002 和 text-embedding-3 系列对中文支持不错，国产模型如阿里云的 text-embedding-v4、智谱的 embedding-3、智源（BAAI）的 bge 系列专门针对中文优化，效果通常更好。如果是多语言场景，要选跨语言能力强的模型。
 
 效果质量直接影响检索准确性。可以用 MTEB（Massive Text Embedding Benchmark）等基准测试的排名作为参考，但最好用自己的数据测试。准备一批典型问题和对应答案，看不同模型的检索召回率和准确率。有时候排名靠前的模型在你的场景不一定最好，要实测。
 
