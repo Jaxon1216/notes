@@ -24,8 +24,7 @@ function getElementFromNode(node: Node | null) {
     : node.parentElement
 }
 
-function isInsideDocContent(selection: Selection) {
-  const root = document.querySelector('[data-ai-doc-content]')
+function isInsideDocContent(selection: Selection, root: Element | null) {
   if (!root || !selection.anchorNode || !selection.focusNode) return false
 
   const anchorElement = getElementFromNode(selection.anchorNode)
@@ -48,6 +47,17 @@ export function useTextSelection() {
     useState<TextSelectionState>(EMPTY_SELECTION)
 
   useEffect(() => {
+    // 缓存正文根节点，避免每次 mouseup/keyup/scroll 都重新 querySelector。
+    // 路由切换后旧节点会从文档树移除（isConnected 变 false），此时重新查询。
+    let cachedRoot: Element | null = null
+
+    function getDocContentRoot() {
+      if (!cachedRoot || !cachedRoot.isConnected) {
+        cachedRoot = document.querySelector('[data-ai-doc-content]')
+      }
+      return cachedRoot
+    }
+
     function updateSelection() {
       if (!isDesktopViewport()) {
         setSelection(EMPTY_SELECTION)
@@ -57,7 +67,11 @@ export function useTextSelection() {
       const currentSelection = window.getSelection()
       const text = currentSelection?.toString().trim() ?? ''
 
-      if (!currentSelection || !text || !isInsideDocContent(currentSelection)) {
+      if (
+        !currentSelection ||
+        !text ||
+        !isInsideDocContent(currentSelection, getDocContentRoot())
+      ) {
         setSelection(EMPTY_SELECTION)
         return
       }
@@ -85,9 +99,11 @@ export function useTextSelection() {
       setSelection(EMPTY_SELECTION)
     }
 
-    function handleScroll(event: Event) {
-      const root = document.querySelector('[data-ai-doc-content]')
-      const target = event.target
+    // scroll 是高频事件：用 rAF 合并同一帧内的多次触发，减少滚动期间的重复工作。
+    let scrollFrame = 0
+
+    function processScroll(target: EventTarget | null) {
+      const root = getDocContentRoot()
 
       // 侧栏流式输出的滚动不会移动正文选区，不能因此隐藏追加引用入口。
       if (
@@ -102,16 +118,27 @@ export function useTextSelection() {
       clearSelection()
     }
 
+    function handleScroll(event: Event) {
+      const target = event.target
+      if (scrollFrame) return
+
+      scrollFrame = window.requestAnimationFrame(() => {
+        scrollFrame = 0
+        processScroll(target)
+      })
+    }
+
     document.addEventListener('mouseup', updateSelection)
     document.addEventListener('keyup', updateSelection)
     window.addEventListener('resize', clearSelection)
-    window.addEventListener('scroll', handleScroll, true)
+    window.addEventListener('scroll', handleScroll, { capture: true, passive: true })
 
     return () => {
       document.removeEventListener('mouseup', updateSelection)
       document.removeEventListener('keyup', updateSelection)
       window.removeEventListener('resize', clearSelection)
-      window.removeEventListener('scroll', handleScroll, true)
+      window.removeEventListener('scroll', handleScroll, { capture: true })
+      if (scrollFrame) window.cancelAnimationFrame(scrollFrame)
     }
   }, [])
 
