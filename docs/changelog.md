@@ -6,6 +6,10 @@
 
 - 升级生产依赖安全基线：将 Next.js 更新到 `16.4.0`，将 `sharp` override 更新到 `0.35.5`，并刷新锁文件中的 `undici`、`source-map-js` 等传递依赖，修复 `npm audit --omit=dev` 报告的 critical/high 安全公告。
 
+## 2026-10-03
+
+- 搜索结果跳转后只标出被点中的那一条：Fumadocs 仍负责跳到标题锚点；页面只在对应小节里给这一段查询词上色，并滚到该段，不再把全文相同的词都染色。离开该页后清除高亮。
+
 ## 2026-09-21
 
 - 新增“域名可能变更，及时 Fork”资源位：文档侧栏在“站点动态”卡片下方新增 `components/site/docs-sidebar-fork.tsx` 横条（`app/docs/layout.tsx` 的 `searchToggle.components.lg` 内挂载），顶部导航右侧同步新增 `.site-header__repo` 的 GitHub 源码图标并带 hover/聚焦 tooltip；两处均指向 `https://github.com/Jaxon1216/notes`，用 Umami `data-umami-event`（`sidebar_fork_link_click` / `header_fork_link_click`）埋点。动效遵循“默认安静、hover 才活跃”：横条 hover 触发一道斜向扫光加箭头右移，图标 hover 变站点蓝，均随 `prefers-reduced-motion` 降级为静态；图标复用 lucide 的 `GitFork`（当前 lucide-react 无 `Github` 品牌图标）。

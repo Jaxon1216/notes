@@ -6,6 +6,7 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 import type { ReactNode } from 'react'
 
+import { DocsSearchDialog } from '@/components/search/docs-search-dialog'
 import { SiteHeader } from '@/components/site/site-header'
 import { getHomeData } from '@/lib/content'
 import { siteUrl } from '@/lib/site-url'
@@ -56,7 +57,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="zh-CN" suppressHydrationWarning>
       <body className="flex min-h-screen flex-col">
-        <RootProvider>
+        <RootProvider search={{ SearchDialog: DocsSearchDialog }}>
           <SiteHeader data={homeData} />
           {children}
         </RootProvider>

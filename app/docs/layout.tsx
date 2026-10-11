@@ -3,6 +3,7 @@ import { Fragment, type ReactNode } from 'react'
 
 import { AiExplainWidget } from '@/components/ai/ai-explain-widget'
 import { DocsScrollReset } from '@/components/docs/docs-scroll-reset'
+import { DocsSearchHighlight } from '@/components/docs/docs-search-highlight'
 import { DocsSidebarActivity } from '@/components/site/docs-sidebar-activity'
 import { DocsSidebarFork } from '@/components/site/docs-sidebar-fork'
 import { baseOptions } from '@/lib/layout.shared'
@@ -33,6 +34,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       {children}
       <AiExplainWidget />
       <DocsScrollReset />
+      <DocsSearchHighlight />
     </DocsLayout>
   )
 }

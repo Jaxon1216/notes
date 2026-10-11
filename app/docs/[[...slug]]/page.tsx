@@ -100,7 +100,7 @@ export default async function Page({ params }: DocsPageProps) {
       {hasBodyTitle ? null : <DocsTitle>{title}</DocsTitle>}
       <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>
-        <div data-ai-doc-content>
+        <div data-ai-doc-content data-page-path={page.url}>
           <MDXContent
             components={getMDXComponents({
               a: createRelativeLink(source, page),

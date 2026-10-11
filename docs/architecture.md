@@ -100,6 +100,7 @@ docs/
 - `app/docs/layout.tsx`：通过 `DocsLayout` 渲染文档区布局和侧边栏。
 - `app/docs/[[...slug]]/page.tsx`：通过 `source.getPage` 读取页面，再用 Fumadocs 的 `DocsPage`、`DocsTitle`、`DocsBody` 渲染。
 - `app/api/search/route.ts`：通过 `createFromSource(source)` 暴露搜索接口。
+- `components/search/docs-search-dialog.tsx` 与 `components/docs/docs-search-highlight.tsx`：点击搜索结果时记下这一条的原文和标题锚点。目标文档渲染后，只在对应小节里给这一段的查询词上色，并滚到该段。高亮在离开该页时清除。
 - `components/mdx.tsx`：复用 `fumadocs-ui/mdx` 默认组件，并覆盖远程图片渲染逻辑。
 - `app/global.css`：引入 `fumadocs-ui/css/neutral.css` 和 `fumadocs-ui/css/preset.css`。
 
