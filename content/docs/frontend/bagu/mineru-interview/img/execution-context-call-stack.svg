@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+  <defs>
+    <linearGradient id="night" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#111827"/>
+      <stop offset="1" stop-color="#1f2937"/>
+    </linearGradient>
+    <linearGradient id="frame" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#34d399"/>
+      <stop offset="1" stop-color="#14b8a6"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000000" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+
+  <rect width="1440" height="900" fill="url(#night)"/>
+  <path d="M0 190 C260 95 470 240 720 150 C980 58 1190 190 1440 96 L1440 0 L0 0 Z" fill="#0f766e" opacity="0.18"/>
+  <circle cx="1310" cy="110" r="54" fill="#fb7185" opacity="0.22"/>
+  <circle cx="1227" cy="83" r="18" fill="#fbbf24" opacity="0.7"/>
+
+  <text x="80" y="82" font-family="Noto Sans SC, sans-serif" font-size="42" font-weight="700" fill="#f8fafc">执行上下文如何进出调用栈</text>
+  <text x="82" y="125" font-family="Noto Sans SC, sans-serif" font-size="20" fill="#cbd5e1">每次函数调用创建一个独立上下文；栈顶上下文获得执行权，结束后按 LIFO 弹出</text>
+
+  <g filter="url(#shadow)">
+    <path d="M90 205 Q90 180 115 180 H550 Q575 180 575 205 V425 Q575 450 550 450 H115 Q90 450 90 425 Z" fill="#f8fafc"/>
+    <path d="M90 205 Q90 180 115 180 H550 Q575 180 575 205 V246 H90 Z" fill="url(#frame)"/>
+    <text x="120" y="224" font-family="Noto Sans SC, sans-serif" font-size="22" font-weight="700" fill="#052e2b">一个函数执行上下文</text>
+
+    <circle cx="140" cy="280" r="22" fill="#dbeafe"/>
+    <text x="140" y="287" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" font-weight="700" fill="#1d4ed8">this</text>
+    <text x="180" y="286" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#0f172a">ThisBinding</text>
+    <text x="365" y="286" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#64748b">调用方式决定</text>
+
+    <circle cx="140" cy="330" r="22" fill="#fef3c7"/>
+    <text x="140" y="337" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="16" font-weight="700" fill="#92400e">L</text>
+    <text x="180" y="336" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#0f172a">LexicalEnvironment</text>
+    <text x="365" y="336" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#64748b">let / const / outer</text>
+
+    <circle cx="140" cy="380" r="22" fill="#fee2e2"/>
+    <text x="140" y="387" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="16" font-weight="700" fill="#991b1b">V</text>
+    <text x="180" y="386" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#0f172a">VariableEnvironment</text>
+    <text x="365" y="386" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#64748b">var / 函数声明</text>
+
+    <circle cx="140" cy="430" r="22" fill="#ede9fe"/>
+    <text x="140" y="437" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="16" font-weight="700" fill="#6d28d9">▶</text>
+    <text x="180" y="436" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#0f172a">执行阶段</text>
+    <text x="365" y="436" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#64748b">赋值 / 运算 / 调用</text>
+  </g>
+
+  <text x="772" y="190" font-family="Noto Sans SC, sans-serif" font-size="20" font-weight="700" fill="#5eead4">调用栈快照</text>
+  <path d="M670 425 H1355" stroke="#64748b" stroke-width="4"/>
+  <path d="M720 425 V250 M920 425 V250 M1120 425 V250 M1320 425 V250" stroke="#334155" stroke-width="2" stroke-dasharray="6 8"/>
+
+  <g filter="url(#shadow)">
+    <rect x="638" y="361" width="164" height="60" rx="14" fill="#334155" stroke="#94a3b8" stroke-width="2"/>
+    <text x="720" y="398" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#f8fafc">Global</text>
+
+    <rect x="838" y="361" width="164" height="60" rx="14" fill="#334155" stroke="#94a3b8" stroke-width="2"/>
+    <text x="920" y="398" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#f8fafc">Global</text>
+    <rect x="838" y="293" width="164" height="60" rx="14" fill="#14b8a6"/>
+    <text x="920" y="330" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#042f2e">first()</text>
+
+    <rect x="1038" y="361" width="164" height="60" rx="14" fill="#334155" stroke="#94a3b8" stroke-width="2"/>
+    <text x="1120" y="398" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#f8fafc">Global</text>
+    <rect x="1038" y="293" width="164" height="60" rx="14" fill="#14b8a6"/>
+    <text x="1120" y="330" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#042f2e">first()</text>
+    <rect x="1038" y="225" width="164" height="60" rx="14" fill="#fb7185"/>
+    <text x="1120" y="262" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#4c0519">second()</text>
+
+    <rect x="1238" y="361" width="164" height="60" rx="14" fill="#334155" stroke="#94a3b8" stroke-width="2"/>
+    <text x="1320" y="398" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#f8fafc">Global</text>
+    <rect x="1238" y="293" width="164" height="60" rx="14" fill="#14b8a6"/>
+    <text x="1320" y="330" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#042f2e">first()</text>
+  </g>
+
+  <text x="720" y="466" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="15" fill="#94a3b8">脚本开始</text>
+  <text x="920" y="466" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="15" fill="#94a3b8">调用 first</text>
+  <text x="1120" y="466" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="15" fill="#94a3b8">调用 second</text>
+  <text x="1320" y="466" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="15" fill="#94a3b8">second 返回</text>
+
+  <path d="M130 600 H1310" stroke="#475569" stroke-width="6"/>
+  <polygon points="1310,600 1288,587 1288,613" fill="#475569"/>
+  <text x="80" y="550" font-family="Noto Sans SC, sans-serif" font-size="24" font-weight="700" fill="#f8fafc">生命周期与时间</text>
+
+  <g>
+    <circle cx="185" cy="600" r="28" fill="#fbbf24"/>
+    <text x="185" y="608" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="19" font-weight="700" fill="#422006">1</text>
+    <text x="185" y="654" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#fef3c7">创建 Global</text>
+
+    <circle cx="430" cy="600" r="28" fill="#34d399"/>
+    <text x="430" y="608" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="19" font-weight="700" fill="#022c22">2</text>
+    <text x="430" y="654" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#d1fae5">first 入栈</text>
+
+    <circle cx="675" cy="600" r="28" fill="#fb7185"/>
+    <text x="675" y="608" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="19" font-weight="700" fill="#500724">3</text>
+    <text x="675" y="654" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#ffe4e6">second 入栈</text>
+
+    <circle cx="920" cy="600" r="28" fill="#a78bfa"/>
+    <text x="920" y="608" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="19" font-weight="700" fill="#2e1065">4</text>
+    <text x="920" y="654" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#ede9fe">second 出栈</text>
+
+    <circle cx="1165" cy="600" r="28" fill="#38bdf8"/>
+    <text x="1165" y="608" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="19" font-weight="700" fill="#082f49">5</text>
+    <text x="1165" y="654" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#e0f2fe">first 出栈</text>
+  </g>
+
+  <path d="M92 745 Q92 716 121 716 H1319 Q1348 716 1348 745 V820 Q1348 849 1319 849 H121 Q92 849 92 820 Z" fill="#0f172a" stroke="#475569" stroke-width="2"/>
+  <text x="130" y="766" font-family="Noto Sans SC, sans-serif" font-size="19" font-weight="700" fill="#5eead4">关键区分</text>
+  <text x="130" y="808" font-family="Noto Sans SC, sans-serif" font-size="18" fill="#e2e8f0">调用栈回答“当前执行谁”；词法环境回答“变量去哪里找”。上下文出栈后，若仍被闭包引用，其环境仍可能存活。</text>
+</svg>

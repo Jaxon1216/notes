@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f9fafb"/>
+      <stop offset="1" stop-color="#fef2f2"/>
+    </linearGradient>
+    <linearGradient id="live" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#22c55e"/>
+      <stop offset="1" stop-color="#16a34a"/>
+    </linearGradient>
+    <linearGradient id="leak" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fb7185"/>
+      <stop offset="1" stop-color="#e11d48"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#111827" flood-opacity="0.13"/>
+    </filter>
+  </defs>
+
+  <rect width="1440" height="900" fill="url(#bg)"/>
+  <text x="76" y="79" font-family="Noto Sans SC, sans-serif" font-size="42" font-weight="700" fill="#111827">GC 看“是否可达”，内存泄漏看“为何仍可达”</text>
+  <text x="78" y="120" font-family="Noto Sans SC, sans-serif" font-size="20" fill="#4b5563">对象不再有业务用途，不等于垃圾回收器无法从根节点找到它</text>
+
+  <path d="M708 165 V760" stroke="#d1d5db" stroke-width="3" stroke-dasharray="10 10"/>
+  <text x="80" y="181" font-family="Noto Sans SC, sans-serif" font-size="23" font-weight="700" fill="#166534">标记清除：从 Roots 遍历对象图</text>
+  <text x="758" y="181" font-family="Noto Sans SC, sans-serif" font-size="23" font-weight="700" fill="#be123c">泄漏：无用对象仍被强引用链锚住</text>
+
+  <g filter="url(#shadow)">
+    <ellipse cx="190" cy="300" rx="105" ry="62" fill="#111827"/>
+    <text x="190" y="290" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="22" font-weight="700" fill="#ffffff">GC Roots</text>
+    <text x="190" y="322" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="15" fill="#d1d5db">window · 当前栈 · 宿主</text>
+
+    <circle cx="430" cy="250" r="66" fill="url(#live)"/>
+    <text x="430" y="245" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="19" font-weight="700" fill="#ffffff">对象 A</text>
+    <text x="430" y="274" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#dcfce7">可达，保留</text>
+
+    <circle cx="590" cy="365" r="62" fill="#4ade80"/>
+    <text x="590" y="360" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="19" font-weight="700" fill="#14532d">对象 B</text>
+    <text x="590" y="389" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#14532d">被 A 引用</text>
+
+    <circle cx="350" cy="545" r="69" fill="#e5e7eb" stroke="#9ca3af" stroke-width="3"/>
+    <text x="350" y="540" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="19" font-weight="700" fill="#374151">对象 C</text>
+    <text x="350" y="569" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#6b7280">不可达</text>
+
+    <circle cx="560" cy="585" r="69" fill="#e5e7eb" stroke="#9ca3af" stroke-width="3"/>
+    <text x="560" y="580" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="19" font-weight="700" fill="#374151">对象 D</text>
+    <text x="560" y="609" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#6b7280">循环引用也可回收</text>
+  </g>
+
+  <line x1="292" y1="277" x2="360" y2="262" stroke="#16a34a" stroke-width="6"/>
+  <polygon points="360,262 341,255 345,275" fill="#16a34a"/>
+  <line x1="486" y1="289" x2="544" y2="331" stroke="#16a34a" stroke-width="6"/>
+  <polygon points="544,331 524,326 536,310" fill="#16a34a"/>
+
+  <path d="M398 565 C440 525 485 530 507 557" fill="none" stroke="#9ca3af" stroke-width="5"/>
+  <polygon points="507,557 487,551 500,536" fill="#9ca3af"/>
+  <path d="M512 598 C467 635 416 626 397 593" fill="none" stroke="#9ca3af" stroke-width="5"/>
+  <polygon points="397,593 417,600 404,615" fill="#9ca3af"/>
+  <path d="M280 648 Q470 724 641 642" fill="none" stroke="#ef4444" stroke-width="5" stroke-dasharray="9 8"/>
+  <polygon points="641,642 623,638 631,624" fill="#ef4444"/>
+  <text x="460" y="703" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="18" font-weight="700" fill="#b91c1c">Roots 无路径 → 下次 GC 可整体回收</text>
+
+  <g filter="url(#shadow)">
+    <rect x="768" y="228" width="164" height="82" rx="41" fill="#111827"/>
+    <text x="850" y="278" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="19" font-weight="700" fill="#ffffff">长期 Root</text>
+
+    <rect x="1022" y="215" width="282" height="108" rx="24" fill="url(#leak)"/>
+    <text x="1163" y="254" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="20" font-weight="700" fill="#ffffff">未清理的定时器</text>
+    <text x="1163" y="286" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="15" fill="#ffe4e6">setInterval → callback 闭包</text>
+
+    <rect x="1022" y="376" width="282" height="108" rx="24" fill="#f97316"/>
+    <text x="1163" y="415" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="20" font-weight="700" fill="#ffffff">残留事件监听</text>
+    <text x="1163" y="447" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="15" fill="#ffedd5">EventTarget → listener → 状态</text>
+
+    <rect x="1022" y="537" width="282" height="108" rx="24" fill="#8b5cf6"/>
+    <text x="1163" y="576" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="20" font-weight="700" fill="#ffffff">脱离 DOM 的节点</text>
+    <text x="1163" y="608" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="15" fill="#ede9fe">JS 变量仍持有 detached node</text>
+
+    <circle cx="855" cy="704" r="74" fill="#fecdd3" stroke="#fb7185" stroke-width="4"/>
+    <text x="855" y="698" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="19" font-weight="700" fill="#9f1239">大对象</text>
+    <text x="855" y="727" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#be123c">业务已不用</text>
+
+    <circle cx="1163" cy="740" r="86" fill="#ffe4e6" stroke="#f43f5e" stroke-width="4"/>
+    <text x="1163" y="733" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="19" font-weight="700" fill="#9f1239">仍然可达</text>
+    <text x="1163" y="762" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#be123c">因此不能回收</text>
+  </g>
+
+  <polyline points="932,269 976,269 976,269 1022,269" fill="none" stroke="#e11d48" stroke-width="6"/>
+  <polygon points="1022,269 1003,258 1003,280" fill="#e11d48"/>
+  <polyline points="850,310 850,430 1022,430" fill="none" stroke="#f97316" stroke-width="6"/>
+  <polygon points="1022,430 1003,419 1003,441" fill="#f97316"/>
+  <polyline points="810,302 752,350 752,591 1022,591" fill="none" stroke="#8b5cf6" stroke-width="6"/>
+  <polygon points="1022,591 1003,580 1003,602" fill="#8b5cf6"/>
+
+  <line x1="1118" y1="645" x2="914" y2="688" stroke="#e11d48" stroke-width="6"/>
+  <polygon points="914,688 930,673 934,694" fill="#e11d48"/>
+  <line x1="929" y1="713" x2="1076" y2="730" stroke="#e11d48" stroke-width="6"/>
+  <polygon points="1076,730 1058,717 1056,738" fill="#e11d48"/>
+
+  <rect x="112" y="808" width="1216" height="58" rx="29" fill="#111827"/>
+  <text x="720" y="845" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="18" fill="#ffffff">修复动作：clearInterval · removeEventListener · AbortController · 解除缓存/DOM 强引用 · 组件卸载时统一清理副作用</text>
+</svg>

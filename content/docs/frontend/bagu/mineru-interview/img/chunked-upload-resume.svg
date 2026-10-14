@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset="1" stop-color="#fff7ed"/>
+    </linearGradient>
+    <linearGradient id="file" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2563eb"/>
+      <stop offset="1" stop-color="#4f46e5"/>
+    </linearGradient>
+    <linearGradient id="done" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#10b981"/>
+      <stop offset="1" stop-color="#059669"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#334155" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+
+  <rect width="1440" height="900" fill="url(#bg)"/>
+  <rect x="0" y="0" width="18" height="900" fill="#f97316"/>
+  <text x="76" y="80" font-family="Noto Sans SC, sans-serif" font-size="42" font-weight="700" fill="#172554">大文件分片上传与断点续传</text>
+  <text x="78" y="121" font-family="Noto Sans SC, sans-serif" font-size="20" fill="#475569">唯一文件指纹 + 可重试分片 + 服务端完成清单，让失败只重传缺失部分</text>
+
+  <g>
+    <rect x="68" y="165" width="1304" height="176" rx="26" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
+    <rect x="68" y="359" width="1304" height="176" rx="26" fill="#fff7ed" stroke="#fed7aa" stroke-width="2"/>
+    <rect x="68" y="553" width="1304" height="176" rx="26" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="2"/>
+
+    <rect x="68" y="165" width="145" height="176" rx="26" fill="#dbeafe"/>
+    <rect x="68" y="359" width="145" height="176" rx="26" fill="#ffedd5"/>
+    <rect x="68" y="553" width="145" height="176" rx="26" fill="#d1fae5"/>
+    <text x="140" y="244" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="22" font-weight="700" fill="#1e3a8a">浏览器</text>
+    <text x="140" y="278" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="15" fill="#1d4ed8">Worker / 调度器</text>
+    <text x="140" y="438" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="22" font-weight="700" fill="#9a3412">上传服务</text>
+    <text x="140" y="472" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="15" fill="#c2410c">任务与校验</text>
+    <text x="140" y="632" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="22" font-weight="700" fill="#065f46">对象存储</text>
+    <text x="140" y="666" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="15" fill="#047857">分片与成品</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <path d="M265 198 H385 L425 238 V307 H265 Z" fill="url(#file)"/>
+    <path d="M385 198 V238 H425" fill="#93c5fd"/>
+    <text x="345" y="263" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="21" font-weight="700" fill="#ffffff">4 GB</text>
+    <text x="345" y="290" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="15" fill="#dbeafe">video.mp4</text>
+  </g>
+
+  <line x1="447" y1="253" x2="522" y2="253" stroke="#2563eb" stroke-width="6"/>
+  <polygon points="522,253 503,242 503,264" fill="#2563eb"/>
+  <text x="484" y="232" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="15" font-weight="700" fill="#1d4ed8">切片</text>
+
+  <g filter="url(#shadow)">
+    <rect x="538" y="205" width="88" height="96" rx="16" fill="#60a5fa"/>
+    <rect x="638" y="205" width="88" height="96" rx="16" fill="#818cf8"/>
+    <rect x="738" y="205" width="88" height="96" rx="16" fill="#a78bfa"/>
+    <rect x="838" y="205" width="88" height="96" rx="16" fill="#c084fc"/>
+    <text x="582" y="260" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="18" font-weight="700" fill="#ffffff">#0</text>
+    <text x="682" y="260" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="18" font-weight="700" fill="#ffffff">#1</text>
+    <text x="782" y="260" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="18" font-weight="700" fill="#ffffff">#2</text>
+    <text x="882" y="260" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="18" font-weight="700" fill="#ffffff">…</text>
+  </g>
+
+  <rect x="1000" y="195" width="312" height="116" rx="58" fill="#ffffff" stroke="#2563eb" stroke-width="3"/>
+  <circle cx="1052" cy="253" r="30" fill="#dbeafe"/>
+  <text x="1052" y="260" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="18" font-weight="700" fill="#1d4ed8">ID</text>
+  <text x="1095" y="242" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#172554">fileHash + uploadId</text>
+  <text x="1095" y="270" font-family="Noto Sans SC, sans-serif" font-size="15" fill="#475569">标识同一文件与上传任务</text>
+
+  <path d="M1155 311 V396 H1038" fill="none" stroke="#f97316" stroke-width="6"/>
+  <polygon points="1038,396 1057,385 1057,407" fill="#f97316"/>
+  <text x="1178" y="360" font-family="Noto Sans SC, sans-serif" font-size="15" font-weight="700" fill="#c2410c">1 初始化 / 查询状态</text>
+
+  <rect x="286" y="397" width="310" height="99" rx="22" fill="#ffffff" stroke="#fb923c" stroke-width="3"/>
+  <text x="441" y="433" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="19" font-weight="700" fill="#9a3412">已完成清单</text>
+  <text x="441" y="468" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" fill="#c2410c">[0, 1, 3] → 仅补传 #2、#4…</text>
+
+  <path d="M596 446 H712" fill="none" stroke="#f97316" stroke-width="6"/>
+  <polygon points="712,446 693,435 693,457" fill="#f97316"/>
+  <text x="654" y="426" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="15" font-weight="700" fill="#c2410c">2 返回缺片</text>
+
+  <rect x="727" y="390" width="292" height="113" rx="22" fill="#ffffff" stroke="#fb923c" stroke-width="3"/>
+  <text x="873" y="427" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="19" font-weight="700" fill="#9a3412">并发上传与重试</text>
+  <text x="873" y="459" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="16" fill="#7c2d12">限制并发 · 指数退避 · 可取消</text>
+  <text x="873" y="485" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="15" fill="#c2410c">每片携带 index / hash / uploadId</text>
+
+  <path d="M873 503 V590" fill="none" stroke="#10b981" stroke-width="6"/>
+  <polygon points="873,590 862,571 884,571" fill="#10b981"/>
+  <text x="895" y="552" font-family="Noto Sans SC, sans-serif" font-size="15" font-weight="700" fill="#047857">3 PUT 分片</text>
+
+  <g filter="url(#shadow)">
+    <ellipse cx="441" cy="624" rx="142" ry="42" fill="#6ee7b7"/>
+    <rect x="299" y="624" width="284" height="50" fill="#34d399"/>
+    <ellipse cx="441" cy="674" rx="142" ry="42" fill="#10b981"/>
+    <text x="441" y="658" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="18" font-weight="700" fill="#064e3b">临时分片 #0 #1 #2 …</text>
+
+    <ellipse cx="1110" cy="624" rx="150" ry="42" fill="#86efac"/>
+    <rect x="960" y="624" width="300" height="50" fill="#22c55e"/>
+    <ellipse cx="1110" cy="674" rx="150" ry="42" fill="url(#done)"/>
+    <text x="1110" y="658" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="18" font-weight="700" fill="#052e16">完整对象 video.mp4</text>
+  </g>
+
+  <line x1="598" y1="649" x2="932" y2="649" stroke="#10b981" stroke-width="8"/>
+  <polygon points="932,649 908,635 908,663" fill="#10b981"/>
+  <text x="765" y="628" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#065f46">4 数量 + 顺序 + hash 校验后合并</text>
+
+  <rect x="190" y="780" width="1060" height="78" rx="39" fill="#172554"/>
+  <text x="240" y="828" font-family="Noto Sans SC, sans-serif" font-size="19" font-weight="700" fill="#93c5fd">可靠性闭环</text>
+  <text x="390" y="828" font-family="Noto Sans SC, sans-serif" font-size="18" fill="#ffffff">刷新后重查状态 · 失败片幂等重传 · 合并成功后清理临时片 · 秒传需服务端确认 hash</text>
+</svg>

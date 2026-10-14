@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fffdf7"/>
+      <stop offset="1" stop-color="#f0fdfa"/>
+    </linearGradient>
+    <linearGradient id="stack" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0f766e"/>
+      <stop offset="1" stop-color="#115e59"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#134e4a" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+
+  <rect width="1440" height="900" fill="url(#paper)"/>
+  <path d="M0 820 C230 755 385 892 610 820 C850 742 1110 885 1440 790 V900 H0 Z" fill="#ccfbf1" opacity="0.6"/>
+
+  <text x="72" y="76" font-family="Noto Sans SC, sans-serif" font-size="42" font-weight="700" fill="#134e4a">浏览器事件循环：一轮到底做什么</text>
+  <text x="74" y="117" font-family="Noto Sans SC, sans-serif" font-size="20" fill="#475569">先执行当前任务，再清空微任务队列；浏览器获得渲染机会后，才进入下一项任务</text>
+
+  <g filter="url(#shadow)">
+    <circle cx="700" cy="440" r="174" fill="#ffffff" stroke="#99f6e4" stroke-width="10"/>
+    <circle cx="700" cy="440" r="132" fill="url(#stack)"/>
+    <text x="700" y="405" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="27" font-weight="700" fill="#ffffff">Call Stack</text>
+    <rect x="625" y="435" width="150" height="42" rx="10" fill="#5eead4"/>
+    <text x="700" y="463" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#134e4a">同步代码</text>
+    <rect x="625" y="485" width="150" height="42" rx="10" fill="#fef3c7"/>
+    <text x="700" y="513" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#92400e">当前回调</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <path d="M80 233 Q80 205 108 205 H410 Q438 205 438 233 V390 Q438 418 410 418 H108 Q80 418 80 390 Z" fill="#eff6ff" stroke="#3b82f6" stroke-width="3"/>
+    <text x="115" y="252" font-family="Noto Sans SC, sans-serif" font-size="23" font-weight="700" fill="#1e3a8a">浏览器 / Web APIs</text>
+    <text x="115" y="294" font-family="Noto Sans SC, sans-serif" font-size="17" fill="#334155">setTimeout 计时</text>
+    <text x="115" y="329" font-family="Noto Sans SC, sans-serif" font-size="17" fill="#334155">网络与用户事件</text>
+    <text x="115" y="364" font-family="Noto Sans SC, sans-serif" font-size="17" fill="#334155">完成后只负责排队，不直接执行</text>
+
+    <path d="M1002 205 Q1002 177 1030 177 H1332 Q1360 177 1360 205 V360 Q1360 388 1332 388 H1030 Q1002 388 1002 360 Z" fill="#fdf2f8" stroke="#ec4899" stroke-width="3"/>
+    <text x="1037" y="225" font-family="Noto Sans SC, sans-serif" font-size="23" font-weight="700" fill="#9d174d">微任务队列</text>
+    <rect x="1037" y="257" width="288" height="40" rx="20" fill="#fbcfe8"/>
+    <text x="1181" y="283" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="16" fill="#831843">Promise.then / catch / finally</text>
+    <rect x="1037" y="309" width="288" height="40" rx="20" fill="#fce7f3"/>
+    <text x="1181" y="335" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="16" fill="#831843">queueMicrotask · MutationObserver</text>
+
+    <path d="M1002 535 Q1002 507 1030 507 H1332 Q1360 507 1360 535 V690 Q1360 718 1332 718 H1030 Q1002 718 1002 690 Z" fill="#fff7ed" stroke="#f97316" stroke-width="3"/>
+    <text x="1037" y="555" font-family="Noto Sans SC, sans-serif" font-size="23" font-weight="700" fill="#9a3412">任务队列</text>
+    <rect x="1037" y="587" width="288" height="40" rx="20" fill="#fed7aa"/>
+    <text x="1181" y="613" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="16" fill="#7c2d12">timer · message · I/O callback</text>
+    <rect x="1037" y="639" width="288" height="40" rx="20" fill="#ffedd5"/>
+    <text x="1181" y="665" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="16" fill="#7c2d12">每轮通常取一个任务执行</text>
+
+    <path d="M80 535 Q80 507 108 507 H410 Q438 507 438 535 V690 Q438 718 410 718 H108 Q80 718 80 690 Z" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="3"/>
+    <text x="115" y="555" font-family="Noto Sans SC, sans-serif" font-size="23" font-weight="700" fill="#5b21b6">渲染机会</text>
+    <text x="115" y="601" font-family="Noto Sans SC, sans-serif" font-size="17" fill="#4c1d95">样式计算 → 布局 → 绘制</text>
+    <text x="115" y="638" font-family="Noto Sans SC, sans-serif" font-size="17" fill="#4c1d95">requestAnimationFrame 回调</text>
+    <text x="115" y="675" font-family="Noto Sans SC, sans-serif" font-size="16" fill="#6d28d9">浏览器按需渲染，不保证每轮发生</text>
+  </g>
+
+  <path d="M438 308 H520 V350 H552" fill="none" stroke="#3b82f6" stroke-width="6"/>
+  <polygon points="552,350 535,340 535,360" fill="#3b82f6"/>
+  <text x="470" y="291" font-family="Noto Sans SC, sans-serif" font-size="15" font-weight="700" fill="#1d4ed8">回调就绪</text>
+
+  <path d="M844 360 H930 V280 H1002" fill="none" stroke="#ec4899" stroke-width="6"/>
+  <polygon points="1002,280 985,270 985,290" fill="#ec4899"/>
+
+  <path d="M1002 388 H945 V430 H875" fill="none" stroke="#ec4899" stroke-width="6"/>
+  <polygon points="875,430 892,420 892,440" fill="#ec4899"/>
+  <text x="900" y="474" font-family="Noto Sans SC, sans-serif" font-size="15" font-weight="700" fill="#be185d">栈空后全部清空</text>
+
+  <path d="M1002 613 H930 V530 H844" fill="none" stroke="#f97316" stroke-width="6"/>
+  <polygon points="844,530 861,520 861,540" fill="#f97316"/>
+
+  <path d="M552 530 H505 V613 H438" fill="none" stroke="#8b5cf6" stroke-width="6"/>
+  <polygon points="438,613 455,603 455,623" fill="#8b5cf6"/>
+  <path d="M259 507 V465 H526" fill="none" stroke="#8b5cf6" stroke-width="6"/>
+  <polygon points="526,465 509,455 509,475" fill="#8b5cf6"/>
+
+  <rect x="125" y="778" width="1190" height="76" rx="38" fill="#0f172a"/>
+  <text x="178" y="825" font-family="Noto Sans SC, sans-serif" font-size="20" font-weight="700" fill="#5eead4">示例输出</text>
+  <text x="348" y="825" font-family="Noto Sans SC, sans-serif" font-size="18" fill="#f8fafc">script start → script end</text>
+  <text x="630" y="825" font-family="Noto Sans SC, sans-serif" font-size="18" font-weight="700" fill="#f9a8d4">→ promise → microtask</text>
+  <text x="890" y="825" font-family="Noto Sans SC, sans-serif" font-size="18" font-weight="700" fill="#fdba74">→ timer（后续任务）</text>
+</svg>

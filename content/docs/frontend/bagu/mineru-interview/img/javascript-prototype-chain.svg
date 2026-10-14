@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset="1" stop-color="#eef2ff"/>
+    </linearGradient>
+    <linearGradient id="instance" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#dbeafe"/>
+      <stop offset="1" stop-color="#bfdbfe"/>
+    </linearGradient>
+    <linearGradient id="proto" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffedd5"/>
+      <stop offset="1" stop-color="#fed7aa"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="1440" height="900" fill="url(#bg)"/>
+  <circle cx="1320" cy="105" r="70" fill="#fef3c7" opacity="0.7"/>
+  <circle cx="105" cy="800" r="92" fill="#ccfbf1" opacity="0.65"/>
+
+  <text x="88" y="90" font-family="Noto Sans SC, sans-serif" font-size="42" font-weight="700" fill="#0f172a">JavaScript 原型链：两条关系不要混</text>
+  <text x="90" y="132" font-family="Noto Sans SC, sans-serif" font-size="20" fill="#475569">属性查找沿 [[Prototype]] 向上；构造函数用 prototype 提供实例共享对象</text>
+
+  <rect x="92" y="172" width="580" height="60" rx="30" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <line x1="125" y1="202" x2="203" y2="202" stroke="#2563eb" stroke-width="5"/>
+  <polygon points="203,202 190,194 190,210" fill="#2563eb"/>
+  <text x="220" y="209" font-family="Noto Sans SC, sans-serif" font-size="18" fill="#334155">prototype 属性</text>
+  <line x1="405" y1="202" x2="483" y2="202" stroke="#ea580c" stroke-width="5" stroke-dasharray="12 8"/>
+  <polygon points="483,202 470,194 470,210" fill="#ea580c"/>
+  <text x="500" y="209" font-family="Noto Sans SC, sans-serif" font-size="18" fill="#334155">[[Prototype]] 链</text>
+
+  <text x="132" y="292" font-family="Noto Sans SC, sans-serif" font-size="20" font-weight="700" fill="#2563eb">构造关系</text>
+  <text x="786" y="292" font-family="Noto Sans SC, sans-serif" font-size="20" font-weight="700" fill="#ea580c">属性查找路径</text>
+
+  <g filter="url(#shadow)">
+    <rect x="98" y="325" width="260" height="118" rx="28" fill="#ffffff" stroke="#93c5fd" stroke-width="3"/>
+    <circle cx="150" cy="384" r="26" fill="#2563eb"/>
+    <text x="150" y="392" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="24" font-weight="700" fill="#ffffff">ƒ</text>
+    <text x="194" y="375" font-family="Noto Sans SC, sans-serif" font-size="24" font-weight="700" fill="#0f172a">Person</text>
+    <text x="194" y="408" font-family="Noto Sans SC, sans-serif" font-size="16" fill="#64748b">构造函数对象</text>
+
+    <rect x="450" y="325" width="300" height="118" rx="28" fill="url(#proto)" stroke="#fb923c" stroke-width="3"/>
+    <text x="600" y="375" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="23" font-weight="700" fill="#7c2d12">Person.prototype</text>
+    <text x="600" y="410" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="16" fill="#9a3412">constructor · sayName()</text>
+
+    <rect x="842" y="325" width="248" height="118" rx="59" fill="url(#instance)" stroke="#60a5fa" stroke-width="3"/>
+    <text x="966" y="375" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="24" font-weight="700" fill="#1e3a8a">person</text>
+    <text x="966" y="410" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="16" fill="#1d4ed8">name: "Easton"</text>
+
+    <rect x="1147" y="325" width="220" height="118" rx="28" fill="#ffffff" stroke="#94a3b8" stroke-width="3"/>
+    <text x="1257" y="375" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="22" font-weight="700" fill="#334155">Object.prototype</text>
+    <text x="1257" y="410" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="15" fill="#64748b">toString() · valueOf()</text>
+  </g>
+
+  <polyline points="358,384 404,384 404,292 600,292 600,325" fill="none" stroke="#2563eb" stroke-width="5"/>
+  <polygon points="600,325 590,309 610,309" fill="#2563eb"/>
+  <text x="410" y="280" font-family="Noto Sans SC, sans-serif" font-size="16" font-weight="700" fill="#1d4ed8">Person.prototype</text>
+
+  <polyline points="842,384 800,384 800,492 600,492 600,443" fill="none" stroke="#ea580c" stroke-width="5" stroke-dasharray="12 8"/>
+  <polygon points="600,443 590,459 610,459" fill="#ea580c"/>
+  <text x="665" y="520" font-family="Noto Sans SC, sans-serif" font-size="16" font-weight="700" fill="#c2410c">person.[[Prototype]]</text>
+
+  <polyline points="228,325 228,255 966,255 966,325" fill="none" stroke="#64748b" stroke-width="3"/>
+  <polygon points="966,325 956,309 976,309" fill="#64748b"/>
+  <text x="805" y="246" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="15" font-weight="700" fill="#475569">new Person()</text>
+
+  <line x1="1090" y1="384" x2="1147" y2="384" stroke="#ea580c" stroke-width="5" stroke-dasharray="12 8"/>
+  <polygon points="1147,384 1131,374 1131,394" fill="#ea580c"/>
+
+  <line x1="1257" y1="443" x2="1257" y2="520" stroke="#ea580c" stroke-width="5" stroke-dasharray="12 8"/>
+  <polygon points="1257,520 1247,504 1267,504" fill="#ea580c"/>
+  <ellipse cx="1257" cy="559" rx="70" ry="34" fill="#0f172a"/>
+  <text x="1257" y="568" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="23" font-weight="700" fill="#ffffff">null</text>
+
+  <path d="M 965 443 C 965 540, 810 548, 705 583" fill="none" stroke="#f59e0b" stroke-width="5"/>
+  <polygon points="705,583 719,568 724,588" fill="#f59e0b"/>
+  <rect x="360" y="558" width="350" height="93" rx="46" fill="#fff7ed" stroke="#f59e0b" stroke-width="3"/>
+  <text x="535" y="594" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="18" font-weight="700" fill="#9a3412">读取 person.sayName</text>
+  <text x="535" y="624" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="16" fill="#c2410c">实例没有 → 沿链在 Person.prototype 找到</text>
+
+  <g>
+    <rect x="90" y="716" width="388" height="116" rx="22" fill="#ecfeff" stroke="#14b8a6" stroke-width="2"/>
+    <text x="118" y="756" font-family="Noto Sans SC, sans-serif" font-size="19" font-weight="700" fill="#115e59">记忆 1｜对象向上找</text>
+    <text x="118" y="793" font-family="Noto Sans SC, sans-serif" font-size="17" fill="#134e4a">Object.getPrototypeOf(person)</text>
+
+    <rect x="526" y="716" width="388" height="116" rx="22" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+    <text x="554" y="756" font-family="Noto Sans SC, sans-serif" font-size="19" font-weight="700" fill="#1e40af">记忆 2｜函数向下提供</text>
+    <text x="554" y="793" font-family="Noto Sans SC, sans-serif" font-size="17" fill="#1e3a8a">Person.prototype 被实例共享</text>
+
+    <rect x="962" y="716" width="388" height="116" rx="22" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+    <text x="990" y="756" font-family="Noto Sans SC, sans-serif" font-size="19" font-weight="700" fill="#991b1b">常见误区</text>
+    <text x="990" y="793" font-family="Noto Sans SC, sans-serif" font-size="17" fill="#7f1d1d">__proto__ 是历史访问器，不是标准内部槽名</text>
+  </g>
+</svg>
