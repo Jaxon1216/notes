@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="proxyGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#8569CB"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0F172A" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="720" rx="28" fill="#F8FAFC"/>
+  <circle cx="1148" cy="92" r="86" fill="#EAE2FE" opacity="0.65"/>
+  <path d="M70 120 C252 24 454 38 622 102" fill="none" stroke="url(#proxyGradient)" stroke-width="8" stroke-linecap="round" opacity="0.18"/>
+
+  <text x="70" y="70" font-size="30" font-weight="700" fill="#0F172A">Proxy：拦截内部操作，再选择如何转发</text>
+  <text x="70" y="104" font-size="15" fill="#64748B">handler trap 可以校验、记录或改写行为；Reflect 用相同语义执行默认操作</text>
+
+  <!-- main flow connectors -->
+  <polyline points="310,254 392,254" fill="none" stroke="#5178C6" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="392,254 378,246 378,262" fill="#5178C6"/>
+  <polyline points="310,366 392,366" fill="none" stroke="#5178C6" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="392,366 378,358 378,374" fill="#5178C6"/>
+  <polyline points="310,478 392,478" fill="none" stroke="#5178C6" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="392,478 378,470 378,486" fill="#5178C6"/>
+
+  <polyline points="706,268 774,268 774,236 842,236" fill="none" stroke="#8569CB" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="842,236 828,228 828,244" fill="#8569CB"/>
+  <polyline points="706,372 774,372 774,350 842,350" fill="none" stroke="#509863" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="842,350 828,342 828,358" fill="#509863"/>
+  <polyline points="706,478 774,478 774,464 842,464" fill="none" stroke="#D4B45B" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="842,464 828,456 828,472" fill="#D4B45B"/>
+
+  <!-- operations -->
+  <rect x="70" y="166" width="240" height="390" rx="28" fill="#F0F4FC" stroke="#5178C6" stroke-width="2"/>
+  <text x="190" y="206" text-anchor="middle" font-size="20" font-weight="700" fill="#315EA8">普通 JavaScript 操作</text>
+
+  <g filter="url(#shadow)">
+    <rect x="104" y="226" width="172" height="56" rx="18" fill="#FFFFFF" stroke="#5178C6" stroke-width="2"/>
+    <text x="190" y="260" text-anchor="middle" font-size="16" font-weight="700" fill="#315EA8">proxy.name</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="104" y="338" width="172" height="56" rx="18" fill="#FFFFFF" stroke="#5178C6" stroke-width="2"/>
+    <text x="190" y="372" text-anchor="middle" font-size="16" font-weight="700" fill="#315EA8">proxy.age = 30</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="104" y="450" width="172" height="56" rx="18" fill="#FFFFFF" stroke="#5178C6" stroke-width="2"/>
+    <text x="190" y="484" text-anchor="middle" font-size="16" font-weight="700" fill="#315EA8">proxy(...args)</text>
+  </g>
+  <text x="190" y="536" text-anchor="middle" font-size="13" fill="#64748B">读取 / 写入 / 调用 / 构造 / 枚举</text>
+
+  <!-- proxy membrane -->
+  <g filter="url(#shadow)">
+    <rect x="392" y="166" width="314" height="390" rx="34" fill="#FFFFFF" stroke="#8569CB" stroke-width="4"/>
+    <rect x="424" y="192" width="250" height="54" rx="27" fill="url(#proxyGradient)"/>
+    <text x="549" y="226" text-anchor="middle" font-size="20" font-weight="700" fill="#FFFFFF">Proxy + handler</text>
+
+    <rect x="432" y="270" width="234" height="62" rx="18" fill="#EAE2FE" stroke="#8569CB" stroke-width="2"/>
+    <text x="549" y="296" text-anchor="middle" font-size="16" font-weight="700" fill="#5D469C">get(target, key, receiver)</text>
+    <text x="549" y="318" text-anchor="middle" font-size="12" fill="#64748B">读取 trap</text>
+
+    <rect x="432" y="350" width="234" height="62" rx="18" fill="#DFF5E5" stroke="#509863" stroke-width="2"/>
+    <text x="549" y="376" text-anchor="middle" font-size="14" font-weight="700" fill="#245C33">set(target, key, value, receiver)</text>
+    <text x="549" y="398" text-anchor="middle" font-size="12" fill="#64748B">写入 trap，必须返回布尔值</text>
+
+    <rect x="432" y="430" width="234" height="62" rx="18" fill="#FEF1CE" stroke="#D4B45B" stroke-width="2"/>
+    <text x="549" y="456" text-anchor="middle" font-size="16" font-weight="700" fill="#7C641E">apply(target, thisArg, args)</text>
+    <text x="549" y="478" text-anchor="middle" font-size="12" fill="#64748B">函数调用 trap</text>
+
+    <text x="549" y="526" text-anchor="middle" font-size="13" fill="#64748B">缺少 trap 时自动转发给 target</text>
+  </g>
+
+  <!-- outcomes -->
+  <rect x="842" y="166" width="368" height="390" rx="28" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="1026" y="206" text-anchor="middle" font-size="20" font-weight="700" fill="#0F172A">trap 内的选择</text>
+
+  <g filter="url(#shadow)">
+    <rect x="876" y="222" width="300" height="76" rx="22" fill="#EAE2FE" stroke="#8569CB" stroke-width="2"/>
+    <text x="1026" y="251" text-anchor="middle" font-size="16" font-weight="700" fill="#5D469C">自定义行为</text>
+    <text x="1026" y="278" text-anchor="middle" font-size="13" fill="#64748B">校验、日志、虚拟属性、访问控制</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="876" y="326" width="300" height="76" rx="22" fill="#DFF5E5" stroke="#509863" stroke-width="2"/>
+    <text x="1026" y="355" text-anchor="middle" font-size="16" font-weight="700" fill="#245C33">Reflect 默认转发</text>
+    <text x="1026" y="382" text-anchor="middle" font-size="13" fill="#64748B">Reflect.get / set / apply(...)</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="876" y="430" width="300" height="76" rx="22" fill="#FEF1CE" stroke="#D4B45B" stroke-width="2"/>
+    <text x="1026" y="459" text-anchor="middle" font-size="16" font-weight="700" fill="#7C641E">访问原始 target</text>
+    <text x="1026" y="486" text-anchor="middle" font-size="13" fill="#64748B">receiver 保留实际接收者语义</text>
+  </g>
+
+  <!-- invariant shield -->
+  <rect x="70" y="596" width="1140" height="74" rx="26" fill="#FFFFFF" stroke="#D25D5A" stroke-width="2"/>
+  <path d="M110 617 L138 607 L166 617 L162 641 C158 652 147 660 138 664 C129 660 118 652 114 641 Z" fill="#FEE3E2" stroke="#D25D5A" stroke-width="2"/>
+  <path d="M127 634 L136 643 L151 625" fill="none" stroke="#D25D5A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="190" y="624" font-size="17" font-weight="700" fill="#8C3432">语言不变量始终生效</text>
+  <text x="190" y="650" font-size="13" fill="#64748B">不可配置属性、不可扩展 target、ownKeys 完整性等约束不能被 trap 绕过；违反时抛出 TypeError</text>
+  <rect x="1012" y="614" width="164" height="38" rx="19" fill="#FEE3E2"/>
+  <text x="1094" y="639" text-anchor="middle" font-size="13" font-weight="700" fill="#8C3432">Proxy ≠ target 身份</text>
+</svg>

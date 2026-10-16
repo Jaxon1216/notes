@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 740" width="1200" height="740">
+  <defs>
+    <linearGradient id="flex-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F8FAFF"/>
+      <stop offset="1" stop-color="#F4FFF8"/>
+    </linearGradient>
+    <linearGradient id="flex-axis" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#5178C6"/>
+      <stop offset="1" stop-color="#8569CB"/>
+    </linearGradient>
+    <filter id="flex-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="11" flood-color="#1F2329" flood-opacity="0.11"/>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="740" rx="28" fill="url(#flex-bg)"/>
+  <text x="58" y="66" font-family="Noto Sans SC, sans-serif" font-size="30" font-weight="700" fill="#1F2329">Flexbox：先定轴，再分配主轴剩余空间</text>
+  <text x="58" y="102" font-family="Noto Sans SC, sans-serif" font-size="16" fill="#646A73">justify-content 作用于主轴；align-items 作用于交叉轴；grow 与 shrink 处理不同方向的空间变化</text>
+
+  <g filter="url(#flex-shadow)">
+    <rect x="60" y="144" width="1080" height="330" rx="24" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="2"/>
+  </g>
+  <text x="92" y="186" font-family="Noto Sans SC, sans-serif" font-size="20" font-weight="700" fill="#1F2329">flex-direction: row 时的轴与项目</text>
+
+  <path d="M 146 248 H 1052" fill="none" stroke="url(#flex-axis)" stroke-width="5"/>
+  <polygon points="1068,248 1046,237 1046,259" fill="#8569CB"/>
+  <text x="146" y="230" font-family="Noto Sans SC, sans-serif" font-size="14" font-weight="700" fill="#5178C6">main-start</text>
+  <text x="982" y="230" font-family="Noto Sans SC, sans-serif" font-size="14" font-weight="700" fill="#8569CB">main-end</text>
+  <text x="600" y="230" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="15" font-weight="700" fill="#1F2329">主轴 main axis</text>
+
+  <path d="M 116 276 V 420" fill="none" stroke="#509863" stroke-width="4"/>
+  <polygon points="116,436 105,414 127,414" fill="#509863"/>
+  <text x="94" y="348" text-anchor="middle" transform="rotate(-90 94 348)" font-family="Noto Sans SC, sans-serif" font-size="15" font-weight="700" fill="#2D6E40">交叉轴 cross axis</text>
+
+  <rect x="164" y="286" width="210" height="124" rx="16" fill="#F0F4FC" stroke="#5178C6" stroke-width="3"/>
+  <circle cx="198" cy="320" r="18" fill="#5178C6"/>
+  <text x="198" y="326" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">A</text>
+  <text x="269" y="330" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#1F2329">flex-basis</text>
+  <text x="269" y="362" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">基础尺寸 180px</text>
+  <text x="269" y="388" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#5178C6">grow: 1 · shrink: 1</text>
+
+  <rect x="398" y="286" width="250" height="124" rx="16" fill="#EAE2FE" stroke="#8569CB" stroke-width="3"/>
+  <circle cx="432" cy="320" r="18" fill="#8569CB"/>
+  <text x="432" y="326" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">B</text>
+  <text x="523" y="330" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#1F2329">flex-basis</text>
+  <text x="523" y="362" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">基础尺寸 220px</text>
+  <text x="523" y="388" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#8569CB">grow: 2 · shrink: 1</text>
+
+  <rect x="672" y="286" width="190" height="124" rx="16" fill="#DFF5E5" stroke="#509863" stroke-width="3"/>
+  <circle cx="706" cy="320" r="18" fill="#509863"/>
+  <text x="706" y="326" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">C</text>
+  <text x="767" y="330" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#1F2329">flex-basis</text>
+  <text x="767" y="362" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">基础尺寸 160px</text>
+  <text x="767" y="388" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#509863">grow: 1 · shrink: 0</text>
+
+  <rect x="886" y="286" width="180" height="124" rx="16" fill="#FEF1CE" stroke="#D4B45B" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="976" y="338" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#7C651E">剩余空间</text>
+  <text x="976" y="369" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#646A73">容器主尺寸减去</text>
+  <text x="976" y="391" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#646A73">基础尺寸与 gap</text>
+
+  <g filter="url(#flex-shadow)">
+    <rect x="60" y="510" width="520" height="174" rx="22" fill="#F0F4FC" stroke="#5178C6" stroke-width="2"/>
+  </g>
+  <text x="92" y="550" font-family="Noto Sans SC, sans-serif" font-size="18" font-weight="700" fill="#1F2329">有正剩余空间：flex-grow</text>
+  <rect x="92" y="580" width="150" height="46" rx="8" fill="#FFFFFF" stroke="#5178C6" stroke-width="2"/>
+  <rect x="246" y="580" width="210" height="46" rx="8" fill="#FFFFFF" stroke="#8569CB" stroke-width="2"/>
+  <rect x="460" y="580" width="88" height="46" rx="8" fill="#FFFFFF" stroke="#509863" stroke-width="2"/>
+  <text x="167" y="609" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#1F2329">A + 1 份</text>
+  <text x="351" y="609" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#1F2329">B + 2 份</text>
+  <text x="504" y="609" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#1F2329">C + 1 份</text>
+  <text x="92" y="657" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#646A73">按 grow 比例分配可用正空间；grow 为 0 的项目不放大</text>
+
+  <g filter="url(#flex-shadow)">
+    <rect x="620" y="510" width="520" height="174" rx="22" fill="#FEE3E2" stroke="#D25D5A" stroke-width="2"/>
+  </g>
+  <text x="652" y="550" font-family="Noto Sans SC, sans-serif" font-size="18" font-weight="700" fill="#1F2329">空间不足：flex-shrink</text>
+  <rect x="652" y="580" width="132" height="46" rx="8" fill="#FFFFFF" stroke="#5178C6" stroke-width="2"/>
+  <rect x="788" y="580" width="168" height="46" rx="8" fill="#FFFFFF" stroke="#8569CB" stroke-width="2"/>
+  <rect x="960" y="580" width="148" height="46" rx="8" fill="#FFFFFF" stroke="#509863" stroke-width="2"/>
+  <text x="718" y="609" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#1F2329">A 收缩</text>
+  <text x="872" y="609" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#1F2329">B 按基准加权</text>
+  <text x="1034" y="609" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#1F2329">C shrink: 0</text>
+  <text x="652" y="657" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#646A73">按 shrink × flex 基础尺寸等因素分配负空间，并受 min-size 限制</text>
+
+  <rect x="374" y="702" width="452" height="32" rx="16" fill="#1F2329"/>
+  <text x="600" y="724" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">常见溢出修复：可收缩 Flex 子项设置 min-width: 0</text>
+</svg>

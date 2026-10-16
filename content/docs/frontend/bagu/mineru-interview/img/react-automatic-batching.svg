@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="1200" height="700">
+  <defs>
+    <linearGradient id="batch-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F8FAFC"/>
+      <stop offset="1" stop-color="#EEF2FF"/>
+    </linearGradient>
+    <linearGradient id="batch-main" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+    <filter id="batch-shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#64748B" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="700" rx="28" fill="url(#batch-bg)"/>
+  <path d="M40 132 H1160" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="7 9"/>
+  <text x="60" y="72" fill="#0F172A" font-family="Noto Sans SC, sans-serif" font-size="30" font-weight="700">React 18+ 自动批处理：更新进入队列，而非立即改值</text>
+  <text x="60" y="108" fill="#64748B" font-family="Noto Sans SC, sans-serif" font-size="15">同一任务中的多次更新被合并为一次 render + commit</text>
+
+  <g filter="url(#batch-shadow)">
+    <rect x="60" y="166" width="214" height="386" rx="22" fill="#FFFFFF" stroke="#5178C6" stroke-width="2"/>
+    <rect x="60" y="166" width="214" height="62" rx="22" fill="#F0F4FC"/>
+    <rect x="60" y="206" width="214" height="22" fill="#F0F4FC"/>
+    <text x="167" y="204" text-anchor="middle" fill="#1E3A8A" font-family="Noto Sans SC, sans-serif" font-size="18" font-weight="700">更新来源</text>
+
+    <rect x="90" y="254" width="154" height="50" rx="12" fill="#FFFFFF" stroke="#5178C6" stroke-width="2"/>
+    <text x="167" y="285" text-anchor="middle" fill="#1F2329" font-family="Noto Sans SC, sans-serif" font-size="14">React 事件</text>
+
+    <rect x="90" y="324" width="154" height="50" rx="12" fill="#FFFFFF" stroke="#8569CB" stroke-width="2"/>
+    <text x="167" y="355" text-anchor="middle" fill="#1F2329" font-family="Noto Sans SC, sans-serif" font-size="14">Promise / await</text>
+
+    <rect x="90" y="394" width="154" height="50" rx="12" fill="#FFFFFF" stroke="#509863" stroke-width="2"/>
+    <text x="167" y="425" text-anchor="middle" fill="#1F2329" font-family="Noto Sans SC, sans-serif" font-size="14">setTimeout</text>
+
+    <rect x="90" y="464" width="154" height="50" rx="12" fill="#FFFFFF" stroke="#D4B45B" stroke-width="2"/>
+    <text x="167" y="495" text-anchor="middle" fill="#1F2329" font-family="Noto Sans SC, sans-serif" font-size="14">原生事件监听</text>
+  </g>
+
+  <polyline points="274,359 330,359 330,290 382,290" fill="none" stroke="#94A3B8" stroke-width="4"/>
+  <polygon points="394,290 380,283 380,297" fill="#94A3B8"/>
+
+  <g filter="url(#batch-shadow)">
+    <rect x="394" y="166" width="370" height="386" rx="22" fill="#FFFFFF" stroke="#8569CB" stroke-width="2"/>
+    <rect x="394" y="166" width="370" height="62" rx="22" fill="#EAE2FE"/>
+    <rect x="394" y="206" width="370" height="22" fill="#EAE2FE"/>
+    <text x="579" y="204" text-anchor="middle" fill="#4C1D95" font-family="Noto Sans SC, sans-serif" font-size="18" font-weight="700">Fiber 更新队列</text>
+
+    <rect x="430" y="258" width="298" height="64" rx="14" fill="#F0F4FC" stroke="#5178C6" stroke-width="2"/>
+    <circle cx="463" cy="290" r="17" fill="#2563EB"/>
+    <text x="463" y="296" text-anchor="middle" fill="#FFFFFF" font-family="Noto Sans SC, sans-serif" font-size="14" font-weight="700">1</text>
+    <text x="493" y="285" fill="#1F2329" font-family="Noto Sans SC, sans-serif" font-size="14" font-weight="700">setCount(c =&gt; c + 1)</text>
+    <text x="493" y="306" fill="#64748B" font-family="Noto Sans SC, sans-serif" font-size="12">函数式更新读取队列前值</text>
+
+    <rect x="430" y="342" width="298" height="64" rx="14" fill="#EAE2FE" stroke="#8569CB" stroke-width="2"/>
+    <circle cx="463" cy="374" r="17" fill="#7C3AED"/>
+    <text x="463" y="380" text-anchor="middle" fill="#FFFFFF" font-family="Noto Sans SC, sans-serif" font-size="14" font-weight="700">2</text>
+    <text x="493" y="369" fill="#1F2329" font-family="Noto Sans SC, sans-serif" font-size="14" font-weight="700">setCount(c =&gt; c + 1)</text>
+    <text x="493" y="390" fill="#64748B" font-family="Noto Sans SC, sans-serif" font-size="12">继续基于计算结果累加</text>
+
+    <rect x="430" y="426" width="298" height="64" rx="14" fill="#DFF5E5" stroke="#509863" stroke-width="2"/>
+    <circle cx="463" cy="458" r="17" fill="#15803D"/>
+    <text x="463" y="464" text-anchor="middle" fill="#FFFFFF" font-family="Noto Sans SC, sans-serif" font-size="14" font-weight="700">3</text>
+    <text x="493" y="453" fill="#1F2329" font-family="Noto Sans SC, sans-serif" font-size="14" font-weight="700">setFlag(f =&gt; !f)</text>
+    <text x="493" y="474" fill="#64748B" font-family="Noto Sans SC, sans-serif" font-size="12">不同 state 也可同批处理</text>
+  </g>
+
+  <polyline points="764,359 818,359 818,290 858,290" fill="none" stroke="#7C3AED" stroke-width="4"/>
+  <polygon points="870,290 856,283 856,297" fill="#7C3AED"/>
+
+  <g filter="url(#batch-shadow)">
+    <rect x="870" y="166" width="270" height="386" rx="22" fill="#0F172A" stroke="#334155" stroke-width="2"/>
+    <text x="1005" y="204" text-anchor="middle" fill="#E2E8F0" font-family="Noto Sans SC, sans-serif" font-size="18" font-weight="700">一次可见更新</text>
+
+    <circle cx="1005" cy="290" r="58" fill="url(#batch-main)"/>
+    <text x="1005" y="285" text-anchor="middle" fill="#FFFFFF" font-family="Noto Sans SC, sans-serif" font-size="16" font-weight="700">Render</text>
+    <text x="1005" y="308" text-anchor="middle" fill="#DBEAFE" font-family="Noto Sans SC, sans-serif" font-size="12">计算下一棵树</text>
+
+    <polyline points="1005,348 1005,386" fill="none" stroke="#94A3B8" stroke-width="4"/>
+    <polygon points="1005,398 998,384 1012,384" fill="#94A3B8"/>
+
+    <rect x="930" y="398" width="150" height="66" rx="16" fill="#DFF5E5" stroke="#509863" stroke-width="2"/>
+    <text x="1005" y="426" text-anchor="middle" fill="#14532D" font-family="Noto Sans SC, sans-serif" font-size="16" font-weight="700">Commit</text>
+    <text x="1005" y="449" text-anchor="middle" fill="#166534" font-family="Noto Sans SC, sans-serif" font-size="12">提交必要 DOM 变更</text>
+
+    <rect x="918" y="490" width="174" height="36" rx="18" fill="#1E293B" stroke="#475569" stroke-width="2"/>
+    <text x="1005" y="514" text-anchor="middle" fill="#CBD5E1" font-family="Noto Sans SC, sans-serif" font-size="12">通常只渲染与提交一次</text>
+  </g>
+
+  <g>
+    <rect x="120" y="596" width="960" height="68" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+    <circle cx="160" cy="630" r="20" fill="#FEF1CE" stroke="#D4B45B" stroke-width="2"/>
+    <text x="160" y="636" text-anchor="middle" fill="#92400E" font-family="Noto Sans SC, sans-serif" font-size="16" font-weight="700">!</text>
+    <text x="196" y="624" fill="#1F2329" font-family="Noto Sans SC, sans-serif" font-size="14" font-weight="700">当前闭包里的 state 仍是本次渲染快照</text>
+    <text x="196" y="647" fill="#64748B" font-family="Noto Sans SC, sans-serif" font-size="13">需要同步读 DOM 的少数场景可用 flushSync，但它会打破批处理，应谨慎使用。</text>
+  </g>
+</svg>

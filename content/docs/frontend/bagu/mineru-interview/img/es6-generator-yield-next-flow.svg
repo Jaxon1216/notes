@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="generatorGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#8569CB"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0F172A" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="720" rx="28" fill="#F8FAFC"/>
+  <circle cx="1140" cy="92" r="86" fill="#F0F4FC"/>
+  <circle cx="1190" cy="142" r="34" fill="#EAE2FE"/>
+  <path d="M70 120 C260 28 450 36 620 104" fill="none" stroke="url(#generatorGradient)" stroke-width="8" stroke-linecap="round" opacity="0.18"/>
+
+  <text x="70" y="70" font-size="30" font-weight="700" fill="#0F172A">Generator：暂停点上的双向传值</text>
+  <text x="70" y="104" font-size="15" fill="#64748B">yield 把值送给调用方；下一次 next(input) 把 input 送回上一个 yield 表达式</text>
+
+  <!-- background lanes -->
+  <rect x="70" y="154" width="354" height="490" rx="28" fill="#F0F4FC" stroke="#5178C6" stroke-width="2"/>
+  <rect x="468" y="154" width="354" height="490" rx="28" fill="#EAE2FE" stroke="#8569CB" stroke-width="2"/>
+  <rect x="866" y="154" width="344" height="490" rx="28" fill="#DFF5E5" stroke="#509863" stroke-width="2"/>
+
+  <text x="247" y="196" text-anchor="middle" font-size="20" font-weight="700" fill="#315EA8">调用方</text>
+  <text x="645" y="196" text-anchor="middle" font-size="20" font-weight="700" fill="#5D469C">Generator 函数体</text>
+  <text x="1038" y="196" text-anchor="middle" font-size="20" font-weight="700" fill="#245C33">IteratorResult</text>
+
+  <!-- vertical progress rail -->
+  <line x1="645" y1="252" x2="645" y2="570" stroke="#C4B5FD" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="645" cy="252" r="15" fill="#8569CB"/>
+  <circle cx="645" cy="350" r="15" fill="#8569CB"/>
+  <circle cx="645" cy="472" r="15" fill="#8569CB"/>
+  <circle cx="645" cy="570" r="15" fill="#509863"/>
+
+  <!-- connectors behind cards -->
+  <polyline points="364,254 474,254 474,252 544,252" fill="none" stroke="#5178C6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="544,252 530,244 530,260" fill="#5178C6"/>
+
+  <polyline points="746,350 836,350 836,274 906,274" fill="none" stroke="#8569CB" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="906,274 892,266 892,282" fill="#8569CB"/>
+
+  <polyline points="906,410 822,410 822,472 746,472" fill="none" stroke="#509863" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="746,472 760,464 760,480" fill="#509863"/>
+
+  <polyline points="746,570 836,570 836,534 906,534" fill="none" stroke="#509863" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="906,534 892,526 892,542" fill="#509863"/>
+
+  <!-- caller cards -->
+  <g filter="url(#shadow)">
+    <rect x="112" y="222" width="252" height="66" rx="20" fill="#FFFFFF" stroke="#5178C6" stroke-width="2"/>
+    <text x="238" y="250" text-anchor="middle" font-size="17" font-weight="700" fill="#315EA8">iterator.next()</text>
+    <text x="238" y="274" text-anchor="middle" font-size="13" fill="#64748B">启动函数；首次参数会被忽略</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="112" y="376" width="252" height="82" rx="20" fill="#FFFFFF" stroke="#509863" stroke-width="2"/>
+    <text x="238" y="408" text-anchor="middle" font-size="17" font-weight="700" fill="#245C33">iterator.next(input)</text>
+    <text x="238" y="434" text-anchor="middle" font-size="13" fill="#64748B">input 成为上一个 yield 的结果</text>
+  </g>
+
+  <rect x="112" y="496" width="252" height="104" rx="22" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" filter="url(#shadow)"/>
+  <text x="238" y="528" text-anchor="middle" font-size="16" font-weight="700" fill="#0F172A">还可注入控制信号</text>
+  <rect x="138" y="548" width="92" height="32" rx="16" fill="#FEE3E2"/>
+  <text x="184" y="570" text-anchor="middle" font-size="13" fill="#8C3432">throw(error)</text>
+  <rect x="240" y="548" width="98" height="32" rx="16" fill="#FEF1CE"/>
+  <text x="289" y="570" text-anchor="middle" font-size="13" fill="#7C641E">return(value)</text>
+
+  <!-- generator states -->
+  <g filter="url(#shadow)">
+    <rect x="544" y="220" width="202" height="64" rx="32" fill="#FFFFFF" stroke="#8569CB" stroke-width="2"/>
+    <text x="645" y="248" text-anchor="middle" font-size="16" font-weight="700" fill="#5D469C">开始执行</text>
+    <text x="645" y="270" text-anchor="middle" font-size="12" fill="#64748B">suspendedStart → running</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="544" y="316" width="202" height="68" rx="20" fill="#FFFFFF" stroke="#8569CB" stroke-width="2"/>
+    <text x="645" y="345" text-anchor="middle" font-size="17" font-weight="700" fill="#5D469C">yield output</text>
+    <text x="645" y="369" text-anchor="middle" font-size="12" fill="#64748B">暂停：suspendedYield</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="544" y="438" width="202" height="68" rx="20" fill="#FFFFFF" stroke="#8569CB" stroke-width="2"/>
+    <text x="645" y="467" text-anchor="middle" font-size="17" font-weight="700" fill="#5D469C">恢复执行</text>
+    <text x="645" y="491" text-anchor="middle" font-size="12" fill="#64748B">yield 表达式得到 input</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="544" y="536" width="202" height="68" rx="34" fill="#FFFFFF" stroke="#509863" stroke-width="2"/>
+    <text x="645" y="565" text-anchor="middle" font-size="17" font-weight="700" fill="#245C33">return finalValue</text>
+    <text x="645" y="589" text-anchor="middle" font-size="12" fill="#64748B">completed</text>
+  </g>
+
+  <!-- iterator result cards -->
+  <g filter="url(#shadow)">
+    <rect x="906" y="232" width="262" height="84" rx="22" fill="#FFFFFF" stroke="#8569CB" stroke-width="2"/>
+    <text x="1037" y="265" text-anchor="middle" font-size="17" font-weight="700" fill="#5D469C">{ value: output,</text>
+    <text x="1037" y="291" text-anchor="middle" font-size="17" font-weight="700" fill="#5D469C">done: false }</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="906" y="368" width="262" height="84" rx="22" fill="#FFFFFF" stroke="#509863" stroke-width="2"/>
+    <text x="1037" y="401" text-anchor="middle" font-size="16" font-weight="700" fill="#245C33">调用方取得 output</text>
+    <text x="1037" y="427" text-anchor="middle" font-size="13" fill="#64748B">决定何时、用什么值恢复</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="906" y="492" width="262" height="84" rx="22" fill="#FFFFFF" stroke="#509863" stroke-width="2"/>
+    <text x="1037" y="525" text-anchor="middle" font-size="17" font-weight="700" fill="#245C33">{ value: finalValue,</text>
+    <text x="1037" y="551" text-anchor="middle" font-size="17" font-weight="700" fill="#245C33">done: true }</text>
+  </g>
+
+  <rect x="894" y="594" width="288" height="34" rx="17" fill="#FFFFFF" stroke="#509863" stroke-width="2"/>
+  <text x="1038" y="617" text-anchor="middle" font-size="13" fill="#245C33">for...of 不包含最终 return 值</text>
+</svg>

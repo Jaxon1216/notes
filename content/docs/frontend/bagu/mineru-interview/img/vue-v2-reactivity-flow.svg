@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700">
+  <defs>
+    <linearGradient id="reactive-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F8FAFC"/>
+      <stop offset="1" stop-color="#F0F4FC"/>
+    </linearGradient>
+    <filter id="reactive-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#1F2329" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="700" rx="28" fill="url(#reactive-bg)"/>
+  <path d="M80 590 C260 670 420 640 560 590 S900 520 1130 610" fill="none" stroke="#EAE2FE" stroke-width="42" opacity="0.65"/>
+  <text x="60" y="62" font-family="Noto Sans SC, sans-serif" font-size="30" font-weight="700" fill="#1F2329">Vue 2 响应式：依赖收集与异步更新</text>
+  <text x="60" y="94" font-family="Noto Sans SC, sans-serif" font-size="15" fill="#646A73">首次渲染建立依赖，后续写入只通知真正订阅该属性的 Watcher</text>
+
+  <rect x="60" y="135" width="1080" height="120" rx="22" fill="#FFFFFF" stroke="#5178C6" stroke-width="2" filter="url(#reactive-shadow)"/>
+  <rect x="82" y="155" width="176" height="80" rx="16" fill="#F0F4FC" stroke="#5178C6" stroke-width="2"/>
+  <text x="170" y="184" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#1F2329">data 初始化</text>
+  <text x="170" y="209" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">遍历已有属性</text>
+  <text x="170" y="228" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#646A73">递归 observe</text>
+
+  <polyline points="258,195 312,195" fill="none" stroke="#BBBFC4" stroke-width="4"/>
+  <polygon points="328,195 307,184 307,206" fill="#BBBFC4"/>
+  <rect x="328" y="155" width="220" height="80" rx="16" fill="#EAE2FE" stroke="#8569CB" stroke-width="2"/>
+  <text x="438" y="184" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#1F2329">defineReactive</text>
+  <text x="438" y="209" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">getter / setter</text>
+  <text x="438" y="228" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#646A73">每个属性持有 Dep</text>
+
+  <polyline points="548,195 602,195" fill="none" stroke="#BBBFC4" stroke-width="4"/>
+  <polygon points="618,195 597,184 597,206" fill="#BBBFC4"/>
+  <rect x="618" y="155" width="220" height="80" rx="16" fill="#DFF5E5" stroke="#509863" stroke-width="2"/>
+  <text x="728" y="184" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#1F2329">渲染 Watcher</text>
+  <text x="728" y="209" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">执行 render</text>
+  <text x="728" y="228" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#646A73">读取模板依赖</text>
+
+  <polyline points="838,195 892,195" fill="none" stroke="#BBBFC4" stroke-width="4"/>
+  <polygon points="908,195 887,184 887,206" fill="#BBBFC4"/>
+  <rect x="908" y="155" width="210" height="80" rx="16" fill="#FEF1CE" stroke="#D4B45B" stroke-width="2"/>
+  <text x="1013" y="184" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#1F2329">首次 patch</text>
+  <text x="1013" y="209" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">VNode → DOM</text>
+  <text x="1013" y="228" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#646A73">完成首次显示</text>
+
+  <rect x="60" y="305" width="1080" height="285" rx="22" fill="#FFFFFF" stroke="#8569CB" stroke-width="2" filter="url(#reactive-shadow)"/>
+  <text x="90" y="345" font-family="Noto Sans SC, sans-serif" font-size="20" font-weight="700" fill="#1F2329">后续更新闭环</text>
+
+  <ellipse cx="170" cy="440" rx="95" ry="58" fill="#FEE3E2" stroke="#D25D5A" stroke-width="2"/>
+  <text x="170" y="430" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#1F2329">状态写入</text>
+  <text x="170" y="455" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">触发 setter</text>
+
+  <polyline points="265,440 345,440" fill="none" stroke="#BBBFC4" stroke-width="4"/>
+  <polygon points="361,440 340,429 340,451" fill="#BBBFC4"/>
+  <rect x="361" y="390" width="180" height="100" rx="18" fill="#EAE2FE" stroke="#8569CB" stroke-width="2"/>
+  <text x="451" y="421" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#1F2329">Dep.notify()</text>
+  <text x="451" y="446" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">通知订阅者</text>
+  <text x="451" y="468" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#646A73">只命中相关 Watcher</text>
+
+  <polyline points="541,440 621,440" fill="none" stroke="#BBBFC4" stroke-width="4"/>
+  <polygon points="637,440 616,429 616,451" fill="#BBBFC4"/>
+  <rect x="637" y="390" width="200" height="100" rx="18" fill="#F0F4FC" stroke="#5178C6" stroke-width="2"/>
+  <text x="737" y="421" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#1F2329">Scheduler 队列</text>
+  <text x="737" y="446" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">同 tick 去重</text>
+  <text x="737" y="468" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#646A73">异步批量 flush</text>
+
+  <polyline points="837,440 917,440" fill="none" stroke="#BBBFC4" stroke-width="4"/>
+  <polygon points="933,440 912,429 912,451" fill="#BBBFC4"/>
+  <rect x="933" y="390" width="170" height="100" rx="18" fill="#DFF5E5" stroke="#509863" stroke-width="2"/>
+  <text x="1018" y="421" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#1F2329">重新渲染</text>
+  <text x="1018" y="446" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">render + Diff</text>
+  <text x="1018" y="468" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#646A73">patch 必要 DOM</text>
+
+  <path d="M1018 500 C1018 555 170 555 170 508" fill="none" stroke="#BBBFC4" stroke-width="3" stroke-dasharray="9 8"/>
+  <polygon points="170,495 159,516 181,516" fill="#BBBFC4"/>
+  <text x="595" y="545" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">下一次状态变化继续闭环</text>
+
+  <rect x="145" y="620" width="910" height="42" rx="21" fill="#1F2329"/>
+  <text x="600" y="647" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="15" font-weight="700" fill="#FFFFFF">nextTick 只等待本轮 DOM flush 完成；真正合并更新的是 Scheduler</text>
+</svg>

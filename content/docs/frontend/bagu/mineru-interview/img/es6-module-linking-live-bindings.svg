@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 760" width="1280" height="760">
+  <defs>
+    <linearGradient id="moduleGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#8569CB"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0F172A" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="760" rx="28" fill="#F8FAFC"/>
+  <circle cx="1160" cy="90" r="86" fill="#EAE2FE" opacity="0.65"/>
+  <path d="M68 122 C260 20 460 48 610 106" fill="none" stroke="url(#moduleGradient)" stroke-width="8" stroke-linecap="round" opacity="0.18"/>
+
+  <text x="68" y="70" font-size="30" font-weight="700" fill="#0F172A">ES Module：先链接，再求值</text>
+  <text x="68" y="104" font-size="15" fill="#64748B">静态 import / export 建立模块图；导入方持有只读的实时绑定</text>
+
+  <!-- module graph connectors -->
+  <polyline points="268,232 336,232 336,300 398,300" fill="none" stroke="#94A3B8" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+  <polygon points="398,300 384,292 384,308" fill="#94A3B8"/>
+  <polyline points="268,358 336,358 336,300 398,300" fill="none" stroke="#94A3B8" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+  <polyline points="268,484 336,484 336,300 398,300" fill="none" stroke="#94A3B8" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+
+  <!-- phases -->
+  <polyline points="600,234 600,274" fill="none" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="600,274 592,260 608,260" fill="#94A3B8"/>
+  <polyline points="600,388 600,428" fill="none" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="600,428 592,414 608,414" fill="#94A3B8"/>
+
+  <!-- live binding connectors -->
+  <polyline points="702,484 770,484 770,270 836,270" fill="none" stroke="#8569CB" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="836,270 822,262 822,278" fill="#8569CB"/>
+  <polyline points="1066,270 1132,270 1132,486 1066,486" fill="none" stroke="#509863" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="1066,486 1080,478 1080,494" fill="#509863"/>
+  <polyline points="836,486 798,486 798,350 836,350" fill="none" stroke="#5178C6" stroke-width="3" stroke-dasharray="8 7" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="836,350 822,342 822,358" fill="#5178C6"/>
+
+  <!-- source modules -->
+  <g filter="url(#shadow)">
+    <rect x="68" y="174" width="200" height="116" rx="22" fill="#FFFFFF" stroke="#5178C6" stroke-width="3"/>
+    <circle cx="112" cy="216" r="21" fill="#F0F4FC"/>
+    <path d="M103 207 L121 207 L121 225 L103 225 Z M108 202 L116 202" fill="none" stroke="#5178C6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="146" y="218" font-size="18" font-weight="700" fill="#315EA8">main.js</text>
+    <text x="94" y="256" font-size="14" fill="#64748B">import { count }</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="68" y="300" width="200" height="116" rx="22" fill="#FFFFFF" stroke="#8569CB" stroke-width="3"/>
+    <circle cx="112" cy="342" r="21" fill="#EAE2FE"/>
+    <path d="M103 333 L121 333 L121 351 L103 351 Z M108 328 L116 328" fill="none" stroke="#8569CB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="146" y="344" font-size="18" font-weight="700" fill="#5D469C">counter.js</text>
+    <text x="94" y="382" font-size="14" fill="#64748B">export let count</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="68" y="426" width="200" height="116" rx="22" fill="#FFFFFF" stroke="#509863" stroke-width="3"/>
+    <circle cx="112" cy="468" r="21" fill="#DFF5E5"/>
+    <path d="M103 459 L121 459 L121 477 L103 477 Z M108 454 L116 454" fill="none" stroke="#509863" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="146" y="470" font-size="18" font-weight="700" fill="#245C33">format.js</text>
+    <text x="94" y="508" font-size="14" fill="#64748B">export function</text>
+  </g>
+
+  <text x="168" y="578" text-anchor="middle" font-size="14" fill="#64748B">静态语法让依赖关系可提前分析</text>
+
+  <!-- lifecycle pipeline -->
+  <g filter="url(#shadow)">
+    <rect x="398" y="160" width="304" height="544" rx="28" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+    <text x="550" y="198" text-anchor="middle" font-size="20" font-weight="700" fill="#0F172A">模块生命周期</text>
+
+    <rect x="436" y="218" width="228" height="16" rx="8" fill="#CBD5E1"/>
+    <circle cx="600" cy="226" r="19" fill="#5178C6"/>
+    <text x="470" y="230" font-size="14" font-weight="700" fill="#315EA8">01</text>
+
+    <rect x="430" y="244" width="240" height="112" rx="22" fill="#F0F4FC" stroke="#5178C6" stroke-width="2"/>
+    <text x="550" y="282" text-anchor="middle" font-size="18" font-weight="700" fill="#315EA8">加载与解析</text>
+    <text x="550" y="310" text-anchor="middle" font-size="14" fill="#64748B">解析模块说明符与源码</text>
+    <text x="550" y="334" text-anchor="middle" font-size="13" fill="#64748B">宿主负责获取资源</text>
+
+    <rect x="430" y="274" width="8" height="28" rx="4" fill="#5178C6"/>
+
+    <rect x="430" y="398" width="240" height="112" rx="22" fill="#EAE2FE" stroke="#8569CB" stroke-width="2"/>
+    <text x="550" y="436" text-anchor="middle" font-size="18" font-weight="700" fill="#5D469C">实例化 / 链接</text>
+    <text x="550" y="464" text-anchor="middle" font-size="14" fill="#64748B">校验导入导出</text>
+    <text x="550" y="488" text-anchor="middle" font-size="13" fill="#64748B">创建实时绑定，不执行顶层代码</text>
+
+    <rect x="430" y="552" width="240" height="112" rx="22" fill="#DFF5E5" stroke="#509863" stroke-width="2"/>
+    <text x="550" y="590" text-anchor="middle" font-size="18" font-weight="700" fill="#245C33">求值</text>
+    <text x="550" y="618" text-anchor="middle" font-size="14" fill="#64748B">依赖通常先执行</text>
+    <text x="550" y="642" text-anchor="middle" font-size="13" fill="#64748B">同一模块通常只求值一次</text>
+  </g>
+
+  <!-- live binding area -->
+  <g filter="url(#shadow)">
+    <rect x="836" y="174" width="230" height="192" rx="26" fill="#EAE2FE" stroke="#8569CB" stroke-width="3"/>
+    <text x="951" y="216" text-anchor="middle" font-size="19" font-weight="700" fill="#5D469C">导出模块</text>
+    <rect x="872" y="238" width="158" height="58" rx="16" fill="#FFFFFF" stroke="#8569CB" stroke-width="2"/>
+    <text x="951" y="264" text-anchor="middle" font-size="15" fill="#5D469C">count 绑定槽</text>
+    <text x="951" y="286" text-anchor="middle" font-size="14" font-weight="700" fill="#0F172A">0 → 1 → 2</text>
+    <text x="951" y="332" text-anchor="middle" font-size="13" fill="#64748B">increment() 更新绑定</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="836" y="410" width="230" height="164" rx="26" fill="#DFF5E5" stroke="#509863" stroke-width="3"/>
+    <text x="951" y="452" text-anchor="middle" font-size="19" font-weight="700" fill="#245C33">导入模块</text>
+    <rect x="872" y="474" width="158" height="52" rx="16" fill="#FFFFFF" stroke="#509863" stroke-width="2"/>
+    <text x="951" y="496" text-anchor="middle" font-size="14" fill="#245C33">只读实时绑定</text>
+    <text x="951" y="518" text-anchor="middle" font-size="13" fill="#64748B">读取时看到最新值</text>
+    <text x="951" y="552" text-anchor="middle" font-size="13" fill="#64748B">导入方不能重新赋值</text>
+  </g>
+
+  <rect x="1102" y="392" width="122" height="120" rx="22" fill="#FFFFFF" stroke="#D4B45B" stroke-width="2" filter="url(#shadow)"/>
+  <text x="1163" y="426" text-anchor="middle" font-size="15" font-weight="700" fill="#7C641E">不是值拷贝</text>
+  <path d="M1130 458 L1196 458" stroke="#D4B45B" stroke-width="4" stroke-linecap="round"/>
+  <path d="M1142 446 L1130 458 L1142 470 M1184 446 L1196 458 L1184 470" fill="none" stroke="#D4B45B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="1163" y="494" text-anchor="middle" font-size="12" fill="#64748B">共享绑定关系</text>
+
+  <rect x="780" y="630" width="444" height="66" rx="22" fill="url(#moduleGradient)"/>
+  <text x="1002" y="657" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">静态结构 ≠ 自动删除未导入代码</text>
+  <text x="1002" y="680" text-anchor="middle" font-size="13" fill="#EEF2FF">tree shaking 仍取决于构建工具与副作用分析</text>
+</svg>

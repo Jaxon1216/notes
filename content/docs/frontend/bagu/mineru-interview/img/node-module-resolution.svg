@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" width="1200" height="760">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F8F9FA"/>
+      <stop offset="1" stop-color="#F0F4FC"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#1F2329" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+  <rect x="24" y="24" width="1152" height="712" rx="32" fill="url(#bg)"/>
+  <text x="600" y="76" text-anchor="middle" font-size="30" font-weight="700" fill="#1F2329">CommonJS require() 模块解析主线</text>
+  <text x="600" y="108" text-anchor="middle" font-size="16" fill="#646A73">先解析标识，再以解析后的文件名查询缓存并加载</text>
+
+  <g filter="url(#shadow)">
+    <rect x="420" y="142" width="360" height="78" rx="22" fill="#1F2329"/>
+    <text x="600" y="178" text-anchor="middle" font-size="21" font-weight="700" fill="#FFFFFF">require(request)</text>
+    <text x="600" y="202" text-anchor="middle" font-size="14" fill="#DDE2EA">判断 request 属于哪一类</text>
+  </g>
+
+  <polyline points="600,220 600,252 205,252 205,285" fill="none" stroke="#BBBFC4" stroke-width="4"/>
+  <polyline points="600,220 600,285" fill="none" stroke="#BBBFC4" stroke-width="4"/>
+  <polyline points="600,252 995,252 995,285" fill="none" stroke="#BBBFC4" stroke-width="4"/>
+  <polygon points="205,285 196,269 214,269" fill="#BBBFC4"/>
+  <polygon points="600,285 591,269 609,269" fill="#BBBFC4"/>
+  <polygon points="995,285 986,269 1004,269" fill="#BBBFC4"/>
+
+  <g filter="url(#shadow)">
+    <rect x="70" y="285" width="270" height="116" rx="22" fill="#F0F4FC" stroke="#5178C6" stroke-width="3"/>
+    <text x="205" y="326" text-anchor="middle" font-size="21" font-weight="700" fill="#1F2329">内置模块</text>
+    <text x="205" y="356" text-anchor="middle" font-size="16" fill="#5178C6">node:fs / fs</text>
+    <text x="205" y="382" text-anchor="middle" font-size="14" fill="#646A73">直接加载内置实现</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="465" y="285" width="270" height="116" rx="22" fill="#EAE2FE" stroke="#8569CB" stroke-width="3"/>
+    <text x="600" y="326" text-anchor="middle" font-size="21" font-weight="700" fill="#1F2329">路径请求</text>
+    <text x="600" y="356" text-anchor="middle" font-size="16" fill="#8569CB">./x　../x　/x</text>
+    <text x="600" y="382" text-anchor="middle" font-size="14" fill="#646A73">相对调用模块或绝对路径</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="860" y="285" width="270" height="116" rx="22" fill="#DFF5E5" stroke="#509863" stroke-width="3"/>
+    <text x="995" y="326" text-anchor="middle" font-size="21" font-weight="700" fill="#1F2329">裸包名</text>
+    <text x="995" y="356" text-anchor="middle" font-size="16" fill="#509863">some-package</text>
+    <text x="995" y="382" text-anchor="middle" font-size="14" fill="#646A73">逐级查找 node_modules</text>
+  </g>
+
+  <polyline points="600,401 600,445" fill="none" stroke="#BBBFC4" stroke-width="4"/>
+  <polygon points="600,445 591,429 609,429" fill="#BBBFC4"/>
+  <g filter="url(#shadow)">
+    <rect x="330" y="445" width="540" height="118" rx="24" fill="#FFFFFF" stroke="#8569CB" stroke-width="3"/>
+    <text x="600" y="481" text-anchor="middle" font-size="20" font-weight="700" fill="#1F2329">文件 / 目录入口解析</text>
+    <text x="600" y="512" text-anchor="middle" font-size="15" fill="#646A73">精确文件 → .js / .json / .node</text>
+    <text x="600" y="540" text-anchor="middle" font-size="15" fill="#646A73">package.json main / exports，必要时回退 index.*</text>
+  </g>
+
+  <polyline points="600,563 600,605" fill="none" stroke="#BBBFC4" stroke-width="4"/>
+  <polygon points="600,605 591,589 609,589" fill="#BBBFC4"/>
+  <rect x="330" y="605" width="540" height="82" rx="22" fill="#1F2329"/>
+  <text x="600" y="638" text-anchor="middle" font-size="19" font-weight="700" fill="#FFFFFF">得到绝对文件名 → 查询 require.cache</text>
+  <text x="600" y="666" text-anchor="middle" font-size="14" fill="#DDE2EA">未命中则执行模块；命中则复用 exports</text>
+
+  <rect x="70" y="610" width="205" height="72" rx="18" fill="#FEF1CE" stroke="#D4B45B" stroke-width="2"/>
+  <text x="172" y="639" text-anchor="middle" font-size="15" font-weight="700" fill="#1F2329">注意：ESM 规则不同</text>
+  <text x="172" y="662" text-anchor="middle" font-size="13" fill="#646A73">扩展名、type、import.meta</text>
+</svg>

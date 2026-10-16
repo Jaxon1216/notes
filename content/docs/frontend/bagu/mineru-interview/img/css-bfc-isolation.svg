@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" width="1200" height="760">
+  <defs>
+    <linearGradient id="bfc-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F8FAFF"/>
+      <stop offset="1" stop-color="#F7FFF9"/>
+    </linearGradient>
+    <filter id="bfc-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="7" stdDeviation="10" flood-color="#1F2329" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="760" rx="28" fill="url(#bfc-bg)"/>
+  <path d="M 42 132 C 220 74, 390 102, 550 138 S 890 178, 1152 106" fill="none" stroke="#EAE2FE" stroke-width="18" opacity="0.72"/>
+
+  <text x="60" y="66" font-family="Noto Sans SC, sans-serif" font-size="30" font-weight="700" fill="#1F2329">BFC：不是万能隔离，而是一套块级布局规则</text>
+  <text x="60" y="102" font-family="Noto Sans SC, sans-serif" font-size="16" fill="#646A73">三个最常考的结果：包含浮动、阻止跨 BFC 的外边距折叠、避开外部浮动区域</text>
+
+  <g filter="url(#bfc-shadow)">
+    <rect x="54" y="154" width="338" height="500" rx="24" fill="#F0F4FC" stroke="#5178C6" stroke-width="2"/>
+  </g>
+  <circle cx="98" cy="198" r="22" fill="#5178C6"/>
+  <text x="98" y="205" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">1</text>
+  <text x="134" y="205" font-family="Noto Sans SC, sans-serif" font-size="20" font-weight="700" fill="#1F2329">自动高度包含浮动</text>
+
+  <text x="82" y="250" font-family="Noto Sans SC, sans-serif" font-size="14" font-weight="700" fill="#D25D5A">普通块：浮动脱离正常流</text>
+  <rect x="82" y="270" width="282" height="56" rx="10" fill="#FFFFFF" stroke="#D25D5A" stroke-width="2" stroke-dasharray="8 6"/>
+  <rect x="102" y="288" width="106" height="96" rx="8" fill="#FEE3E2" stroke="#D25D5A" stroke-width="2"/>
+  <text x="155" y="340" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#1F2329">float</text>
+  <path d="M 226 304 H 340" fill="none" stroke="#D25D5A" stroke-width="2"/>
+  <polygon points="340,304 328,298 328,310" fill="#D25D5A"/>
+  <text x="282" y="292" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="12" fill="#D25D5A">父高度接近 0</text>
+
+  <text x="82" y="430" font-family="Noto Sans SC, sans-serif" font-size="14" font-weight="700" fill="#2D6E40">display: flow-root：创建 BFC</text>
+  <rect x="82" y="452" width="282" height="142" rx="14" fill="#DFF5E5" stroke="#509863" stroke-width="3"/>
+  <rect x="104" y="474" width="106" height="96" rx="8" fill="#FFFFFF" stroke="#509863" stroke-width="2"/>
+  <text x="157" y="526" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#1F2329">float</text>
+  <path d="M 228 522 H 332" fill="none" stroke="#509863" stroke-width="2"/>
+  <polygon points="332,522 320,516 320,528" fill="#509863"/>
+  <text x="280" y="507" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="12" fill="#2D6E40">父高度包住浮动</text>
+  <text x="223" y="628" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#646A73">适合清除浮动；无裁剪副作用</text>
+
+  <g filter="url(#bfc-shadow)">
+    <rect x="431" y="154" width="338" height="500" rx="24" fill="#EAE2FE" stroke="#8569CB" stroke-width="2"/>
+  </g>
+  <circle cx="475" cy="198" r="22" fill="#8569CB"/>
+  <text x="475" y="205" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">2</text>
+  <text x="511" y="205" font-family="Noto Sans SC, sans-serif" font-size="20" font-weight="700" fill="#1F2329">垂直外边距折叠</text>
+
+  <text x="459" y="250" font-family="Noto Sans SC, sans-serif" font-size="14" font-weight="700" fill="#6B51AF">同一 BFC，满足折叠条件</text>
+  <rect x="475" y="276" width="250" height="70" rx="10" fill="#FFFFFF" stroke="#8569CB" stroke-width="2"/>
+  <text x="600" y="317" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="15" fill="#1F2329">块 A · margin-bottom: 40px</text>
+  <path d="M 600 348 V 394" fill="none" stroke="#8569CB" stroke-width="3"/>
+  <path d="M 584 360 H 616 M 584 382 H 616" fill="none" stroke="#8569CB" stroke-width="2"/>
+  <text x="635" y="376" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#6B51AF">折叠后取规则结果</text>
+  <rect x="475" y="396" width="250" height="70" rx="10" fill="#FFFFFF" stroke="#8569CB" stroke-width="2"/>
+  <text x="600" y="437" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="15" fill="#1F2329">块 B · margin-top: 24px</text>
+
+  <rect x="459" y="500" width="282" height="110" rx="14" fill="#FFFFFF" stroke="#509863" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="600" y="532" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" font-weight="700" fill="#2D6E40">把 B 放进新的 BFC</text>
+  <text x="600" y="562" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#646A73">A 与 B 不再共享同一格式化上下文</text>
+  <text x="600" y="588" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#646A73">两侧垂直 margin 不发生折叠</text>
+  <text x="600" y="628" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#646A73">注意：水平 margin 从不折叠</text>
+
+  <g filter="url(#bfc-shadow)">
+    <rect x="808" y="154" width="338" height="500" rx="24" fill="#FEF1CE" stroke="#D4B45B" stroke-width="2"/>
+  </g>
+  <circle cx="852" cy="198" r="22" fill="#D4B45B"/>
+  <text x="852" y="205" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">3</text>
+  <text x="888" y="205" font-family="Noto Sans SC, sans-serif" font-size="20" font-weight="700" fill="#1F2329">避开外部浮动</text>
+
+  <rect x="840" y="262" width="108" height="224" rx="12" fill="#FFFFFF" stroke="#D25D5A" stroke-width="2"/>
+  <text x="894" y="352" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="15" font-weight="700" fill="#1F2329">float</text>
+  <text x="894" y="378" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#646A73">固定侧栏</text>
+
+  <rect x="970" y="262" width="144" height="224" rx="12" fill="#FFFFFF" stroke="#D4B45B" stroke-width="3"/>
+  <text x="1042" y="338" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="15" font-weight="700" fill="#1F2329">main BFC</text>
+  <text x="1042" y="368" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#646A73">不会进入</text>
+  <text x="1042" y="391" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#646A73">浮动占据区域</text>
+
+  <path d="M 954 294 V 454" fill="none" stroke="#BBBFC4" stroke-width="2" stroke-dasharray="6 6"/>
+  <text x="840" y="520" font-family="Noto Sans SC, sans-serif" font-size="14" font-weight="700" fill="#7C651E">结果：右栏自动占据剩余宽度</text>
+  <text x="840" y="550" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#646A73">旧式两栏布局常见</text>
+  <text x="840" y="574" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#646A73">新项目优先 Flex / Grid</text>
+
+  <rect x="250" y="688" width="700" height="44" rx="22" fill="#1F2329"/>
+  <text x="600" y="716" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="15" font-weight="700" fill="#FFFFFF">推荐显式使用 display: flow-root，而不是借 overflow: hidden 顺便创建 BFC</text>
+</svg>

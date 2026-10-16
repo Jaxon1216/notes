@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" width="1200" height="760">
+  <rect x="10" y="10" width="1180" height="740" rx="28" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="2"/>
+  <text x="600" y="48" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="26" font-weight="700" fill="#1F2329">TypeScript 高级类型：从已有类型构造新类型</text>
+  <text x="600" y="74" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">组合、查询、遍历与分支都发生在类型层，不直接生成运行时代码</text>
+
+  <circle cx="600" cy="210" r="92" fill="#1F2329" stroke="#1F2329" stroke-width="2"/>
+  <text x="600" y="201" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="21" font-weight="700" fill="#FFFFFF">已有类型</text>
+  <text x="600" y="229" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#FFFFFF">对象 · 联合 · 泛型参数</text>
+
+  <path d="M523 176 C430 112 334 120 272 168" fill="none" stroke="#BBBFC4" stroke-width="3"/>
+  <polygon points="264,175 270,160 280,172" fill="#BBBFC4"/>
+  <path d="M677 176 C770 112 866 120 928 168" fill="none" stroke="#BBBFC4" stroke-width="3"/>
+  <polygon points="936,175 920,172 930,160" fill="#BBBFC4"/>
+  <path d="M510 239 C396 274 330 323 277 370" fill="none" stroke="#BBBFC4" stroke-width="3"/>
+  <polygon points="269,378 275,362 286,374" fill="#BBBFC4"/>
+  <path d="M690 239 C804 274 870 323 923 370" fill="none" stroke="#BBBFC4" stroke-width="3"/>
+  <polygon points="931,378 914,374 925,362" fill="#BBBFC4"/>
+  <polyline points="600,302 600,368" fill="none" stroke="#BBBFC4" stroke-width="3"/>
+  <polygon points="600,378 592,364 608,364" fill="#BBBFC4"/>
+
+  <ellipse cx="205" cy="210" rx="150" ry="76" fill="#F0F4FC" stroke="#5178C6" stroke-width="2"/>
+  <text x="205" y="193" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="20" font-weight="700" fill="#1F2329">联合 A | B</text>
+  <text x="205" y="221" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">值可属于任一成员</text>
+  <text x="205" y="244" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">使用前先缩小类型</text>
+
+  <ellipse cx="995" cy="210" rx="150" ry="76" fill="#EAE2FE" stroke="#8569CB" stroke-width="2"/>
+  <text x="995" y="193" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="20" font-weight="700" fill="#1F2329">交叉 A &amp; B</text>
+  <text x="995" y="221" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">值同时满足两组约束</text>
+  <text x="995" y="244" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">矛盾约束可能得到 never</text>
+
+  <rect x="65" y="390" width="300" height="126" rx="18" fill="#FEF1CE" stroke="#D4B45B" stroke-width="2"/>
+  <text x="215" y="424" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="19" font-weight="700" fill="#1F2329">查询：keyof / T[K]</text>
+  <text x="90" y="455" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">keyof T → 键的联合</text>
+  <text x="90" y="480" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">T[K] → 对应属性类型</text>
+  <text x="90" y="503" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#5178C6">让键与返回值保持关联</text>
+
+  <rect x="450" y="390" width="300" height="126" rx="18" fill="#DFF5E5" stroke="#509863" stroke-width="2"/>
+  <text x="600" y="424" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="19" font-weight="700" fill="#1F2329">遍历：映射类型</text>
+  <text x="475" y="455" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">[K in keyof T] 遍历属性</text>
+  <text x="475" y="480" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">可增删 readonly / ? 修饰符</text>
+  <text x="475" y="503" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#509863">Partial · Readonly · Pick</text>
+
+  <rect x="835" y="390" width="300" height="126" rx="18" fill="#FEE3E2" stroke="#D25D5A" stroke-width="2"/>
+  <text x="985" y="424" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="19" font-weight="700" fill="#1F2329">分支：条件类型</text>
+  <text x="860" y="455" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">T extends U ? X : Y</text>
+  <text x="860" y="480" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">infer 可提取内部类型</text>
+  <text x="860" y="503" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#D25D5A">裸类型参数会对联合分发</text>
+
+  <polyline points="215,516 215,570 600,570 600,598" fill="none" stroke="#BBBFC4" stroke-width="3"/>
+  <polyline points="600,516 600,598" fill="none" stroke="#BBBFC4" stroke-width="3"/>
+  <polyline points="985,516 985,570 600,570" fill="none" stroke="#BBBFC4" stroke-width="3"/>
+  <polygon points="600,608 592,594 608,594" fill="#BBBFC4"/>
+
+  <rect x="180" y="608" width="840" height="104" rx="22" fill="#F0F4FC" stroke="#5178C6" stroke-width="2"/>
+  <text x="600" y="642" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="19" font-weight="700" fill="#1F2329">组合成业务类型工具</text>
+  <text x="600" y="673" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="15" fill="#646A73">先用 keyof / T[K] 建立关系，再用映射批量转换，最后用条件类型选择结果</text>
+  <text x="600" y="698" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#5178C6">目标是准确表达约束，而不是制造难以阅读的类型体操</text>
+</svg>

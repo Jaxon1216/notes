@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 740" width="1280" height="740">
+  <defs>
+    <linearGradient id="decoratorGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#8569CB"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0F172A" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="740" rx="28" fill="#F8FAFC"/>
+  <path d="M70 120 C252 24 454 38 622 102" fill="none" stroke="url(#decoratorGradient)" stroke-width="8" stroke-linecap="round" opacity="0.18"/>
+
+  <text x="70" y="70" font-size="30" font-weight="700" fill="#0F172A">Decorator：定义期间的三步模型</text>
+  <text x="70" y="104" font-size="15" fill="#64748B">当前 TC39 仓库标记为 Stage 2.7；工具链必须固定所采用的语义版本</text>
+
+  <rect x="1016" y="52" width="192" height="48" rx="24" fill="#FFFFFF" stroke="#8569CB" stroke-width="2"/>
+  <text x="1112" y="82" text-anchor="middle" font-size="15" font-weight="700" fill="#5D469C">提案，非 ES6 标准</text>
+
+  <!-- top process connectors -->
+  <polyline points="340,290 390,290 390,228 438,228" fill="none" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="438,228 424,220 424,236" fill="#94A3B8"/>
+  <polyline points="340,350 390,350 390,382 438,382" fill="none" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="438,382 424,374 424,390" fill="#94A3B8"/>
+  <polyline points="698,228 754,228 754,300 808,300" fill="none" stroke="#8569CB" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="808,300 794,292 794,308" fill="#8569CB"/>
+  <polyline points="698,382 754,382 754,300 808,300" fill="none" stroke="#8569CB" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="1068,300 1130,300 1130,376 1068,376" fill="none" stroke="#509863" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="1068,376 1082,368 1082,384" fill="#509863"/>
+
+  <!-- source area -->
+  <g filter="url(#shadow)">
+    <rect x="70" y="170" width="270" height="286" rx="26" fill="#FFFFFF" stroke="#5178C6" stroke-width="3"/>
+    <text x="205" y="210" text-anchor="middle" font-size="19" font-weight="700" fill="#315EA8">源码中的装饰器</text>
+
+    <rect x="104" y="236" width="202" height="52" rx="18" fill="#F0F4FC" stroke="#5178C6" stroke-width="2"/>
+    <text x="205" y="269" text-anchor="middle" font-size="18" font-weight="700" fill="#315EA8">@outer</text>
+    <rect x="104" y="300" width="202" height="52" rx="18" fill="#EAE2FE" stroke="#8569CB" stroke-width="2"/>
+    <text x="205" y="333" text-anchor="middle" font-size="18" font-weight="700" fill="#5D469C">@inner</text>
+
+    <rect x="104" y="370" width="202" height="54" rx="12" fill="#0F172A"/>
+    <text x="205" y="403" text-anchor="middle" font-size="15" fill="#FFFFFF">method() { ... }</text>
+    <text x="205" y="444" text-anchor="middle" font-size="13" fill="#64748B">表达式：从上到下求值</text>
+  </g>
+
+  <!-- middle phases -->
+  <g filter="url(#shadow)">
+    <rect x="438" y="176" width="260" height="104" rx="24" fill="#F0F4FC" stroke="#5178C6" stroke-width="3"/>
+    <circle cx="480" cy="228" r="23" fill="#5178C6"/>
+    <text x="480" y="235" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">1</text>
+    <text x="522" y="218" font-size="18" font-weight="700" fill="#315EA8">求值表达式</text>
+    <text x="522" y="246" font-size="13" fill="#64748B">保存 decorator 函数</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="438" y="330" width="260" height="104" rx="24" fill="#EAE2FE" stroke="#8569CB" stroke-width="3"/>
+    <circle cx="480" cy="382" r="23" fill="#8569CB"/>
+    <text x="480" y="389" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">2</text>
+    <text x="522" y="372" font-size="18" font-weight="700" fill="#5D469C">调用装饰器</text>
+    <text x="522" y="400" font-size="13" fill="#64748B">从下到上：inner → outer</text>
+  </g>
+
+  <rect x="464" y="468" width="208" height="74" rx="20" fill="#FFFFFF" stroke="#D4B45B" stroke-width="2" filter="url(#shadow)"/>
+  <text x="568" y="496" text-anchor="middle" font-size="15" font-weight="700" fill="#7C641E">(value, context)</text>
+  <text x="568" y="520" text-anchor="middle" font-size="13" fill="#64748B">不是 target / descriptor</text>
+
+  <!-- class assembly -->
+  <g filter="url(#shadow)">
+    <rect x="808" y="184" width="260" height="232" rx="28" fill="#FFFFFF" stroke="#8569CB" stroke-width="3"/>
+    <circle cx="850" cy="226" r="23" fill="#8569CB"/>
+    <text x="850" y="233" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">3</text>
+    <text x="886" y="232" font-size="19" font-weight="700" fill="#5D469C">应用结果</text>
+
+    <rect x="842" y="260" width="192" height="52" rx="18" fill="#EAE2FE"/>
+    <text x="938" y="282" text-anchor="middle" font-size="14" font-weight="700" fill="#5D469C">返回同类替代值</text>
+    <text x="938" y="301" text-anchor="middle" font-size="12" fill="#64748B">方法换方法，类换类</text>
+
+    <rect x="842" y="326" width="192" height="52" rx="18" fill="#DFF5E5"/>
+    <text x="938" y="348" text-anchor="middle" font-size="14" font-weight="700" fill="#245C33">注册 initializer</text>
+    <text x="938" y="367" text-anchor="middle" font-size="12" fill="#64748B">context.addInitializer()</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="808" y="446" width="400" height="112" rx="26" fill="#DFF5E5" stroke="#509863" stroke-width="3"/>
+    <text x="1008" y="482" text-anchor="middle" font-size="19" font-weight="700" fill="#245C33">类或实例初始化</text>
+    <text x="1008" y="512" text-anchor="middle" font-size="14" fill="#3D704A">按元素种类和 static 状态运行 initializer</text>
+    <rect x="890" y="526" width="236" height="22" rx="11" fill="#FFFFFF"/>
+    <text x="1008" y="542" text-anchor="middle" font-size="11" fill="#64748B">装饰器在定义期间调用，不是每次方法调用时调用</text>
+  </g>
+
+  <!-- bottom comparison -->
+  <rect x="70" y="590" width="1138" height="100" rx="28" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="104" y="626" font-size="18" font-weight="700" fill="#0F172A">不要混用两代 API</text>
+  <rect x="326" y="610" width="332" height="60" rx="18" fill="#FEE3E2" stroke="#D25D5A" stroke-width="2"/>
+  <text x="492" y="635" text-anchor="middle" font-size="14" font-weight="700" fill="#8C3432">Legacy TypeScript / Babel</text>
+  <text x="492" y="657" text-anchor="middle" font-size="13" fill="#9C4B49">(target, propertyKey, descriptor)</text>
+  <path d="M680 640 L730 640" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+  <path d="M697 624 L713 640 L697 656 M713 624 L697 640 L713 656" fill="none" stroke="#D25D5A" stroke-width="3" stroke-linecap="round"/>
+  <rect x="752" y="610" width="396" height="60" rx="18" fill="url(#decoratorGradient)"/>
+  <text x="950" y="635" text-anchor="middle" font-size="14" font-weight="700" fill="#FFFFFF">当前提案形态</text>
+  <text x="950" y="657" text-anchor="middle" font-size="13" fill="#EEF2FF">(value, context) → replacement / initializer</text>
+</svg>

@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 780" width="1280" height="780">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F8F9FA"/>
+      <stop offset="1" stop-color="#F0F4FC"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#1F2329" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+  <rect x="24" y="24" width="1232" height="732" rx="32" fill="url(#bg)"/>
+  <text x="640" y="76" text-anchor="middle" font-size="30" font-weight="700" fill="#1F2329">DNS：客户端递归查询与解析器迭代查询</text>
+  <text x="640" y="108" text-anchor="middle" font-size="16" fill="#646A73">缓存未命中时，递归解析器依次询问根、顶级域和权威 DNS</text>
+
+  <g filter="url(#shadow)">
+    <rect x="60" y="190" width="210" height="128" rx="24" fill="#FFFFFF" stroke="#5178C6" stroke-width="3"/>
+    <circle cx="165" cy="228" r="22" fill="#F0F4FC" stroke="#5178C6" stroke-width="2"/>
+    <text x="165" y="271" text-anchor="middle" font-size="20" font-weight="700" fill="#1F2329">浏览器 / 系统</text>
+    <text x="165" y="298" text-anchor="middle" font-size="14" fill="#646A73">缓存、hosts、Stub</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="370" y="172" width="230" height="164" rx="26" fill="#EAE2FE" stroke="#8569CB" stroke-width="3"/>
+    <circle cx="485" cy="216" r="24" fill="#FFFFFF" stroke="#8569CB" stroke-width="2"/>
+    <text x="485" y="262" text-anchor="middle" font-size="20" font-weight="700" fill="#1F2329">递归解析器</text>
+    <text x="485" y="291" text-anchor="middle" font-size="14" fill="#646A73">检查正向 / 否定缓存</text>
+    <text x="485" y="315" text-anchor="middle" font-size="14" fill="#646A73">替客户端完成迭代查询</text>
+  </g>
+  <g filter="url(#shadow)">
+    <circle cx="770" cy="236" r="78" fill="#FEF1CE" stroke="#D4B45B" stroke-width="3"/>
+    <text x="770" y="228" text-anchor="middle" font-size="21" font-weight="700" fill="#1F2329">根 DNS</text>
+    <text x="770" y="258" text-anchor="middle" font-size="14" fill="#646A73">返回 .com 委派</text>
+  </g>
+  <g filter="url(#shadow)">
+    <circle cx="1010" cy="236" r="78" fill="#DFF5E5" stroke="#509863" stroke-width="3"/>
+    <text x="1010" y="228" text-anchor="middle" font-size="21" font-weight="700" fill="#1F2329">顶级域 DNS</text>
+    <text x="1010" y="258" text-anchor="middle" font-size="14" fill="#646A73">返回权威 DNS 委派</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="858" y="470" width="304" height="142" rx="26" fill="#FEE3E2" stroke="#D25D5A" stroke-width="3"/>
+    <text x="1010" y="514" text-anchor="middle" font-size="21" font-weight="700" fill="#1F2329">example.com 权威 DNS</text>
+    <text x="1010" y="547" text-anchor="middle" font-size="15" fill="#646A73">返回 A / AAAA / CNAME</text>
+    <text x="1010" y="576" text-anchor="middle" font-size="14" fill="#646A73">只对负责的区域给权威答案</text>
+  </g>
+
+  <polyline points="270,236 370,236" fill="none" stroke="#BBBFC4" stroke-width="5"/>
+  <polygon points="370,236 354,227 354,245" fill="#BBBFC4"/>
+  <text x="320" y="216" text-anchor="middle" font-size="14" font-weight="700" fill="#5178C6">递归请求</text>
+  <polyline points="600,216 692,216" fill="none" stroke="#BBBFC4" stroke-width="5"/>
+  <polygon points="692,216 676,207 676,225" fill="#BBBFC4"/>
+  <polyline points="848,236 932,236" fill="none" stroke="#BBBFC4" stroke-width="5"/>
+  <polygon points="932,236 916,227 916,245" fill="#BBBFC4"/>
+  <polyline points="1010,314 1010,470" fill="none" stroke="#BBBFC4" stroke-width="5"/>
+  <polygon points="1010,470 1001,454 1019,454" fill="#BBBFC4"/>
+  <text x="820" y="186" text-anchor="middle" font-size="14" fill="#646A73">① 问根</text>
+  <text x="890" y="216" text-anchor="middle" font-size="14" fill="#646A73">② 问 TLD</text>
+  <text x="1042" y="402" font-size="14" fill="#646A73">③ 问权威</text>
+
+  <path d="M858 558 H690 V522 H485 V336" fill="none" stroke="#D25D5A" stroke-width="5" stroke-dasharray="12 9"/>
+  <polygon points="485,336 476,352 494,352" fill="#D25D5A"/>
+  <text x="668" y="542" text-anchor="middle" font-size="15" font-weight="700" fill="#D25D5A">④ 最终记录 + TTL</text>
+  <path d="M370 286 H306 V390 H165 V318" fill="none" stroke="#5178C6" stroke-width="5" stroke-dasharray="12 9"/>
+  <polygon points="165,318 156,334 174,334" fill="#5178C6"/>
+  <text x="270" y="375" text-anchor="middle" font-size="15" font-weight="700" fill="#5178C6">⑤ 返回并缓存</text>
+
+  <rect x="90" y="650" width="1100" height="66" rx="20" fill="#1F2329"/>
+  <text x="640" y="678" text-anchor="middle" font-size="17" font-weight="700" fill="#FFFFFF">传统 DNS 常先用 UDP；截断、区域传送等场景使用 TCP</text>
+  <text x="640" y="702" text-anchor="middle" font-size="14" fill="#DDE2EA">DoT 在 TLS 中传输，DoH 在 HTTPS 中传输；NXDOMAIN 也可以按 TTL 缓存</text>
+</svg>

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" width="1200" height="720">
+  <defs>
+    <linearGradient id="box-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F8FAFF"/>
+      <stop offset="1" stop-color="#F4F0FF"/>
+    </linearGradient>
+    <linearGradient id="content-fill" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5178C6"/>
+      <stop offset="1" stop-color="#8569CB"/>
+    </linearGradient>
+    <filter id="box-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#1F2329" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="720" rx="28" fill="url(#box-bg)"/>
+  <circle cx="1100" cy="92" r="54" fill="#EAE2FE" opacity="0.72"/>
+  <circle cx="1055" cy="124" r="18" fill="#DFF5E5"/>
+
+  <text x="60" y="70" font-family="Noto Sans SC, sans-serif" font-size="30" font-weight="700" fill="#1F2329">CSS 盒模型：声明尺寸究竟包到哪一层？</text>
+  <text x="60" y="106" font-family="Noto Sans SC, sans-serif" font-size="16" fill="#646A73">margin 在盒子之外；box-sizing 只改变 width / height 对 content、padding、border 的覆盖范围</text>
+
+  <g filter="url(#box-shadow)">
+    <rect x="64" y="148" width="510" height="478" rx="24" fill="#FFFFFF" stroke="#DEE0E3" stroke-width="2"/>
+  </g>
+  <text x="92" y="190" font-family="Noto Sans SC, sans-serif" font-size="20" font-weight="700" fill="#1F2329">从外到内拆解一个元素</text>
+
+  <rect x="104" y="222" width="430" height="350" rx="20" fill="#FEF1CE" stroke="#D4B45B" stroke-width="2" stroke-dasharray="10 8"/>
+  <text x="124" y="252" font-family="Noto Sans SC, sans-serif" font-size="16" font-weight="700" fill="#7C651E">margin</text>
+  <text x="124" y="276" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#646A73">外部间距，不属于元素背景与边框盒</text>
+
+  <rect x="148" y="292" width="342" height="238" rx="16" fill="#D25D5A" stroke="#B74946" stroke-width="2"/>
+  <text x="166" y="320" font-family="Noto Sans SC, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">border</text>
+
+  <rect x="172" y="332" width="294" height="174" rx="12" fill="#DFF5E5" stroke="#509863" stroke-width="2"/>
+  <text x="190" y="360" font-family="Noto Sans SC, sans-serif" font-size="16" font-weight="700" fill="#2D6E40">padding</text>
+
+  <rect x="218" y="382" width="202" height="96" rx="12" fill="url(#content-fill)"/>
+  <text x="319" y="421" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="18" font-weight="700" fill="#FFFFFF">content</text>
+  <text x="319" y="449" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#FFFFFF">文本 / 图片 / 子元素</text>
+
+  <path d="M 112 594 H 526" fill="none" stroke="#BBBFC4" stroke-width="2"/>
+  <polygon points="112,594 124,588 124,600" fill="#BBBFC4"/>
+  <polygon points="526,594 514,588 514,600" fill="#BBBFC4"/>
+  <text x="319" y="616" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">元素水平占用 = 边框盒 + 左右 margin</text>
+
+  <g filter="url(#box-shadow)">
+    <rect x="610" y="148" width="526" height="214" rx="24" fill="#F0F4FC" stroke="#5178C6" stroke-width="2"/>
+  </g>
+  <circle cx="654" cy="194" r="22" fill="#5178C6"/>
+  <text x="654" y="201" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">1</text>
+  <text x="692" y="201" font-family="Noto Sans SC, sans-serif" font-size="21" font-weight="700" fill="#1F2329">content-box（默认）</text>
+  <text x="650" y="242" font-family="Noto Sans SC, sans-serif" font-size="15" fill="#1F2329">声明 width = content</text>
+  <rect x="650" y="264" width="446" height="64" rx="12" fill="#FFFFFF" stroke="#5178C6" stroke-width="2"/>
+  <text x="873" y="291" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="16" font-weight="700" fill="#1F2329">边框盒宽度</text>
+  <text x="873" y="316" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">width + 左右 padding + 左右 border</text>
+
+  <g filter="url(#box-shadow)">
+    <rect x="610" y="390" width="526" height="236" rx="24" fill="#EAE2FE" stroke="#8569CB" stroke-width="2"/>
+  </g>
+  <circle cx="654" cy="436" r="22" fill="#8569CB"/>
+  <text x="654" y="443" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">2</text>
+  <text x="692" y="443" font-family="Noto Sans SC, sans-serif" font-size="21" font-weight="700" fill="#1F2329">border-box（工程常用）</text>
+  <text x="650" y="484" font-family="Noto Sans SC, sans-serif" font-size="15" fill="#1F2329">声明 width = content + padding + border</text>
+  <rect x="650" y="506" width="446" height="78" rx="12" fill="#FFFFFF" stroke="#8569CB" stroke-width="2"/>
+  <text x="873" y="535" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="16" font-weight="700" fill="#1F2329">内容宽度</text>
+  <text x="873" y="562" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">width - 左右 padding - 左右 border</text>
+  <text x="873" y="608" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="13" fill="#646A73">两种模式都不把 margin 算进 width</text>
+
+  <rect x="410" y="652" width="380" height="38" rx="19" fill="#1F2329"/>
+  <text x="600" y="677" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">关键：先区分“边框盒尺寸”和“页面占用空间”</text>
+</svg>

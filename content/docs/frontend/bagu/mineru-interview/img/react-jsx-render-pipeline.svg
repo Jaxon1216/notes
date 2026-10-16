@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" width="1200" height="680">
+  <defs>
+    <linearGradient id="jsx-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07111F"/>
+      <stop offset="0.55" stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#172554"/>
+    </linearGradient>
+    <linearGradient id="jsx-flow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#60A5FA"/>
+      <stop offset="0.5" stop-color="#A78BFA"/>
+      <stop offset="1" stop-color="#34D399"/>
+    </linearGradient>
+    <filter id="jsx-shadow" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#020617" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="680" rx="30" fill="url(#jsx-bg)"/>
+  <path d="M58 128 C245 88 370 166 560 126 S930 82 1140 130" fill="none" stroke="#334155" stroke-width="2" stroke-dasharray="8 10"/>
+  <text x="60" y="66" fill="#F8FAFC" font-family="Noto Sans SC, sans-serif" font-size="30" font-weight="700">JSX 到真实 DOM：描述、调和、提交</text>
+  <text x="60" y="102" fill="#94A3B8" font-family="Noto Sans SC, sans-serif" font-size="15">JSX 不直接创建 DOM；render 可重做，commit 才改变屏幕</text>
+
+  <path d="M132 390 C240 220 386 210 492 344 C600 480 726 492 842 342 C930 230 1030 242 1092 330" fill="none" stroke="url(#jsx-flow)" stroke-width="13" opacity="0.3"/>
+
+  <g filter="url(#jsx-shadow)">
+    <rect x="54" y="292" width="190" height="180" rx="24" fill="#111C31" stroke="#3B82F6" stroke-width="2"/>
+    <circle cx="93" cy="331" r="20" fill="#2563EB"/>
+    <text x="93" y="338" text-anchor="middle" fill="#FFFFFF" font-family="Noto Sans SC, sans-serif" font-size="16" font-weight="700">1</text>
+    <text x="126" y="338" fill="#93C5FD" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700">JSX 源码</text>
+    <text x="78" y="382" fill="#E2E8F0" font-family="monospace" font-size="14">&lt;Avatar</text>
+    <text x="78" y="406" fill="#C4B5FD" font-family="monospace" font-size="14">  src={url}</text>
+    <text x="78" y="430" fill="#E2E8F0" font-family="monospace" font-size="14">/&gt;</text>
+    <text x="78" y="454" fill="#64748B" font-family="Noto Sans SC, sans-serif" font-size="12">声明 UI，而非 DOM 指令</text>
+  </g>
+
+  <polyline points="244,346 278,346 278,286 314,286" fill="none" stroke="#60A5FA" stroke-width="4"/>
+  <polygon points="326,286 312,279 312,293" fill="#60A5FA"/>
+
+  <g filter="url(#jsx-shadow)">
+    <rect x="326" y="188" width="216" height="196" rx="24" fill="#111C31" stroke="#8569CB" stroke-width="2"/>
+    <circle cx="365" cy="227" r="20" fill="#7C3AED"/>
+    <text x="365" y="234" text-anchor="middle" fill="#FFFFFF" font-family="Noto Sans SC, sans-serif" font-size="16" font-weight="700">2</text>
+    <text x="398" y="234" fill="#C4B5FD" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700">编译转换</text>
+    <rect x="350" y="260" width="168" height="74" rx="12" fill="#1E293B" stroke="#475569" stroke-width="1"/>
+    <text x="434" y="288" text-anchor="middle" fill="#E2E8F0" font-family="monospace" font-size="13">jsx(Avatar,</text>
+    <text x="434" y="312" text-anchor="middle" fill="#E2E8F0" font-family="monospace" font-size="13">{ src: url })</text>
+    <text x="434" y="360" text-anchor="middle" fill="#94A3B8" font-family="Noto Sans SC, sans-serif" font-size="12">自动 JSX runtime / Babel</text>
+  </g>
+
+  <polyline points="542,286 574,286 574,346 610,346" fill="none" stroke="#A78BFA" stroke-width="4"/>
+  <polygon points="622,346 608,339 608,353" fill="#A78BFA"/>
+
+  <g filter="url(#jsx-shadow)">
+    <rect x="622" y="286" width="224" height="196" rx="24" fill="#111C31" stroke="#D4B45B" stroke-width="2"/>
+    <circle cx="661" cy="325" r="20" fill="#D4B45B"/>
+    <text x="661" y="332" text-anchor="middle" fill="#1F2329" font-family="Noto Sans SC, sans-serif" font-size="16" font-weight="700">3</text>
+    <text x="694" y="332" fill="#FDE68A" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700">React 元素</text>
+    <rect x="648" y="358" width="172" height="82" rx="14" fill="#FEF1CE" stroke="#D4B45B" stroke-width="2"/>
+    <text x="672" y="385" fill="#1F2329" font-family="monospace" font-size="13">type: Avatar</text>
+    <text x="672" y="409" fill="#1F2329" font-family="monospace" font-size="13">key: null</text>
+    <text x="672" y="433" fill="#1F2329" font-family="monospace" font-size="13">props: {...}</text>
+    <text x="734" y="466" text-anchor="middle" fill="#94A3B8" font-family="Noto Sans SC, sans-serif" font-size="12">不可变 UI 描述</text>
+  </g>
+
+  <polyline points="846,384 878,384 878,286 914,286" fill="none" stroke="#FBBF24" stroke-width="4"/>
+  <polygon points="926,286 912,279 912,293" fill="#FBBF24"/>
+
+  <g filter="url(#jsx-shadow)">
+    <rect x="926" y="188" width="220" height="196" rx="24" fill="#111C31" stroke="#509863" stroke-width="2"/>
+    <circle cx="965" cy="227" r="20" fill="#15803D"/>
+    <text x="965" y="234" text-anchor="middle" fill="#FFFFFF" font-family="Noto Sans SC, sans-serif" font-size="16" font-weight="700">4</text>
+    <text x="998" y="234" fill="#86EFAC" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700">Render / Diff</text>
+    <circle cx="1036" cy="292" r="32" fill="#DFF5E5" stroke="#509863" stroke-width="2"/>
+    <circle cx="1000" cy="342" r="20" fill="#FFFFFF" stroke="#509863" stroke-width="2"/>
+    <circle cx="1072" cy="342" r="20" fill="#FFFFFF" stroke="#509863" stroke-width="2"/>
+    <polyline points="1036,324 1000,322 1000,320" fill="none" stroke="#86EFAC" stroke-width="3"/>
+    <polyline points="1036,324 1072,322 1072,320" fill="none" stroke="#86EFAC" stroke-width="3"/>
+    <text x="1036" y="298" text-anchor="middle" fill="#14532D" font-family="Noto Sans SC, sans-serif" font-size="13" font-weight="700">Fiber</text>
+    <text x="1036" y="370" text-anchor="middle" fill="#94A3B8" font-family="Noto Sans SC, sans-serif" font-size="12">匹配 type + key，标记变更</text>
+  </g>
+
+  <polyline points="1036,384 1036,444 914,444 914,500" fill="none" stroke="#34D399" stroke-width="4"/>
+  <polygon points="914,512 907,498 921,498" fill="#34D399"/>
+
+  <g filter="url(#jsx-shadow)">
+    <rect x="690" y="512" width="448" height="112" rx="24" fill="#ECFDF5" stroke="#10B981" stroke-width="3"/>
+    <circle cx="738" cy="568" r="24" fill="#10B981"/>
+    <text x="738" y="576" text-anchor="middle" fill="#FFFFFF" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700">5</text>
+    <text x="778" y="550" fill="#064E3B" font-family="Noto Sans SC, sans-serif" font-size="18" font-weight="700">Commit：写入真实 DOM</text>
+    <text x="778" y="580" fill="#065F46" font-family="Noto Sans SC, sans-serif" font-size="14">创建 / 更新 / 插入 / 删除必要节点</text>
+    <text x="778" y="604" fill="#047857" font-family="Noto Sans SC, sans-serif" font-size="13">随后浏览器执行样式、布局与绘制</text>
+    <rect x="1054" y="542" width="48" height="52" rx="8" fill="#FFFFFF" stroke="#10B981" stroke-width="2"/>
+    <rect x="1064" y="552" width="28" height="7" rx="3" fill="#A7F3D0"/>
+    <rect x="1064" y="566" width="28" height="18" rx="3" fill="#D1FAE5"/>
+  </g>
+
+  <rect x="54" y="544" width="556" height="80" rx="20" fill="#111C31" stroke="#334155" stroke-width="2"/>
+  <text x="82" y="577" fill="#F8FAFC" font-family="Noto Sans SC, sans-serif" font-size="15" font-weight="700">关键边界</text>
+  <text x="82" y="604" fill="#94A3B8" font-family="Noto Sans SC, sans-serif" font-size="13">Render 可暂停、重启或放弃；只有 Commit 会改变可见 UI。</text>
+</svg>

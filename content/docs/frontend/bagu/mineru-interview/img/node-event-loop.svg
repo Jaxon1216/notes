@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F0F4FC"/>
+      <stop offset="1" stop-color="#DFF5E5"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#1F2329" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+  <rect x="24" y="24" width="1152" height="752" rx="32" fill="url(#bg)"/>
+  <text x="600" y="76" text-anchor="middle" font-size="30" font-weight="700" fill="#1F2329">Node.js 事件循环与微任务检查点</text>
+  <text x="600" y="108" text-anchor="middle" font-size="16" fill="#646A73">libuv 阶段推进；每个 JavaScript 回调结束后先清空 nextTick 与微任务</text>
+
+  <g filter="url(#shadow)">
+    <rect x="95" y="178" width="210" height="92" rx="20" fill="#FFFFFF" stroke="#5178C6" stroke-width="3"/>
+    <text x="200" y="216" text-anchor="middle" font-size="21" font-weight="700" fill="#1F2329">timers</text>
+    <text x="200" y="244" text-anchor="middle" font-size="14" fill="#646A73">到期的 timeout / interval</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="382" y="178" width="210" height="92" rx="20" fill="#FFFFFF" stroke="#8569CB" stroke-width="3"/>
+    <text x="487" y="216" text-anchor="middle" font-size="21" font-weight="700" fill="#1F2329">pending</text>
+    <text x="487" y="244" text-anchor="middle" font-size="14" fill="#646A73">延迟的系统回调</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="669" y="178" width="210" height="92" rx="20" fill="#FFFFFF" stroke="#D4B45B" stroke-width="3"/>
+    <text x="774" y="216" text-anchor="middle" font-size="21" font-weight="700" fill="#1F2329">poll</text>
+    <text x="774" y="244" text-anchor="middle" font-size="14" fill="#646A73">等待并处理 I/O</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="956" y="178" width="150" height="92" rx="20" fill="#FFFFFF" stroke="#509863" stroke-width="3"/>
+    <text x="1031" y="216" text-anchor="middle" font-size="21" font-weight="700" fill="#1F2329">check</text>
+    <text x="1031" y="244" text-anchor="middle" font-size="14" fill="#646A73">setImmediate</text>
+  </g>
+
+  <polyline points="305,224 382,224" fill="none" stroke="#BBBFC4" stroke-width="5"/>
+  <polygon points="382,224 366,215 366,233" fill="#BBBFC4"/>
+  <polyline points="592,224 669,224" fill="none" stroke="#BBBFC4" stroke-width="5"/>
+  <polygon points="669,224 653,215 653,233" fill="#BBBFC4"/>
+  <polyline points="879,224 956,224" fill="none" stroke="#BBBFC4" stroke-width="5"/>
+  <polygon points="956,224 940,215 940,233" fill="#BBBFC4"/>
+  <path d="M1031 270 V314 H200 V270" fill="none" stroke="#BBBFC4" stroke-width="5"/>
+  <polygon points="200,270 191,286 209,286" fill="#BBBFC4"/>
+
+  <text x="600" y="335" text-anchor="middle" font-size="15" fill="#646A73">close callbacks 在相应关闭事件就绪时处理；idle / prepare 由 libuv 内部使用</text>
+
+  <g filter="url(#shadow)">
+    <rect x="180" y="394" width="840" height="190" rx="28" fill="#1F2329"/>
+    <text x="600" y="435" text-anchor="middle" font-size="22" font-weight="700" fill="#FFFFFF">每次 JavaScript 回调执行结束</text>
+    <rect x="244" y="468" width="280" height="72" rx="18" fill="#FEE3E2" stroke="#D25D5A" stroke-width="2"/>
+    <text x="384" y="498" text-anchor="middle" font-size="18" font-weight="700" fill="#1F2329">① next tick queue</text>
+    <text x="384" y="523" text-anchor="middle" font-size="14" fill="#646A73">process.nextTick()</text>
+    <polyline points="524,504 668,504" fill="none" stroke="#BBBFC4" stroke-width="5"/>
+    <polygon points="668,504 652,495 652,513" fill="#BBBFC4"/>
+    <rect x="668" y="468" width="288" height="72" rx="18" fill="#EAE2FE" stroke="#8569CB" stroke-width="2"/>
+    <text x="812" y="498" text-anchor="middle" font-size="18" font-weight="700" fill="#1F2329">② V8 微任务</text>
+    <text x="812" y="523" text-anchor="middle" font-size="14" fill="#646A73">Promise / queueMicrotask</text>
+  </g>
+
+  <rect x="130" y="634" width="940" height="92" rx="24" fill="#FFFFFF" stroke="#5178C6" stroke-width="3"/>
+  <text x="600" y="667" text-anchor="middle" font-size="18" font-weight="700" fill="#1F2329">关键边界</text>
+  <text x="600" y="695" text-anchor="middle" font-size="15" fill="#646A73">计时器延迟只是“最早可执行时间”；顶层 timeout(0) 与 immediate 顺序不应作为契约</text>
+  <text x="600" y="718" text-anchor="middle" font-size="14" fill="#646A73">Node 20 / libuv 1.45 起，timers 只在 poll 之后运行</text>
+</svg>

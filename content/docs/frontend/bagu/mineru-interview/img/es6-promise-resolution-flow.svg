@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="titleGlow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#8569CB"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0F172A" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="1280" height="720" rx="28" fill="#F8FAFC"/>
+  <circle cx="1110" cy="92" r="84" fill="#EAE2FE" opacity="0.65"/>
+  <path d="M78 118 C250 35 430 32 610 98" fill="none" stroke="url(#titleGlow)" stroke-width="8" stroke-linecap="round" opacity="0.18"/>
+
+  <text x="72" y="72" font-size="30" font-weight="700" fill="#0F172A">Promise：状态迁移与链式解析</text>
+  <text x="72" y="106" font-size="15" fill="#64748B">状态只敲定一次；每次 then / catch / finally 都产生一个新的 Promise</text>
+
+  <!-- state transitions -->
+  <polyline points="318,250 390,250 390,192 484,192" fill="none" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="484,192 470,184 470,200" fill="#94A3B8"/>
+  <polyline points="318,250 390,250 390,324 484,324" fill="none" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="484,324 470,316 470,332" fill="#94A3B8"/>
+  <polyline points="696,192 792,192" fill="none" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="792,192 778,184 778,200" fill="#94A3B8"/>
+  <polyline points="696,324 792,324" fill="none" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="792,324 778,316 778,332" fill="#94A3B8"/>
+
+  <g filter="url(#shadow)">
+    <rect x="72" y="170" width="246" height="160" rx="24" fill="#FFFFFF" stroke="#5178C6" stroke-width="3"/>
+    <circle cx="118" cy="216" r="23" fill="#F0F4FC" stroke="#5178C6" stroke-width="2"/>
+    <path d="M110 216 L124 216 M118 208 L118 224" stroke="#5178C6" stroke-width="3" stroke-linecap="round"/>
+    <text x="154" y="210" font-size="20" font-weight="700" fill="#1F2329">executor 同步执行</text>
+    <text x="154" y="238" font-size="14" fill="#64748B">调用 resolve / reject</text>
+    <rect x="98" y="270" width="194" height="34" rx="17" fill="#F0F4FC"/>
+    <text x="195" y="292" text-anchor="middle" font-size="14" font-weight="600" fill="#315EA8">new Promise(executor)</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <circle cx="590" cy="258" r="106" fill="#FEF1CE" stroke="#D4B45B" stroke-width="4"/>
+    <circle cx="590" cy="258" r="77" fill="#FFFFFF" stroke="#D4B45B" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="590" y="252" text-anchor="middle" font-size="25" font-weight="700" fill="#7C641E">pending</text>
+    <text x="590" y="282" text-anchor="middle" font-size="14" fill="#806C31">初始状态</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="792" y="136" width="204" height="112" rx="24" fill="#DFF5E5" stroke="#509863" stroke-width="3"/>
+    <circle cx="838" cy="192" r="23" fill="#FFFFFF"/>
+    <path d="M827 192 L836 201 L851 183" fill="none" stroke="#509863" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="874" y="185" font-size="21" font-weight="700" fill="#245C33">fulfilled</text>
+    <text x="874" y="211" font-size="14" fill="#3D704A">带结果值</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="792" y="268" width="204" height="112" rx="24" fill="#FEE3E2" stroke="#D25D5A" stroke-width="3"/>
+    <circle cx="838" cy="324" r="23" fill="#FFFFFF"/>
+    <path d="M830 316 L846 332 M846 316 L830 332" stroke="#D25D5A" stroke-width="4" stroke-linecap="round"/>
+    <text x="874" y="317" font-size="21" font-weight="700" fill="#8C3432">rejected</text>
+    <text x="874" y="343" font-size="14" fill="#9C4B49">带拒绝原因</text>
+  </g>
+
+  <g>
+    <rect x="1030" y="146" width="178" height="224" rx="24" fill="#FFFFFF" stroke="#8569CB" stroke-width="3" filter="url(#shadow)"/>
+    <text x="1119" y="183" text-anchor="middle" font-size="18" font-weight="700" fill="#5D469C">反应回调</text>
+    <rect x="1056" y="204" width="126" height="40" rx="20" fill="#EAE2FE"/>
+    <text x="1119" y="230" text-anchor="middle" font-size="15" fill="#5D469C">进入微任务</text>
+    <rect x="1056" y="260" width="126" height="40" rx="20" fill="#F0F4FC"/>
+    <text x="1119" y="286" text-anchor="middle" font-size="15" fill="#315EA8">当前栈结束后</text>
+    <rect x="1056" y="316" width="126" height="32" rx="16" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+    <text x="1119" y="338" text-anchor="middle" font-size="13" fill="#64748B">按注册顺序运行</text>
+  </g>
+
+  <!-- chain resolution -->
+  <rect x="72" y="438" width="1136" height="214" rx="28" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="102" y="478" font-size="20" font-weight="700" fill="#0F172A">回调结果决定“下一个 Promise”</text>
+  <text x="102" y="506" font-size="14" fill="#64748B">链式调用不是修改原 Promise，而是持续创建并解析新的 Promise</text>
+
+  <polyline points="330,570 390,570" fill="none" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="390,570 376,562 376,578" fill="#94A3B8"/>
+  <polyline points="616,570 676,570" fill="none" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="676,570 662,562 662,578" fill="#94A3B8"/>
+  <polyline points="902,570 962,570" fill="none" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="962,570 948,562 948,578" fill="#94A3B8"/>
+
+  <rect x="102" y="534" width="228" height="76" rx="18" fill="#F0F4FC" stroke="#5178C6" stroke-width="2"/>
+  <text x="216" y="562" text-anchor="middle" font-size="16" font-weight="700" fill="#315EA8">then(onFulfilled)</text>
+  <text x="216" y="588" text-anchor="middle" font-size="13" fill="#64748B">或 catch(onRejected)</text>
+
+  <rect x="390" y="534" width="226" height="76" rx="18" fill="#EAE2FE" stroke="#8569CB" stroke-width="2"/>
+  <text x="503" y="562" text-anchor="middle" font-size="16" font-weight="700" fill="#5D469C">执行回调</text>
+  <text x="503" y="588" text-anchor="middle" font-size="13" fill="#64748B">返回 / 抛错 / 返回 thenable</text>
+
+  <rect x="676" y="534" width="226" height="76" rx="18" fill="#FEF1CE" stroke="#D4B45B" stroke-width="2"/>
+  <text x="789" y="562" text-anchor="middle" font-size="16" font-weight="700" fill="#7C641E">Promise 解析过程</text>
+  <text x="789" y="588" text-anchor="middle" font-size="13" fill="#64748B">采用返回值的最终状态</text>
+
+  <rect x="962" y="526" width="216" height="92" rx="46" fill="url(#titleGlow)"/>
+  <text x="1070" y="562" text-anchor="middle" font-size="17" font-weight="700" fill="#FFFFFF">新的 Promise</text>
+  <text x="1070" y="590" text-anchor="middle" font-size="13" fill="#EEF2FF">继续 fulfilled / rejected</text>
+</svg>

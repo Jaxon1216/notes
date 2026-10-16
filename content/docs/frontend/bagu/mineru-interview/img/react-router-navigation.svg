@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="1200" height="700">
+  <defs>
+    <linearGradient id="router-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#172554"/>
+    </linearGradient>
+    <linearGradient id="router-head" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+    <filter id="router-shadow" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#020617" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="700" rx="28" fill="url(#router-bg)"/>
+  <text x="58" y="66" fill="#F8FAFC" font-family="Noto Sans SC, sans-serif" font-size="30" font-weight="700">React Router：URL 变化如何变成 UI 更新</text>
+  <text x="58" y="102" fill="#94A3B8" font-family="Noto Sans SC, sans-serif" font-size="15">History 与 Hash 只是在“位置存在哪里、监听什么事件”上不同</text>
+
+  <g filter="url(#router-shadow)">
+    <rect x="58" y="150" width="220" height="400" rx="24" fill="#111C31" stroke="#334155" stroke-width="2"/>
+    <text x="88" y="190" fill="#93C5FD" font-family="Noto Sans SC, sans-serif" font-size="18" font-weight="700">导航来源</text>
+
+    <rect x="88" y="224" width="160" height="56" rx="14" fill="#F0F4FC" stroke="#5178C6" stroke-width="2"/>
+    <text x="168" y="258" text-anchor="middle" fill="#1E3A8A" font-family="Noto Sans SC, sans-serif" font-size="14" font-weight="700">&lt;Link&gt; 点击</text>
+
+    <rect x="88" y="304" width="160" height="56" rx="14" fill="#EAE2FE" stroke="#8569CB" stroke-width="2"/>
+    <text x="168" y="338" text-anchor="middle" fill="#4C1D95" font-family="Noto Sans SC, sans-serif" font-size="14" font-weight="700">navigate()</text>
+
+    <rect x="88" y="384" width="160" height="56" rx="14" fill="#DFF5E5" stroke="#509863" stroke-width="2"/>
+    <text x="168" y="418" text-anchor="middle" fill="#14532D" font-family="Noto Sans SC, sans-serif" font-size="14" font-weight="700">前进 / 后退</text>
+
+    <rect x="88" y="464" width="160" height="56" rx="14" fill="#FEF1CE" stroke="#D4B45B" stroke-width="2"/>
+    <text x="168" y="498" text-anchor="middle" fill="#92400E" font-family="Noto Sans SC, sans-serif" font-size="14" font-weight="700">地址栏 Hash</text>
+  </g>
+
+  <polyline points="278,350 326,350" fill="none" stroke="#60A5FA" stroke-width="4"/>
+  <polygon points="338,350 324,343 324,357" fill="#60A5FA"/>
+
+  <g filter="url(#router-shadow)">
+    <rect x="338" y="150" width="330" height="400" rx="24" fill="#111C31" stroke="#475569" stroke-width="2"/>
+    <rect x="338" y="150" width="330" height="64" rx="24" fill="url(#router-head)"/>
+    <rect x="338" y="190" width="330" height="24" fill="url(#router-head)"/>
+    <text x="503" y="190" text-anchor="middle" fill="#FFFFFF" font-family="Noto Sans SC, sans-serif" font-size="18" font-weight="700">位置策略</text>
+
+    <rect x="370" y="246" width="266" height="112" rx="18" fill="#F0F4FC" stroke="#5178C6" stroke-width="2"/>
+    <text x="396" y="278" fill="#1E3A8A" font-family="Noto Sans SC, sans-serif" font-size="16" font-weight="700">History 模式</text>
+    <text x="396" y="305" fill="#334155" font-family="monospace" font-size="13">/users/42</text>
+    <text x="396" y="330" fill="#64748B" font-family="Noto Sans SC, sans-serif" font-size="12">pushState / replaceState</text>
+    <text x="396" y="349" fill="#64748B" font-family="Noto Sans SC, sans-serif" font-size="12">popstate 监听前进后退</text>
+
+    <rect x="370" y="390" width="266" height="112" rx="18" fill="#EAE2FE" stroke="#8569CB" stroke-width="2"/>
+    <text x="396" y="422" fill="#4C1D95" font-family="Noto Sans SC, sans-serif" font-size="16" font-weight="700">Hash 模式</text>
+    <text x="396" y="449" fill="#334155" font-family="monospace" font-size="13">/#/users/42</text>
+    <text x="396" y="474" fill="#64748B" font-family="Noto Sans SC, sans-serif" font-size="12">location.hash</text>
+    <text x="396" y="493" fill="#64748B" font-family="Noto Sans SC, sans-serif" font-size="12">hashchange 监听片段变化</text>
+  </g>
+
+  <polyline points="668,350 716,350" fill="none" stroke="#A78BFA" stroke-width="4"/>
+  <polygon points="728,350 714,343 714,357" fill="#A78BFA"/>
+
+  <g filter="url(#router-shadow)">
+    <rect x="728" y="150" width="414" height="400" rx="24" fill="#111C31" stroke="#334155" stroke-width="2"/>
+    <text x="758" y="190" fill="#C4B5FD" font-family="Noto Sans SC, sans-serif" font-size="18" font-weight="700">路由状态与 React 渲染</text>
+
+    <rect x="770" y="232" width="330" height="66" rx="16" fill="#1E293B" stroke="#64748B" stroke-width="2"/>
+    <text x="935" y="260" text-anchor="middle" fill="#E2E8F0" font-family="Noto Sans SC, sans-serif" font-size="14" font-weight="700">产生新 location</text>
+    <text x="935" y="282" text-anchor="middle" fill="#94A3B8" font-family="monospace" font-size="12">{ pathname, search, hash, state }</text>
+
+    <polyline points="935,298 935,326" fill="none" stroke="#94A3B8" stroke-width="4"/>
+    <polygon points="935,338 928,324 942,324" fill="#94A3B8"/>
+
+    <rect x="770" y="338" width="330" height="66" rx="16" fill="#FEF1CE" stroke="#D4B45B" stroke-width="2"/>
+    <text x="935" y="366" text-anchor="middle" fill="#1F2329" font-family="Noto Sans SC, sans-serif" font-size="14" font-weight="700">匹配路由树</text>
+    <text x="935" y="388" text-anchor="middle" fill="#92400E" font-family="Noto Sans SC, sans-serif" font-size="12">静态段、动态参数、嵌套路由</text>
+
+    <polyline points="935,404 935,432" fill="none" stroke="#94A3B8" stroke-width="4"/>
+    <polygon points="935,444 928,430 942,430" fill="#94A3B8"/>
+
+    <rect x="770" y="444" width="330" height="66" rx="16" fill="#DFF5E5" stroke="#509863" stroke-width="2"/>
+    <text x="935" y="472" text-anchor="middle" fill="#14532D" font-family="Noto Sans SC, sans-serif" font-size="14" font-weight="700">通知订阅者，React 更新 UI</text>
+    <text x="935" y="494" text-anchor="middle" fill="#166534" font-family="Noto Sans SC, sans-serif" font-size="12">复用 SPA 文档，不做整页刷新</text>
+  </g>
+
+  <g filter="url(#router-shadow)">
+    <rect x="132" y="592" width="936" height="72" rx="20" fill="#FFFFFF" stroke="#D25D5A" stroke-width="2"/>
+    <circle cx="174" cy="628" r="21" fill="#FEE3E2" stroke="#D25D5A" stroke-width="2"/>
+    <text x="174" y="635" text-anchor="middle" fill="#B91C1C" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700">!</text>
+    <text x="212" y="621" fill="#7F1D1D" font-family="Noto Sans SC, sans-serif" font-size="14" font-weight="700">History 模式的刷新直达会请求服务器</text>
+    <text x="212" y="645" fill="#64748B" font-family="Noto Sans SC, sans-serif" font-size="13">生产服务器需把前端路由回退到应用入口；Hash 片段不会发送给服务器。</text>
+  </g>
+</svg>

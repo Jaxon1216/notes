@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F8FAFC"/>
+      <stop offset="1" stop-color="#F0F4FC"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#1F2329" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="700" rx="28" fill="url(#bg)"/>
+  <circle cx="1080" cy="90" r="72" fill="#EAE2FE" opacity="0.65"/>
+  <circle cx="1125" cy="620" r="105" fill="#DFF5E5" opacity="0.55"/>
+  <text x="60" y="62" font-family="Noto Sans SC, sans-serif" font-size="30" font-weight="700" fill="#1F2329">Vue 组件生命周期：创建、更新与卸载</text>
+  <text x="60" y="94" font-family="Noto Sans SC, sans-serif" font-size="15" fill="#646A73">Vue 2 与 Vue 3 Options API 的主要钩子映射</text>
+
+  <rect x="70" y="130" width="505" height="500" rx="24" fill="#FFFFFF" stroke="#5178C6" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="625" y="130" width="505" height="500" rx="24" fill="#FFFFFF" stroke="#8569CB" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="92" y="150" width="150" height="38" rx="19" fill="#5178C6"/>
+  <text x="167" y="176" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">首次创建与挂载</text>
+  <rect x="647" y="150" width="150" height="38" rx="19" fill="#8569CB"/>
+  <text x="722" y="176" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">更新与离开</text>
+
+  <line x1="160" y1="225" x2="160" y2="568" stroke="#BBBFC4" stroke-width="5" stroke-linecap="round"/>
+  <polygon points="160,586 149,564 171,564" fill="#BBBFC4"/>
+
+  <circle cx="160" cy="232" r="17" fill="#F0F4FC" stroke="#5178C6" stroke-width="4"/>
+  <circle cx="160" cy="320" r="17" fill="#F0F4FC" stroke="#5178C6" stroke-width="4"/>
+  <circle cx="160" cy="408" r="17" fill="#F0F4FC" stroke="#5178C6" stroke-width="4"/>
+  <circle cx="160" cy="496" r="17" fill="#DFF5E5" stroke="#509863" stroke-width="4"/>
+
+  <rect x="215" y="204" width="320" height="58" rx="13" fill="#F0F4FC" stroke="#5178C6" stroke-width="2"/>
+  <text x="235" y="229" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#1F2329">beforeCreate → created</text>
+  <text x="235" y="250" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">Vue 3 setup() 在创建钩子之前执行</text>
+
+  <rect x="215" y="292" width="320" height="58" rx="13" fill="#F0F4FC" stroke="#5178C6" stroke-width="2"/>
+  <text x="235" y="317" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#1F2329">beforeMount</text>
+  <text x="235" y="338" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">首次 render 与 patch 即将开始</text>
+
+  <rect x="215" y="380" width="320" height="58" rx="13" fill="#F0F4FC" stroke="#5178C6" stroke-width="2"/>
+  <text x="235" y="405" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#1F2329">render → patch DOM</text>
+  <text x="235" y="426" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">建立响应式依赖并创建宿主节点</text>
+
+  <rect x="215" y="468" width="320" height="58" rx="13" fill="#DFF5E5" stroke="#509863" stroke-width="2"/>
+  <text x="235" y="493" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#1F2329">mounted / onMounted</text>
+  <text x="235" y="514" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">组件自身同步 DOM 已挂载</text>
+
+  <path d="M710 244 C760 205 855 205 900 244" fill="none" stroke="#8569CB" stroke-width="5" stroke-linecap="round"/>
+  <polygon points="909,252 887,248 900,232" fill="#8569CB"/>
+  <path d="M910 285 C860 325 765 325 715 285" fill="none" stroke="#8569CB" stroke-width="5" stroke-linecap="round"/>
+  <polygon points="706,277 728,281 715,297" fill="#8569CB"/>
+
+  <rect x="690" y="202" width="185" height="64" rx="15" fill="#EAE2FE" stroke="#8569CB" stroke-width="2"/>
+  <text x="782" y="228" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#1F2329">状态变化</text>
+  <text x="782" y="250" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">调度组件更新</text>
+  <rect x="920" y="202" width="165" height="64" rx="15" fill="#FEF1CE" stroke="#D4B45B" stroke-width="2"/>
+  <text x="1002" y="228" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#1F2329">beforeUpdate</text>
+  <text x="1002" y="250" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">DOM 尚未 patch</text>
+
+  <rect x="690" y="304" width="395" height="64" rx="15" fill="#F0F4FC" stroke="#5178C6" stroke-width="2"/>
+  <text x="887" y="330" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#1F2329">重新 render → Diff → patch DOM</text>
+  <text x="887" y="352" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">updated / onUpdated 在本轮 DOM 更新后执行</text>
+
+  <line x1="887" y1="386" x2="887" y2="430" stroke="#BBBFC4" stroke-width="4"/>
+  <polygon points="887,447 877,426 897,426" fill="#BBBFC4"/>
+  <rect x="690" y="448" width="395" height="64" rx="15" fill="#FEE3E2" stroke="#D25D5A" stroke-width="2"/>
+  <text x="887" y="474" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#1F2329">beforeDestroy / beforeUnmount</text>
+  <text x="887" y="496" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">清理事件、定时器、订阅与未完成请求</text>
+
+  <line x1="887" y1="512" x2="887" y2="548" stroke="#BBBFC4" stroke-width="4"/>
+  <polygon points="887,565 877,544 897,544" fill="#BBBFC4"/>
+  <rect x="690" y="566" width="395" height="44" rx="22" fill="#D25D5A"/>
+  <text x="887" y="594" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">destroyed / unmounted</text>
+
+  <text x="600" y="670" text-anchor="middle" font-family="Noto Sans SC, sans-serif" font-size="14" fill="#646A73">KeepAlive 缓存切换使用 activated / deactivated，不会重复创建组件实例</text>
+</svg>
