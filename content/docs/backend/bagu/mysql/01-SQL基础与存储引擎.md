@@ -48,6 +48,12 @@ NoSQL 是对非关系型数据库的统称，常见类型包括键值数据库�
 - `RIGHT JOIN` 保留右表全部行，通常可交换表顺序改写成 `LEFT JOIN`。
 - `CROSS JOIN` 返回笛卡尔积，缺少连接条件的普通 `JOIN` 也可能产生笛卡尔积。
 
+用维恩图理解各类连接“保留哪一块”最直观（红色为该连接保留的部分）：
+
+![JOIN 连接查询维恩图](./img/join-venn-fixed.svg)
+
+> 小结：`LEFT JOIN` = 交集 + 左表独有的行（整个左表全保留，右表缺失处填 `NULL`）。所以凡是“查出**所有**左表记录，哪怕没有关联数据也要列出来”的需求，都用 `LEFT JOIN`。
+
 ```sql
 SELECT e.name, d.name AS department_name
 FROM employees AS e
@@ -92,16 +98,16 @@ CREATE TABLE users (
 根据冲突后的业务语义选择写法：
 
 ```sql
--- Raise an error on a duplicate key.
+-- 抛出错误 (如果有重复键的话)
 INSERT INTO users (email, name)
 VALUES ('alice@example.com', 'Alice');
 
--- Update selected columns on a duplicate key.
+-- 更新选定列 (如果有重复键的话)
 INSERT INTO users (email, name)
 VALUES ('alice@example.com', 'Alice')
 ON DUPLICATE KEY UPDATE name = 'Alice';
 
--- Ignore this row on a duplicate key.
+-- 忽略这行 (如果有重复键的话，直接静默忽略)
 INSERT IGNORE INTO users (email, name)
 VALUES ('alice@example.com', 'Alice');
 ```
@@ -127,6 +133,10 @@ VALUES ('alice@example.com', 'Alice');
 显示宽度主要曾与 `ZEROFILL` 配合影响客户端展示，例如把 `1` 展示为 `0001`，但不改变真实值。整数显示宽度和 `ZEROFILL` 已在 MySQL 8.0 中被弃用，新表应直接写 `INT`，业务展示格式交给应用层。
 
 `TINYINT(1)` 也不是独立的布尔存储类型，只是经常被驱动或 ORM 映射为布尔值。
+
+下图把「比特 / 字节 / 字符 / UTF-8」这些底层单位，与 `CHAR`、`VARCHAR`、`INT` 的实际映射关系串在一起，帮助理解这些常见误区：
+
+![MySQL 数据类型与底层单位](./img/data-type-and-storage-units.svg)
 
 ## `TEXT` 类型可以无限存储文本吗？
 
@@ -283,6 +293,24 @@ WHERE created_at >= CURDATE();
 
 这解释了为什么聚合后的过滤要写在 `HAVING`，以及为什么同层 `WHERE` 通常不能直接引用 `SELECT` 别名。
 
+其中两个容易混淆的关键字值得单独说明：
+
+- **`ON`**：出现在 `JOIN` 中，定义**两张表怎么配对**（连接条件）。它在连接阶段执行，决定哪些行能拼到一起。注意 `ON` 和 `WHERE` 的区别——在 `LEFT JOIN` 中，写在 `ON` 里的条件只影响“能否匹配”（匹配不上仍保留左表行并填 `NULL`），写在 `WHERE` 里的条件则会在连接之后把整行过滤掉（可能把左表行也滤没）。
+- **`HAVING`**：对 `GROUP BY` 分组聚合**之后**的结果做过滤，可以直接用 `COUNT()`、`SUM()` 等聚合值。它和 `WHERE` 的分工是：`WHERE` 过滤“行”（聚合前），`HAVING` 过滤“组”（聚合后）。例如“只保留订单数大于 5 的用户”就必须用 `HAVING COUNT(*) > 5`，因为 `WHERE` 执行时 `COUNT()` 还没算出来。
+
+```sql
+SELECT user_id, COUNT(*) AS order_count   -- 第6步：选列、起别名
+FROM orders                               -- 第1步：取数据源
+WHERE status = 'paid'                     -- 第2步：按“行”过滤（聚合前，不能用 COUNT）
+GROUP BY user_id                          -- 第3步：按用户分组；第4步：每组算 COUNT(*)
+HAVING COUNT(*) > 5                        -- 第5步：按“组”过滤（聚合后，可以用 COUNT）
+ORDER BY order_count DESC;                -- 第7步：排序
+```
+
+下图用两张极简表演示 `INNER JOIN` 与 `LEFT JOIN` 的结果差异，并把“书写顺序”与“实际执行顺序”对照起来：
+
+![JOIN 与 SELECT 执行顺序图解](./img/join-and-select-order.svg)
+
 这里说的是帮助理解语义的逻辑顺序，不是存储引擎实际逐步执行的物理顺序。优化器可以在保证结果等价的前提下做谓词下推、连接重排和子查询改写。
 
 ## 如何查询“未选 01 课程但选了 02 课程”的学生成绩？
@@ -294,16 +322,21 @@ WHERE created_at >= CURDATE();
 ```sql
 SELECT s.id, s.name, sc.score
 FROM students AS s
-JOIN scores AS sc
-  ON sc.student_id = s.id
- AND sc.course_id = '02'
-WHERE NOT EXISTS (
-  SELECT 1
+JOIN scores AS sc                   -- 第1步：先把学生和“02 课的成绩”配对
+  ON sc.student_id = s.id           --        配对条件：同一个学生
+ AND sc.course_id = '02'            --        且这条成绩是 02 课的 → 筛出“选了 02 课”的人
+WHERE NOT EXISTS (                  -- 第2步：再排除“选过 01 课”的人
+  SELECT 1                          --        子查询只看“有没有”，返回什么不重要
   FROM scores AS excluded
-  WHERE excluded.student_id = s.id
-    AND excluded.course_id = '01'
+  WHERE excluded.student_id = s.id  --        这个学生
+    AND excluded.course_id = '01'   --        有没有 01 课的成绩？有就被 NOT EXISTS 排除
 );
 ```
+
+执行步骤拆解：
+
+1. `JOIN ... ON ... AND course_id = '02'`：先得到“选了 02 课”的学生及其成绩。
+2. `NOT EXISTS (...)`：对每个候选学生，检查他是否选过 01 课；选过则排除，没选过才保留。
 
 建议为 `scores` 建立与访问模式匹配的联合索引，例如 `(student_id, course_id)`。如果每名学生每门课只能有一条成绩，还应把它设为唯一索引。
 
@@ -314,27 +347,33 @@ WHERE NOT EXISTS (
 MySQL 8.0 可以先聚合，再使用窗口函数排名：
 
 ```sql
-WITH student_totals AS (
+WITH student_totals AS (                    -- 第1步：按学生聚合，算出每人总分
   SELECT
     student_id,
     SUM(score) AS total_score
   FROM student_scores
   GROUP BY student_id
 ),
-ranked_students AS (
+ranked_students AS (                        -- 第2步：按总分从高到低排名
   SELECT
     student_id,
     total_score,
-    RANK() OVER (ORDER BY total_score DESC) AS ranking
+    RANK() OVER (ORDER BY total_score DESC) AS ranking  -- 窗口函数：给每人打名次
   FROM student_totals
 )
 SELECT student_id, total_score, ranking
 FROM ranked_students
-WHERE ranking BETWEEN 5 AND 10
+WHERE ranking BETWEEN 5 AND 10              -- 第3步：只取第 5 到第 10 名
 ORDER BY ranking, student_id;
 ```
 
-`RANK()` 会为并列成绩保留名次空缺；`DENSE_RANK()` 不留空缺；`ROW_NUMBER()` 强制每行名次唯一。面试时应先确认并列成绩采用哪种规则。
+执行步骤拆解：
+
+1. 第一个 CTE `student_totals`：先 `GROUP BY student_id` 把每个学生的分数 `SUM` 成总分。
+2. 第二个 CTE `ranked_students`：用窗口函数 `RANK()` 按总分降序给每个学生编名次。
+3. 最外层查询：用 `WHERE ranking BETWEEN 5 AND 10` 过滤出目标名次区间。
+
+`RANK()` 会为并列成绩保留名次空缺（如 1、2、2、4）；`DENSE_RANK()` 不留空缺（1、2、2、3）；`ROW_NUMBER()` 强制每行名次唯一（1、2、3、4）。面试时应先确认并列成绩采用哪种规则。
 
 ## 如何查询某个班级所有学生的选课情况？
 
@@ -348,15 +387,21 @@ SELECT
   s.name AS student_name,
   cs.course_id
 FROM classes AS c
-JOIN students AS s
+JOIN students AS s                  -- 第1步：班级 → 学生，每个班都有学生，用内连接
   ON s.class_id = c.id
-LEFT JOIN course_selections AS cs
+LEFT JOIN course_selections AS cs   -- 第2步：学生 → 选课，可能没选课，必须用左连接
   ON cs.student_id = s.id
-WHERE c.name = 'Class A'
+WHERE c.name = 'Class A'            -- 第3步：只看指定班级
 ORDER BY s.id, cs.course_id;
 ```
 
-没有选课的学生仍会出现，其 `course_id` 为 `NULL`。
+执行步骤拆解：
+
+1. `classes JOIN students`：班级和学生用内连接，因为每个学生一定属于某个班。
+2. `LEFT JOIN course_selections`：学生和选课用左连接——没选课的学生也要保留，这是“所有学生”的关键。
+3. `WHERE c.name = 'Class A'`：限定到目标班级。
+
+没有选课的学生仍会出现，其 `course_id` 为 `NULL`。假如这里误用 `JOIN`（内连接），没选课的学生就会被整行过滤掉，不符合“所有学生”的要求。
 
 ## 能否只用 MySQL 实现可重入锁？
 
@@ -429,3 +474,42 @@ MyISAM 可以快速返回无 `WHERE` 条件的精确 `COUNT(*)`，因为它维�
 SHOW VARIABLES LIKE 'datadir';
 SHOW VARIABLES LIKE 'innodb_file_per_table';
 ```
+
+## 本篇复习要点
+
+按“必须记住”和“看懂即可”两类自测，点击展开查看答案。
+
+<details>
+<summary>🔴 必须记住：面试要能张口就答的结论</summary>
+
+- **三范式**：1NF 字段不可再分；2NF 消除部分依赖；3NF 消除传递依赖。
+- **CHAR vs VARCHAR**：CHAR 定长、VARCHAR 变长；括号里 `n` 是字符数不是字节数。
+- **INT(n)**：`INT(1)` 和 `INT(10)` 完全一样，都占 4 字节；`n` 只是显示宽度，8.0 已弃用；省空间该换 `TINYINT`。
+- **TEXT 上限**：有上限、按字节算；`TEXT` 最大 65535 字节；超大内容存对象存储只留 URL。
+- **防重复插入**：建唯一索引 + `ON DUPLICATE KEY UPDATE` / `INSERT IGNORE`；别用“先查再插”。
+- **JOIN 区别**：INNER=交集；LEFT=左表全保留（右缺填 `NULL`）；“所有 / 每个”就用 `LEFT JOIN`。
+- **IN vs EXISTS**：没有“大用 EXISTS 小用 IN”的死规则；`NOT IN` 碰 `NULL` 返回空，反连接优先 `NOT EXISTS`。
+- **执行顺序**：`FROM → WHERE → GROUP BY → 聚合 → HAVING → SELECT → ORDER BY → LIMIT`。
+- **WHERE vs HAVING**：WHERE 过滤行（聚合前）、HAVING 过滤组（聚合后能用 `COUNT`）。
+- **命名锁 vs 行锁**：`GET_LOCK` 跟连接走；`FOR UPDATE` 跟事务走，提交即释放。
+- **SQL 执行流程**：连接器 → 解析器 → 预处理 → 优化器 → 执行器；⚠️ 8.0 删了查询缓存。
+- **InnoDB vs MyISAM**：InnoDB 支持事务 / 行锁 / MVCC / 外键 / 崩溃恢复；MyISAM 表锁、不支持事务、能快速 `COUNT(*)`。
+- **默认存储引擎**：InnoDB。
+
+</details>
+
+<details>
+<summary>🟡 看懂即可：理解原理，不用背字句</summary>
+
+- **SQL vs NoSQL 选型**：关系型强在事务 / 关联，NoSQL 强在灵活 / 扩展，实际常组合用。开放题，不用背。
+- **为什么 LEFT JOIN 保留左表**：配合维恩图理解“交集 + 左表独有”即可。
+- **FULL JOIN 模拟**：MySQL 不支持，可用 `LEFT JOIN ... UNION ALL ...` 模拟，不用背代码。
+- **IP 地址存储**：IPv4 用 `INT` + `INET_ATON` 省空间、IPv6 用 `VARBINARY(16)`，函数名忘了能查。
+- **外键利弊**：保证引用完整性，但增加写入 / 拆库复杂度；大厂常不用外键、改应用层保证。
+- **三道实战 SQL**：理解解题套路（`NOT EXISTS` 表达“不存在”、窗口函数排名、`LEFT JOIN` 保留全体），会分析就能现场写。
+- **文件存哪**：`.ibd` 存表数据索引、binlog 属 Server 层、`SHOW VARIABLES` 能查目录，记个大概。
+- **常用函数**：`COUNT(*)` vs `COUNT(列)`、`LENGTH` vs `CHAR_LENGTH` 的区分点记住，其余查文档。
+
+</details>
+
+> 时间紧时，优先把这 5 个最高频刻进肌肉记忆：INT(n) 的 n 是显示宽度、VARCHAR 的 n 是字符数、SELECT 执行顺序 + WHERE/HAVING 分工、JOIN 四种区别、InnoDB vs MyISAM。

@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 980" font-family="'PingFang SC','Microsoft YaHei',-apple-system,sans-serif">
+  <title>JOIN 连接查询与 SELECT 执行顺序图解</title>
+  <desc>用两张极简表演示 INNER JOIN 与 LEFT JOIN 的结果差异，并展示 SELECT 的逻辑执行顺序</desc>
+
+  <rect x="0" y="0" width="1060" height="980" fill="#fbfcfd"/>
+
+  <!-- banner -->
+  <rect x="40" y="24" width="980" height="56" rx="10" fill="#4b74d8"/>
+  <text x="530" y="60" fill="#ffffff" font-size="23" font-weight="bold" text-anchor="middle">JOIN 连接查询 &amp; SELECT 执行顺序图解</text>
+
+  <!-- ===== 源数据 ===== -->
+  <text x="64" y="118" fill="#4b74d8" font-size="16" font-weight="bold">① 两张极简表（源数据）</text>
+
+  <!-- students table -->
+  <text x="64" y="148" fill="#1f2329" font-size="14" font-weight="bold">students（学生）</text>
+  <g font-size="13">
+    <rect x="64" y="158" width="200" height="30" fill="#4b74d8"/>
+    <text x="94" y="178" fill="#ffffff" font-weight="bold">id</text>
+    <text x="174" y="178" fill="#ffffff" font-weight="bold">name</text>
+    <rect x="64" y="188" width="200" height="28" fill="#ffffff" stroke="#dadde3"/>
+    <text x="94" y="207" fill="#1f2329">1</text><text x="174" y="207" fill="#1f2329">小明</text>
+    <rect x="64" y="216" width="200" height="28" fill="#f7f8fa" stroke="#dadde3"/>
+    <text x="94" y="235" fill="#1f2329">2</text><text x="174" y="235" fill="#1f2329">小红</text>
+    <rect x="64" y="244" width="200" height="28" fill="#ffffff" stroke="#dadde3"/>
+    <text x="94" y="263" fill="#1f2329">3</text><text x="174" y="263" fill="#1f2329">小刚</text>
+  </g>
+  <text x="64" y="292" fill="#86909c" font-size="12">小刚没有选课记录</text>
+
+  <!-- scores table -->
+  <text x="320" y="148" fill="#1f2329" font-size="14" font-weight="bold">scores（选课成绩）</text>
+  <g font-size="13">
+    <rect x="320" y="158" width="260" height="30" fill="#4e9d6d"/>
+    <text x="345" y="178" fill="#ffffff" font-weight="bold">student_id</text>
+    <text x="470" y="178" fill="#ffffff" font-weight="bold">score</text>
+    <rect x="320" y="188" width="260" height="28" fill="#ffffff" stroke="#dadde3"/>
+    <text x="345" y="207" fill="#1f2329">1</text><text x="470" y="207" fill="#1f2329">90</text>
+    <rect x="320" y="216" width="260" height="28" fill="#f7f8fa" stroke="#dadde3"/>
+    <text x="345" y="235" fill="#1f2329">2</text><text x="470" y="235" fill="#1f2329">85</text>
+    <rect x="320" y="244" width="260" height="28" fill="#ffffff" stroke="#dadde3"/>
+    <text x="345" y="263" fill="#1f2329">2</text><text x="470" y="263" fill="#1f2329">70</text>
+  </g>
+  <text x="320" y="292" fill="#86909c" font-size="12">小红有两条成绩，小刚一条都没有</text>
+
+  <!-- key explanation -->
+  <rect x="620" y="150" width="400" height="128" rx="10" fill="#eef3ff" stroke="#5b8ff9" stroke-width="1.5"/>
+  <text x="640" y="176" fill="#4b74d8" font-size="14" font-weight="bold">连接条件（ON）</text>
+  <text x="640" y="202" fill="#1f2329" font-size="13" font-family="monospace">students.id = scores.student_id</text>
+  <text x="640" y="230" fill="#4e5969" font-size="13">把“学生”和“成绩”按学生编号配对</text>
+  <text x="640" y="256" fill="#4e5969" font-size="13">关键看：配不上的行，留不留？</text>
+
+  <!-- ===== INNER JOIN ===== -->
+  <text x="64" y="340" fill="#4b74d8" font-size="16" font-weight="bold">② INNER JOIN：只留“两边都配上”的行</text>
+  <g font-size="13">
+    <rect x="64" y="354" width="440" height="30" fill="#4b74d8"/>
+    <text x="90" y="374" fill="#ffffff" font-weight="bold">name</text>
+    <text x="250" y="374" fill="#ffffff" font-weight="bold">score</text>
+    <rect x="64" y="384" width="440" height="28" fill="#ffffff" stroke="#dadde3"/>
+    <text x="90" y="403" fill="#1f2329">小明</text><text x="250" y="403" fill="#1f2329">90</text>
+    <rect x="64" y="412" width="440" height="28" fill="#f7f8fa" stroke="#dadde3"/>
+    <text x="90" y="431" fill="#1f2329">小红</text><text x="250" y="431" fill="#1f2329">85</text>
+    <rect x="64" y="440" width="440" height="28" fill="#ffffff" stroke="#dadde3"/>
+    <text x="90" y="459" fill="#1f2329">小红</text><text x="250" y="459" fill="#1f2329">70</text>
+  </g>
+  <rect x="64" y="476" width="440" height="30" rx="6" fill="#fdebec" stroke="#c94c4c"/>
+  <text x="84" y="496" fill="#c94c4c" font-size="13" font-weight="bold">✗ 小刚消失了（没有成绩，配不上就被丢掉）</text>
+
+  <!-- ===== LEFT JOIN ===== -->
+  <text x="560" y="340" fill="#4e9d6d" font-size="16" font-weight="bold">③ LEFT JOIN：左表(students)全保留</text>
+  <g font-size="13">
+    <rect x="560" y="354" width="440" height="30" fill="#4e9d6d"/>
+    <text x="586" y="374" fill="#ffffff" font-weight="bold">name</text>
+    <text x="746" y="374" fill="#ffffff" font-weight="bold">score</text>
+    <rect x="560" y="384" width="440" height="28" fill="#ffffff" stroke="#dadde3"/>
+    <text x="586" y="403" fill="#1f2329">小明</text><text x="746" y="403" fill="#1f2329">90</text>
+    <rect x="560" y="412" width="440" height="28" fill="#f7f8fa" stroke="#dadde3"/>
+    <text x="586" y="431" fill="#1f2329">小红</text><text x="746" y="431" fill="#1f2329">85</text>
+    <rect x="560" y="440" width="440" height="28" fill="#ffffff" stroke="#dadde3"/>
+    <text x="586" y="459" fill="#1f2329">小红</text><text x="746" y="459" fill="#1f2329">70</text>
+    <rect x="560" y="468" width="440" height="28" fill="#eaf7ee" stroke="#4e9d6d"/>
+    <text x="586" y="487" fill="#1f2329" font-weight="bold">小刚</text><text x="746" y="487" fill="#c94c4c" font-weight="bold">NULL</text>
+  </g>
+  <rect x="560" y="504" width="440" height="30" rx="6" fill="#eaf7ee" stroke="#4e9d6d"/>
+  <text x="580" y="524" fill="#14532d" font-size="13" font-weight="bold">✓ 小刚还在！没成绩的地方填 NULL</text>
+
+  <!-- ===== SELECT execution order ===== -->
+  <text x="64" y="590" fill="#6e56b5" font-size="16" font-weight="bold">④ SELECT 的逻辑执行顺序（你写的顺序 ≠ 执行顺序）</text>
+
+  <!-- written order -->
+  <rect x="64" y="606" width="440" height="150" rx="10" fill="#f5f6f8" stroke="#bfc5cc"/>
+  <text x="84" y="632" fill="#6b7280" font-size="13" font-weight="bold">你写 SQL 的顺序</text>
+  <text x="84" y="662" fill="#1f2329" font-size="14" font-family="monospace">SELECT   name, COUNT(*)</text>
+  <text x="84" y="686" fill="#1f2329" font-size="14" font-family="monospace">FROM     orders</text>
+  <text x="84" y="710" fill="#1f2329" font-size="14" font-family="monospace">WHERE    status = 'paid'</text>
+  <text x="84" y="734" fill="#1f2329" font-size="14" font-family="monospace">GROUP BY name</text>
+
+  <!-- execution order flow -->
+  <text x="544" y="632" fill="#6e56b5" font-size="13" font-weight="bold">数据库实际执行顺序 ↓</text>
+  <g font-size="13">
+    <rect x="544" y="644" width="150" height="30" rx="6" fill="#f3eeff" stroke="#7b67c9"/><text x="619" y="664" fill="#1f2329" text-anchor="middle">1. FROM / JOIN</text>
+    <rect x="544" y="680" width="150" height="30" rx="6" fill="#f3eeff" stroke="#7b67c9"/><text x="619" y="700" fill="#1f2329" text-anchor="middle">2. WHERE 过滤行</text>
+    <rect x="544" y="716" width="150" height="30" rx="6" fill="#f3eeff" stroke="#7b67c9"/><text x="619" y="736" fill="#1f2329" text-anchor="middle">3. GROUP BY 分组</text>
+    <rect x="724" y="644" width="160" height="30" rx="6" fill="#f3eeff" stroke="#7b67c9"/><text x="804" y="664" fill="#1f2329" text-anchor="middle">4. 聚合 COUNT/SUM</text>
+    <rect x="724" y="680" width="160" height="30" rx="6" fill="#fff4d9" stroke="#c8a33e"/><text x="804" y="700" fill="#1f2329" text-anchor="middle">5. HAVING 过滤组</text>
+    <rect x="724" y="716" width="160" height="30" rx="6" fill="#eef3ff" stroke="#5b8ff9"/><text x="804" y="736" fill="#1f2329" text-anchor="middle">6. SELECT 选列/别名</text>
+    <rect x="904" y="644" width="116" height="30" rx="6" fill="#eef3ff" stroke="#5b8ff9"/><text x="962" y="664" fill="#1f2329" text-anchor="middle">7. ORDER BY</text>
+    <rect x="904" y="680" width="116" height="30" rx="6" fill="#eef3ff" stroke="#5b8ff9"/><text x="962" y="700" fill="#1f2329" text-anchor="middle">8. LIMIT</text>
+    <line x1="694" y1="659" x2="720" y2="659" stroke="#7b67c9" stroke-width="2" marker-end="url(#a2)"/>
+    <line x1="884" y1="659" x2="900" y2="659" stroke="#5b8ff9" stroke-width="2" marker-end="url(#a3)"/>
+  </g>
+
+  <!-- two takeaways -->
+  <rect x="64" y="776" width="956" height="80" rx="10" fill="#fff4d9" stroke="#c8a33e" stroke-width="1.5"/>
+  <text x="84" y="802" fill="#8a6d1a" font-size="14" font-weight="bold">💡 执行顺序能解释两件事</text>
+  <text x="84" y="826" fill="#4e5969" font-size="13">· WHERE 在聚合之前跑 → 普通条件（status='paid'）放 WHERE；对 COUNT/SUM 结果过滤必须放 HAVING</text>
+  <text x="84" y="848" fill="#4e5969" font-size="13">· SELECT 在 WHERE 之后才跑 → 所以 WHERE 里不能用 SELECT 定义的别名</text>
+
+  <!-- IN vs EXISTS note -->
+  <rect x="64" y="876" width="956" height="76" rx="10" fill="#eef3ff" stroke="#5b8ff9" stroke-width="1.5"/>
+  <text x="84" y="902" fill="#4b74d8" font-size="14" font-weight="bold">IN vs EXISTS 一句话</text>
+  <text x="84" y="926" fill="#4e5969" font-size="13">· IN：值在不在一个集合里； EXISTS：子查询有没有返回行（找到一行就停）</text>
+  <text x="84" y="946" fill="#4e5969" font-size="13">· 表达“不存在”优先用 NOT EXISTS：NOT IN 碰到子查询里的 NULL 会返回空结果，是经典坑</text>
+
+  <defs>
+    <marker id="a2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><polygon points="0 0, 7 3, 0 6" fill="#7b67c9"/></marker>
+    <marker id="a3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><polygon points="0 0, 7 3, 0 6" fill="#5b8ff9"/></marker>
+  </defs>
+</svg>

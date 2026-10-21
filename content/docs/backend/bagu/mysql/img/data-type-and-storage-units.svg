@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 760" font-family="'PingFang SC','Microsoft YaHei',-apple-system,sans-serif">
+  <title>MySQL 数据类型与底层单位</title>
+  <desc>从比特、字节到字符、UTF-8，再到 CHAR / VARCHAR / INT 的关系图解</desc>
+
+  <!-- background -->
+  <rect x="0" y="0" width="1040" height="760" fill="#fbfcfd"/>
+
+  <!-- top banner -->
+  <rect x="40" y="28" width="960" height="60" rx="10" fill="#4b74d8"/>
+  <text x="520" y="65" fill="#ffffff" font-size="24" font-weight="bold" text-anchor="middle">MySQL 数据类型与底层单位</text>
+
+  <!-- ============ 第一层：底层存储单位 ============ -->
+  <rect x="40" y="112" width="460" height="208" rx="12" fill="#eef3ff" stroke="#5b8ff9" stroke-width="1.5"/>
+  <text x="64" y="140" fill="#4b74d8" font-size="16" font-weight="bold">① 底层存储单位（机器视角）</text>
+
+  <!-- bit -->
+  <rect x="64" y="158" width="190" height="140" rx="10" fill="#ffffff" stroke="#5b7fcb" stroke-width="1.5"/>
+  <text x="159" y="186" fill="#1f2329" font-size="16" font-weight="bold" text-anchor="middle">比特 Bit</text>
+  <text x="159" y="212" fill="#4e5969" font-size="13" text-anchor="middle">最小单位</text>
+  <text x="159" y="232" fill="#4e5969" font-size="13" text-anchor="middle">只能是 0 或 1</text>
+  <rect x="84" y="248" width="30" height="30" rx="5" fill="#eef3ff" stroke="#5b8ff9"/><text x="99" y="268" fill="#4b74d8" font-size="14" font-weight="bold" text-anchor="middle">0</text>
+  <rect x="120" y="248" width="30" height="30" rx="5" fill="#4b74d8" stroke="#4b74d8"/><text x="135" y="268" fill="#ffffff" font-size="14" font-weight="bold" text-anchor="middle">1</text>
+  <rect x="156" y="248" width="30" height="30" rx="5" fill="#4b74d8" stroke="#4b74d8"/><text x="171" y="268" fill="#ffffff" font-size="14" font-weight="bold" text-anchor="middle">1</text>
+  <rect x="192" y="248" width="30" height="30" rx="5" fill="#eef3ff" stroke="#5b8ff9"/><text x="207" y="268" fill="#4b74d8" font-size="14" font-weight="bold" text-anchor="middle">0</text>
+
+  <!-- arrow bit->byte -->
+  <line x1="256" y1="228" x2="288" y2="228" stroke="#5b7fcb" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="272" y="220" fill="#86909c" font-size="11" text-anchor="middle">×8</text>
+
+  <!-- byte -->
+  <rect x="290" y="158" width="190" height="140" rx="10" fill="#ffffff" stroke="#5b7fcb" stroke-width="1.5"/>
+  <text x="385" y="186" fill="#1f2329" font-size="16" font-weight="bold" text-anchor="middle">字节 Byte</text>
+  <text x="385" y="212" fill="#4e5969" font-size="13" text-anchor="middle">基本存储单位</text>
+  <text x="385" y="232" fill="#1f2329" font-size="13" font-weight="bold" text-anchor="middle">1 字节 = 8 比特</text>
+  <text x="385" y="258" fill="#86909c" font-size="12" text-anchor="middle">硬盘 KB/MB/GB</text>
+  <text x="385" y="276" fill="#86909c" font-size="12" text-anchor="middle">都按字节计</text>
+
+  <!-- ============ 第二层：字符与编码 ============ -->
+  <rect x="540" y="112" width="460" height="208" rx="12" fill="#f3eeff" stroke="#7b67c9" stroke-width="1.5"/>
+  <text x="564" y="140" fill="#6e56b5" font-size="16" font-weight="bold">② 字符与编码（人类视角）</text>
+
+  <!-- character -->
+  <rect x="564" y="158" width="180" height="140" rx="10" fill="#ffffff" stroke="#7b67c9" stroke-width="1.5"/>
+  <text x="654" y="186" fill="#1f2329" font-size="16" font-weight="bold" text-anchor="middle">字符 Character</text>
+  <text x="654" y="212" fill="#4e5969" font-size="13" text-anchor="middle">人类阅读单位</text>
+  <text x="654" y="236" fill="#4e5969" font-size="13" text-anchor="middle">一个字母 A</text>
+  <text x="654" y="258" fill="#4e5969" font-size="13" text-anchor="middle">一个汉字 中</text>
+  <text x="654" y="280" fill="#4e5969" font-size="13" text-anchor="middle">一个表情 🐼</text>
+
+  <!-- arrow char->utf8 -->
+  <line x1="746" y1="228" x2="778" y2="228" stroke="#7b67c9" stroke-width="2" marker-end="url(#arrowp)"/>
+
+  <!-- utf8 -->
+  <rect x="780" y="158" width="196" height="140" rx="10" fill="#ffffff" stroke="#7b67c9" stroke-width="1.5"/>
+  <text x="878" y="184" fill="#1f2329" font-size="16" font-weight="bold" text-anchor="middle">UTF-8（utf8mb4）</text>
+  <text x="878" y="204" fill="#86909c" font-size="12" text-anchor="middle">“翻译字典”：字符→占几字节</text>
+  <text x="798" y="230" fill="#4e5969" font-size="13">英文 / 数字</text><text x="960" y="230" fill="#4b74d8" font-size="13" font-weight="bold" text-anchor="end">1 字节</text>
+  <text x="798" y="254" fill="#4e5969" font-size="13">常见汉字</text><text x="960" y="254" fill="#4b74d8" font-size="13" font-weight="bold" text-anchor="end">3 字节</text>
+  <text x="798" y="278" fill="#4e5969" font-size="13">Emoji 表情</text><text x="960" y="278" fill="#4b74d8" font-size="13" font-weight="bold" text-anchor="end">4 字节</text>
+
+  <!-- connector layer1/2 -> types -->
+  <line x1="520" y1="320" x2="520" y2="352" stroke="#bfc5cc" stroke-width="2" stroke-dasharray="5 4"/>
+  <text x="520" y="344" fill="#86909c" font-size="12" text-anchor="middle">MySQL 字段类型如何映射这些单位 ↓</text>
+
+  <!-- ============ 第三层：数据类型 ============ -->
+  <!-- CHAR -->
+  <rect x="40" y="360" width="300" height="360" rx="12" fill="#eaf7ee" stroke="#4e9d6d" stroke-width="1.5"/>
+  <rect x="40" y="360" width="300" height="42" rx="12" fill="#4e9d6d"/>
+  <rect x="40" y="384" width="300" height="18" fill="#4e9d6d"/>
+  <text x="190" y="388" fill="#ffffff" font-size="17" font-weight="bold" text-anchor="middle">CHAR(n) · 定长字符串</text>
+  <text x="64" y="432" fill="#14532d" font-size="13" font-weight="bold">n = 最多字符数（不是字节数）</text>
+  <text x="64" y="458" fill="#4e5969" font-size="13">· 固定划出 n 个字符的空间</text>
+  <text x="64" y="482" fill="#4e5969" font-size="13">· 没存满用空格补齐</text>
+  <text x="64" y="506" fill="#4e5969" font-size="13">· 适合长度稳定的短值</text>
+  <rect x="64" y="524" width="252" height="76" rx="8" fill="#ffffff" stroke="#4e9d6d"/>
+  <text x="80" y="548" fill="#86909c" font-size="12">示例：手机号固定 11 位</text>
+  <text x="80" y="572" fill="#1f2329" font-size="14" font-weight="bold">CHAR(11)</text>
+  <text x="80" y="592" fill="#4e9d6d" font-size="12">查询效率高，长度不变最合适</text>
+  <text x="64" y="636" fill="#14532d" font-size="12" font-weight="bold">💡 一句话</text>
+  <text x="64" y="658" fill="#4e5969" font-size="12">空间换速度：长度恒定就用它</text>
+  <text x="64" y="690" fill="#86909c" font-size="11">底层仍按字符集折算字节</text>
+
+  <!-- VARCHAR -->
+  <rect x="368" y="360" width="300" height="360" rx="12" fill="#eef3ff" stroke="#5b8ff9" stroke-width="1.5"/>
+  <rect x="368" y="360" width="300" height="42" rx="12" fill="#4b74d8"/>
+  <rect x="368" y="384" width="300" height="18" fill="#4b74d8"/>
+  <text x="518" y="388" fill="#ffffff" font-size="17" font-weight="bold" text-anchor="middle">VARCHAR(n) · 变长字符串</text>
+  <text x="392" y="432" fill="#1d3f94" font-size="13" font-weight="bold">n = 最多允许的字符数</text>
+  <text x="392" y="458" fill="#4e5969" font-size="13">· 按实际内容占用字节</text>
+  <text x="392" y="482" fill="#4e5969" font-size="13">· 另加 1~2 字节记录长度</text>
+  <text x="392" y="506" fill="#4e5969" font-size="13">· 适合长度差异大的值</text>
+  <rect x="392" y="524" width="252" height="76" rx="8" fill="#ffffff" stroke="#5b8ff9"/>
+  <text x="408" y="548" fill="#86909c" font-size="12">示例：个性签名长短不一</text>
+  <text x="408" y="572" fill="#1f2329" font-size="14" font-weight="bold">VARCHAR(100)</text>
+  <text x="408" y="592" fill="#4b74d8" font-size="12">存 1 个汉字就只占 3 字节</text>
+  <text x="392" y="636" fill="#1d3f94" font-size="12" font-weight="bold">💡 一句话</text>
+  <text x="392" y="658" fill="#4e5969" font-size="12">省空间：长度忽长忽短就用它</text>
+  <text x="392" y="690" fill="#86909c" font-size="11">n 是字符数上限，不是磁盘占用</text>
+
+  <!-- INT -->
+  <rect x="696" y="360" width="304" height="360" rx="12" fill="#fdebec" stroke="#c94c4c" stroke-width="1.5"/>
+  <rect x="696" y="360" width="304" height="42" rx="12" fill="#b7444a"/>
+  <rect x="696" y="384" width="304" height="18" fill="#b7444a"/>
+  <text x="848" y="388" fill="#ffffff" font-size="17" font-weight="bold" text-anchor="middle">INT · 整数类型</text>
+  <text x="720" y="432" fill="#7a1f24" font-size="13" font-weight="bold">固定占 4 字节（32 比特）</text>
+  <text x="720" y="458" fill="#4e5969" font-size="13">· 范围约 -21 亿 ~ +21 亿</text>
+  <text x="720" y="482" fill="#4e5969" font-size="13">· 与字符串括号完全不同义</text>
+  <rect x="720" y="500" width="256" height="100" rx="8" fill="#ffffff" stroke="#c94c4c"/>
+  <text x="736" y="524" fill="#c94c4c" font-size="13" font-weight="bold">⚠ INT(n) 的世纪误解</text>
+  <text x="736" y="548" fill="#4e5969" font-size="12">n 只是“显示宽度”，不限制大小</text>
+  <text x="736" y="570" fill="#4e5969" font-size="12">INT(3) 照样能存 10000，仍占 4 字节</text>
+  <text x="736" y="590" fill="#4e5969" font-size="12">MySQL 8.0 已弃用显示宽度</text>
+  <text x="720" y="636" fill="#7a1f24" font-size="12" font-weight="bold">💡 一句话</text>
+  <text x="720" y="658" fill="#4e5969" font-size="12">省空间要换类型，不是改括号</text>
+  <text x="720" y="690" fill="#b7444a" font-size="12" font-weight="bold">存年龄 → 用 TINYINT（1 字节）</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><polygon points="0 0, 7 3, 0 6" fill="#5b7fcb"/></marker>
+    <marker id="arrowp" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><polygon points="0 0, 7 3, 0 6" fill="#7b67c9"/></marker>
+  </defs>
+</svg>

@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 640" font-family="'PingFang SC','Microsoft YaHei',-apple-system,sans-serif">
+  <title>JOIN 连接查询维恩图</title>
+  <desc>用维恩图表示 INNER JOIN、LEFT JOIN、RIGHT JOIN、FULL JOIN 四种连接保留的区域</desc>
+
+  <defs>
+    <clipPath id="c_inner"><circle cx="315" cy="285" r="58"/></clipPath>
+    <clipPath id="c_right"><circle cx="315" cy="505" r="58"/></clipPath>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="640" fill="#fbfcfd"/>
+
+  <!-- banner -->
+  <rect x="40" y="24" width="960" height="54" rx="10" fill="#4b74d8"/>
+  <text x="520" y="59" fill="#ffffff" font-size="22" font-weight="bold" text-anchor="middle">JOIN 连接查询维恩图：到底保留哪块？</text>
+
+  <!-- legend -->
+  <circle cx="400" cy="104" r="9" fill="#e7ecf9" stroke="#4b74d8"/>
+  <text x="416" y="109" fill="#4e5969" font-size="13">左表 A（如 students）</text>
+  <circle cx="600" cy="104" r="9" fill="#e7f1ea" stroke="#4e9d6d"/>
+  <text x="616" y="109" fill="#4e5969" font-size="13">右表 B（如 scores）</text>
+  <rect x="780" y="96" width="16" height="16" rx="3" fill="#c94c4c"/>
+  <text x="802" y="109" fill="#4e5969" font-size="13">红色 = 该 JOIN 保留的部分</text>
+
+  <!-- ================= INNER JOIN ================= -->
+  <g>
+    <rect x="60" y="150" width="440" height="210" rx="12" fill="#ffffff" stroke="#dadde3"/>
+    <text x="80" y="180" fill="#4b74d8" font-size="16" font-weight="bold">INNER JOIN · 内连接</text>
+    <text x="80" y="202" fill="#86909c" font-size="12">只保留两表都匹配上的交集</text>
+    <circle cx="245" cy="285" r="58" fill="#e7ecf9"/>
+    <circle cx="315" cy="285" r="58" fill="#e7f1ea"/>
+    <!-- 交集刷纯红：A 圆裁进 B 圆范围 -->
+    <circle cx="245" cy="285" r="58" fill="#c94c4c" clip-path="url(#c_inner)"/>
+    <circle cx="245" cy="285" r="58" fill="none" stroke="#4b74d8" stroke-width="1.5"/>
+    <circle cx="315" cy="285" r="58" fill="none" stroke="#4e9d6d" stroke-width="1.5"/>
+    <text x="200" y="290" fill="#4e5969" font-size="14" text-anchor="middle" font-weight="bold">A</text>
+    <text x="360" y="290" fill="#4e5969" font-size="14" text-anchor="middle" font-weight="bold">B</text>
+  </g>
+
+  <!-- ================= LEFT JOIN ================= -->
+  <g>
+    <rect x="540" y="150" width="440" height="210" rx="12" fill="#ffffff" stroke="#4e9d6d" stroke-width="2"/>
+    <text x="560" y="180" fill="#4e9d6d" font-size="16" font-weight="bold">LEFT JOIN · 左连接 ⭐</text>
+    <text x="560" y="202" fill="#86909c" font-size="12">整个左表 A（含交集）全红，右表独有部分不要</text>
+    <!-- 1) 先铺右圆 B 浅绿 -->
+    <circle cx="805" cy="285" r="58" fill="#e7f1ea"/>
+    <!-- 2) 整个 A 用不透明纯红盖上去，交集处红盖绿 = 纯红 -->
+    <circle cx="735" cy="285" r="58" fill="#c94c4c"/>
+    <!-- 3) 描边 -->
+    <circle cx="805" cy="285" r="58" fill="none" stroke="#4e9d6d" stroke-width="1.5"/>
+    <circle cx="735" cy="285" r="58" fill="none" stroke="#4b74d8" stroke-width="1.5"/>
+    <text x="712" y="290" fill="#ffffff" font-size="14" text-anchor="middle" font-weight="bold">A</text>
+    <text x="848" y="290" fill="#4e5969" font-size="14" text-anchor="middle" font-weight="bold">B</text>
+  </g>
+
+  <!-- ================= RIGHT JOIN ================= -->
+  <g>
+    <rect x="60" y="380" width="440" height="210" rx="12" fill="#ffffff" stroke="#dadde3"/>
+    <text x="80" y="410" fill="#4b74d8" font-size="16" font-weight="bold">RIGHT JOIN · 右连接</text>
+    <text x="80" y="432" fill="#86909c" font-size="12">整个右表 B（含交集）全红（换表顺序即 LEFT JOIN）</text>
+    <!-- 1) 先铺左圆 A 浅蓝 -->
+    <circle cx="245" cy="505" r="58" fill="#e7ecf9"/>
+    <!-- 2) 整个 B 用不透明纯红盖上去 -->
+    <circle cx="315" cy="505" r="58" fill="#c94c4c"/>
+    <circle cx="245" cy="505" r="58" fill="none" stroke="#4b74d8" stroke-width="1.5"/>
+    <circle cx="315" cy="505" r="58" fill="none" stroke="#4e9d6d" stroke-width="1.5"/>
+    <text x="192" y="510" fill="#4e5969" font-size="14" text-anchor="middle" font-weight="bold">A</text>
+    <text x="328" y="510" fill="#ffffff" font-size="14" text-anchor="middle" font-weight="bold">B</text>
+  </g>
+
+  <!-- ================= FULL JOIN ================= -->
+  <g>
+    <rect x="540" y="380" width="440" height="210" rx="12" fill="#ffffff" stroke="#dadde3"/>
+    <text x="560" y="410" fill="#4b74d8" font-size="16" font-weight="bold">FULL JOIN · 全连接</text>
+    <text x="560" y="432" fill="#86909c" font-size="12">两表都全红（MySQL 不直接支持，用 UNION 模拟）</text>
+    <circle cx="735" cy="505" r="58" fill="#c94c4c"/>
+    <circle cx="805" cy="505" r="58" fill="#c94c4c"/>
+    <circle cx="735" cy="505" r="58" fill="none" stroke="#4b74d8" stroke-width="1.5"/>
+    <circle cx="805" cy="505" r="58" fill="none" stroke="#4e9d6d" stroke-width="1.5"/>
+    <text x="712" y="510" fill="#ffffff" font-size="14" text-anchor="middle" font-weight="bold">A</text>
+    <text x="828" y="510" fill="#ffffff" font-size="14" text-anchor="middle" font-weight="bold">B</text>
+  </g>
+</svg>
